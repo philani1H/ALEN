@@ -46,6 +46,7 @@ pub mod knowledge;
 pub mod neural;
 pub mod reasoning;
 pub mod storage;
+pub mod math;
 
 // Re-export commonly used types at the crate level
 pub use core::{
