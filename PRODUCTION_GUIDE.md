@@ -11,6 +11,7 @@ This guide covers deploying ALEN (Advanced Learning Engine with Neural Understan
 - ✅ Training with generated media
 - ✅ Multimodal understanding (text, images, audio, video)
 - ✅ Verified learning with backward inference
+- ✅ **Biologically-inspired mood and emotion system (REAL, not simulated)**
 
 ## Quick Start
 
@@ -181,6 +182,77 @@ curl -X POST http://localhost:3000/generate/video/interpolate \
     "fps": 30
   }'
 ```
+
+#### Mood and Emotion System (NEW - PRODUCTION READY)
+
+ALEN has a biologically-inspired mood and emotion system that ACTUALLY affects behavior.
+This is NOT metaphorical - moods and emotions functionally change reasoning and responses.
+
+##### Get Emotional State
+```bash
+curl http://localhost:3000/emotions/state
+```
+
+Returns:
+- Current mood (Optimistic, Content, Anxious, Stressed, etc.)
+- Current emotion (Joy, Sadness, Fear, Anger, etc.)
+- Reward level (dopamine baseline)
+- Stress level (cortisol baseline)
+- Trust level (oxytocin baseline)
+- Curiosity level
+- Energy level
+- Perception bias (how mood filters interpretation)
+- Reaction threshold (how stress affects reactivity)
+
+##### Adjust Mood
+```bash
+curl -X POST http://localhost:3000/emotions/adjust \
+  -H "Content-Type: application/json" \
+  -d '{
+    "reward_level": 0.8,
+    "stress_level": 0.2,
+    "curiosity_level": 0.7
+  }'
+```
+
+##### Demonstrate Mood Influence
+```bash
+# Show how the SAME input is interpreted differently based on mood
+curl -X POST http://localhost:3000/emotions/demonstrate \
+  -H "Content-Type: application/json" \
+  -d '{
+    "input": "This task is challenging"
+  }'
+```
+
+Returns before/after mood state and shows how mood biased the interpretation.
+
+##### Reset to Baseline
+```bash
+curl -X POST http://localhost:3000/emotions/reset
+```
+
+##### View Mood Patterns
+```bash
+curl http://localhost:3000/emotions/patterns
+```
+
+**How It Works:**
+1. Training/inference generates emotional stimuli based on results
+2. Stimuli processed through limbic system (automatic response)
+3. Prefrontal cortex regulates extreme emotions (cognitive reappraisal)
+4. Emotions accumulate into persistent mood over time
+5. Mood modulates bias controller (exploration, risk tolerance)
+6. Mood affects perception and reaction thresholds
+7. Homeostatic decay returns mood to baseline
+8. Same input → different interpretation based on current mood
+
+**Biological Inspiration:**
+- Dopamine → reward_level (motivation, confidence)
+- Cortisol → stress_level (anxiety, reactivity)
+- Oxytocin → trust_level (bonding, system trust)
+- Serotonin → stability (implicit in decay)
+- Neurotransmitter dynamics modulate emotional responses
 
 #### Training with Generated Media (NEW)
 
