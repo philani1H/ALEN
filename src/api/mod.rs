@@ -1442,6 +1442,102 @@ pub async fn verify_statement(
     }))
 }
 
+// ============================================================================
+// UNIVERSAL EXPLANATION - Multi-Audience Knowledge Translation
+// ============================================================================
+
+/// Universal explanation request
+#[derive(Debug, Deserialize)]
+pub struct ExplainRequest {
+    /// Concept to explain
+    pub concept: String,
+    /// Target audience: child, general, elder, mathematician, expert
+    #[serde(default = "default_audience")]
+    pub audience: String,
+    /// Maximum sentences
+    #[serde(default = "default_max_sentences")]
+    pub max_sentences: usize,
+    /// Verification mode
+    #[serde(default = "default_verification_mode")]
+    pub verification_mode: String,
+    /// Include analogy (if appropriate for audience)
+    #[serde(default)]
+    pub include_analogy: bool,
+}
+
+fn default_audience() -> String { "general".to_string() }
+fn default_max_sentences() -> usize { 3 }
+
+/// Universal explanation endpoint
+/// Uses: h'_explain = f(h_knowledge, s_style, c_context)
+/// CRITICAL: Same verification as factual mode - NO HALLUCINATIONS
+pub async fn explain_universal(
+    State(state): State<Arc<AppState>>,
+    Json(req): Json<ExplainRequest>,
+) -> impl IntoResponse {
+    use crate::generation::{ExplanationDecoder, ExplanationAudience, FactualThresholds};
+
+    let engine = state.engine.lock().await;
+    let dim = state.config.dimension;
+
+    // Parse audience
+    let audience = match req.audience.to_lowercase().as_str() {
+        "child" => ExplanationAudience::Child,
+        "elder" => ExplanationAudience::Elder,
+        "mathematician" | "math" => ExplanationAudience::Mathematician,
+        "expert" => ExplanationAudience::Expert,
+        _ => ExplanationAudience::General,
+    };
+
+    // Select verification thresholds
+    let thresholds = match req.verification_mode.as_str() {
+        "strict" => FactualThresholds::strict(),
+        "relaxed" => FactualThresholds::relaxed(),
+        _ => FactualThresholds::balanced(),
+    };
+
+    // Create explanation decoder
+    let decoder = ExplanationDecoder::new(dim, audience, thresholds);
+
+    // Generate explanation
+    let response = match decoder.explain(&req.concept, &engine.semantic_memory, req.max_sentences) {
+        Ok(resp) => resp,
+        Err(e) => {
+            return Json(serde_json::json!({
+                "success": false,
+                "error": format!("Explanation failed: {}", e),
+            }));
+        }
+    };
+
+    // Optionally generate analogy
+    let analogy = if req.include_analogy {
+        decoder.generate_analogy(&req.concept, &engine.semantic_memory)
+            .ok()
+            .flatten()
+    } else {
+        None
+    };
+
+    Json(serde_json::json!({
+        "success": true,
+        "concept": req.concept,
+        "audience": format!("{:?}", audience),
+        "explanation": response.explanation,
+        "sentences": response.sentences,
+        "analogy": analogy,
+        "verified_percentage": response.verified_percentage,
+        "style": {
+            "abstraction": audience.style_vector().abstraction,
+            "formality": audience.style_vector().formality,
+            "technical_density": audience.style_vector().technical_density,
+            "analogy_preference": audience.style_vector().analogy_preference,
+        },
+        "verifications": response.verifications.len(),
+        "verified_tokens": response.verifications.iter().filter(|v| v.verified).count(),
+    }))
+}
+
 /// Comprehensive training request
 #[derive(Debug, Deserialize)]
 pub struct ComprehensiveTrainRequest {
@@ -1921,6 +2017,9 @@ pub fn create_router(state: Arc<AppState>) -> Router {
         // Factual generation (no hallucinations)
         .route("/generate/factual", post(answer_factual))
         .route("/verify/statement", post(verify_statement))
+
+        // Universal explanation (multi-audience, no hallucinations)
+        .route("/explain", post(explain_universal))
 
         // Multimodal endpoints
         .route("/multimodal/image", post(process_image))
