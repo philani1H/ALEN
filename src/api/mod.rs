@@ -1258,13 +1258,13 @@ pub struct GeneratePoemResponse {
     pub confidence: f64,
 }
 
-/// Generate poem from prompt with mood-aware creativity
-/// Implements: p_t = softmax(W_out·h_t + b) with mood modulation
+/// Generate poem from prompt using learned semantic memory
+/// Uses thought vectors + bias + semantic memory (no hardcoded vocab)
 pub async fn generate_poem(
     State(state): State<Arc<AppState>>,
     Json(req): Json<GeneratePoemRequest>,
 ) -> impl IntoResponse {
-    use crate::generation::{PoetryGenerator, PoetryTheme};
+    use crate::generation::LearnedDecoder;
 
     let mut engine = state.engine.lock().await;
     let dim = state.config.dimension;
@@ -1277,31 +1277,26 @@ pub async fn generate_poem(
     let emotion = engine.emotion_system.get_state();
     let bias = &engine.bias_controller.current_bias;
 
-    // Determine theme from string
-    let theme = match req.theme.as_deref() {
-        Some("love") => Some(PoetryTheme::Love),
-        Some("nature") => Some(PoetryTheme::Nature),
-        Some("time") => Some(PoetryTheme::Time),
-        Some("loss") => Some(PoetryTheme::Loss),
-        Some("hope") => Some(PoetryTheme::Hope),
-        Some("dreams") => Some(PoetryTheme::Dreams),
-        Some("freedom") => Some(PoetryTheme::Freedom),
-        Some("journey") => Some(PoetryTheme::Journey),
-        Some("silence") => Some(PoetryTheme::Silence),
-        Some("fire") => Some(PoetryTheme::Fire),
-        Some("ocean") => Some(PoetryTheme::Ocean),
-        Some("stars") => Some(PoetryTheme::Stars),
-        _ => None, // Auto-detect from prompt
-    };
+    // Modulate thought with emotion/bias
+    let modulated_thought = bias.modulate(&result.thought);
 
-    // Create poetry generator
-    let mut generator = PoetryGenerator::new(dim);
+    // Create learned decoder with creativity-based temperature
+    let temperature = 0.5 + bias.creativity * 0.7;
+    let decoder = LearnedDecoder::new(dim, temperature);
 
-    // Generate poem
-    let poem = if req.haiku {
-        generator.generate_with_emotion(&result.thought, &emotion, &bias, theme, 3)
-    } else {
-        generator.generate_with_emotion(&result.thought, &emotion, &bias, theme, req.lines)
+    // Generate poem from learned semantic memory
+    let theme_str = req.theme.as_deref().unwrap_or("thought");
+    let poem = match decoder.generate_poem_from_memory(
+        &modulated_thought,
+        &engine.semantic_memory,
+        theme_str,
+        req.lines,
+    ) {
+        Ok(p) => p,
+        Err(_) => {
+            // Fallback if no semantic memory yet: interpret thought vector directly
+            decoder.interpret_raw_thought(&modulated_thought)
+        }
     };
 
     // Get mood description
@@ -1312,7 +1307,7 @@ pub async fn generate_poem(
         success: true,
         poem: poem.clone(),
         lines_generated: poem.lines().count(),
-        theme: theme.map(|t| format!("{:?}", t)).unwrap_or_else(|| "Auto".to_string()),
+        theme: req.theme.clone().unwrap_or_else(|| "Auto".to_string()),
         mood: mood_desc,
         confidence: result.confidence,
     })

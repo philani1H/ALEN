@@ -10,10 +10,12 @@
 pub mod video;
 pub mod text_decoder;
 pub mod poetry;
+pub mod learned_decoder;
 
 pub use video::{VideoGenerator, VideoGenConfig, GeneratedVideo, MotionType};
 pub use text_decoder::{TextDecoder, Vocabulary as DecoderVocabulary};
 pub use poetry::{PoetryGenerator, PoetryStyle, PoetryTheme};
+pub use learned_decoder::{LearnedDecoder, GenerationResult, ConceptSource};
 
 use crate::core::{ThoughtState, Activation, DenseLayer};
 use nalgebra::{DMatrix, DVector};
