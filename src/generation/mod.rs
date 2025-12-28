@@ -13,6 +13,8 @@ pub mod poetry;
 pub mod learned_decoder;
 pub mod factual_decoder;
 pub mod explanation_decoder;
+pub mod reasoning_engine;
+pub mod knowledge_visual;
 
 pub use video::{VideoGenerator, VideoGenConfig, GeneratedVideo, MotionType};
 pub use text_decoder::{TextDecoder, Vocabulary as DecoderVocabulary};
@@ -24,6 +26,12 @@ pub use factual_decoder::{
 };
 pub use explanation_decoder::{
     ExplanationDecoder, ExplanationAudience, ExplanationResponse, StyleVector,
+};
+pub use reasoning_engine::{
+    ReasoningEngine, LatentResult, LatentVerification,
+};
+pub use knowledge_visual::{
+    KnowledgeImageGenerator, KnowledgeImage, KnowledgeVideo, KnowledgeVisualConfig,
 };
 
 use crate::core::{ThoughtState, Activation, DenseLayer};
