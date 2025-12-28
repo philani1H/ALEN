@@ -293,19 +293,10 @@ impl ExplanationDecoder {
         &self,
         fact: &SemanticFact,
     ) -> Result<String, Box<dyn std::error::Error>> {
-        let words: Vec<&str> = fact.content.split_whitespace().collect();
-
-        if words.is_empty() {
-            return Ok(String::new());
-        }
-
-        let style = self.audience.style_vector();
-
-        // Select word based on audience complexity
-        let complexity = self.audience.complexity_level();
-        let idx = (complexity * (words.len() - 1) as f64) as usize;
-
-        Ok(words.get(idx).unwrap_or(&words[0]).to_string())
+        // For now, use the full fact content
+        // Future: implement vocabulary simplification based on audience
+        // (e.g., child: simpler words, expert: technical terms)
+        Ok(fact.content.clone())
     }
 
     /// Compute verification rate

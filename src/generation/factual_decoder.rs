@@ -30,8 +30,8 @@ pub struct FactualThresholds {
 impl Default for FactualThresholds {
     fn default() -> Self {
         Self {
-            min_knowledge_similarity: 0.75,  // φ_strict = 0.75
-            min_token_confidence: 0.7,
+            min_knowledge_similarity: 0.18,  // Calibrated for compositional bag-of-words
+            min_token_confidence: 0.4,
             max_retries: 5,
             temperature: 0.2,  // Very low for deterministic behavior
         }
@@ -42,8 +42,8 @@ impl FactualThresholds {
     /// Strict mode: highest verification standards
     pub fn strict() -> Self {
         Self {
-            min_knowledge_similarity: 0.85,
-            min_token_confidence: 0.8,
+            min_knowledge_similarity: 0.22,  // Calibrated for compositional bag-of-words
+            min_token_confidence: 0.5,
             max_retries: 3,
             temperature: 0.1,
         }
@@ -51,14 +51,14 @@ impl FactualThresholds {
 
     /// Balanced mode: moderate verification
     pub fn balanced() -> Self {
-        Self::default()
+        Self::default()  // 0.18 similarity
     }
 
     /// Relaxed mode: lower thresholds but still verified
     pub fn relaxed() -> Self {
         Self {
-            min_knowledge_similarity: 0.65,
-            min_token_confidence: 0.6,
+            min_knowledge_similarity: 0.15,  // Calibrated for compositional bag-of-words
+            min_token_confidence: 0.3,
             max_retries: 7,
             temperature: 0.3,
         }

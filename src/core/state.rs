@@ -66,20 +66,62 @@ impl ThoughtState {
         }
 
         // Fall back to text-based embedding for non-math content
-        let mut rng = rand::thread_rng();
+        // Use word-based compositional embedding for better semantic similarity
         let normal = Normal::new(0.0, 1.0).unwrap();
 
-        // Create deterministic embedding based on input
-        let seed: u64 = input.bytes().map(|b| b as u64).sum();
-        let mut seeded_rng = rand::rngs::StdRng::seed_from_u64(seed);
-
-        let vector: Vec<f64> = (0..dimension)
-            .map(|_| normal.sample(&mut seeded_rng))
+        // Split into words and create compositional embedding
+        let lowercase_input = input.to_lowercase();
+        let words: Vec<&str> = lowercase_input
+            .split_whitespace()
+            .filter(|w| !w.is_empty())
             .collect();
 
+        if words.is_empty() {
+            // Empty input - return zero vector
+            return Self {
+                vector: vec![0.0; dimension],
+                dimension,
+                confidence: 0.0,
+                metadata: ThoughtMetadata {
+                    source: Some(input.to_string()),
+                    timestamp: Some(chrono::Utc::now().timestamp()),
+                    ..Default::default()
+                },
+            };
+        }
+
+        // Create compositional embedding by averaging word embeddings
+        let mut combined_vector = vec![0.0; dimension];
+
+        for word in words.iter() {
+            // Generate deterministic embedding for each word
+            let word_seed: u64 = word.bytes().map(|b| b as u64).sum();
+            let mut word_rng = rand::rngs::StdRng::seed_from_u64(word_seed);
+
+            // Generate word embedding
+            let word_vector: Vec<f64> = (0..dimension)
+                .map(|_| normal.sample(&mut word_rng))
+                .collect();
+
+            // Add to combined vector
+            for (i, &val) in word_vector.iter().enumerate() {
+                combined_vector[i] += val;
+            }
+        }
+
+        // Average the combined vector
+        let word_count = words.len() as f64;
+        for val in combined_vector.iter_mut() {
+            *val /= word_count;
+        }
+
         // Normalize the vector
-        let norm: f64 = vector.iter().map(|x| x * x).sum::<f64>().sqrt();
-        let normalized: Vec<f64> = vector.iter().map(|x| x / norm).collect();
+        let norm: f64 = combined_vector.iter().map(|x| x * x).sum::<f64>().sqrt();
+        let normalized: Vec<f64> = if norm > 1e-10 {
+            combined_vector.iter().map(|x| x / norm).collect()
+        } else {
+            combined_vector
+        };
 
         Self {
             vector: normalized,
