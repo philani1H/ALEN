@@ -43,27 +43,48 @@ impl ThoughtState {
         }
     }
 
-    /// Create a thought state from raw input (text embedding simulation)
+    /// Create a thought state from raw input
+    /// Uses mathematical AST embedding for math expressions, falls back to text embedding
     pub fn from_input(input: &str, dimension: usize) -> Self {
+        // Try to parse as mathematical expression first
+        if let Ok(ast) = crate::math::MathParser::parse(input) {
+            // Successfully parsed as math - use AST embedder
+            let simplified = crate::math::simplify_expression(&ast);
+            let embedder = crate::math::MathEmbedder::new(dimension);
+            let vector = embedder.embed(&simplified);
+
+            return Self {
+                vector,
+                dimension,
+                confidence: 0.5,
+                metadata: ThoughtMetadata {
+                    source: Some(input.to_string()),
+                    timestamp: Some(chrono::Utc::now().timestamp()),
+                    ..Default::default()
+                },
+            };
+        }
+
+        // Fall back to text-based embedding for non-math content
         let mut rng = rand::thread_rng();
         let normal = Normal::new(0.0, 1.0).unwrap();
-        
-        // Create deterministic-ish embedding based on input
+
+        // Create deterministic embedding based on input
         let seed: u64 = input.bytes().map(|b| b as u64).sum();
         let mut seeded_rng = rand::rngs::StdRng::seed_from_u64(seed);
-        
+
         let vector: Vec<f64> = (0..dimension)
             .map(|_| normal.sample(&mut seeded_rng))
             .collect();
-        
+
         // Normalize the vector
         let norm: f64 = vector.iter().map(|x| x * x).sum::<f64>().sqrt();
         let normalized: Vec<f64> = vector.iter().map(|x| x / norm).collect();
-        
+
         Self {
             vector: normalized,
             dimension,
-            confidence: 0.5, // Initial confidence
+            confidence: 0.5,
             metadata: ThoughtMetadata {
                 source: Some(input.to_string()),
                 timestamp: Some(chrono::Utc::now().timestamp()),

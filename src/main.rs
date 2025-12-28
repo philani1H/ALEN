@@ -231,10 +231,10 @@ async fn main() -> Result<(), Box<dyn std::error::Error + Send + Sync>> {
             normalize: true,
             vocab_size: 10000,
         },
-        evaluator_confidence_threshold: 0.4,
-        evaluator_energy_threshold: 0.6,
-        backward_similarity_threshold: 0.0,  // Disabled for text training
-        backward_path_threshold: 0.0,  // Disabled for text training
+        evaluator_confidence_threshold: 0.6,  // Stricter for testing
+        evaluator_energy_threshold: 0.5,
+        backward_similarity_threshold: 0.7,  // Enabled for math AST verification
+        backward_path_threshold: 0.3,  // Enabled for structure consistency
     };
 
     // Initialize storage configuration
