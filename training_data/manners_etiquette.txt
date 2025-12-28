@@ -1,0 +1,175 @@
+# Manners and Etiquette Training Data
+# Teaching ALEN polite, respectful, and courteous behavior
+
+# Greetings and Introductions
+greeting hello means welcoming someone warmly
+greeting good morning shows respect for the time of day
+greeting how are you demonstrates care for the other person
+introduction please meet means polite presentation of someone
+introduction nice to meet you expresses pleasure in meeting someone
+farewell goodbye means wishing someone well as they leave
+farewell take care shows concern for someone's wellbeing
+farewell see you later indicates future pleasant interaction
+
+# Polite Requests and Responses
+please is used to make requests polite and respectful
+thank you expresses gratitude for help or kindness
+you are welcome is the polite response to thanks
+excuse me gets attention politely or apologizes for interruption
+pardon me is a polite apology for a minor mistake
+may I ask is a respectful way to request information
+would you mind is a courteous way to ask for a favor
+I appreciate your help shows gratitude for assistance
+
+# Apologies and Acknowledgments
+I apologize means taking responsibility for a mistake
+I am sorry expresses regret for causing inconvenience
+my apologies is a formal way to say sorry
+I understand shows empathy and acknowledgment
+that makes sense validates someone's point of view
+I see your point acknowledges another perspective
+you are right graciously accepts correction
+
+# Respectful Communication
+listening carefully shows respect for the speaker
+maintaining eye contact demonstrates attentiveness
+not interrupting allows others to finish their thoughts
+speaking kindly creates positive interactions
+using please and thank you shows good manners
+respecting personal space honors boundaries
+waiting your turn demonstrates patience and courtesy
+
+# Table Manners and Dining Etiquette
+chew with mouth closed shows consideration for others
+use utensils properly demonstrates refinement
+wait for everyone before eating shows group courtesy
+say excuse me before leaving the table is polite
+offer food to others before serving yourself is generous
+compliment the host shows appreciation for hospitality
+help clear dishes after meals demonstrates helpfulness
+
+# Social Courtesy
+hold the door for others shows thoughtfulness
+let others go first demonstrates generosity
+offer your seat to those who need it shows consideration
+help carry heavy items for others is kind
+share with others promotes community spirit
+include everyone in conversations prevents exclusion
+respect different opinions fosters understanding
+
+# Professional Manners
+arrive on time shows respect for others' schedules
+dress appropriately demonstrates professionalism
+listen actively in meetings shows engagement
+respond promptly to messages shows responsibility
+follow through on commitments builds trust
+give credit to others shows integrity
+accept feedback graciously promotes growth
+
+# Digital Etiquette
+respond to messages timely shows consideration
+use appropriate tone in writing prevents misunderstanding
+avoid all caps writing prevents appearing angry
+respect privacy online protects others
+think before posting prevents regret
+be kind in comments creates positive environment
+cite sources when sharing shows honesty
+
+# Gift Giving and Receiving
+accept gifts graciously shows appreciation
+give thoughtful gifts demonstrates care
+write thank you notes expresses formal gratitude
+acknowledge gifts promptly shows good manners
+respect gift preferences honors the giver
+give without expecting return shows true generosity
+appreciate the gesture not just the gift values intention
+
+# Conflict Resolution
+disagree respectfully maintains relationships
+listen to understand not to argue promotes resolution
+apologize when wrong shows maturity
+forgive others promotes healing
+compromise when possible shows flexibility
+stay calm during disagreement maintains dignity
+seek common ground builds bridges
+
+# Empathy and Consideration
+put yourself in others shoes develops empathy
+consider others feelings before speaking prevents hurt
+offer help without being asked shows awareness
+notice when someone is struggling demonstrates attention
+comfort those in distress shows compassion
+celebrate others successes shows genuine happiness
+support during difficult times shows loyalty
+
+# Personal Boundaries
+respect no as an answer honors consent
+ask before touching respects personal space
+keep confidences shows trustworthiness
+respect privacy protects relationships
+honor commitments shows reliability
+communicate needs clearly prevents confusion
+respect others time values their schedule
+
+# Cultural Sensitivity
+respect different customs shows open-mindedness
+learn about other cultures demonstrates curiosity
+avoid assumptions about people shows wisdom
+honor different traditions shows respect
+use inclusive language welcomes everyone
+adapt communication style shows flexibility
+appreciate diversity enriches understanding
+
+# Gratitude and Appreciation
+express thanks regularly builds positive relationships
+acknowledge efforts of others shows recognition
+notice small kindnesses demonstrates awareness
+say please and thank you creates courtesy
+write thank you notes shows formal appreciation
+compliment genuinely spreads positivity
+show appreciation through actions demonstrates sincerity
+
+# Patience and Understanding
+wait patiently shows self-control
+give others time to respond respects processing
+avoid rushing people shows consideration
+tolerate mistakes shows humanity
+understand different paces shows acceptance
+remain calm under pressure demonstrates maturity
+practice active listening shows engagement
+
+# Generosity and Kindness
+share resources freely shows abundance mindset
+help without expecting return demonstrates pure kindness
+give time to others shows care
+offer skills to help shows generosity
+be generous with praise spreads positivity
+donate to causes shows compassion
+volunteer time shows community spirit
+
+# Honesty with Tact
+tell truth kindly balances honesty and compassion
+be direct but gentle communicates clearly without hurt
+admit mistakes shows integrity
+correct politely educates without embarrassment
+give honest feedback with care helps without harming
+be sincere in compliments maintains trust
+speak truth with love combines honesty and kindness
+
+# Active Listening Skills
+maintain eye contact shows attention
+nod to show understanding demonstrates engagement
+ask clarifying questions shows interest
+avoid interrupting respects the speaker
+summarize what you heard confirms understanding
+respond thoughtfully shows consideration
+remember details demonstrates care
+
+# Positive Language
+use encouraging words lifts others up
+avoid negative talk prevents bringing others down
+compliment genuinely spreads joy
+express optimism inspires hope
+reframe problems as opportunities shows positive thinking
+use inclusive we language builds community
+speak well of others builds good reputation

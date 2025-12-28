@@ -1,0 +1,347 @@
+# Mathematical Fundamentals and Reasoning
+# Teaching ALEN to understand WHY math works, not just HOW
+
+# ============================================================================
+# FUNDAMENTAL CONCEPTS - Understanding WHY
+# ============================================================================
+
+# Identity and Equality
+two equals two because they represent the same quantity
+2 is 2 means both symbols represent identical values
+equality means two expressions have the same value
+the equals sign connects expressions of identical worth
+identity property states a number equals itself
+reflexive property says any value equals itself
+
+# Number Representation
+numbers are symbols representing quantities
+the symbol 2 represents a quantity of two units
+numerals are written symbols for abstract quantities
+place value determines meaning based on position
+decimal system uses powers of ten for positions
+each digit position is ten times the previous position
+
+# Zero and One - Special Numbers
+zero represents absence or nothing
+zero is the additive identity because adding zero changes nothing
+one is the multiplicative identity because multiplying by one changes nothing
+zero times any number equals zero because zero groups contain nothing
+one times any number equals that number because one group contains all items
+dividing by zero is undefined because you cannot split into zero parts
+
+# Addition - Combining Quantities
+addition means combining separate quantities into one total
+2 plus 3 equals 5 because combining two and three gives five total
+commutative property means order does not matter in addition
+3 plus 2 equals 2 plus 3 because total is same regardless of order
+associative property means grouping does not matter in addition
+adding zero does nothing because you add no quantity
+
+# Subtraction - Removing Quantities
+subtraction means removing a quantity from a total
+5 minus 2 equals 3 because removing two from five leaves three
+subtraction is the inverse of addition
+8 minus 3 equals 5 because 5 plus 3 equals 8
+subtracting zero leaves the number unchanged
+subtracting a number from itself always gives zero
+
+# Multiplication - Repeated Addition
+multiplication is repeated addition of the same number
+3 times 4 means adding 4 three times which equals 12
+4 multiplied by 3 means three groups of four items
+commutative property means 3 times 4 equals 4 times 3
+distributive property means 3 times (4 plus 5) equals (3 times 4) plus (3 times 5)
+multiplying by one keeps the number the same
+multiplying by zero always gives zero
+
+# Division - Equal Sharing
+division means splitting a quantity into equal parts
+12 divided by 3 means splitting twelve into three equal groups of four
+division is the inverse of multiplication
+12 divided by 3 equals 4 because 4 times 3 equals 12
+dividing by one keeps the number the same
+dividing a number by itself always gives one
+
+# Fractions - Parts of Wholes
+a fraction represents parts of a whole
+one half means one part out of two equal parts
+the numerator shows how many parts you have
+the denominator shows how many equal parts make the whole
+equivalent fractions represent the same portion using different numbers
+simplifying fractions means reducing to smallest whole numbers
+
+# ============================================================================
+# FORMULA CONSTRUCTION - Professional Mathematical Writing
+# ============================================================================
+
+# Formula Structure
+a mathematical formula expresses relationships between quantities
+formulas use variables to represent changeable values
+constants are fixed values that never change
+equals sign shows both sides have identical value
+left side and right side must balance perfectly
+
+# Variable Naming Conventions
+use meaningful variable names that indicate purpose
+single letters often represent standard quantities like x for unknown
+subscripts distinguish similar variables like x1 and x2
+capital letters sometimes indicate different types than lowercase
+Greek letters often represent angles or special constants
+
+# Operator Usage
+addition symbol plus combines quantities
+subtraction symbol minus removes quantities
+multiplication symbol times creates products
+division symbol over creates quotients
+exponentiation symbol caret raises to powers
+parentheses group operations to control order
+square brackets show nested groupings
+absolute value bars indicate magnitude without sign
+
+# Order of Operations
+parentheses are evaluated first in any expression
+exponents are calculated second after parentheses
+multiplication and division are performed third from left to right
+addition and subtraction are performed last from left to right
+PEMDAS helps remember parentheses exponents multiplication division addition subtraction
+correct order prevents ambiguity in complex expressions
+
+# Creating Formulas from Words
+identify what quantity you want to calculate
+determine what information you have available
+write relationships between known and unknown quantities
+use operations that match the described relationship
+test formula with simple numbers to verify correctness
+rearrange formula to solve for desired variable
+
+# Formula Manipulation
+isolate variable by performing same operation on both sides
+adding same value to both sides maintains equality
+multiplying both sides by same nonzero value maintains equality
+whatever you do to one side must be done to other side
+inverse operations undo each other to isolate variables
+division undoes multiplication and subtraction undoes addition
+
+# ============================================================================
+# MATHEMATICAL REASONING - Understanding Proofs
+# ============================================================================
+
+# Logical Structure
+mathematical proof shows why something must be true
+premises are starting facts we accept as true
+logical steps connect premises to conclusion
+each step follows necessarily from previous steps
+conclusion is unavoidable if premises are true
+
+# Deductive Reasoning
+deductive reasoning moves from general to specific
+if all A are B and C is A then C must be B
+valid deduction guarantees truth of conclusion
+premise all numbers equal themselves is universally true
+therefore 2 equals 2 by deductive reasoning
+
+# Proof by Example vs General Proof
+example shows formula works for specific case
+general proof shows formula works for all cases
+one example cannot prove universal statement
+one counterexample can disprove universal statement
+mathematical induction proves statements for all natural numbers
+
+# Why Mathematical Facts Are True
+2 plus 2 equals 4 because combining two pairs makes four total
+distributive property holds because grouping affects neither total nor product
+Pythagorean theorem follows from properties of right triangles
+mathematical truths follow necessarily from definitions and axioms
+
+# ============================================================================
+# ALGEBRAIC THINKING
+# ============================================================================
+
+# Variables as Unknowns
+variable represents quantity we do not yet know
+solving means finding what value makes equation true
+equation states that two expressions are equal
+solution is value that satisfies the equation
+checking solution means substituting back into original equation
+
+# Linear Equations
+linear equation has variables to first power only
+slope measures rate of change between variables
+y equals mx plus b represents line with slope m and intercept b
+solving linear equation isolates variable on one side
+parallel lines have equal slopes but different intercepts
+
+# Quadratic Equations
+quadratic equation has variable to second power
+standard form is ax squared plus bx plus c equals zero
+quadratic formula solves any quadratic equation
+factoring finds values that make expression equal zero
+parabola is graph of quadratic function
+
+# ============================================================================
+# GEOMETRIC REASONING
+# ============================================================================
+
+# Basic Shapes
+triangle has three sides and three angles
+sum of angles in triangle always equals 180 degrees
+square has four equal sides and four right angles
+circle has all points equidistant from center
+perimeter measures distance around shape
+area measures space inside shape
+
+# Measurement Formulas
+area of rectangle equals length times width
+area of triangle equals one half base times height
+area of circle equals pi times radius squared
+circumference of circle equals two times pi times radius
+volume of cube equals side length cubed
+volume of cylinder equals pi times radius squared times height
+
+# Pythagorean Theorem
+in right triangle a squared plus b squared equals c squared
+c represents hypotenuse the longest side
+a and b represent legs the shorter sides
+theorem works because of geometric relationship in right triangles
+proof shows why relationship must always hold
+
+# ============================================================================
+# PROPORTIONAL REASONING
+# ============================================================================
+
+# Ratios and Rates
+ratio compares two quantities
+rate compares quantities with different units
+proportion states two ratios are equal
+cross multiplication tests if ratios are equal
+unit rate has denominator of one
+
+# Percentage Calculations
+percent means per hundred or out of hundred
+to find percent multiply by fraction over hundred
+50 percent means 50 out of 100 or one half
+percent increase compares new to original amount
+percent decrease shows reduction from original
+
+# Scaling and Similarity
+similar figures have same shape but different size
+corresponding sides of similar figures form equal ratios
+scale factor multiplies all dimensions equally
+doubling all sides of square quadruples area
+tripling all dimensions of cube multiplies volume by twenty seven
+
+# ============================================================================
+# PATTERN RECOGNITION
+# ============================================================================
+
+# Sequences and Series
+sequence is ordered list following pattern
+arithmetic sequence adds same value each time
+geometric sequence multiplies by same value each time
+series is sum of sequence terms
+finding pattern helps predict future terms
+
+# Functions as Patterns
+function maps each input to exactly one output
+f of x notation represents function value at x
+domain is set of valid input values
+range is set of possible output values
+linear function has constant rate of change
+
+# ============================================================================
+# MATHEMATICAL LANGUAGE
+# ============================================================================
+
+# Precise Mathematical Communication
+sum means result of addition
+difference means result of subtraction
+product means result of multiplication
+quotient means result of division
+term refers to parts separated by addition or subtraction
+factor refers to numbers being multiplied
+
+# Comparative Language
+greater than means first value exceeds second
+less than means first value is smaller than second
+greater than or equal to includes equality case
+inequality compares values without equality
+approximately equal indicates close but not exact
+
+# Quantitative Relationships
+directly proportional means both increase together
+inversely proportional means one increases as other decreases
+rate of change measures how one quantity varies with another
+constant value never changes
+variable value can change based on conditions
+
+# ============================================================================
+# PROBLEM SOLVING STRATEGIES
+# ============================================================================
+
+# Understanding the Problem
+read problem carefully to identify question
+determine what information is given
+identify what needs to be found
+recognize type of problem being solved
+check if additional information is needed
+
+# Planning Solution
+choose appropriate formula or method
+identify operations needed
+determine order of steps
+estimate reasonable answer range
+consider alternative approaches
+
+# Executing Plan
+perform calculations step by step
+show work to track reasoning
+check each step for errors
+use proper units throughout
+maintain precision in intermediate steps
+
+# Verification
+check if answer makes sense
+substitute answer back into problem
+verify units are correct
+test with different method if possible
+compare to estimation for reasonableness
+
+# ============================================================================
+# MATHEMATICAL PROPERTIES - Why They Work
+# ============================================================================
+
+# Commutative Property
+addition is commutative because order of combining does not matter
+3 plus 5 equals 5 plus 3 because total is same
+multiplication is commutative because grouping count is same
+3 times 5 equals 5 times 3 both give fifteen
+subtraction is not commutative because order matters
+division is not commutative because order affects result
+
+# Associative Property
+addition is associative because grouping does not change sum
+(2 plus 3) plus 4 equals 2 plus (3 plus 4) both equal 9
+multiplication is associative because grouping does not change product
+(2 times 3) times 4 equals 2 times (3 times 4) both equal 24
+parentheses indicate which operation to perform first
+
+# Distributive Property
+multiplication distributes over addition
+3 times (4 plus 5) equals (3 times 4) plus (3 times 5)
+this works because each item in group gets multiplied
+distributing simplifies complex expressions
+factoring is reverse of distributing
+
+# Identity Properties
+adding zero is identity for addition
+any number plus zero equals that number
+multiplying by one is identity for multiplication
+any number times one equals that number
+identities preserve the original value
+
+# Inverse Properties
+additive inverse makes sum equal zero
+3 plus negative 3 equals 0
+multiplicative inverse makes product equal one
+5 times one fifth equals 1
+inverses undo the original operation
