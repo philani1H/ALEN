@@ -1,0 +1,89 @@
+# General Knowledge Training Data
+# Format: input -> expected_answer
+
+# Colors
+color of sky -> blue
+color of grass -> green
+color of sun -> yellow
+color of ocean -> blue
+color of snow -> white
+color of night -> black
+mix red and blue -> purple
+mix blue and yellow -> green
+mix red and yellow -> orange
+
+# Animals
+dog says -> woof
+cat says -> meow
+cow says -> moo
+bird says -> chirp
+lion is -> carnivore
+rabbit is -> herbivore
+bear is -> omnivore
+fastest land animal -> cheetah
+largest animal -> blue whale
+tallest animal -> giraffe
+
+# Human Body
+humans have bones -> 206
+heart pumps -> blood
+lungs breathe -> air
+brain controls -> body
+skin is -> largest organ
+liver filters -> toxins
+kidneys filter -> blood
+stomach digests -> food
+
+# Time
+seconds in minute -> 60
+minutes in hour -> 60
+hours in day -> 24
+days in week -> 7
+days in year -> 365
+months in year -> 12
+weeks in year -> 52
+
+# Calendar
+first month -> January
+last month -> December
+shortest month -> February
+spring months -> March, April, May
+summer months -> June, July, August
+fall months -> September, October, November
+winter months -> December, January, February
+
+# Numbers
+first prime number -> 2
+smallest even number -> 2
+smallest odd number -> 1
+number of sides triangle -> 3
+number of sides square -> 4
+number of sides pentagon -> 5
+number of sides hexagon -> 6
+number of sides octagon -> 8
+
+# Directions
+opposite of north -> south
+opposite of east -> west
+opposite of up -> down
+opposite of left -> right
+compass has -> four cardinal directions
+
+# Basic Facts
+Earth orbits -> Sun
+Moon orbits -> Earth
+humans need to survive -> air, water, food
+plants need to grow -> sunlight, water, soil
+fire needs -> oxygen, fuel, heat
+ice is -> frozen water
+steam is -> water vapor
+clouds are made of -> water droplets
+
+# Languages
+hello in Spanish -> hola
+hello in French -> bonjour
+hello in German -> hallo
+hello in Italian -> ciao
+thank you in Spanish -> gracias
+thank you in French -> merci
+thank you in German -> danke

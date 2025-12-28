@@ -1,0 +1,72 @@
+# Programming Training Data
+# Format: input -> expected_answer
+
+# Programming Languages
+Python is -> a high-level programming language
+JavaScript runs in -> web browsers
+Java compiles to -> bytecode
+C++ is -> a compiled language
+Rust provides -> memory safety
+Go is developed by -> Google
+Swift is for -> iOS development
+Kotlin runs on -> JVM
+Ruby is -> a dynamic language
+PHP is used for -> web development
+
+# Programming Concepts
+variable stores -> data
+function is -> reusable code block
+loop repeats -> code multiple times
+if statement does -> conditional execution
+array holds -> multiple values
+class defines -> object blueprint
+object is -> instance of class
+inheritance allows -> code reuse
+polymorphism means -> many forms
+encapsulation is -> data hiding
+
+# Data Structures
+stack follows -> LIFO
+queue follows -> FIFO
+linked list contains -> nodes with pointers
+binary tree has -> at most two children
+hash table uses -> key-value pairs
+heap is -> specialized tree
+graph contains -> vertices and edges
+array provides -> random access
+
+# Algorithms
+binary search requires -> sorted data
+quicksort is -> divide and conquer
+merge sort is -> stable sort
+bubble sort time complexity -> O(n²)
+binary search time complexity -> O(log n)
+hash table lookup -> O(1) average
+
+# Web Development
+HTML is for -> structure
+CSS is for -> styling
+JavaScript is for -> interactivity
+HTTP is -> protocol
+REST is -> architectural style
+API stands for -> Application Programming Interface
+JSON is -> data format
+XML is -> markup language
+
+# Databases
+SQL is for -> relational databases
+NoSQL is for -> non-relational databases
+primary key is -> unique identifier
+foreign key references -> another table
+index improves -> query performance
+transaction ensures -> ACID properties
+normalization reduces -> data redundancy
+
+# Version Control
+Git is -> version control system
+commit saves -> changes
+branch creates -> separate line of development
+merge combines -> branches
+pull request requests -> code review
+clone copies -> repository
+push sends -> commits to remote

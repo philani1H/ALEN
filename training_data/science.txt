@@ -1,0 +1,71 @@
+# Science Training Data
+# Format: input -> expected_answer
+
+# Chemistry - Elements
+H -> Hydrogen
+He -> Helium
+C -> Carbon
+N -> Nitrogen
+O -> Oxygen
+Na -> Sodium
+Cl -> Chlorine
+Fe -> Iron
+Au -> Gold
+Ag -> Silver
+
+# Chemistry - Compounds
+H2O -> water
+CO2 -> carbon dioxide
+NaCl -> salt
+O2 -> oxygen gas
+N2 -> nitrogen gas
+CH4 -> methane
+C6H12O6 -> glucose
+NH3 -> ammonia
+
+# Physics - Units
+unit of force -> Newton
+unit of energy -> Joule
+unit of power -> Watt
+unit of electric current -> Ampere
+unit of voltage -> Volt
+unit of resistance -> Ohm
+unit of frequency -> Hertz
+unit of temperature -> Kelvin
+
+# Physics - Constants
+speed of light -> 299792458 m/s
+acceleration due to gravity -> 9.8 m/s²
+absolute zero -> -273.15°C
+
+# Biology - Classification
+dog is a -> mammal
+cat is a -> mammal
+bird is a -> animal
+fish is a -> animal
+snake is a -> reptile
+frog is a -> amphibian
+bee is an -> insect
+spider is an -> arachnid
+whale is a -> mammal
+bat is a -> mammal
+
+# Biology - Plants
+plant needs for photosynthesis -> light, water, carbon dioxide
+product of photosynthesis -> oxygen and glucose
+green pigment in plants -> chlorophyll
+process plants make food -> photosynthesis
+
+# Biology - Cells
+powerhouse of cell -> mitochondria
+brain of cell -> nucleus
+cell membrane function -> controls what enters and exits
+DNA location -> nucleus
+protein synthesis location -> ribosomes
+
+# Earth Science
+Earth's layers -> crust, mantle, outer core, inner core
+plate tectonics causes -> earthquakes and volcanoes
+water cycle stages -> evaporation, condensation, precipitation
+greenhouse gas -> carbon dioxide
+ozone layer location -> stratosphere

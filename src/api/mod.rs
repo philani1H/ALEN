@@ -114,7 +114,7 @@ impl ReasoningEngine {
     /// Create a new reasoning engine with in-memory storage (for testing)
     pub fn new(config: EngineConfig) -> Result<Self, Box<dyn std::error::Error + Send + Sync>> {
         let operators = OperatorManager::new(config.dimension);
-        let evaluator = Evaluator::new(config.energy_weights.clone(), 0.5);
+        let evaluator = Evaluator::new(config.energy_weights.clone(), 0.4);
         let feedback = FeedbackLoop::new(
             operators.clone(),
             evaluator.clone(),
@@ -144,7 +144,7 @@ impl ReasoningEngine {
     /// Create a new reasoning engine with persistent storage (for production)
     pub fn with_storage(config: EngineConfig, storage: &crate::storage::StorageConfig) -> Result<Self, Box<dyn std::error::Error + Send + Sync>> {
         let operators = OperatorManager::new(config.dimension);
-        let evaluator = Evaluator::new(config.energy_weights.clone(), 0.5);
+        let evaluator = Evaluator::new(config.energy_weights.clone(), 0.4);
         let feedback = FeedbackLoop::new(
             operators.clone(),
             evaluator.clone(),

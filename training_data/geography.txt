@@ -1,0 +1,57 @@
+# Geography Training Data
+# Format: input -> expected_answer
+
+# World Capitals
+capital of France -> Paris
+capital of Germany -> Berlin
+capital of Italy -> Rome
+capital of Spain -> Madrid
+capital of Portugal -> Lisbon
+capital of United Kingdom -> London
+capital of Netherlands -> Amsterdam
+capital of Belgium -> Brussels
+capital of Switzerland -> Bern
+capital of Austria -> Vienna
+
+capital of USA -> Washington DC
+capital of Canada -> Ottawa
+capital of Mexico -> Mexico City
+capital of Brazil -> Brasília
+capital of Argentina -> Buenos Aires
+
+capital of China -> Beijing
+capital of Japan -> Tokyo
+capital of India -> New Delhi
+capital of Russia -> Moscow
+capital of Australia -> Canberra
+
+capital of Egypt -> Cairo
+capital of South Africa -> Pretoria
+capital of Kenya -> Nairobi
+capital of Nigeria -> Abuja
+capital of Morocco -> Rabat
+
+# Continents
+France is in -> Europe
+Brazil is in -> South America
+China is in -> Asia
+Egypt is in -> Africa
+Australia is in -> Oceania
+Canada is in -> North America
+Antarctica is -> a continent
+
+# Oceans
+largest ocean -> Pacific Ocean
+second largest ocean -> Atlantic Ocean
+smallest ocean -> Arctic Ocean
+ocean between Africa and Australia -> Indian Ocean
+
+# Geography Facts
+highest mountain -> Mount Everest
+longest river -> Nile River
+largest desert -> Sahara Desert
+largest country by area -> Russia
+most populated country -> China
+smallest country -> Vatican City
+largest island -> Greenland
+deepest ocean point -> Mariana Trench
