@@ -231,6 +231,10 @@ async fn main() -> Result<(), Box<dyn std::error::Error + Send + Sync>> {
             normalize: true,
             vocab_size: 10000,
         },
+        evaluator_confidence_threshold: 0.4,
+        evaluator_energy_threshold: 0.6,
+        backward_similarity_threshold: 0.0,  // Disabled for text training
+        backward_path_threshold: 0.0,  // Disabled for text training
     };
 
     // Initialize storage configuration

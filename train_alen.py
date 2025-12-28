@@ -290,7 +290,7 @@ def main():
     parser = argparse.ArgumentParser(description="Train ALEN on various datasets")
     parser.add_argument('--domain', default='all',
                        choices=['all', 'mathematics', 'geography', 'science',
-                               'programming', 'general_knowledge'],
+                               'programming', 'general_knowledge', 'conversations'],
                        help='Domain to train on')
     parser.add_argument('--epochs', type=int, default=2,
                        help='Number of training epochs')
@@ -307,7 +307,7 @@ def main():
 
     # Determine domains to train
     if args.domain == 'all':
-        domains = ['mathematics', 'geography', 'science', 'programming', 'general_knowledge']
+        domains = ['mathematics', 'geography', 'science', 'programming', 'general_knowledge', 'conversations']
     else:
         domains = [args.domain]
 

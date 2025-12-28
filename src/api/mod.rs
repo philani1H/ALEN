@@ -69,6 +69,14 @@ pub struct EngineConfig {
     pub energy_weights: EnergyWeights,
     /// Embedding configuration
     pub embedding: EmbeddingConfig,
+    /// Evaluator confidence threshold (0.0-1.0)
+    pub evaluator_confidence_threshold: f64,
+    /// Evaluator energy threshold (0.0-1.0)
+    pub evaluator_energy_threshold: f64,
+    /// Backward inference similarity threshold (0.0-1.0)
+    pub backward_similarity_threshold: f64,
+    /// Backward inference path consistency threshold (0.0-1.0)
+    pub backward_path_threshold: f64,
 }
 
 impl Default for EngineConfig {
@@ -82,6 +90,10 @@ impl Default for EngineConfig {
                 normalize: true,
                 vocab_size: 10000,
             },
+            evaluator_confidence_threshold: 0.4,
+            evaluator_energy_threshold: 0.6,
+            backward_similarity_threshold: 0.0,  // Disabled for text training
+            backward_path_threshold: 0.0,  // Disabled for text training
         }
     }
 }
@@ -114,7 +126,10 @@ impl ReasoningEngine {
     /// Create a new reasoning engine with in-memory storage (for testing)
     pub fn new(config: EngineConfig) -> Result<Self, Box<dyn std::error::Error + Send + Sync>> {
         let operators = OperatorManager::new(config.dimension);
-        let evaluator = Evaluator::new(config.energy_weights.clone(), 0.4);
+        let mut evaluator = Evaluator::new(config.energy_weights.clone(), config.evaluator_confidence_threshold);
+        evaluator.energy_threshold = config.evaluator_energy_threshold;
+        evaluator.backward_similarity_threshold = config.backward_similarity_threshold;
+        evaluator.backward_path_threshold = config.backward_path_threshold;
         let feedback = FeedbackLoop::new(
             operators.clone(),
             evaluator.clone(),
@@ -144,7 +159,10 @@ impl ReasoningEngine {
     /// Create a new reasoning engine with persistent storage (for production)
     pub fn with_storage(config: EngineConfig, storage: &crate::storage::StorageConfig) -> Result<Self, Box<dyn std::error::Error + Send + Sync>> {
         let operators = OperatorManager::new(config.dimension);
-        let evaluator = Evaluator::new(config.energy_weights.clone(), 0.4);
+        let mut evaluator = Evaluator::new(config.energy_weights.clone(), config.evaluator_confidence_threshold);
+        evaluator.energy_threshold = config.evaluator_energy_threshold;
+        evaluator.backward_similarity_threshold = config.backward_similarity_threshold;
+        evaluator.backward_path_threshold = config.backward_path_threshold;
         let feedback = FeedbackLoop::new(
             operators.clone(),
             evaluator.clone(),
