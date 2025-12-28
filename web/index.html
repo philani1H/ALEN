@@ -672,6 +672,17 @@ capital of Germany -> Berlin</textarea>
 
             <!-- Chat Section -->
             <div id="chat" class="section">
+                <div class="card" style="background: #fff3cd; border-left: 4px solid #ffc107;">
+                    <h3 style="color: #856404;">⚠️ Important: Clear Browser Cache</h3>
+                    <div style="padding: 15px; background: #fff; border-radius: 5px; margin: 10px 0;">
+                        <p><strong>If you see gibberish responses:</strong></p>
+                        <p>1. Press <code style="background: #f0f0f0; padding: 2px 8px; border-radius: 3px;">Ctrl + Shift + R</code> (Windows/Linux) or <code style="background: #f0f0f0; padding: 2px 8px; border-radius: 3px;">Cmd + Shift + R</code> (Mac)</p>
+                        <p>2. Click "Start New Conversation" button below</p>
+                        <p>3. Try asking: "How are you?" or "Hello"</p>
+                        <p style="margin-top: 10px; color: #28a745;"><strong>✅ Server is working perfectly - just need fresh cache!</strong></p>
+                    </div>
+                </div>
+                
                 <div class="card">
                     <h3>Chat with ALEN</h3>
                     <div class="info-box">
@@ -1340,7 +1351,13 @@ capital of Germany -> Berlin</textarea>
 
         function clearChat() {
             conversationId = null;
-            document.getElementById('chat-result').innerHTML = '<p class="info-box">Started new conversation</p>';
+            document.getElementById('chat-result').innerHTML = '<p class="info-box">✅ Started fresh conversation. All context cleared.</p>';
+            // Clear the input
+            document.getElementById('chat-input').value = '';
+            // Show success message
+            setTimeout(() => {
+                document.getElementById('chat-result').innerHTML += '<p class="info-box" style="background: #d4edda; color: #155724;">💡 Tip: Try asking "How are you?" or "Hello" to see natural responses!</p>';
+            }, 500);
         }
 
         function setExampleChat(text) {
