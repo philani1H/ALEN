@@ -53,10 +53,11 @@
 //! - `POST /bias/reset` - Reset bias to defaults
 //! - `POST /learning/reset` - Reset learning rate
 
-use alen::api::{AppState, EngineConfig, ReasoningEngine, create_router};
+use alen::api::{AppState, EngineConfig, ReasoningEngine, create_router, ConversationManager};
 use alen::learning::LearningConfig;
 use alen::core::EnergyWeights;
 use alen::memory::EmbeddingConfig;
+use alen::storage::StorageConfig;
 
 use std::env;
 use std::net::SocketAddr;
@@ -232,9 +233,22 @@ async fn main() -> Result<(), Box<dyn std::error::Error + Send + Sync>> {
         },
     };
 
-    // Create the reasoning engine
+    // Initialize storage configuration
+    info!("Initializing storage...");
+    let storage_config = match StorageConfig::production() {
+        Ok(s) => {
+            info!("✓ Storage configured at: {:?}", s.base_dir);
+            s
+        }
+        Err(e) => {
+            error!("Failed to configure storage: {}", e);
+            return Err(Box::new(e) as Box<dyn std::error::Error + Send + Sync>);
+        }
+    };
+
+    // Create the reasoning engine with persistent storage
     info!("Initializing reasoning engine...");
-    let engine = match ReasoningEngine::new(engine_config.clone()) {
+    let engine = match ReasoningEngine::with_storage(engine_config.clone(), &storage_config) {
         Ok(e) => {
             info!("✓ Reasoning engine initialized successfully");
             e
@@ -245,10 +259,17 @@ async fn main() -> Result<(), Box<dyn std::error::Error + Send + Sync>> {
         }
     };
 
+    // Create conversation manager
+    info!("Initializing conversation manager...");
+    let conversation_manager = ConversationManager::new();
+    info!("✓ Conversation manager initialized");
+
     // Create shared state
     let state = Arc::new(AppState {
         engine: tokio::sync::Mutex::new(engine),
         config: engine_config,
+        conversation_manager,
+        storage: storage_config,
     });
 
     // Create router with middleware

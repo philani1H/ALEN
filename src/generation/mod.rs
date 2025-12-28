@@ -3,7 +3,12 @@
 //! Generates outputs from thought states:
 //! - Text Generation: Vocabulary-based decoding
 //! - Image Generation: Simple diffusion-like process
+//! - Video Generation: Temporal sequence generation
 //! - Content synthesis and controlled generation
+
+pub mod video;
+
+pub use video::{VideoGenerator, VideoGenConfig, GeneratedVideo, MotionType};
 
 use crate::core::{ThoughtState, Activation, DenseLayer};
 use nalgebra::{DMatrix, DVector};

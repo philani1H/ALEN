@@ -6,8 +6,14 @@
 //! - System status and statistics
 //! - Memory management
 //! - Advanced reasoning (math, logic, chain-of-thought)
+//! - Conversational interface
+//! - Video and image generation
 
 pub mod advanced;
+pub mod conversation;
+pub mod media_training;
+
+pub use conversation::ConversationManager;
 
 use crate::core::{
     Problem, OperatorManager, OperatorStats,
@@ -39,6 +45,10 @@ pub struct AppState {
     pub engine: Mutex<ReasoningEngine>,
     /// Configuration
     pub config: EngineConfig,
+    /// Conversation manager for chat interface
+    pub conversation_manager: ConversationManager,
+    /// Storage configuration
+    pub storage: crate::storage::StorageConfig,
 }
 
 /// Configuration for the reasoning engine
@@ -90,7 +100,7 @@ pub struct ReasoningEngine {
 }
 
 impl ReasoningEngine {
-    /// Create a new reasoning engine
+    /// Create a new reasoning engine with in-memory storage (for testing)
     pub fn new(config: EngineConfig) -> Result<Self, Box<dyn std::error::Error + Send + Sync>> {
         let operators = OperatorManager::new(config.dimension);
         let evaluator = Evaluator::new(config.energy_weights.clone(), 0.5);
@@ -101,6 +111,35 @@ impl ReasoningEngine {
         );
         let episodic_memory = EpisodicMemory::in_memory()?;
         let semantic_memory = SemanticMemory::in_memory(config.dimension)?;
+        let embedding = EmbeddingEngine::new(config.embedding.clone());
+        let bias_controller = BiasController::new();
+
+        Ok(Self {
+            operators,
+            evaluator,
+            feedback,
+            episodic_memory,
+            semantic_memory,
+            embedding,
+            bias_controller,
+            config,
+        })
+    }
+
+    /// Create a new reasoning engine with persistent storage (for production)
+    pub fn with_storage(config: EngineConfig, storage: &crate::storage::StorageConfig) -> Result<Self, Box<dyn std::error::Error + Send + Sync>> {
+        let operators = OperatorManager::new(config.dimension);
+        let evaluator = Evaluator::new(config.energy_weights.clone(), 0.5);
+        let feedback = FeedbackLoop::new(
+            operators.clone(),
+            evaluator.clone(),
+            config.learning.clone(),
+        );
+        let episodic_memory = EpisodicMemory::new(&storage.episodic_db_path)?;
+        let semantic_memory = SemanticMemory::new(
+            &storage.semantic_db_path,
+            config.dimension
+        )?;
         let embedding = EmbeddingEngine::new(config.embedding.clone());
         let bias_controller = BiasController::new();
 
@@ -1261,6 +1300,179 @@ pub async fn query_knowledge(
     }
 }
 
+/// Get storage statistics
+pub async fn get_storage_stats(
+    State(state): State<Arc<AppState>>,
+) -> impl IntoResponse {
+    let stats = state.storage.get_stats();
+    Json(serde_json::json!({
+        "storage": {
+            "episodic_db_mb": stats.episodic_size_mb(),
+            "semantic_db_mb": stats.semantic_size_mb(),
+            "conversation_db_mb": stats.conversation_size_mb(),
+            "total_mb": stats.total_size_mb(),
+            "backup_count": stats.backup_count
+        },
+        "paths": {
+            "base_dir": state.storage.base_dir,
+            "episodic_db": state.storage.episodic_db_path,
+            "semantic_db": state.storage.semantic_db_path,
+            "conversation_db": state.storage.conversation_db_path
+        }
+    }))
+}
+
+/// Generate video from prompt
+#[derive(Debug, Deserialize)]
+pub struct GenerateVideoRequest {
+    pub prompt: String,
+    #[serde(default = "default_video_duration")]
+    pub duration: f64,
+    #[serde(default = "default_video_fps")]
+    pub fps: f64,
+    #[serde(default = "default_video_size")]
+    pub size: usize,
+    #[serde(default)]
+    pub motion_type: Option<String>,
+}
+
+fn default_video_duration() -> f64 { 2.0 }
+fn default_video_fps() -> f64 { 30.0 }
+fn default_video_size() -> usize { 64 }
+
+#[derive(Debug, Serialize)]
+pub struct GenerateVideoResponse {
+    pub success: bool,
+    pub frame_count: usize,
+    pub fps: f64,
+    pub duration: f64,
+    /// Each frame as comma-separated pixel values
+    pub frames: Vec<String>,
+    pub confidence: f64,
+}
+
+/// Generate video endpoint
+pub async fn generate_video(
+    State(state): State<Arc<AppState>>,
+    Json(req): Json<GenerateVideoRequest>,
+) -> impl IntoResponse {
+    use crate::generation::video::{VideoGenerator, VideoGenConfig, MotionType};
+
+    let mut engine = state.engine.lock().await;
+    let dim = state.config.dimension;
+
+    // Create problem and get thought state
+    let problem = Problem::new(&req.prompt, dim);
+    let result = engine.infer(&problem);
+
+    // Create video generator
+    let config = VideoGenConfig {
+        fps: req.fps,
+        duration: req.duration,
+        width: req.size,
+        height: req.size,
+        channels: 3,
+        temporal_coherence: 0.8,
+        motion_amplitude: 0.3,
+    };
+
+    let generator = VideoGenerator::new(config, dim);
+
+    // Generate video based on motion type
+    let video = if let Some(motion_str) = req.motion_type {
+        let motion = match motion_str.to_lowercase().as_str() {
+            "linear" => MotionType::Linear,
+            "circular" => MotionType::Circular,
+            "oscillating" => MotionType::Oscillating,
+            "expanding" => MotionType::Expanding,
+            "random" => MotionType::Random,
+            _ => MotionType::Linear,
+        };
+        generator.generate_with_motion(&result.thought, motion)
+    } else {
+        generator.generate(&result.thought)
+    };
+
+    // Convert frames to string format
+    let frames: Vec<String> = video.frames.iter().map(|frame| {
+        frame.pixels.iter()
+            .map(|p| format!("{:.4}", p))
+            .collect::<Vec<_>>()
+            .join(",")
+    }).collect();
+
+    Json(GenerateVideoResponse {
+        success: true,
+        frame_count: video.frames.len(),
+        fps: video.fps,
+        duration: video.duration,
+        frames,
+        confidence: result.confidence,
+    })
+}
+
+/// Video interpolation request
+#[derive(Debug, Deserialize)]
+pub struct VideoInterpolationRequest {
+    pub prompt_a: String,
+    pub prompt_b: String,
+    #[serde(default = "default_video_duration")]
+    pub duration: f64,
+    #[serde(default = "default_video_fps")]
+    pub fps: f64,
+    #[serde(default = "default_video_size")]
+    pub size: usize,
+}
+
+/// Generate interpolation video between two prompts
+pub async fn generate_video_interpolation(
+    State(state): State<Arc<AppState>>,
+    Json(req): Json<VideoInterpolationRequest>,
+) -> impl IntoResponse {
+    use crate::generation::video::{VideoGenerator, VideoGenConfig};
+
+    let mut engine = state.engine.lock().await;
+    let dim = state.config.dimension;
+
+    // Create problems and get thought states
+    let problem_a = Problem::new(&req.prompt_a, dim);
+    let result_a = engine.infer(&problem_a);
+
+    let problem_b = Problem::new(&req.prompt_b, dim);
+    let result_b = engine.infer(&problem_b);
+
+    // Create video generator
+    let config = VideoGenConfig {
+        fps: req.fps,
+        duration: req.duration,
+        width: req.size,
+        height: req.size,
+        channels: 3,
+        temporal_coherence: 0.9,
+        motion_amplitude: 0.2,
+    };
+
+    let generator = VideoGenerator::new(config, dim);
+    let video = generator.generate_interpolation(&result_a.thought, &result_b.thought);
+
+    // Convert frames to string format
+    let frames: Vec<String> = video.frames.iter().map(|frame| {
+        frame.pixels.iter()
+            .map(|p| format!("{:.4}", p))
+            .collect::<Vec<_>>()
+            .join(",")
+    }).collect();
+
+    Json(GenerateVideoResponse {
+        success: true,
+        frame_count: video.frames.len(),
+        fps: video.fps,
+        duration: video.duration,
+        frames,
+        confidence: video.confidence,
+    })
+}
+
 /// System capabilities info
 pub async fn get_capabilities() -> impl IntoResponse {
     Json(serde_json::json!({
@@ -1304,48 +1516,65 @@ pub fn create_router(state: Arc<AppState>) -> Router {
         .route("/health", get(health_check))
         .route("/stats", get(get_statistics))
         .route("/capabilities", get(get_capabilities))
-        
+        .route("/storage/stats", get(get_storage_stats))
+
+        // Conversation endpoints
+        .route("/chat", post(conversation::chat))
+        .route("/conversation/get", post(conversation::get_conversation))
+        .route("/conversation/list", get(conversation::list_conversations))
+        .route("/conversation/clear", post(conversation::clear_conversation))
+        .route("/system-prompt/update", post(conversation::update_system_prompt))
+        .route("/system-prompt/set-default", post(conversation::set_default_system_prompt))
+        .route("/system-prompt/get-default", get(conversation::get_default_system_prompt))
+
         // Training endpoints
         .route("/train", post(train))
         .route("/train/batch", post(batch_train))
         .route("/train/comprehensive", post(comprehensive_train))
-        
+
         // Knowledge learning
         .route("/learn", post(learn_knowledge))
         .route("/query", post(query_knowledge))
-        
+
+        // Media-based training
+        .route("/train/with-images", post(media_training::train_with_generated_images))
+        .route("/train/with-videos", post(media_training::train_with_generated_videos))
+        .route("/train/self-supervised", post(media_training::self_supervised_learning))
+
         // Inference endpoint
         .route("/infer", post(infer))
-        
+
         // Generation endpoints
         .route("/generate/text", post(generate_text))
         .route("/generate/image", post(generate_image))
-        
+        .route("/generate/video", post(generate_video))
+        .route("/generate/video/interpolate", post(generate_video_interpolation))
+
         // Multimodal endpoints
         .route("/multimodal/image", post(process_image))
         .route("/multimodal/audio", post(process_audio))
         .route("/multimodal/video", post(process_video))
         .route("/multimodal/fuse", post(fuse_modalities))
-        
+
         // Semantic memory
         .route("/facts", post(add_fact))
         .route("/facts/search", post(search_facts))
         .route("/memory/semantic/clear", delete(clear_semantic_memory))
-        
+
         // Episodic memory
         .route("/memory/episodic/stats", get(get_episodic_stats))
         .route("/memory/episodic/top/:limit", get(get_top_episodes))
         .route("/memory/episodic/clear", delete(clear_episodic_memory))
-        
+
         // Operators
         .route("/operators", get(get_operators))
-        
+
         // Bias control
         .route("/bias", post(set_bias))
         .route("/bias/reset", post(reset_bias))
-        
+
         // Learning rate
         .route("/learning/reset", post(reset_learning_rate))
-        
+
         .with_state(state)
 }

@@ -45,6 +45,7 @@ pub mod generation;
 pub mod knowledge;
 pub mod neural;
 pub mod reasoning;
+pub mod storage;
 
 // Re-export commonly used types at the crate level
 pub use core::{
@@ -71,6 +72,7 @@ pub use multimodal::{
 pub use generation::{
     TextGenerator, ImageGenerator, ContentGenerator,
     GenerationConfig, GeneratedContent,
+    VideoGenerator, VideoGenConfig, GeneratedVideo, MotionType,
 };
 
 pub use memory::{
@@ -119,6 +121,8 @@ pub use api::{
     InferRequest, InferResponse,
     BatchTrainRequest, BatchTrainResponse,
 };
+
+pub use storage::{StorageConfig, StorageStats};
 
 /// Version of the library
 pub const VERSION: &str = env!("CARGO_PKG_VERSION");
