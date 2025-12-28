@@ -1313,6 +1313,135 @@ pub async fn generate_poem(
     })
 }
 
+// ============================================================================
+// FACTUAL QUESTION ANSWERING - NO HALLUCINATIONS
+// ============================================================================
+
+/// Factual question request
+#[derive(Debug, Deserialize)]
+pub struct FactualQuestionRequest {
+    /// The question to answer
+    pub question: String,
+    /// Maximum tokens to generate
+    #[serde(default = "default_factual_max_tokens")]
+    pub max_tokens: usize,
+    /// Verification mode: strict, balanced, or relaxed
+    #[serde(default = "default_verification_mode")]
+    pub verification_mode: String,
+}
+
+fn default_factual_max_tokens() -> usize { 50 }
+fn default_verification_mode() -> String { "balanced".to_string() }
+
+/// Generate factual answer with knowledge verification
+/// Uses: h_factual = f(W_c·c_t + W_m·m_neutral + W_τ·τ_factual + b)
+/// Every token verified against semantic memory (no hallucinations)
+pub async fn answer_factual(
+    State(state): State<Arc<AppState>>,
+    Json(req): Json<FactualQuestionRequest>,
+) -> impl IntoResponse {
+    use crate::generation::{FactualDecoder, FactualThresholds};
+
+    let mut engine = state.engine.lock().await;
+    let dim = state.config.dimension;
+
+    // Create problem and get thought state
+    let problem = Problem::new(&req.question, dim);
+    let result = engine.infer(&problem);
+
+    // Select verification thresholds based on mode
+    let thresholds = match req.verification_mode.as_str() {
+        "strict" => FactualThresholds::strict(),
+        "relaxed" => FactualThresholds::relaxed(),
+        _ => FactualThresholds::balanced(),
+    };
+
+    // Create factual decoder (neutral bias, no creativity)
+    let decoder = FactualDecoder::new(dim, thresholds);
+
+    // Generate factual response with verification
+    let response = match decoder.generate_factual(
+        &result.thought,
+        &engine.semantic_memory,
+        req.max_tokens,
+    ) {
+        Ok(resp) => resp,
+        Err(e) => {
+            return Json(serde_json::json!({
+                "success": false,
+                "error": format!("Generation failed: {}", e),
+            }));
+        }
+    };
+
+    Json(serde_json::json!({
+        "success": true,
+        "answer": response.text,
+        "tokens": response.tokens,
+        "mode": "factual",
+        "overall_confidence": response.overall_confidence,
+        "verifications": response.verifications,
+        "verified_tokens": response.verifications.iter().filter(|v| v.verified).count(),
+        "total_tokens": response.tokens.len(),
+    }))
+}
+
+/// Statement verification request
+#[derive(Debug, Deserialize)]
+pub struct VerifyStatementRequest {
+    /// Statement to verify
+    pub statement: String,
+    /// Verification mode
+    #[serde(default = "default_verification_mode")]
+    pub verification_mode: String,
+}
+
+/// Verify a statement against knowledge base
+/// Returns cosine similarity and verification result
+pub async fn verify_statement(
+    State(state): State<Arc<AppState>>,
+    Json(req): Json<VerifyStatementRequest>,
+) -> impl IntoResponse {
+    use crate::generation::{FactualDecoder, FactualThresholds};
+
+    let engine = state.engine.lock().await;
+    let dim = state.config.dimension;
+
+    // Select verification thresholds
+    let thresholds = match req.verification_mode.as_str() {
+        "strict" => FactualThresholds::strict(),
+        "relaxed" => FactualThresholds::relaxed(),
+        _ => FactualThresholds::balanced(),
+    };
+
+    // Save threshold value before moving thresholds
+    let min_similarity_threshold = thresholds.min_knowledge_similarity;
+
+    let decoder = FactualDecoder::new(dim, thresholds);
+
+    // Verify statement against knowledge base
+    let result = match decoder.verify_statement(&req.statement, &engine.semantic_memory) {
+        Ok(res) => res,
+        Err(e) => {
+            return Json(serde_json::json!({
+                "success": false,
+                "error": format!("Verification failed: {}", e),
+            }));
+        }
+    };
+
+    Json(serde_json::json!({
+        "success": true,
+        "statement": req.statement,
+        "verified": result.verified,
+        "confidence": result.confidence,
+        "max_similarity": result.max_similarity,
+        "threshold": min_similarity_threshold,
+        "supporting_facts": result.supporting_facts,
+        "reason": result.reason,
+    }))
+}
+
 /// Comprehensive training request
 #[derive(Debug, Deserialize)]
 pub struct ComprehensiveTrainRequest {
@@ -1788,6 +1917,10 @@ pub fn create_router(state: Arc<AppState>) -> Router {
         .route("/generate/video", post(generate_video))
         .route("/generate/video/interpolate", post(generate_video_interpolation))
         .route("/generate/poem", post(generate_poem))
+
+        // Factual generation (no hallucinations)
+        .route("/generate/factual", post(answer_factual))
+        .route("/verify/statement", post(verify_statement))
 
         // Multimodal endpoints
         .route("/multimodal/image", post(process_image))
