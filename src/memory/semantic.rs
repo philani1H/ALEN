@@ -290,6 +290,26 @@ impl SemanticMemory {
         self.find_similar(&query_state.vector, limit)
     }
 
+    /// Get all facts (for export)
+    pub fn get_all_facts(&self, limit: usize) -> SqlResult<Vec<SemanticFact>> {
+        let mut stmt = self.conn.prepare(
+            "SELECT id, concept, content, embedding, confidence, reinforcement_count,
+                    last_accessed, source, category, related_concepts
+             FROM facts
+             ORDER BY created_at DESC
+             LIMIT ?1"
+        )?;
+
+        let mut rows = stmt.query(params![limit as i64])?;
+
+        let mut facts = Vec::new();
+        while let Some(row) = rows.next()? {
+            facts.push(self.row_to_fact(row)?);
+        }
+
+        Ok(facts)
+    }
+
     /// Reinforce a fact (increase confidence)
     pub fn reinforce(&self, id: &str) -> SqlResult<bool> {
         let result = self.conn.execute(

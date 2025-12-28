@@ -6,8 +6,18 @@
 //! - System status and statistics
 //! - Memory management
 //! - Advanced reasoning (math, logic, chain-of-thought)
+//! - Conversational interface
+//! - Video and image generation
+//! - Emotions and mood system
+//! - Export and import
 
 pub mod advanced;
+pub mod conversation;
+pub mod media_training;
+pub mod emotions;
+pub mod export;
+
+pub use conversation::ConversationManager;
 
 use crate::core::{
     Problem, OperatorManager, OperatorStats,
@@ -21,7 +31,10 @@ use crate::memory::{
 use crate::learning::{
     FeedbackLoop, LearningConfig, TrainingResult, InferenceResult,
 };
-use crate::control::{BiasController, ControlStateSummary};
+use crate::control::{
+    BiasController, ControlStateSummary,
+    MoodEngine, EmotionSystem, EmotionalStimulus, StimulusType,
+};
 
 use axum::{
     extract::{Path, State, Json},
@@ -39,6 +52,10 @@ pub struct AppState {
     pub engine: Mutex<ReasoningEngine>,
     /// Configuration
     pub config: EngineConfig,
+    /// Conversation manager for chat interface
+    pub conversation_manager: ConversationManager,
+    /// Storage configuration
+    pub storage: crate::storage::StorageConfig,
 }
 
 /// Configuration for the reasoning engine
@@ -52,6 +69,14 @@ pub struct EngineConfig {
     pub energy_weights: EnergyWeights,
     /// Embedding configuration
     pub embedding: EmbeddingConfig,
+    /// Evaluator confidence threshold (0.0-1.0)
+    pub evaluator_confidence_threshold: f64,
+    /// Evaluator energy threshold (0.0-1.0)
+    pub evaluator_energy_threshold: f64,
+    /// Backward inference similarity threshold (0.0-1.0)
+    pub backward_similarity_threshold: f64,
+    /// Backward inference path consistency threshold (0.0-1.0)
+    pub backward_path_threshold: f64,
 }
 
 impl Default for EngineConfig {
@@ -65,6 +90,10 @@ impl Default for EngineConfig {
                 normalize: true,
                 vocab_size: 10000,
             },
+            evaluator_confidence_threshold: 0.6,  // Stricter for testing
+            evaluator_energy_threshold: 0.5,
+            backward_similarity_threshold: 0.7,  // Enabled for math AST verification
+            backward_path_threshold: 0.3,  // Enabled for structure consistency
         }
     }
 }
@@ -85,15 +114,22 @@ pub struct ReasoningEngine {
     pub embedding: EmbeddingEngine,
     /// Bias controller
     pub bias_controller: BiasController,
+    /// Mood engine - persistent emotional state
+    pub mood_engine: MoodEngine,
+    /// Emotion system - reactive emotional processing
+    pub emotion_system: EmotionSystem,
     /// Configuration
     pub config: EngineConfig,
 }
 
 impl ReasoningEngine {
-    /// Create a new reasoning engine
+    /// Create a new reasoning engine with in-memory storage (for testing)
     pub fn new(config: EngineConfig) -> Result<Self, Box<dyn std::error::Error + Send + Sync>> {
         let operators = OperatorManager::new(config.dimension);
-        let evaluator = Evaluator::new(config.energy_weights.clone(), 0.5);
+        let mut evaluator = Evaluator::new(config.energy_weights.clone(), config.evaluator_confidence_threshold);
+        evaluator.energy_threshold = config.evaluator_energy_threshold;
+        evaluator.backward_similarity_threshold = config.backward_similarity_threshold;
+        evaluator.backward_path_threshold = config.backward_path_threshold;
         let feedback = FeedbackLoop::new(
             operators.clone(),
             evaluator.clone(),
@@ -103,6 +139,8 @@ impl ReasoningEngine {
         let semantic_memory = SemanticMemory::in_memory(config.dimension)?;
         let embedding = EmbeddingEngine::new(config.embedding.clone());
         let bias_controller = BiasController::new();
+        let mood_engine = MoodEngine::new();
+        let emotion_system = EmotionSystem::new();
 
         Ok(Self {
             operators,
@@ -112,6 +150,44 @@ impl ReasoningEngine {
             semantic_memory,
             embedding,
             bias_controller,
+            mood_engine,
+            emotion_system,
+            config,
+        })
+    }
+
+    /// Create a new reasoning engine with persistent storage (for production)
+    pub fn with_storage(config: EngineConfig, storage: &crate::storage::StorageConfig) -> Result<Self, Box<dyn std::error::Error + Send + Sync>> {
+        let operators = OperatorManager::new(config.dimension);
+        let mut evaluator = Evaluator::new(config.energy_weights.clone(), config.evaluator_confidence_threshold);
+        evaluator.energy_threshold = config.evaluator_energy_threshold;
+        evaluator.backward_similarity_threshold = config.backward_similarity_threshold;
+        evaluator.backward_path_threshold = config.backward_path_threshold;
+        let feedback = FeedbackLoop::new(
+            operators.clone(),
+            evaluator.clone(),
+            config.learning.clone(),
+        );
+        let episodic_memory = EpisodicMemory::new(&storage.episodic_db_path)?;
+        let semantic_memory = SemanticMemory::new(
+            &storage.semantic_db_path,
+            config.dimension
+        )?;
+        let embedding = EmbeddingEngine::new(config.embedding.clone());
+        let bias_controller = BiasController::new();
+        let mood_engine = MoodEngine::new();
+        let emotion_system = EmotionSystem::new();
+
+        Ok(Self {
+            operators,
+            evaluator,
+            feedback,
+            episodic_memory,
+            semantic_memory,
+            embedding,
+            bias_controller,
+            mood_engine,
+            emotion_system,
             config,
         })
     }
@@ -119,18 +195,77 @@ impl ReasoningEngine {
     /// Train on a single problem
     pub fn train(&mut self, problem: &Problem) -> TrainingResult {
         let result = self.feedback.train_step(problem);
-        
+
         // Store in episodic memory if successful
         if result.success {
-            if let (Some(ref thought), Some(ref energy), Some(ref op_id)) = 
-                (&result.best_candidate, &result.best_energy, &result.best_operator_id) 
+            if let (Some(ref thought), Some(ref energy), Some(ref op_id)) =
+                (&result.best_candidate, &result.best_energy, &result.best_operator_id)
             {
                 let episode = Episode::from_training(problem, thought, energy, op_id);
                 let _ = self.episodic_memory.store(&episode);
             }
         }
 
-        // Update bias controller
+        // Create emotional stimulus from training result
+        let stimulus = if result.success {
+            EmotionalStimulus {
+                stimulus_type: if let Some(ref energy) = result.best_energy {
+                    if energy.verified {
+                        StimulusType::Success
+                    } else {
+                        StimulusType::Reward
+                    }
+                } else {
+                    StimulusType::Success
+                },
+                intensity: result.best_energy.as_ref()
+                    .map(|e| e.confidence_score)
+                    .unwrap_or(0.5),
+                valence: 0.7,
+                context: format!("training_success: {}", problem.input),
+            }
+        } else {
+            EmotionalStimulus {
+                stimulus_type: StimulusType::Failure,
+                intensity: 0.6,
+                valence: -0.5,
+                context: format!("training_failure: {}", problem.input),
+            }
+        };
+
+        // Process through emotion system (returns RegulatedResponse)
+        let regulated_response = self.emotion_system.process(stimulus);
+
+        // Create EmotionalResponse for mood update from regulated emotion
+        let emotional_response = crate::control::EmotionalResponse {
+            emotion: regulated_response.regulated_emotion,
+            valence: if result.success { 0.7 } else { -0.5 },
+            arousal: if result.success { 0.6 } else { 0.5 },
+            intensity: result.best_energy.as_ref()
+                .map(|e| e.confidence_score)
+                .unwrap_or(0.5),
+            neurotransmitters: crate::control::Neurotransmitters::default(),
+        };
+
+        // Update mood from emotional response
+        self.mood_engine.update_from_emotion(&emotional_response);
+        self.mood_engine.decay();
+        self.mood_engine.record();
+
+        // Get mood bias and apply to BiasController
+        let mood_state = self.mood_engine.get_state();
+        let perception_bias = mood_state.perception_bias();
+        let reaction_threshold = mood_state.reaction_threshold();
+
+        // Modulate bias based on mood
+        self.bias_controller.set_exploration(
+            (self.bias_controller.current_bias.exploration + perception_bias * 0.2).clamp(0.0, 1.0)
+        );
+        self.bias_controller.set_risk_tolerance(
+            (reaction_threshold).clamp(0.0, 1.0)
+        );
+
+        // Update bias controller meta state
         if let Some(ref energy) = result.best_energy {
             self.bias_controller.update_meta(energy.confidence_score);
         }
@@ -139,8 +274,54 @@ impl ReasoningEngine {
     }
 
     /// Perform inference
-    pub fn infer(&self, problem: &Problem) -> InferenceResult {
-        self.feedback.infer(problem)
+    pub fn infer(&mut self, problem: &Problem) -> InferenceResult {
+        // Get current mood state and apply to bias
+        let mood_state = self.mood_engine.get_state();
+        let perception_bias = mood_state.perception_bias();
+        let reaction_threshold = mood_state.reaction_threshold();
+
+        // Modulate bias based on mood before inference
+        self.bias_controller.set_exploration(
+            (self.bias_controller.current_bias.exploration + perception_bias * 0.1).clamp(0.0, 1.0)
+        );
+        self.bias_controller.set_risk_tolerance(
+            (reaction_threshold).clamp(0.0, 1.0)
+        );
+
+        // Perform inference with mood-modulated bias
+        let result = self.feedback.infer(problem);
+
+        // Create emotional stimulus from inference
+        let stimulus = EmotionalStimulus {
+            stimulus_type: if result.energy.verified {
+                StimulusType::Success
+            } else if result.confidence > 0.7 {
+                StimulusType::Reward
+            } else {
+                StimulusType::Novel
+            },
+            intensity: result.confidence,
+            valence: (result.confidence - 0.5) * 2.0,  // Map confidence to valence
+            context: format!("inference: {}", problem.input),
+        };
+
+        // Process through emotion system
+        let regulated_response = self.emotion_system.process(stimulus);
+
+        // Create EmotionalResponse for mood update
+        let emotional_response = crate::control::EmotionalResponse {
+            emotion: regulated_response.regulated_emotion,
+            valence: (result.confidence - 0.5) * 2.0,
+            arousal: if result.energy.verified { 0.7 } else { 0.5 },
+            intensity: result.confidence,
+            neurotransmitters: crate::control::Neurotransmitters::default(),
+        };
+
+        // Update mood from inference (subtle influence)
+        self.mood_engine.update_from_emotion(&emotional_response);
+        self.mood_engine.decay();
+
+        result
     }
 
     /// Get system statistics
@@ -380,8 +561,8 @@ pub async fn infer(
     State(state): State<Arc<AppState>>,
     Json(req): Json<InferRequest>,
 ) -> impl IntoResponse {
-    let engine = state.engine.lock().await;
-    
+    let mut engine = state.engine.lock().await;
+
     let mut problem = Problem::new(&req.input, engine.config.dimension);
     for constraint in &req.constraints {
         problem = problem.with_constraint(constraint);
@@ -1049,6 +1230,314 @@ pub async fn generate_image(
     })
 }
 
+/// Poem generation request
+#[derive(Debug, Deserialize)]
+pub struct GeneratePoemRequest {
+    /// Input theme/prompt
+    pub prompt: String,
+    /// Number of lines
+    #[serde(default = "default_poem_lines")]
+    pub lines: usize,
+    /// Poetry theme (optional)
+    pub theme: Option<String>,
+    /// Use haiku format (3 lines, 5-7-5)
+    #[serde(default)]
+    pub haiku: bool,
+}
+
+fn default_poem_lines() -> usize { 4 }
+
+/// Poem generation response
+#[derive(Debug, Serialize)]
+pub struct GeneratePoemResponse {
+    pub success: bool,
+    pub poem: String,
+    pub lines_generated: usize,
+    pub theme: String,
+    pub mood: String,
+    pub confidence: f64,
+}
+
+/// Generate poem from prompt using learned semantic memory
+/// Uses thought vectors + bias + semantic memory (no hardcoded vocab)
+pub async fn generate_poem(
+    State(state): State<Arc<AppState>>,
+    Json(req): Json<GeneratePoemRequest>,
+) -> impl IntoResponse {
+    use crate::generation::LearnedDecoder;
+
+    let mut engine = state.engine.lock().await;
+    let dim = state.config.dimension;
+
+    // Create problem and get thought state
+    let problem = Problem::new(&req.prompt, dim);
+    let result = engine.infer(&problem);
+
+    // Get current emotional state and bias
+    let emotion = engine.emotion_system.get_state();
+    let bias = &engine.bias_controller.current_bias;
+
+    // Modulate thought with emotion/bias
+    let modulated_thought = bias.modulate(&result.thought);
+
+    // Create learned decoder with creativity-based temperature
+    let temperature = 0.5 + bias.creativity * 0.7;
+    let decoder = LearnedDecoder::new(dim, temperature);
+
+    // Generate poem from learned semantic memory
+    let theme_str = req.theme.as_deref().unwrap_or("thought");
+    let poem = match decoder.generate_poem_from_memory(
+        &modulated_thought,
+        &engine.semantic_memory,
+        theme_str,
+        req.lines,
+    ) {
+        Ok(p) => p,
+        Err(_) => {
+            // Fallback if no semantic memory yet: interpret thought vector directly
+            decoder.interpret_raw_thought(&modulated_thought)
+        }
+    };
+
+    // Get mood description
+    let classified_emotion = emotion.classify();
+    let mood_desc = format!("{:?}", classified_emotion);
+
+    Json(GeneratePoemResponse {
+        success: true,
+        poem: poem.clone(),
+        lines_generated: poem.lines().count(),
+        theme: req.theme.clone().unwrap_or_else(|| "Auto".to_string()),
+        mood: mood_desc,
+        confidence: result.confidence,
+    })
+}
+
+// ============================================================================
+// FACTUAL QUESTION ANSWERING - NO HALLUCINATIONS
+// ============================================================================
+
+/// Factual question request
+#[derive(Debug, Deserialize)]
+pub struct FactualQuestionRequest {
+    /// The question to answer
+    pub question: String,
+    /// Maximum tokens to generate
+    #[serde(default = "default_factual_max_tokens")]
+    pub max_tokens: usize,
+    /// Verification mode: strict, balanced, or relaxed
+    #[serde(default = "default_verification_mode")]
+    pub verification_mode: String,
+}
+
+fn default_factual_max_tokens() -> usize { 50 }
+fn default_verification_mode() -> String { "balanced".to_string() }
+
+/// Generate factual answer with knowledge verification
+/// Uses: h_factual = f(W_c·c_t + W_m·m_neutral + W_τ·τ_factual + b)
+/// Every token verified against semantic memory (no hallucinations)
+pub async fn answer_factual(
+    State(state): State<Arc<AppState>>,
+    Json(req): Json<FactualQuestionRequest>,
+) -> impl IntoResponse {
+    use crate::generation::{FactualDecoder, FactualThresholds};
+
+    let mut engine = state.engine.lock().await;
+    let dim = state.config.dimension;
+
+    // Create problem and get thought state
+    let problem = Problem::new(&req.question, dim);
+    let result = engine.infer(&problem);
+
+    // Select verification thresholds based on mode
+    let thresholds = match req.verification_mode.as_str() {
+        "strict" => FactualThresholds::strict(),
+        "relaxed" => FactualThresholds::relaxed(),
+        _ => FactualThresholds::balanced(),
+    };
+
+    // Create factual decoder (neutral bias, no creativity)
+    let decoder = FactualDecoder::new(dim, thresholds);
+
+    // Generate factual response with verification
+    let response = match decoder.generate_factual(
+        &result.thought,
+        &engine.semantic_memory,
+        req.max_tokens,
+    ) {
+        Ok(resp) => resp,
+        Err(e) => {
+            return Json(serde_json::json!({
+                "success": false,
+                "error": format!("Generation failed: {}", e),
+            }));
+        }
+    };
+
+    Json(serde_json::json!({
+        "success": true,
+        "answer": response.text,
+        "tokens": response.tokens,
+        "mode": "factual",
+        "overall_confidence": response.overall_confidence,
+        "verifications": response.verifications,
+        "verified_tokens": response.verifications.iter().filter(|v| v.verified).count(),
+        "total_tokens": response.tokens.len(),
+    }))
+}
+
+/// Statement verification request
+#[derive(Debug, Deserialize)]
+pub struct VerifyStatementRequest {
+    /// Statement to verify
+    pub statement: String,
+    /// Verification mode
+    #[serde(default = "default_verification_mode")]
+    pub verification_mode: String,
+}
+
+/// Verify a statement against knowledge base
+/// Returns cosine similarity and verification result
+pub async fn verify_statement(
+    State(state): State<Arc<AppState>>,
+    Json(req): Json<VerifyStatementRequest>,
+) -> impl IntoResponse {
+    use crate::generation::{FactualDecoder, FactualThresholds};
+
+    let engine = state.engine.lock().await;
+    let dim = state.config.dimension;
+
+    // Select verification thresholds
+    let thresholds = match req.verification_mode.as_str() {
+        "strict" => FactualThresholds::strict(),
+        "relaxed" => FactualThresholds::relaxed(),
+        _ => FactualThresholds::balanced(),
+    };
+
+    // Save threshold value before moving thresholds
+    let min_similarity_threshold = thresholds.min_knowledge_similarity;
+
+    let decoder = FactualDecoder::new(dim, thresholds);
+
+    // Verify statement against knowledge base
+    let result = match decoder.verify_statement(&req.statement, &engine.semantic_memory) {
+        Ok(res) => res,
+        Err(e) => {
+            return Json(serde_json::json!({
+                "success": false,
+                "error": format!("Verification failed: {}", e),
+            }));
+        }
+    };
+
+    Json(serde_json::json!({
+        "success": true,
+        "statement": req.statement,
+        "verified": result.verified,
+        "confidence": result.confidence,
+        "max_similarity": result.max_similarity,
+        "threshold": min_similarity_threshold,
+        "supporting_facts": result.supporting_facts,
+        "reason": result.reason,
+    }))
+}
+
+// ============================================================================
+// UNIVERSAL EXPLANATION - Multi-Audience Knowledge Translation
+// ============================================================================
+
+/// Universal explanation request
+#[derive(Debug, Deserialize)]
+pub struct ExplainRequest {
+    /// Concept to explain
+    pub concept: String,
+    /// Target audience: child, general, elder, mathematician, expert
+    #[serde(default = "default_audience")]
+    pub audience: String,
+    /// Maximum sentences
+    #[serde(default = "default_max_sentences")]
+    pub max_sentences: usize,
+    /// Verification mode
+    #[serde(default = "default_verification_mode")]
+    pub verification_mode: String,
+    /// Include analogy (if appropriate for audience)
+    #[serde(default)]
+    pub include_analogy: bool,
+}
+
+fn default_audience() -> String { "general".to_string() }
+fn default_max_sentences() -> usize { 3 }
+
+/// Universal explanation endpoint
+/// Uses: h'_explain = f(h_knowledge, s_style, c_context)
+/// CRITICAL: Same verification as factual mode - NO HALLUCINATIONS
+pub async fn explain_universal(
+    State(state): State<Arc<AppState>>,
+    Json(req): Json<ExplainRequest>,
+) -> impl IntoResponse {
+    use crate::generation::{ExplanationDecoder, ExplanationAudience, FactualThresholds};
+
+    let engine = state.engine.lock().await;
+    let dim = state.config.dimension;
+
+    // Parse audience
+    let audience = match req.audience.to_lowercase().as_str() {
+        "child" => ExplanationAudience::Child,
+        "elder" => ExplanationAudience::Elder,
+        "mathematician" | "math" => ExplanationAudience::Mathematician,
+        "expert" => ExplanationAudience::Expert,
+        _ => ExplanationAudience::General,
+    };
+
+    // Select verification thresholds
+    let thresholds = match req.verification_mode.as_str() {
+        "strict" => FactualThresholds::strict(),
+        "relaxed" => FactualThresholds::relaxed(),
+        _ => FactualThresholds::balanced(),
+    };
+
+    // Create explanation decoder
+    let decoder = ExplanationDecoder::new(dim, audience, thresholds);
+
+    // Generate explanation
+    let response = match decoder.explain(&req.concept, &engine.semantic_memory, req.max_sentences) {
+        Ok(resp) => resp,
+        Err(e) => {
+            return Json(serde_json::json!({
+                "success": false,
+                "error": format!("Explanation failed: {}", e),
+            }));
+        }
+    };
+
+    // Optionally generate analogy
+    let analogy = if req.include_analogy {
+        decoder.generate_analogy(&req.concept, &engine.semantic_memory)
+            .ok()
+            .flatten()
+    } else {
+        None
+    };
+
+    Json(serde_json::json!({
+        "success": true,
+        "concept": req.concept,
+        "audience": format!("{:?}", audience),
+        "explanation": response.explanation,
+        "sentences": response.sentences,
+        "analogy": analogy,
+        "verified_percentage": response.verified_percentage,
+        "style": {
+            "abstraction": audience.style_vector().abstraction,
+            "formality": audience.style_vector().formality,
+            "technical_density": audience.style_vector().technical_density,
+            "analogy_preference": audience.style_vector().analogy_preference,
+        },
+        "verifications": response.verifications.len(),
+        "verified_tokens": response.verifications.iter().filter(|v| v.verified).count(),
+    }))
+}
+
 /// Comprehensive training request
 #[derive(Debug, Deserialize)]
 pub struct ComprehensiveTrainRequest {
@@ -1261,6 +1750,179 @@ pub async fn query_knowledge(
     }
 }
 
+/// Get storage statistics
+pub async fn get_storage_stats(
+    State(state): State<Arc<AppState>>,
+) -> impl IntoResponse {
+    let stats = state.storage.get_stats();
+    Json(serde_json::json!({
+        "storage": {
+            "episodic_db_mb": stats.episodic_size_mb(),
+            "semantic_db_mb": stats.semantic_size_mb(),
+            "conversation_db_mb": stats.conversation_size_mb(),
+            "total_mb": stats.total_size_mb(),
+            "backup_count": stats.backup_count
+        },
+        "paths": {
+            "base_dir": state.storage.base_dir,
+            "episodic_db": state.storage.episodic_db_path,
+            "semantic_db": state.storage.semantic_db_path,
+            "conversation_db": state.storage.conversation_db_path
+        }
+    }))
+}
+
+/// Generate video from prompt
+#[derive(Debug, Deserialize)]
+pub struct GenerateVideoRequest {
+    pub prompt: String,
+    #[serde(default = "default_video_duration")]
+    pub duration: f64,
+    #[serde(default = "default_video_fps")]
+    pub fps: f64,
+    #[serde(default = "default_video_size")]
+    pub size: usize,
+    #[serde(default)]
+    pub motion_type: Option<String>,
+}
+
+fn default_video_duration() -> f64 { 2.0 }
+fn default_video_fps() -> f64 { 30.0 }
+fn default_video_size() -> usize { 64 }
+
+#[derive(Debug, Serialize)]
+pub struct GenerateVideoResponse {
+    pub success: bool,
+    pub frame_count: usize,
+    pub fps: f64,
+    pub duration: f64,
+    /// Each frame as comma-separated pixel values
+    pub frames: Vec<String>,
+    pub confidence: f64,
+}
+
+/// Generate video endpoint
+pub async fn generate_video(
+    State(state): State<Arc<AppState>>,
+    Json(req): Json<GenerateVideoRequest>,
+) -> impl IntoResponse {
+    use crate::generation::video::{VideoGenerator, VideoGenConfig, MotionType};
+
+    let mut engine = state.engine.lock().await;
+    let dim = state.config.dimension;
+
+    // Create problem and get thought state
+    let problem = Problem::new(&req.prompt, dim);
+    let result = engine.infer(&problem);
+
+    // Create video generator
+    let config = VideoGenConfig {
+        fps: req.fps,
+        duration: req.duration,
+        width: req.size,
+        height: req.size,
+        channels: 3,
+        temporal_coherence: 0.8,
+        motion_amplitude: 0.3,
+    };
+
+    let generator = VideoGenerator::new(config, dim);
+
+    // Generate video based on motion type
+    let video = if let Some(motion_str) = req.motion_type {
+        let motion = match motion_str.to_lowercase().as_str() {
+            "linear" => MotionType::Linear,
+            "circular" => MotionType::Circular,
+            "oscillating" => MotionType::Oscillating,
+            "expanding" => MotionType::Expanding,
+            "random" => MotionType::Random,
+            _ => MotionType::Linear,
+        };
+        generator.generate_with_motion(&result.thought, motion)
+    } else {
+        generator.generate(&result.thought)
+    };
+
+    // Convert frames to string format
+    let frames: Vec<String> = video.frames.iter().map(|frame| {
+        frame.pixels.iter()
+            .map(|p| format!("{:.4}", p))
+            .collect::<Vec<_>>()
+            .join(",")
+    }).collect();
+
+    Json(GenerateVideoResponse {
+        success: true,
+        frame_count: video.frames.len(),
+        fps: video.fps,
+        duration: video.duration,
+        frames,
+        confidence: result.confidence,
+    })
+}
+
+/// Video interpolation request
+#[derive(Debug, Deserialize)]
+pub struct VideoInterpolationRequest {
+    pub prompt_a: String,
+    pub prompt_b: String,
+    #[serde(default = "default_video_duration")]
+    pub duration: f64,
+    #[serde(default = "default_video_fps")]
+    pub fps: f64,
+    #[serde(default = "default_video_size")]
+    pub size: usize,
+}
+
+/// Generate interpolation video between two prompts
+pub async fn generate_video_interpolation(
+    State(state): State<Arc<AppState>>,
+    Json(req): Json<VideoInterpolationRequest>,
+) -> impl IntoResponse {
+    use crate::generation::video::{VideoGenerator, VideoGenConfig};
+
+    let mut engine = state.engine.lock().await;
+    let dim = state.config.dimension;
+
+    // Create problems and get thought states
+    let problem_a = Problem::new(&req.prompt_a, dim);
+    let result_a = engine.infer(&problem_a);
+
+    let problem_b = Problem::new(&req.prompt_b, dim);
+    let result_b = engine.infer(&problem_b);
+
+    // Create video generator
+    let config = VideoGenConfig {
+        fps: req.fps,
+        duration: req.duration,
+        width: req.size,
+        height: req.size,
+        channels: 3,
+        temporal_coherence: 0.9,
+        motion_amplitude: 0.2,
+    };
+
+    let generator = VideoGenerator::new(config, dim);
+    let video = generator.generate_interpolation(&result_a.thought, &result_b.thought);
+
+    // Convert frames to string format
+    let frames: Vec<String> = video.frames.iter().map(|frame| {
+        frame.pixels.iter()
+            .map(|p| format!("{:.4}", p))
+            .collect::<Vec<_>>()
+            .join(",")
+    }).collect();
+
+    Json(GenerateVideoResponse {
+        success: true,
+        frame_count: video.frames.len(),
+        fps: video.fps,
+        duration: video.duration,
+        frames,
+        confidence: video.confidence,
+    })
+}
+
 /// System capabilities info
 pub async fn get_capabilities() -> impl IntoResponse {
     Json(serde_json::json!({
@@ -1304,48 +1966,86 @@ pub fn create_router(state: Arc<AppState>) -> Router {
         .route("/health", get(health_check))
         .route("/stats", get(get_statistics))
         .route("/capabilities", get(get_capabilities))
-        
+        .route("/storage/stats", get(get_storage_stats))
+
+        // Conversation endpoints
+        .route("/chat", post(conversation::chat))
+        .route("/conversation/get", post(conversation::get_conversation))
+        .route("/conversation/list", get(conversation::list_conversations))
+        .route("/conversation/clear", post(conversation::clear_conversation))
+        .route("/system-prompt/update", post(conversation::update_system_prompt))
+        .route("/system-prompt/set-default", post(conversation::set_default_system_prompt))
+        .route("/system-prompt/get-default", get(conversation::get_default_system_prompt))
+
         // Training endpoints
         .route("/train", post(train))
         .route("/train/batch", post(batch_train))
         .route("/train/comprehensive", post(comprehensive_train))
-        
+
         // Knowledge learning
         .route("/learn", post(learn_knowledge))
         .route("/query", post(query_knowledge))
-        
+
+        // Media-based training
+        .route("/train/with-images", post(media_training::train_with_generated_images))
+        .route("/train/with-videos", post(media_training::train_with_generated_videos))
+        .route("/train/self-supervised", post(media_training::self_supervised_learning))
+
+        // Emotions and Mood
+        .route("/emotions/state", get(emotions::get_emotional_state))
+        .route("/emotions/adjust", post(emotions::adjust_mood))
+        .route("/emotions/demonstrate", post(emotions::demonstrate_mood_influence))
+        .route("/emotions/reset", post(emotions::reset_mood))
+        .route("/emotions/patterns", get(emotions::get_mood_patterns))
+
+        // Export/Import
+        .route("/export/conversations", post(export::export_conversations))
+        .route("/export/episodic", post(export::export_episodic_memory))
+        .route("/export/semantic", post(export::export_semantic_memory))
+        .route("/export/list", get(export::list_exports))
+
         // Inference endpoint
         .route("/infer", post(infer))
-        
+
         // Generation endpoints
         .route("/generate/text", post(generate_text))
         .route("/generate/image", post(generate_image))
-        
+        .route("/generate/video", post(generate_video))
+        .route("/generate/video/interpolate", post(generate_video_interpolation))
+        .route("/generate/poem", post(generate_poem))
+
+        // Factual generation (no hallucinations)
+        .route("/generate/factual", post(answer_factual))
+        .route("/verify/statement", post(verify_statement))
+
+        // Universal explanation (multi-audience, no hallucinations)
+        .route("/explain", post(explain_universal))
+
         // Multimodal endpoints
         .route("/multimodal/image", post(process_image))
         .route("/multimodal/audio", post(process_audio))
         .route("/multimodal/video", post(process_video))
         .route("/multimodal/fuse", post(fuse_modalities))
-        
+
         // Semantic memory
         .route("/facts", post(add_fact))
         .route("/facts/search", post(search_facts))
         .route("/memory/semantic/clear", delete(clear_semantic_memory))
-        
+
         // Episodic memory
         .route("/memory/episodic/stats", get(get_episodic_stats))
         .route("/memory/episodic/top/:limit", get(get_top_episodes))
         .route("/memory/episodic/clear", delete(clear_episodic_memory))
-        
+
         // Operators
         .route("/operators", get(get_operators))
-        
+
         // Bias control
         .route("/bias", post(set_bias))
         .route("/bias/reset", post(reset_bias))
-        
+
         // Learning rate
         .route("/learning/reset", post(reset_learning_rate))
-        
+
         .with_state(state)
 }

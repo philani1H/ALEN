@@ -2,8 +2,38 @@
 //!
 //! Generates outputs from thought states:
 //! - Text Generation: Vocabulary-based decoding
+//! - Poetry Generation: Mood-aware creative text (p_t = softmax(W_out·h_t + b))
 //! - Image Generation: Simple diffusion-like process
+//! - Video Generation: Temporal sequence generation
 //! - Content synthesis and controlled generation
+
+pub mod video;
+pub mod text_decoder;
+pub mod poetry;
+pub mod learned_decoder;
+pub mod factual_decoder;
+pub mod explanation_decoder;
+pub mod reasoning_engine;
+pub mod knowledge_visual;
+
+pub use video::{VideoGenerator, VideoGenConfig, GeneratedVideo, MotionType};
+pub use text_decoder::{TextDecoder, Vocabulary as DecoderVocabulary};
+pub use poetry::{PoetryGenerator, PoetryStyle, PoetryTheme};
+pub use learned_decoder::{LearnedDecoder, GenerationResult, ConceptSource};
+pub use factual_decoder::{
+    FactualDecoder, FactualResponse, FactualThresholds, TokenVerification,
+    VerificationResult, GenerationMode,
+};
+pub use explanation_decoder::{
+    ExplanationDecoder, ExplanationAudience, ExplanationResponse, StyleVector,
+};
+pub use reasoning_engine::{
+    ReasoningEngine, LatentResult, LatentVerification,
+    MultiStepReasoning, VerifiedReasoningStep,
+};
+pub use knowledge_visual::{
+    KnowledgeImageGenerator, KnowledgeImage, KnowledgeVideo, KnowledgeVisualConfig,
+};
 
 use crate::core::{ThoughtState, Activation, DenseLayer};
 use nalgebra::{DMatrix, DVector};

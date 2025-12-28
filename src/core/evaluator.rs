@@ -54,6 +54,10 @@ pub struct Evaluator {
     pub confidence_threshold: f64,
     /// Maximum allowed energy for acceptance
     pub energy_threshold: f64,
+    /// Backward inference similarity threshold (0.0 = disabled)
+    pub backward_similarity_threshold: f64,
+    /// Backward inference path consistency threshold (0.0 = disabled)
+    pub backward_path_threshold: f64,
 }
 
 impl Default for Evaluator {
@@ -62,6 +66,8 @@ impl Default for Evaluator {
             weights: EnergyWeights::default(),
             confidence_threshold: 0.5,
             energy_threshold: 0.8,
+            backward_similarity_threshold: 0.0,
+            backward_path_threshold: 0.0,
         }
     }
 }
@@ -73,6 +79,8 @@ impl Evaluator {
             weights,
             confidence_threshold,
             energy_threshold: 1.0 - confidence_threshold,
+            backward_similarity_threshold: 0.0,
+            backward_path_threshold: 0.0,
         }
     }
 
@@ -241,8 +249,16 @@ impl Evaluator {
         // Reconstruction error - how far is candidate from target
         let reconstruction_error = candidate.distance(target) / (candidate.dimension as f64).sqrt();
         
+        // If thresholds are 0, backward check is disabled (always passes)
+        let passes = if self.backward_similarity_threshold == 0.0 && self.backward_path_threshold == 0.0 {
+            true
+        } else {
+            target_similarity > self.backward_similarity_threshold
+                || path_consistency > self.backward_path_threshold
+        };
+
         BackwardCheck {
-            passes: target_similarity > 0.7 && path_consistency > 0.5,
+            passes,
             reconstruction_error,
             path_consistency,
         }

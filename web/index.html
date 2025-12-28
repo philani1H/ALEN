@@ -1,0 +1,931 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ALEN - Advanced Learning Engine</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+
+        .header p {
+            font-size: 1.1em;
+            opacity: 0.9;
+        }
+
+        .tabs {
+            display: flex;
+            background: #f5f5f5;
+            border-bottom: 2px solid #ddd;
+            overflow-x: auto;
+        }
+
+        .tab {
+            padding: 15px 25px;
+            cursor: pointer;
+            border: none;
+            background: none;
+            font-size: 1em;
+            transition: all 0.3s;
+            white-space: nowrap;
+        }
+
+        .tab:hover {
+            background: #e0e0e0;
+        }
+
+        .tab.active {
+            background: white;
+            border-bottom: 3px solid #667eea;
+            font-weight: bold;
+        }
+
+        .content {
+            padding: 30px;
+        }
+
+        .section {
+            display: none;
+        }
+
+        .section.active {
+            display: block;
+        }
+
+        .card {
+            background: #f9f9f9;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-left: 4px solid #667eea;
+        }
+
+        .card h3 {
+            color: #667eea;
+            margin-bottom: 15px;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+            color: #333;
+        }
+
+        input[type="text"],
+        input[type="number"],
+        textarea,
+        select {
+            width: 100%;
+            padding: 10px;
+            border: 2px solid #ddd;
+            border-radius: 5px;
+            font-size: 1em;
+            transition: border-color 0.3s;
+        }
+
+        input:focus,
+        textarea:focus,
+        select:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+
+        textarea {
+            min-height: 100px;
+            resize: vertical;
+        }
+
+        button {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 5px;
+            font-size: 1em;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        button:active {
+            transform: translateY(0);
+        }
+
+        .result {
+            background: #fff;
+            border: 2px solid #667eea;
+            border-radius: 5px;
+            padding: 15px;
+            margin-top: 15px;
+            max-height: 400px;
+            overflow-y: auto;
+        }
+
+        .result pre {
+            white-space: pre-wrap;
+            word-wrap: break-word;
+            font-size: 0.9em;
+        }
+
+        .success {
+            background: #d4edda;
+            border-color: #28a745;
+            color: #155724;
+        }
+
+        .error {
+            background: #f8d7da;
+            border-color: #dc3545;
+            color: #721c24;
+        }
+
+        .info-box {
+            background: #e7f3ff;
+            border-left: 4px solid #2196F3;
+            padding: 15px;
+            margin-bottom: 20px;
+            border-radius: 5px;
+        }
+
+        .info-box p {
+            margin: 5px 0;
+        }
+
+        .mood-display {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .mood-card {
+            background: white;
+            border-radius: 8px;
+            padding: 15px;
+            text-align: center;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .mood-label {
+            font-size: 0.9em;
+            color: #666;
+            margin-bottom: 5px;
+        }
+
+        .mood-value {
+            font-size: 1.5em;
+            font-weight: bold;
+            color: #667eea;
+        }
+
+        .loading {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid #f3f3f3;
+            border-top: 3px solid #667eea;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin-left: 10px;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .status-indicator {
+            display: inline-block;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            margin-right: 8px;
+        }
+
+        .status-healthy {
+            background: #28a745;
+        }
+
+        .status-unhealthy {
+            background: #dc3545;
+        }
+
+        .example-button {
+            background: #f0f0f0;
+            color: #333;
+            padding: 8px 15px;
+            margin: 5px;
+            border-radius: 5px;
+            font-size: 0.9em;
+        }
+
+        .example-button:hover {
+            background: #e0e0e0;
+        }
+
+        .grid-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+
+        @media (max-width: 768px) {
+            .grid-2 {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🧠 ALEN</h1>
+            <p>Advanced Learning Engine with Neural Understanding</p>
+            <p style="font-size: 0.9em; margin-top: 10px;">
+                <span id="status-indicator">Checking connection...</span>
+            </p>
+        </div>
+
+        <div class="tabs">
+            <button class="tab active" onclick="showSection('dashboard')">Dashboard</button>
+            <button class="tab" onclick="showSection('train')">Train ALEN</button>
+            <button class="tab" onclick="showSection('chat')">Chat</button>
+            <button class="tab" onclick="showSection('mood')">Mood & Emotions</button>
+            <button class="tab" onclick="showSection('generate')">Generate Media</button>
+            <button class="tab" onclick="showSection('memory')">Memory</button>
+        </div>
+
+        <div class="content">
+            <!-- Dashboard Section -->
+            <div id="dashboard" class="section active">
+                <div class="card">
+                    <h3>Welcome to ALEN!</h3>
+                    <p>ALEN is an AI system that learns through verified understanding, not just pattern matching.</p>
+                    <div class="info-box">
+                        <p><strong>What makes ALEN special:</strong></p>
+                        <p>✅ Learns by proving it understands (backward inference)</p>
+                        <p>✅ Has real moods and emotions that affect behavior</p>
+                        <p>✅ Generates images and videos from thoughts</p>
+                        <p>✅ Remembers everything it learns</p>
+                        <p>✅ Can train itself using self-generated content</p>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h3>System Status</h3>
+                    <div id="system-stats">Loading...</div>
+                    <button onclick="loadSystemStats()">Refresh Status</button>
+                </div>
+
+                <div class="card">
+                    <h3>Quick Actions</h3>
+                    <button onclick="showSection('train')">Start Training</button>
+                    <button onclick="showSection('chat')">Start Chatting</button>
+                    <button onclick="showSection('mood')">Check ALEN's Mood</button>
+                </div>
+            </div>
+
+            <!-- Training Section -->
+            <div id="train" class="section">
+                <div class="card">
+                    <h3>Train ALEN - Teach New Concepts</h3>
+                    <div class="info-box">
+                        <p><strong>How Training Works:</strong></p>
+                        <p>1. You provide an input and expected answer</p>
+                        <p>2. ALEN tries different reasoning strategies</p>
+                        <p>3. It verifies understanding by working backwards</p>
+                        <p>4. Only stores knowledge if verification succeeds</p>
+                        <p>5. Success makes ALEN happy, failure causes stress</p>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h3>Single Problem Training</h3>
+                    <div class="form-group">
+                        <label>Input (What to learn):</label>
+                        <input type="text" id="train-input" placeholder="e.g., 'What is 2+2?'" value="What is the capital of France?">
+                    </div>
+                    <div class="form-group">
+                        <label>Expected Answer:</label>
+                        <input type="text" id="train-answer" placeholder="e.g., '4'" value="Paris">
+                    </div>
+                    <div class="form-group">
+                        <label>Context (optional, comma-separated):</label>
+                        <input type="text" id="train-context" placeholder="e.g., 'math, arithmetic'" value="geography, Europe">
+                    </div>
+                    <button onclick="trainSingle()">Train ALEN <span id="train-loading"></span></button>
+                    <div id="train-result"></div>
+
+                    <div style="margin-top: 20px;">
+                        <p><strong>Try these examples:</strong></p>
+                        <button class="example-button" onclick="loadExample('train', '5 + 3', '8', 'math')">Math Example</button>
+                        <button class="example-button" onclick="loadExample('train', 'dog', 'animal', 'biology')">Classification</button>
+                        <button class="example-button" onclick="loadExample('train', 'H2O', 'water', 'chemistry')">Chemistry</button>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h3>Batch Training - Multiple Examples</h3>
+                    <div class="info-box">
+                        <p>Train on multiple examples at once. Format: one example per line as "input -> answer"</p>
+                    </div>
+                    <div class="form-group">
+                        <label>Training Examples (one per line):</label>
+                        <textarea id="batch-input" placeholder="2+2 -> 4&#10;3+5 -> 8&#10;capital of Spain -> Madrid">2+2 -> 4
+3×5 -> 15
+capital of Germany -> Berlin</textarea>
+                    </div>
+                    <button onclick="trainBatch()">Batch Train <span id="batch-loading"></span></button>
+                    <div id="batch-result"></div>
+                </div>
+
+                <div class="card">
+                    <h3>Train with Generated Images</h3>
+                    <div class="info-box">
+                        <p>ALEN generates images from your prompts, then trains on them!</p>
+                    </div>
+                    <div class="form-group">
+                        <label>Prompts (comma-separated):</label>
+                        <input type="text" id="image-train-prompts" value="cat, dog, bird">
+                    </div>
+                    <div class="form-group">
+                        <label>Labels (comma-separated):</label>
+                        <input type="text" id="image-train-labels" value="feline, canine, avian">
+                    </div>
+                    <div class="form-group">
+                        <label>Epochs (repetitions):</label>
+                        <input type="number" id="image-epochs" value="2" min="1" max="10">
+                    </div>
+                    <button onclick="trainWithImages()">Train with Images <span id="img-train-loading"></span></button>
+                    <div id="img-train-result"></div>
+                </div>
+            </div>
+
+            <!-- Chat Section -->
+            <div id="chat" class="section">
+                <div class="card">
+                    <h3>Chat with ALEN</h3>
+                    <div class="info-box">
+                        <p><strong>ALEN remembers your conversation and its mood affects responses!</strong></p>
+                        <p>• When happy/optimistic: More creative and exploratory</p>
+                        <p>• When stressed/anxious: More cautious and conservative</p>
+                        <p>• Conversation history provides context</p>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="form-group">
+                        <label>Your Message:</label>
+                        <textarea id="chat-input" placeholder="Type your message here...">Hello! Can you explain how neural networks work?</textarea>
+                    </div>
+                    <div class="grid-2">
+                        <div class="form-group">
+                            <label>Max Response Length:</label>
+                            <input type="number" id="chat-tokens" value="100" min="10" max="500">
+                        </div>
+                        <div class="form-group">
+                            <label>Context Messages:</label>
+                            <input type="number" id="chat-context" value="5" min="1" max="20">
+                        </div>
+                    </div>
+                    <button onclick="sendChat()">Send Message <span id="chat-loading"></span></button>
+                    <button class="example-button" onclick="clearChat()">Start New Conversation</button>
+                    <div id="chat-result"></div>
+                </div>
+
+                <div class="card">
+                    <h3>Conversation History</h3>
+                    <button onclick="loadConversationHistory()">Load History</button>
+                    <div id="conversation-history"></div>
+                </div>
+            </div>
+
+            <!-- Mood & Emotions Section -->
+            <div id="mood" class="section">
+                <div class="card">
+                    <h3>ALEN's Current Mood & Emotions</h3>
+                    <div class="info-box">
+                        <p><strong>This is REAL, not simulated!</strong></p>
+                        <p>Mood accumulates from emotional responses during training and conversation.</p>
+                        <p>It actually changes how ALEN thinks and responds.</p>
+                    </div>
+                    <button onclick="loadMoodState()">Check Current Mood <span id="mood-loading"></span></button>
+                    <div id="mood-display"></div>
+                </div>
+
+                <div class="card">
+                    <h3>Adjust ALEN's Mood</h3>
+                    <div class="info-box">
+                        <p>Try different moods to see how they affect ALEN's behavior!</p>
+                    </div>
+                    <div class="form-group">
+                        <label>Reward Level (dopamine - motivation): <span id="reward-val">0.5</span></label>
+                        <input type="range" id="reward-slider" min="0" max="1" step="0.1" value="0.5" oninput="updateSliderValue('reward')">
+                    </div>
+                    <div class="form-group">
+                        <label>Stress Level (cortisol - anxiety): <span id="stress-val">0.3</span></label>
+                        <input type="range" id="stress-slider" min="0" max="1" step="0.1" value="0.3" oninput="updateSliderValue('stress')">
+                    </div>
+                    <div class="form-group">
+                        <label>Curiosity Level: <span id="curiosity-val">0.5</span></label>
+                        <input type="range" id="curiosity-slider" min="0" max="1" step="0.1" value="0.5" oninput="updateSliderValue('curiosity')">
+                    </div>
+                    <div class="form-group">
+                        <label>Energy Level: <span id="energy-val">0.6</span></label>
+                        <input type="range" id="energy-slider" min="0" max="1" step="0.1" value="0.6" oninput="updateSliderValue('energy')">
+                    </div>
+
+                    <button onclick="setPresetMood('optimistic')">Make Optimistic</button>
+                    <button onclick="setPresetMood('stressed')">Make Stressed</button>
+                    <button onclick="setPresetMood('neutral')">Reset to Neutral</button>
+                    <button onclick="adjustMood()">Apply Custom Mood <span id="adjust-loading"></span></button>
+                    <div id="adjust-result"></div>
+                </div>
+
+                <div class="card">
+                    <h3>Mood Experiment</h3>
+                    <div class="info-box">
+                        <p>See how mood changes ALEN's interpretation of the SAME input!</p>
+                    </div>
+                    <div class="form-group">
+                        <label>Test Input:</label>
+                        <input type="text" id="mood-test-input" value="This task is challenging">
+                    </div>
+                    <button onclick="demonstrateMood()">Test How Mood Affects This <span id="demo-loading"></span></button>
+                    <div id="demo-result"></div>
+                </div>
+
+                <div class="card">
+                    <h3>Mood Patterns & History</h3>
+                    <button onclick="loadMoodPatterns()">View Mood History <span id="patterns-loading"></span></button>
+                    <div id="patterns-result"></div>
+                </div>
+            </div>
+
+            <!-- Generation Section -->
+            <div id="generate" class="section">
+                <div class="card">
+                    <h3>Generate Image from Thought</h3>
+                    <div class="form-group">
+                        <label>Prompt:</label>
+                        <input type="text" id="gen-img-prompt" value="A beautiful sunset over mountains">
+                    </div>
+                    <div class="grid-2">
+                        <div class="form-group">
+                            <label>Size (pixels):</label>
+                            <input type="number" id="gen-img-size" value="64" min="32" max="256">
+                        </div>
+                        <div class="form-group">
+                            <label>Noise Level:</label>
+                            <input type="number" id="gen-img-noise" value="0.1" min="0" max="1" step="0.1">
+                        </div>
+                    </div>
+                    <button onclick="generateImage()">Generate Image <span id="gen-img-loading"></span></button>
+                    <div id="gen-img-result"></div>
+                </div>
+
+                <div class="card">
+                    <h3>Generate Video from Thought</h3>
+                    <div class="form-group">
+                        <label>Prompt:</label>
+                        <input type="text" id="gen-vid-prompt" value="Waves on a beach">
+                    </div>
+                    <div class="grid-2">
+                        <div class="form-group">
+                            <label>Duration (seconds):</label>
+                            <input type="number" id="gen-vid-duration" value="2" min="0.5" max="10" step="0.5">
+                        </div>
+                        <div class="form-group">
+                            <label>FPS:</label>
+                            <input type="number" id="gen-vid-fps" value="10" min="5" max="60">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Motion Type:</label>
+                        <select id="gen-vid-motion">
+                            <option value="linear">Linear</option>
+                            <option value="circular">Circular</option>
+                            <option value="oscillating" selected>Oscillating</option>
+                            <option value="expanding">Expanding</option>
+                            <option value="random">Random</option>
+                        </select>
+                    </div>
+                    <button onclick="generateVideo()">Generate Video <span id="gen-vid-loading"></span></button>
+                    <div id="gen-vid-result"></div>
+                </div>
+            </div>
+
+            <!-- Memory Section -->
+            <div id="memory" class="section">
+                <div class="card">
+                    <h3>Episodic Memory - Training History</h3>
+                    <div class="info-box">
+                        <p>Shows what ALEN has learned through training</p>
+                    </div>
+                    <button onclick="loadEpisodicStats()">View Training Statistics <span id="episodic-loading"></span></button>
+                    <div id="episodic-result"></div>
+                </div>
+
+                <div class="card">
+                    <h3>Add Knowledge Fact</h3>
+                    <div class="form-group">
+                        <label>Concept:</label>
+                        <input type="text" id="fact-concept" placeholder="e.g., 'Python'">
+                    </div>
+                    <div class="form-group">
+                        <label>Content:</label>
+                        <textarea id="fact-content" placeholder="e.g., 'Python is a programming language'"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label>Category (optional):</label>
+                        <input type="text" id="fact-category" placeholder="e.g., 'programming'">
+                    </div>
+                    <button onclick="addFact()">Add to Knowledge Base <span id="fact-loading"></span></button>
+                    <div id="fact-result"></div>
+                </div>
+
+                <div class="card">
+                    <h3>Search Knowledge</h3>
+                    <div class="form-group">
+                        <label>Search Query:</label>
+                        <input type="text" id="search-query" placeholder="e.g., 'programming languages'">
+                    </div>
+                    <button onclick="searchFacts()">Search <span id="search-loading"></span></button>
+                    <div id="search-result"></div>
+                </div>
+
+                <div class="card">
+                    <h3>Export Data</h3>
+                    <div class="info-box">
+                        <p>Export your conversations and training data</p>
+                    </div>
+                    <button onclick="exportData('conversations')">Export Conversations</button>
+                    <button onclick="exportData('episodic')">Export Training History</button>
+                    <button onclick="exportData('semantic')">Export Knowledge Facts</button>
+                    <div id="export-result"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Configuration
+        const API_URL = 'http://localhost:3000';
+        let conversationId = null;
+
+        // Utility functions
+        function showSection(sectionId) {
+            document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+            document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+            document.getElementById(sectionId).classList.add('active');
+            event.target.classList.add('active');
+        }
+
+        function showLoading(elementId) {
+            const el = document.getElementById(elementId);
+            if (el) el.innerHTML = '<span class="loading"></span>';
+        }
+
+        function hideLoading(elementId) {
+            const el = document.getElementById(elementId);
+            if (el) el.innerHTML = '';
+        }
+
+        function showResult(elementId, content, isSuccess = true) {
+            const el = document.getElementById(elementId);
+            if (el) {
+                el.className = 'result ' + (isSuccess ? 'success' : 'error');
+                el.innerHTML = '<pre>' + JSON.stringify(content, null, 2) + '</pre>';
+            }
+        }
+
+        async function apiCall(endpoint, method = 'GET', body = null) {
+            try {
+                const options = {
+                    method,
+                    headers: {'Content-Type': 'application/json'}
+                };
+                if (body) options.body = JSON.stringify(body);
+
+                const response = await fetch(API_URL + endpoint, options);
+                return await response.json();
+            } catch (error) {
+                return {success: false, error: error.message};
+            }
+        }
+
+        // Status check
+        async function checkStatus() {
+            const result = await apiCall('/health');
+            const indicator = document.getElementById('status-indicator');
+            if (result.status === 'healthy') {
+                indicator.innerHTML = '<span class="status-indicator status-healthy"></span>Connected to ALEN';
+            } else {
+                indicator.innerHTML = '<span class="status-indicator status-unhealthy"></span>Connection Failed';
+            }
+        }
+
+        async function loadSystemStats() {
+            const result = await apiCall('/stats');
+            const el = document.getElementById('system-stats');
+            if (result) {
+                el.innerHTML = `
+                    <p><strong>Learning Rate:</strong> ${result.learning_rate}</p>
+                    <p><strong>Training Episodes:</strong> ${result.episodic_memory.total_episodes}</p>
+                    <p><strong>Verified Episodes:</strong> ${result.episodic_memory.verified_episodes}</p>
+                    <p><strong>Knowledge Facts:</strong> ${result.semantic_memory.total_facts}</p>
+                    <p><strong>System Confidence:</strong> ${(result.control_state.confidence * 100).toFixed(1)}%</p>
+                `;
+            }
+        }
+
+        // Training functions
+        async function trainSingle() {
+            showLoading('train-loading');
+            const input = document.getElementById('train-input').value;
+            const answer = document.getElementById('train-answer').value;
+            const context = document.getElementById('train-context').value.split(',').map(s => s.trim()).filter(s => s);
+
+            const result = await apiCall('/train', 'POST', {
+                input,
+                expected_answer: answer,
+                context
+            });
+
+            hideLoading('train-loading');
+            showResult('train-result', result, result.success);
+        }
+
+        async function trainBatch() {
+            showLoading('batch-loading');
+            const text = document.getElementById('batch-input').value;
+            const lines = text.split('\n').filter(l => l.trim());
+            const problems = lines.map(line => {
+                const [input, expected_answer] = line.split('->').map(s => s.trim());
+                return {input, expected_answer};
+            });
+
+            const result = await apiCall('/train/batch', 'POST', {problems});
+            hideLoading('batch-loading');
+            showResult('batch-result', result);
+        }
+
+        async function trainWithImages() {
+            showLoading('img-train-loading');
+            const prompts = document.getElementById('image-train-prompts').value.split(',').map(s => s.trim());
+            const labels = document.getElementById('image-train-labels').value.split(',').map(s => s.trim());
+            const epochs = parseInt(document.getElementById('image-epochs').value);
+
+            const result = await apiCall('/train/with-images', 'POST', {
+                prompts, labels, epochs, image_size: 64
+            });
+
+            hideLoading('img-train-loading');
+            showResult('img-train-result', result, result.success);
+        }
+
+        function loadExample(type, input, answer, context) {
+            document.getElementById('train-input').value = input;
+            document.getElementById('train-answer').value = answer;
+            document.getElementById('train-context').value = context;
+        }
+
+        // Chat functions
+        async function sendChat() {
+            showLoading('chat-loading');
+            const message = document.getElementById('chat-input').value;
+            const max_tokens = parseInt(document.getElementById('chat-tokens').value);
+            const include_context = parseInt(document.getElementById('chat-context').value);
+
+            const result = await apiCall('/chat', 'POST', {
+                message,
+                max_tokens,
+                include_context,
+                conversation_id: conversationId
+            });
+
+            if (result.conversation_id) {
+                conversationId = result.conversation_id;
+            }
+
+            hideLoading('chat-loading');
+            showResult('chat-result', result);
+        }
+
+        function clearChat() {
+            conversationId = null;
+            document.getElementById('chat-result').innerHTML = '<p class="info-box">Started new conversation</p>';
+        }
+
+        async function loadConversationHistory() {
+            if (!conversationId) {
+                showResult('conversation-history', {message: 'No active conversation'}, false);
+                return;
+            }
+            const result = await apiCall('/conversation/get', 'POST', {conversation_id: conversationId});
+            showResult('conversation-history', result);
+        }
+
+        // Mood functions
+        async function loadMoodState() {
+            showLoading('mood-loading');
+            const result = await apiCall('/emotions/state');
+            hideLoading('mood-loading');
+
+            if (result.mood) {
+                const mood = result.mood;
+                document.getElementById('mood-display').innerHTML = `
+                    <div class="mood-card">
+                        <div class="mood-label">Current Mood</div>
+                        <div class="mood-value">${mood.current_mood}</div>
+                    </div>
+                    <div class="mood-card">
+                        <div class="mood-label">Reward (Dopamine)</div>
+                        <div class="mood-value">${(mood.reward_level * 100).toFixed(0)}%</div>
+                    </div>
+                    <div class="mood-card">
+                        <div class="mood-label">Stress (Cortisol)</div>
+                        <div class="mood-value">${(mood.stress_level * 100).toFixed(0)}%</div>
+                    </div>
+                    <div class="mood-card">
+                        <div class="mood-label">Curiosity</div>
+                        <div class="mood-value">${(mood.curiosity_level * 100).toFixed(0)}%</div>
+                    </div>
+                    <div class="mood-card">
+                        <div class="mood-label">Energy</div>
+                        <div class="mood-value">${(mood.energy_level * 100).toFixed(0)}%</div>
+                    </div>
+                    <div class="mood-card">
+                        <div class="mood-label">Perception Bias</div>
+                        <div class="mood-value">${mood.perception_bias.toFixed(2)}</div>
+                    </div>
+                    <div class="mood-card">
+                        <div class="mood-label">Current Emotion</div>
+                        <div class="mood-value">${result.emotion.current_emotion}</div>
+                    </div>
+                `;
+            }
+        }
+
+        function updateSliderValue(type) {
+            const slider = document.getElementById(type + '-slider');
+            const display = document.getElementById(type + '-val');
+            display.textContent = slider.value;
+        }
+
+        function setPresetMood(preset) {
+            const presets = {
+                optimistic: {reward: 0.9, stress: 0.1, curiosity: 0.7, energy: 0.8},
+                stressed: {reward: 0.2, stress: 0.9, curiosity: 0.3, energy: 0.4},
+                neutral: {reward: 0.5, stress: 0.3, curiosity: 0.5, energy: 0.6}
+            };
+
+            const mood = presets[preset];
+            document.getElementById('reward-slider').value = mood.reward;
+            document.getElementById('stress-slider').value = mood.stress;
+            document.getElementById('curiosity-slider').value = mood.curiosity;
+            document.getElementById('energy-slider').value = mood.energy;
+
+            updateSliderValue('reward');
+            updateSliderValue('stress');
+            updateSliderValue('curiosity');
+            updateSliderValue('energy');
+        }
+
+        async function adjustMood() {
+            showLoading('adjust-loading');
+            const result = await apiCall('/emotions/adjust', 'POST', {
+                reward_level: parseFloat(document.getElementById('reward-slider').value),
+                stress_level: parseFloat(document.getElementById('stress-slider').value),
+                curiosity_level: parseFloat(document.getElementById('curiosity-slider').value),
+                energy_level: parseFloat(document.getElementById('energy-slider').value)
+            });
+            hideLoading('adjust-loading');
+            showResult('adjust-result', result, result.success);
+            loadMoodState();
+        }
+
+        async function demonstrateMood() {
+            showLoading('demo-loading');
+            const input = document.getElementById('mood-test-input').value;
+            const result = await apiCall('/emotions/demonstrate', 'POST', {input});
+            hideLoading('demo-loading');
+            showResult('demo-result', result);
+        }
+
+        async function loadMoodPatterns() {
+            showLoading('patterns-loading');
+            const result = await apiCall('/emotions/patterns');
+            hideLoading('patterns-loading');
+            showResult('patterns-result', result);
+        }
+
+        // Generation functions
+        async function generateImage() {
+            showLoading('gen-img-loading');
+            const result = await apiCall('/generate/image', 'POST', {
+                prompt: document.getElementById('gen-img-prompt').value,
+                size: parseInt(document.getElementById('gen-img-size').value),
+                noise_level: parseFloat(document.getElementById('gen-img-noise').value)
+            });
+            hideLoading('gen-img-loading');
+            showResult('gen-img-result', result);
+        }
+
+        async function generateVideo() {
+            showLoading('gen-vid-loading');
+            const result = await apiCall('/generate/video', 'POST', {
+                prompt: document.getElementById('gen-vid-prompt').value,
+                duration: parseFloat(document.getElementById('gen-vid-duration').value),
+                fps: parseInt(document.getElementById('gen-vid-fps').value),
+                size: 64,
+                motion_type: document.getElementById('gen-vid-motion').value
+            });
+            hideLoading('gen-vid-loading');
+            showResult('gen-vid-result', result);
+        }
+
+        // Memory functions
+        async function loadEpisodicStats() {
+            showLoading('episodic-loading');
+            const result = await apiCall('/memory/episodic/stats');
+            hideLoading('episodic-loading');
+            showResult('episodic-result', result);
+        }
+
+        async function addFact() {
+            showLoading('fact-loading');
+            const result = await apiCall('/facts', 'POST', {
+                concept: document.getElementById('fact-concept').value,
+                content: document.getElementById('fact-content').value,
+                category: document.getElementById('fact-category').value
+            });
+            hideLoading('fact-loading');
+            showResult('fact-result', result, result.success);
+        }
+
+        async function searchFacts() {
+            showLoading('search-loading');
+            const result = await apiCall('/facts/search', 'POST', {
+                query: document.getElementById('search-query').value,
+                limit: 10
+            });
+            hideLoading('search-loading');
+            showResult('search-result', result);
+        }
+
+        async function exportData(type) {
+            const result = await apiCall(`/export/${type}`, 'POST', {
+                format: 'json',
+                output_file: `${type}_export.json`
+            });
+            showResult('export-result', result, result.success);
+        }
+
+        // Initialize
+        checkStatus();
+        loadSystemStats();
+        setInterval(checkStatus, 30000); // Check every 30 seconds
+    </script>
+</body>
+</html>

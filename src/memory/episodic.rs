@@ -255,19 +255,39 @@ impl EpisodicMemory {
         let mut stmt = self.conn.prepare(
             "SELECT id, problem_input, answer_output, thought_vector, verified,
                     confidence_score, energy, operator_id, created_at, tags
-             FROM episodes 
+             FROM episodes
              WHERE operator_id = ?1
              ORDER BY created_at DESC
              LIMIT ?2"
         )?;
 
         let mut rows = stmt.query(params![operator_id, limit as i64])?;
-        
+
         let mut episodes = Vec::new();
         while let Some(row) = rows.next()? {
             episodes.push(self.row_to_episode(row)?);
         }
-        
+
+        Ok(episodes)
+    }
+
+    /// Get all episodes (for export)
+    pub fn get_all_episodes(&self, limit: usize) -> SqlResult<Vec<Episode>> {
+        let mut stmt = self.conn.prepare(
+            "SELECT id, problem_input, answer_output, thought_vector, verified,
+                    confidence_score, energy, operator_id, created_at, tags
+             FROM episodes
+             ORDER BY created_at DESC
+             LIMIT ?1"
+        )?;
+
+        let mut rows = stmt.query(params![limit as i64])?;
+
+        let mut episodes = Vec::new();
+        while let Some(row) = rows.next()? {
+            episodes.push(self.row_to_episode(row)?);
+        }
+
         Ok(episodes)
     }
 

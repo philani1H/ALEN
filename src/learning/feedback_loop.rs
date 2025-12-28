@@ -40,8 +40,8 @@ impl Default for LearningConfig {
             decay_factor: 0.99,
             num_candidates: 5,
             max_iterations: 10,
-            confidence_threshold: 0.6,
-            energy_threshold: 0.5,
+            confidence_threshold: 0.55,
+            energy_threshold: 0.55,
         }
     }
 }

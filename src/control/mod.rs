@@ -5,9 +5,11 @@
 //! - Meta tracking (confidence, uncertainty)
 //! - Curiosity and self-supervised learning
 //! - Biologically-inspired emotion system
+//! - Mood system (persistent emotional state)
 
 pub mod curiosity;
 pub mod emotions;
+pub mod mood;
 
 pub use curiosity::{
     CuriosityEngine, Prediction, Observation, Surprise,
@@ -17,6 +19,9 @@ pub use emotions::{
     EmotionSystem, Emotion, EmotionalStimulus, StimulusType,
     EmotionalResponse, RegulatedResponse, Neurotransmitters,
     EmotionalState, LimbicSystem, PrefrontalCortex,
+};
+pub use mood::{
+    MoodEngine, MoodState, Mood, MoodStatistics,
 };
 
 use crate::core::{ThoughtState, BiasVector};
