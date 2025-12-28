@@ -8,10 +8,14 @@
 //! - Advanced reasoning (math, logic, chain-of-thought)
 //! - Conversational interface
 //! - Video and image generation
+//! - Emotions and mood system
+//! - Export and import
 
 pub mod advanced;
 pub mod conversation;
 pub mod media_training;
+pub mod emotions;
+pub mod export;
 
 pub use conversation::ConversationManager;
 
@@ -27,7 +31,10 @@ use crate::memory::{
 use crate::learning::{
     FeedbackLoop, LearningConfig, TrainingResult, InferenceResult,
 };
-use crate::control::{BiasController, ControlStateSummary};
+use crate::control::{
+    BiasController, ControlStateSummary,
+    MoodEngine, EmotionSystem, EmotionalStimulus, StimulusType,
+};
 
 use axum::{
     extract::{Path, State, Json},
@@ -95,6 +102,10 @@ pub struct ReasoningEngine {
     pub embedding: EmbeddingEngine,
     /// Bias controller
     pub bias_controller: BiasController,
+    /// Mood engine - persistent emotional state
+    pub mood_engine: MoodEngine,
+    /// Emotion system - reactive emotional processing
+    pub emotion_system: EmotionSystem,
     /// Configuration
     pub config: EngineConfig,
 }
@@ -113,6 +124,8 @@ impl ReasoningEngine {
         let semantic_memory = SemanticMemory::in_memory(config.dimension)?;
         let embedding = EmbeddingEngine::new(config.embedding.clone());
         let bias_controller = BiasController::new();
+        let mood_engine = MoodEngine::new();
+        let emotion_system = EmotionSystem::new();
 
         Ok(Self {
             operators,
@@ -122,6 +135,8 @@ impl ReasoningEngine {
             semantic_memory,
             embedding,
             bias_controller,
+            mood_engine,
+            emotion_system,
             config,
         })
     }
@@ -142,6 +157,8 @@ impl ReasoningEngine {
         )?;
         let embedding = EmbeddingEngine::new(config.embedding.clone());
         let bias_controller = BiasController::new();
+        let mood_engine = MoodEngine::new();
+        let emotion_system = EmotionSystem::new();
 
         Ok(Self {
             operators,
@@ -151,6 +168,8 @@ impl ReasoningEngine {
             semantic_memory,
             embedding,
             bias_controller,
+            mood_engine,
+            emotion_system,
             config,
         })
     }
@@ -158,18 +177,77 @@ impl ReasoningEngine {
     /// Train on a single problem
     pub fn train(&mut self, problem: &Problem) -> TrainingResult {
         let result = self.feedback.train_step(problem);
-        
+
         // Store in episodic memory if successful
         if result.success {
-            if let (Some(ref thought), Some(ref energy), Some(ref op_id)) = 
-                (&result.best_candidate, &result.best_energy, &result.best_operator_id) 
+            if let (Some(ref thought), Some(ref energy), Some(ref op_id)) =
+                (&result.best_candidate, &result.best_energy, &result.best_operator_id)
             {
                 let episode = Episode::from_training(problem, thought, energy, op_id);
                 let _ = self.episodic_memory.store(&episode);
             }
         }
 
-        // Update bias controller
+        // Create emotional stimulus from training result
+        let stimulus = if result.success {
+            EmotionalStimulus {
+                stimulus_type: if let Some(ref energy) = result.best_energy {
+                    if energy.verified {
+                        StimulusType::Success
+                    } else {
+                        StimulusType::Reward
+                    }
+                } else {
+                    StimulusType::Success
+                },
+                intensity: result.best_energy.as_ref()
+                    .map(|e| e.confidence_score)
+                    .unwrap_or(0.5),
+                valence: 0.7,
+                context: format!("training_success: {}", problem.input),
+            }
+        } else {
+            EmotionalStimulus {
+                stimulus_type: StimulusType::Failure,
+                intensity: 0.6,
+                valence: -0.5,
+                context: format!("training_failure: {}", problem.input),
+            }
+        };
+
+        // Process through emotion system (returns RegulatedResponse)
+        let regulated_response = self.emotion_system.process(stimulus);
+
+        // Create EmotionalResponse for mood update from regulated emotion
+        let emotional_response = crate::control::EmotionalResponse {
+            emotion: regulated_response.regulated_emotion,
+            valence: if result.success { 0.7 } else { -0.5 },
+            arousal: if result.success { 0.6 } else { 0.5 },
+            intensity: result.best_energy.as_ref()
+                .map(|e| e.confidence_score)
+                .unwrap_or(0.5),
+            neurotransmitters: crate::control::Neurotransmitters::default(),
+        };
+
+        // Update mood from emotional response
+        self.mood_engine.update_from_emotion(&emotional_response);
+        self.mood_engine.decay();
+        self.mood_engine.record();
+
+        // Get mood bias and apply to BiasController
+        let mood_state = self.mood_engine.get_state();
+        let perception_bias = mood_state.perception_bias();
+        let reaction_threshold = mood_state.reaction_threshold();
+
+        // Modulate bias based on mood
+        self.bias_controller.set_exploration(
+            (self.bias_controller.current_bias.exploration + perception_bias * 0.2).clamp(0.0, 1.0)
+        );
+        self.bias_controller.set_risk_tolerance(
+            (reaction_threshold).clamp(0.0, 1.0)
+        );
+
+        // Update bias controller meta state
         if let Some(ref energy) = result.best_energy {
             self.bias_controller.update_meta(energy.confidence_score);
         }
@@ -178,8 +256,54 @@ impl ReasoningEngine {
     }
 
     /// Perform inference
-    pub fn infer(&self, problem: &Problem) -> InferenceResult {
-        self.feedback.infer(problem)
+    pub fn infer(&mut self, problem: &Problem) -> InferenceResult {
+        // Get current mood state and apply to bias
+        let mood_state = self.mood_engine.get_state();
+        let perception_bias = mood_state.perception_bias();
+        let reaction_threshold = mood_state.reaction_threshold();
+
+        // Modulate bias based on mood before inference
+        self.bias_controller.set_exploration(
+            (self.bias_controller.current_bias.exploration + perception_bias * 0.1).clamp(0.0, 1.0)
+        );
+        self.bias_controller.set_risk_tolerance(
+            (reaction_threshold).clamp(0.0, 1.0)
+        );
+
+        // Perform inference with mood-modulated bias
+        let result = self.feedback.infer(problem);
+
+        // Create emotional stimulus from inference
+        let stimulus = EmotionalStimulus {
+            stimulus_type: if result.energy.verified {
+                StimulusType::Success
+            } else if result.confidence > 0.7 {
+                StimulusType::Reward
+            } else {
+                StimulusType::Novel
+            },
+            intensity: result.confidence,
+            valence: (result.confidence - 0.5) * 2.0,  // Map confidence to valence
+            context: format!("inference: {}", problem.input),
+        };
+
+        // Process through emotion system
+        let regulated_response = self.emotion_system.process(stimulus);
+
+        // Create EmotionalResponse for mood update
+        let emotional_response = crate::control::EmotionalResponse {
+            emotion: regulated_response.regulated_emotion,
+            valence: (result.confidence - 0.5) * 2.0,
+            arousal: if result.energy.verified { 0.7 } else { 0.5 },
+            intensity: result.confidence,
+            neurotransmitters: crate::control::Neurotransmitters::default(),
+        };
+
+        // Update mood from inference (subtle influence)
+        self.mood_engine.update_from_emotion(&emotional_response);
+        self.mood_engine.decay();
+
+        result
     }
 
     /// Get system statistics
@@ -419,8 +543,8 @@ pub async fn infer(
     State(state): State<Arc<AppState>>,
     Json(req): Json<InferRequest>,
 ) -> impl IntoResponse {
-    let engine = state.engine.lock().await;
-    
+    let mut engine = state.engine.lock().await;
+
     let mut problem = Problem::new(&req.input, engine.config.dimension);
     for constraint in &req.constraints {
         problem = problem.with_constraint(constraint);
@@ -1540,6 +1664,19 @@ pub fn create_router(state: Arc<AppState>) -> Router {
         .route("/train/with-images", post(media_training::train_with_generated_images))
         .route("/train/with-videos", post(media_training::train_with_generated_videos))
         .route("/train/self-supervised", post(media_training::self_supervised_learning))
+
+        // Emotions and Mood
+        .route("/emotions/state", get(emotions::get_emotional_state))
+        .route("/emotions/adjust", post(emotions::adjust_mood))
+        .route("/emotions/demonstrate", post(emotions::demonstrate_mood_influence))
+        .route("/emotions/reset", post(emotions::reset_mood))
+        .route("/emotions/patterns", get(emotions::get_mood_patterns))
+
+        // Export/Import
+        .route("/export/conversations", post(export::export_conversations))
+        .route("/export/episodic", post(export::export_episodic_memory))
+        .route("/export/semantic", post(export::export_semantic_memory))
+        .route("/export/list", get(export::list_exports))
 
         // Inference endpoint
         .route("/infer", post(infer))

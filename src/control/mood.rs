@@ -102,7 +102,7 @@ impl MoodState {
 }
 
 /// Discrete mood categories
-#[derive(Debug, Clone, Copy, PartialEq, Eq, Serialize, Deserialize)]
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, Serialize, Deserialize)]
 pub enum Mood {
     Optimistic,   // High reward, low stress
     Content,      // Balanced positive
@@ -203,6 +203,11 @@ impl MoodEngine {
     /// Get mood state
     pub fn get_state(&self) -> &MoodState {
         &self.state
+    }
+
+    /// Set mood state directly (for external adjustment)
+    pub fn set_state(&mut self, state: MoodState) {
+        self.state = state;
     }
 
     /// Record mood in history

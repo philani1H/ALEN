@@ -156,8 +156,8 @@ use tokio::sync::Mutex as TokioMutex;
 use std::collections::HashMap;
 
 pub struct ConversationStore {
-    conversations: HashMap<String, Conversation>,
-    default_system_prompt: String,
+    pub conversations: HashMap<String, Conversation>,
+    pub default_system_prompt: String,
 }
 
 impl ConversationStore {
