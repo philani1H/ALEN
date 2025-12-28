@@ -293,10 +293,165 @@ impl ExplanationDecoder {
         &self,
         fact: &SemanticFact,
     ) -> Result<String, Box<dyn std::error::Error>> {
-        // For now, use the full fact content
-        // Future: implement vocabulary simplification based on audience
-        // (e.g., child: simpler words, expert: technical terms)
-        Ok(fact.content.clone())
+        let style = self.audience.style_vector();
+        let content = fact.content.clone();
+
+        // Apply vocabulary transformation based on audience
+        let transformed = match self.audience {
+            ExplanationAudience::Child => self.simplify_for_child(&content),
+            ExplanationAudience::General => content, // Keep as is
+            ExplanationAudience::Elder => self.adapt_for_elder(&content),
+            ExplanationAudience::Mathematician => self.formalize_for_mathematician(&content),
+            ExplanationAudience::Expert => self.enhance_for_expert(&content),
+        };
+
+        Ok(transformed)
+    }
+
+    /// Simplify vocabulary for child audience (5-10 years)
+    /// Replaces complex words with simpler synonyms
+    fn simplify_for_child(&self, text: &str) -> String {
+        let mut result = text.to_string();
+
+        // Common scientific/technical term simplifications
+        let simplifications = vec![
+            ("approximately", "about"),
+            ("approximately", "around"),
+            ("significant", "important"),
+            ("utilize", "use"),
+            ("demonstrate", "show"),
+            ("possess", "have"),
+            ("sufficient", "enough"),
+            ("abundant", "lots of"),
+            ("microscopic", "very tiny"),
+            ("enormous", "very big"),
+            ("velocity", "speed"),
+            ("observe", "see"),
+            ("examine", "look at"),
+            ("construct", "build"),
+            ("purchase", "buy"),
+            ("comprehend", "understand"),
+            ("illuminate", "light up"),
+            ("transparent", "see-through"),
+            ("rotate", "spin"),
+            ("revolve", "go around"),
+            ("orbit", "go around"),
+            ("composed", "made"),
+            ("oxygen", "air we breathe"),
+            ("hydrogen", "a very light gas"),
+            ("photosynthesis", "how plants make food"),
+            ("evaporation", "water turning into air"),
+            ("condensation", "water drops forming"),
+            ("precipitation", "rain or snow"),
+            ("temperature", "how hot or cold"),
+            ("measure", "find out how much"),
+            ("calculate", "figure out"),
+            ("determine", "find out"),
+        ];
+
+        for (complex, simple) in simplifications {
+            // Case-insensitive replacement
+            let lower_result = result.to_lowercase();
+            if lower_result.contains(complex) {
+                result = result
+                    .replace(complex, simple)
+                    .replace(&complex.to_uppercase(), &simple.to_uppercase())
+                    .replace(
+                        &format!("{}{}", complex.chars().next().unwrap().to_uppercase(), &complex[1..]),
+                        &format!("{}{}", simple.chars().next().unwrap().to_uppercase(), &simple[1..])
+                    );
+            }
+        }
+
+        result
+    }
+
+    /// Adapt vocabulary for elder audience
+    /// Emphasizes practical wisdom and respect
+    fn adapt_for_elder(&self, text: &str) -> String {
+        let mut result = text.to_string();
+
+        // Add respectful framing if not present
+        if !result.ends_with('.') && !result.ends_with('!') && !result.ends_with('?') {
+            result.push('.');
+        }
+
+        result
+    }
+
+    /// Formalize for mathematician audience
+    /// Uses precise mathematical language and notation
+    fn formalize_for_mathematician(&self, text: &str) -> String {
+        let mut result = text.to_string();
+
+        // Mathematical term enhancements
+        let formalizations = vec![
+            ("speed", "velocity"),
+            ("about", "approximately"),
+            ("around", "approximately"),
+            ("change", "variation"),
+            ("pattern", "sequence"),
+            ("same", "equivalent"),
+            ("different", "distinct"),
+            ("relationship", "relation"),
+            ("rule", "axiom"),
+            ("always true", "invariant"),
+            ("never changes", "constant"),
+            ("goes up", "increases monotonically"),
+            ("goes down", "decreases monotonically"),
+        ];
+
+        for (informal, formal) in formalizations {
+            let lower_result = result.to_lowercase();
+            if lower_result.contains(informal) {
+                result = result
+                    .replace(informal, formal)
+                    .replace(
+                        &format!("{}{}", informal.chars().next().unwrap().to_uppercase(), &informal[1..]),
+                        &format!("{}{}", formal.chars().next().unwrap().to_uppercase(), &formal[1..])
+                    );
+            }
+        }
+
+        result
+    }
+
+    /// Enhance for expert audience
+    /// Uses technical terminology and precise language
+    fn enhance_for_expert(&self, text: &str) -> String {
+        let mut result = text.to_string();
+
+        // Technical enhancements
+        let enhancements = vec![
+            ("big", "substantial"),
+            ("small", "minimal"),
+            ("fast", "rapid"),
+            ("slow", "gradual"),
+            ("show", "demonstrate"),
+            ("use", "utilize"),
+            ("see", "observe"),
+            ("look at", "examine"),
+            ("make", "generate"),
+            ("build", "construct"),
+            ("break", "decompose"),
+            ("join", "concatenate"),
+            ("mix", "combine"),
+            ("separate", "isolate"),
+        ];
+
+        for (simple, technical) in enhancements {
+            let lower_result = result.to_lowercase();
+            if lower_result.contains(simple) {
+                result = result
+                    .replace(simple, technical)
+                    .replace(
+                        &format!("{}{}", simple.chars().next().unwrap().to_uppercase(), &simple[1..]),
+                        &format!("{}{}", technical.chars().next().unwrap().to_uppercase(), &technical[1..])
+                    );
+            }
+        }
+
+        result
     }
 
     /// Compute verification rate
