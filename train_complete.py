@@ -6,6 +6,7 @@ Trains ALEN with comprehensive knowledge including:
 - Personality and personalization
 - Emotional intelligence
 - Conversation skills
+- Math fundamentals and reasoning
 - General knowledge (math, science, programming, etc.)
 """
 
@@ -34,43 +35,77 @@ def load_training_file(filepath):
     print(f"   ✓ Loaded {len(facts)} facts")
     return facts
 
-def train_batch(facts, category, batch_size=50):
-    """Train ALEN with batch of facts"""
+def parse_fact(fact_text):
+    """Parse fact text into concept and content"""
+    # Handle different formats:
+    # "concept means explanation"
+    # "concept is explanation"
+    # "concept shows explanation"
+    # "concept indicates explanation"
+
+    separators = [' means ', ' is ', ' shows ', ' indicates ', ' demonstrates ',
+                  ' expresses ', ' creates ', ' allows ', ' encourages ', ' validates ',
+                  ' acknowledges ', ' represents ', ' refers ', ' compares ', ' maintains ']
+
+    for sep in separators:
+        if sep in fact_text:
+            parts = fact_text.split(sep, 1)
+            if len(parts) == 2:
+                concept = parts[0].strip()
+                content = fact_text  # Full sentence as content
+                return {"concept": concept, "content": content}
+
+    # If no separator found, use first 3 words as concept, full as content
+    words = fact_text.split()
+    if len(words) > 3:
+        concept = ' '.join(words[:3])
+    else:
+        concept = fact_text
+
+    return {"concept": concept, "content": fact_text}
+
+def train_knowledge(facts, category, batch_size=100):
+    """Train ALEN with knowledge facts"""
     print(f"\n🎓 Training {category}...")
     print(f"   Total facts: {len(facts)}")
 
+    # Parse all facts
+    parsed_facts = [parse_fact(f) for f in facts]
+
     # Split into batches
-    total_batches = (len(facts) + batch_size - 1) // batch_size
+    total_batches = (len(parsed_facts) + batch_size - 1) // batch_size
     trained_count = 0
 
-    for i in range(0, len(facts), batch_size):
-        batch = facts[i:i + batch_size]
+    for i in range(0, len(parsed_facts), batch_size):
+        batch = parsed_facts[i:i + batch_size]
         batch_num = (i // batch_size) + 1
 
         try:
             response = requests.post(
-                f"{API_URL}/train/batch",
+                f"{API_URL}/learn",
                 json={
-                    "facts": batch,
-                    "confidence": 0.95
+                    "category": category,
+                    "facts": batch
                 },
-                timeout=30
+                timeout=60
             )
 
             if response.status_code == 200:
                 result = response.json()
-                trained_count += len(batch)
-                print(f"   ✓ Batch {batch_num}/{total_batches}: {len(batch)} facts trained")
+                stored = result.get("facts_stored", 0)
+                trained_count += stored
+                print(f"   ✓ Batch {batch_num}/{total_batches}: {stored} facts stored")
             else:
                 print(f"   ✗ Batch {batch_num} failed: {response.status_code}")
+                # print(f"      Response: {response.text[:200]}")
 
         except Exception as e:
             print(f"   ✗ Error training batch {batch_num}: {str(e)}")
 
         # Small delay between batches
-        time.sleep(0.5)
+        time.sleep(0.3)
 
-    print(f"   ✅ Completed {category}: {trained_count}/{len(facts)} facts trained")
+    print(f"   ✅ Completed {category}: {trained_count}/{len(facts)} facts stored")
     return trained_count
 
 def main():
@@ -94,18 +129,19 @@ def main():
     # Training data files
     training_files = [
         # Social and Emotional Skills
-        ("training_data/manners_etiquette.txt", "Manners & Etiquette"),
-        ("training_data/personality_personalization.txt", "Personality & Personalization"),
-        ("training_data/emotional_intelligence.txt", "Emotional Intelligence"),
-        ("training_data/conversation_skills.txt", "Conversation Skills"),
+        ("training_data/manners_etiquette.txt", "manners-etiquette"),
+        ("training_data/personality_personalization.txt", "personality"),
+        ("training_data/emotional_intelligence.txt", "emotional-intelligence"),
+        ("training_data/conversation_skills.txt", "conversation-skills"),
 
         # Knowledge Domains
-        ("training_data/general_knowledge.txt", "General Knowledge"),
-        ("training_data/science.txt", "Science"),
-        ("training_data/mathematics.txt", "Mathematics"),
-        ("training_data/programming.txt", "Programming"),
-        ("training_data/geography.txt", "Geography"),
-        ("training_data/conversations.txt", "Human Conversations"),
+        ("training_data/general_knowledge.txt", "general-knowledge"),
+        ("training_data/science.txt", "science"),
+        ("training_data/mathematics.txt", "mathematics"),
+        ("training_data/math_fundamentals.txt", "math-fundamentals"),
+        ("training_data/programming.txt", "programming"),
+        ("training_data/geography.txt", "geography"),
+        ("training_data/conversations.txt", "conversations"),
     ]
 
     total_facts_trained = 0
@@ -119,7 +155,7 @@ def main():
         if Path(filepath).exists():
             facts = load_training_file(filepath)
             if facts:
-                count = train_batch(facts, category)
+                count = train_knowledge(facts, category)
                 total_facts_trained += count
                 if count > 0:
                     successful_categories += 1
@@ -145,6 +181,10 @@ def main():
         ("What does remembering names show?", "Personalization"),
         ("What is Python?", "Programming"),
         ("What is photosynthesis?", "Science"),
+        ("Why does 2 equal 2?", "Math Fundamentals"),
+        ("Why does 2 plus 2 equal 4?", "Math Reasoning"),
+        ("What is the distributive property?", "Math Properties"),
+        ("What is a mathematical formula?", "Formula Construction"),
     ]
 
     for query, category in test_queries:
@@ -153,7 +193,7 @@ def main():
                 f"{API_URL}/generate/factual",
                 json={
                     "query": query,
-                    "max_tokens": 50,
+                    "max_tokens": 80,
                     "mode": "balanced"
                 },
                 timeout=10
@@ -165,7 +205,7 @@ def main():
                 verified_pct = result.get("verification_percentage", 0)
 
                 print(f"\n❓ [{category}] {query}")
-                print(f"💬 {answer}")
+                print(f"💬 {answer[:150]}")
                 print(f"✓ Verification: {verified_pct:.0f}%")
             else:
                 print(f"\n❓ [{category}] {query}")
@@ -206,7 +246,8 @@ def main():
     print("   3. Test manners: Ask 'What is proper table etiquette?'")
     print("   4. Test emotions: Ask 'How do I comfort a sad friend?'")
     print("   5. Test conversation: Ask 'How do I start a conversation?'")
-    print("\n🚀 ALEN is now trained with comprehensive social and emotional skills!")
+    print("   6. Test math: Ask 'Why does 2 equal 2?'")
+    print("\n🚀 ALEN is now trained with comprehensive knowledge!")
 
 if __name__ == "__main__":
     main()
