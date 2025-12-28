@@ -5,6 +5,9 @@
 //! - Inference (thinking)
 //! - System status and statistics
 //! - Memory management
+//! - Advanced reasoning (math, logic, chain-of-thought)
+
+pub mod advanced;
 
 use crate::core::{
     Problem, OperatorManager, OperatorStats,

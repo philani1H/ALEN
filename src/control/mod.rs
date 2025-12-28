@@ -3,6 +3,21 @@
 //! Contains:
 //! - Emotion/bias control (modulates reasoning)
 //! - Meta tracking (confidence, uncertainty)
+//! - Curiosity and self-supervised learning
+//! - Biologically-inspired emotion system
+
+pub mod curiosity;
+pub mod emotions;
+
+pub use curiosity::{
+    CuriosityEngine, Prediction, Observation, Surprise,
+    SelfSupervisedLoop, CuriosityStats,
+};
+pub use emotions::{
+    EmotionSystem, Emotion, EmotionalStimulus, StimulusType,
+    EmotionalResponse, RegulatedResponse, Neurotransmitters,
+    EmotionalState, LimbicSystem, PrefrontalCortex,
+};
 
 use crate::core::{ThoughtState, BiasVector};
 use serde::{Deserialize, Serialize};

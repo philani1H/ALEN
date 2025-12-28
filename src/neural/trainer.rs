@@ -70,10 +70,12 @@ impl Optimizer for SGD {
                 new_data[j] -= self.lr * velocity[j];
             }
             
-            *param = Tensor::new(new_data, param.shape.clone());
-            if param.requires_grad {
-                *param = param.clone().with_grad();
-            }
+            let new_tensor = Tensor::new(new_data, param.shape.clone());
+            **param = if param.requires_grad {
+                new_tensor.with_grad()
+            } else {
+                new_tensor
+            };
         }
     }
 
@@ -177,10 +179,12 @@ impl Optimizer for Adam {
                 }
             }
             
-            *param = Tensor::new(new_data, param.shape.clone());
-            if param.requires_grad {
-                *param = param.clone().with_grad();
-            }
+            let new_tensor = Tensor::new(new_data, param.shape.clone());
+            **param = if param.requires_grad {
+                new_tensor.with_grad()
+            } else {
+                new_tensor
+            };
         }
     }
 

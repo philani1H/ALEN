@@ -44,6 +44,7 @@ pub mod multimodal;
 pub mod generation;
 pub mod knowledge;
 pub mod neural;
+pub mod reasoning;
 
 // Re-export commonly used types at the crate level
 pub use core::{
@@ -54,9 +55,9 @@ pub use core::{
     Selector, SelectionStrategy, SelectionResult, SelectorBuilder,
     
     // Advanced math
-    Activation, DenseLayer, LayerNorm, AttentionHead, MultiHeadAttention,
-    FeedForward, TransformerLayer, PositionalEncoding, InfoTheory, MatrixOps,
-    AdamOptimizer, LRScheduler,
+    Activation, DenseLayer, AttentionHead, MultiHeadAttention,
+    FeedForward, TransformerLayer, InfoTheory, MatrixOps,
+    AdamOptimizer,
 };
 
 // Re-export multimodal types
@@ -89,6 +90,14 @@ pub use learning::{
 pub use control::{BiasController, ControlStateSummary, MetaState};
 
 pub use knowledge::{KnowledgeBase, KnowledgeItem, KnowledgeCategory};
+
+// Re-export reasoning types
+pub use reasoning::{
+    MathSolver, MathExpression, MathResult,
+    ReasoningChain, ReasoningStep, ChainResult,
+    SymbolicReasoner, Symbol, SymbolicExpression,
+    LogicalInference, Premise, Conclusion, InferenceRule,
+};
 
 // Re-export neural network types
 pub use neural::{

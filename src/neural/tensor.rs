@@ -7,8 +7,7 @@
 //! - CPU execution (GPU-ready interface)
 
 use std::ops::{Add, Mul, Sub, Neg};
-use std::sync::Arc;
-use std::cell::RefCell;
+use std::sync::{Arc, Mutex};
 use rand::Rng;
 use rand_distr::{Normal, Distribution};
 
@@ -60,18 +59,27 @@ impl From<&[usize]> for TensorShape {
 }
 
 /// Gradient tracking for autograd
-#[derive(Debug, Clone)]
+#[derive(Clone)]
 pub struct GradFn {
     pub name: String,
     pub inputs: Vec<Tensor>,
     pub backward: Option<Arc<dyn Fn(&Tensor, &Tensor) -> Vec<Tensor> + Send + Sync>>,
 }
 
+impl std::fmt::Debug for GradFn {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        f.debug_struct("GradFn")
+            .field("name", &self.name)
+            .field("inputs", &self.inputs.len())
+            .finish()
+    }
+}
+
 /// N-dimensional Tensor with autograd support
 #[derive(Clone)]
 pub struct Tensor {
     /// Raw data storage
-    pub data: Arc<Vec<f32>>,
+    pub data: Vec<f32>,
     /// Shape of the tensor
     pub shape: TensorShape,
     /// Device (CPU/GPU)
@@ -79,7 +87,7 @@ pub struct Tensor {
     /// Whether to track gradients
     pub requires_grad: bool,
     /// Accumulated gradient
-    pub grad: RefCell<Option<Arc<Vec<f32>>>>,
+    pub grad: Arc<Mutex<Option<Vec<f32>>>>,
     /// Gradient function for backprop
     grad_fn: Option<Arc<GradFn>>,
 }
@@ -90,6 +98,7 @@ impl std::fmt::Debug for Tensor {
             .field("shape", &self.shape)
             .field("device", &self.device)
             .field("requires_grad", &self.requires_grad)
+            .field("data_len", &self.data.len())
             .finish()
     }
 }
@@ -100,11 +109,11 @@ impl Tensor {
         let shape = shape.into();
         assert_eq!(data.len(), shape.numel(), "Data size must match shape");
         Self {
-            data: Arc::new(data),
+            data: data,
             shape,
             device: Device::CPU,
             requires_grad: false,
-            grad: RefCell::new(None),
+            grad: Arc::new(Mutex::new(None)),
             grad_fn: None,
         }
     }
@@ -176,7 +185,7 @@ impl Tensor {
     /// Set element at index (creates new tensor - immutable design)
     pub fn set(&self, indices: &[usize], value: f32) -> Self {
         let idx = self.flat_index(indices);
-        let mut new_data = (*self.data).clone();
+        let mut new_data = self.data.clone();
         new_data[idx] = value;
         Self::new(new_data, self.shape.clone())
     }
@@ -202,7 +211,7 @@ impl Tensor {
             shape: new_shape,
             device: self.device,
             requires_grad: self.requires_grad,
-            grad: RefCell::new(None),
+            grad: Arc::new(Mutex::new(None)),
             grad_fn: None,
         }
     }
@@ -431,6 +440,15 @@ impl Tensor {
         self.sum() / self.shape.numel() as f32
     }
 
+    /// Normalize to unit L2 norm
+    pub fn normalize(&self) -> Self {
+        let norm: f32 = self.data.iter().map(|x| x * x).sum::<f32>().sqrt();
+        if norm < 1e-10 {
+            return self.clone();
+        }
+        self.scale(1.0 / norm)
+    }
+
     /// Sum along dimension
     pub fn sum_dim(&self, dim: usize) -> Self {
         assert!(dim < self.shape.ndim(), "Dimension out of bounds");
@@ -547,7 +565,7 @@ impl Tensor {
         
         // Initialize gradient as ones (for scalar loss)
         let grad = vec![1.0; self.shape.numel()];
-        *self.grad.borrow_mut() = Some(Arc::new(grad));
+        *self.grad.lock().unwrap() = Some(grad);
         
         // TODO: Implement full autograd with topological sort
         // For now, gradients are computed manually in the trainer
@@ -555,12 +573,12 @@ impl Tensor {
 
     /// Zero gradients
     pub fn zero_grad(&self) {
-        *self.grad.borrow_mut() = None;
+        *self.grad.lock().unwrap() = None;
     }
 
     /// Get gradient
     pub fn get_grad(&self) -> Option<Vec<f32>> {
-        self.grad.borrow().as_ref().map(|g| g.to_vec())
+        self.grad.lock().unwrap().as_ref().map(|g| g.to_vec())
     }
 
     /// Convert to Vec

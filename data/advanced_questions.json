@@ -1,0 +1,282 @@
+[
+  {
+    "category": "Advanced Mathematics",
+    "questions": [
+      {
+        "q": "What is the derivative of x^2 + 3x + 5?",
+        "a": "2x + 3",
+        "difficulty": "medium",
+        "requires": ["calculus", "differentiation"]
+      },
+      {
+        "q": "Solve the equation 2x + 5 = 13",
+        "a": "x = 4",
+        "difficulty": "easy",
+        "requires": ["algebra", "equation_solving"]
+      },
+      {
+        "q": "What is the integral of 2x?",
+        "a": "x^2 + C",
+        "difficulty": "medium",
+        "requires": ["calculus", "integration"]
+      },
+      {
+        "q": "Calculate the area of a circle with radius 5",
+        "a": "78.54 (approximately 25π)",
+        "difficulty": "easy",
+        "requires": ["geometry", "formulas"]
+      },
+      {
+        "q": "What is the Pythagorean theorem?",
+        "a": "a^2 + b^2 = c^2 for right triangles",
+        "difficulty": "easy",
+        "requires": ["geometry", "theorems"]
+      }
+    ]
+  },
+  {
+    "category": "Multi-Step Reasoning",
+    "questions": [
+      {
+        "q": "If John has 5 apples and gives 2 to Mary, then Mary gives 1 to Tom, how many apples does each person have?",
+        "a": "John: 3, Mary: 1, Tom: 1",
+        "difficulty": "medium",
+        "requires": ["arithmetic", "tracking_state"]
+      },
+      {
+        "q": "A train travels 60 km/h for 2 hours, then 80 km/h for 1 hour. What is the total distance?",
+        "a": "200 km",
+        "difficulty": "medium",
+        "requires": ["arithmetic", "multi_step"]
+      },
+      {
+        "q": "If all cats are animals and all animals need food, do cats need food?",
+        "a": "Yes, by transitive property",
+        "difficulty": "easy",
+        "requires": ["logic", "syllogism"]
+      },
+      {
+        "q": "A store has a 20% discount, then an additional 10% off. What is the total discount on a $100 item?",
+        "a": "$28 (final price $72)",
+        "difficulty": "hard",
+        "requires": ["percentages", "compound_operations"]
+      },
+      {
+        "q": "If it takes 5 machines 5 minutes to make 5 widgets, how long does it take 100 machines to make 100 widgets?",
+        "a": "5 minutes",
+        "difficulty": "hard",
+        "requires": ["logic", "proportional_reasoning"]
+      }
+    ]
+  },
+  {
+    "category": "Logical Inference",
+    "questions": [
+      {
+        "q": "If P implies Q, and Q implies R, what can we conclude about P and R?",
+        "a": "P implies R (transitivity)",
+        "difficulty": "medium",
+        "requires": ["logic", "transitivity"]
+      },
+      {
+        "q": "All humans are mortal. Socrates is human. What can we conclude?",
+        "a": "Socrates is mortal",
+        "difficulty": "easy",
+        "requires": ["logic", "modus_ponens"]
+      },
+      {
+        "q": "If it rains, the ground is wet. The ground is not wet. What can we conclude?",
+        "a": "It did not rain (modus tollens)",
+        "difficulty": "medium",
+        "requires": ["logic", "modus_tollens"]
+      },
+      {
+        "q": "Either A or B is true. A is false. What can we conclude?",
+        "a": "B is true (disjunctive syllogism)",
+        "difficulty": "easy",
+        "requires": ["logic", "disjunction"]
+      },
+      {
+        "q": "If not P, then Q. Not Q. What can we conclude?",
+        "a": "P is true (modus tollens on negation)",
+        "difficulty": "hard",
+        "requires": ["logic", "negation", "modus_tollens"]
+      }
+    ]
+  },
+  {
+    "category": "Abstract Reasoning",
+    "questions": [
+      {
+        "q": "What comes next in the sequence: 2, 4, 8, 16, ?",
+        "a": "32 (powers of 2)",
+        "difficulty": "easy",
+        "requires": ["pattern_recognition", "sequences"]
+      },
+      {
+        "q": "What is the pattern in: 1, 1, 2, 3, 5, 8, ?",
+        "a": "13 (Fibonacci sequence)",
+        "difficulty": "medium",
+        "requires": ["pattern_recognition", "fibonacci"]
+      },
+      {
+        "q": "If A=1, B=2, C=3, what is the value of 'CAB'?",
+        "a": "312 or 3+1+2=6",
+        "difficulty": "easy",
+        "requires": ["encoding", "arithmetic"]
+      },
+      {
+        "q": "What is the relationship between 'cat' and 'dog' similar to 'bird' and ?",
+        "a": "fish (different animal categories)",
+        "difficulty": "medium",
+        "requires": ["analogy", "categorization"]
+      },
+      {
+        "q": "If all Bloops are Razzies and all Razzies are Lazzies, are all Bloops Lazzies?",
+        "a": "Yes (transitive property with abstract terms)",
+        "difficulty": "medium",
+        "requires": ["abstract_logic", "transitivity"]
+      }
+    ]
+  },
+  {
+    "category": "Causal Reasoning",
+    "questions": [
+      {
+        "q": "If increasing temperature causes ice to melt, what happens when temperature decreases?",
+        "a": "Water freezes (reverse causation)",
+        "difficulty": "easy",
+        "requires": ["causation", "physics"]
+      },
+      {
+        "q": "Plants need sunlight to grow. If a plant is not growing, what might be the cause?",
+        "a": "Lack of sunlight (or other factors like water, nutrients)",
+        "difficulty": "medium",
+        "requires": ["causation", "multiple_factors"]
+      },
+      {
+        "q": "Correlation does not imply causation. Why?",
+        "a": "Two things can be related without one causing the other",
+        "difficulty": "hard",
+        "requires": ["statistics", "causation", "logic"]
+      },
+      {
+        "q": "If A causes B and B causes C, does A cause C?",
+        "a": "Yes, indirectly (causal chain)",
+        "difficulty": "medium",
+        "requires": ["causation", "transitivity"]
+      },
+      {
+        "q": "What is a confounding variable?",
+        "a": "A variable that influences both cause and effect, creating spurious correlation",
+        "difficulty": "hard",
+        "requires": ["statistics", "causation"]
+      }
+    ]
+  },
+  {
+    "category": "Probabilistic Reasoning",
+    "questions": [
+      {
+        "q": "What is the probability of flipping heads on a fair coin?",
+        "a": "0.5 or 50%",
+        "difficulty": "easy",
+        "requires": ["probability", "basic"]
+      },
+      {
+        "q": "If you roll two dice, what is the probability of getting a sum of 7?",
+        "a": "1/6 or about 16.67%",
+        "difficulty": "medium",
+        "requires": ["probability", "combinations"]
+      },
+      {
+        "q": "What is Bayes' theorem used for?",
+        "a": "Updating probabilities based on new evidence",
+        "difficulty": "hard",
+        "requires": ["probability", "bayesian"]
+      },
+      {
+        "q": "If an event has a 20% chance of occurring, what is the probability it does NOT occur?",
+        "a": "80% or 0.8",
+        "difficulty": "easy",
+        "requires": ["probability", "complement"]
+      },
+      {
+        "q": "What is the expected value of rolling a fair six-sided die?",
+        "a": "3.5",
+        "difficulty": "medium",
+        "requires": ["probability", "expected_value"]
+      }
+    ]
+  },
+  {
+    "category": "Optimization Problems",
+    "questions": [
+      {
+        "q": "What is the shortest path between two points?",
+        "a": "A straight line",
+        "difficulty": "easy",
+        "requires": ["geometry", "optimization"]
+      },
+      {
+        "q": "How do you maximize area with a fixed perimeter?",
+        "a": "Use a circle (or square for polygons)",
+        "difficulty": "hard",
+        "requires": ["calculus", "optimization"]
+      },
+      {
+        "q": "What is the traveling salesman problem?",
+        "a": "Finding the shortest route visiting all cities exactly once",
+        "difficulty": "medium",
+        "requires": ["algorithms", "optimization"]
+      },
+      {
+        "q": "What is gradient descent?",
+        "a": "An optimization algorithm that iteratively moves toward a minimum",
+        "difficulty": "hard",
+        "requires": ["machine_learning", "optimization"]
+      },
+      {
+        "q": "What is the difference between local and global optimum?",
+        "a": "Local is best in neighborhood, global is best overall",
+        "difficulty": "medium",
+        "requires": ["optimization", "concepts"]
+      }
+    ]
+  },
+  {
+    "category": "Computational Thinking",
+    "questions": [
+      {
+        "q": "What is an algorithm?",
+        "a": "A step-by-step procedure for solving a problem",
+        "difficulty": "easy",
+        "requires": ["computer_science", "basics"]
+      },
+      {
+        "q": "What is the difference between O(n) and O(n^2) complexity?",
+        "a": "O(n) is linear, O(n^2) is quadratic - much slower for large n",
+        "difficulty": "medium",
+        "requires": ["algorithms", "complexity"]
+      },
+      {
+        "q": "What is recursion?",
+        "a": "A function that calls itself to solve smaller instances of the same problem",
+        "difficulty": "medium",
+        "requires": ["programming", "recursion"]
+      },
+      {
+        "q": "What is the halting problem?",
+        "a": "The problem of determining whether a program will finish running or run forever",
+        "difficulty": "hard",
+        "requires": ["computer_science", "theory"]
+      },
+      {
+        "q": "What is dynamic programming?",
+        "a": "An optimization technique that stores solutions to subproblems to avoid recomputation",
+        "difficulty": "hard",
+        "requires": ["algorithms", "optimization"]
+      }
+    ]
+  }
+]

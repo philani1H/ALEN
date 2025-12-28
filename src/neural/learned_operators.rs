@@ -104,13 +104,15 @@ impl GatedOperator {
             in_dim = out_dim;
         }
         
+        let dropout_p = config.dropout;
+        
         Self {
             name: name.to_string(),
             config,
             transform_layers,
             gate_layers,
             layer_norms,
-            dropout: Dropout::new(config.dropout),
+            dropout: Dropout::new(dropout_p),
             success_count: 0,
             usage_count: 0,
             weight: 1.0,

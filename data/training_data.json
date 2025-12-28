@@ -1,0 +1,152 @@
+[
+  {
+    "category": "Mathematics",
+    "questions": [
+      {"q": "What is 2+2?", "a": "4"},
+      {"q": "What is 3+3?", "a": "6"},
+      {"q": "What is 5+5?", "a": "10"},
+      {"q": "What is 10-3?", "a": "7"},
+      {"q": "What is 4*5?", "a": "20"},
+      {"q": "What is 12/3?", "a": "4"},
+      {"q": "What is 7+8?", "a": "15"},
+      {"q": "What is 9*9?", "a": "81"},
+      {"q": "What is 100-25?", "a": "75"},
+      {"q": "What is 15/5?", "a": "3"}
+    ]
+  },
+  {
+    "category": "Geography",
+    "questions": [
+      {"q": "What is the capital of France?", "a": "Paris"},
+      {"q": "What is the capital of Germany?", "a": "Berlin"},
+      {"q": "What is the capital of Italy?", "a": "Rome"},
+      {"q": "What is the capital of Spain?", "a": "Madrid"},
+      {"q": "What is the capital of Japan?", "a": "Tokyo"},
+      {"q": "What is the capital of China?", "a": "Beijing"},
+      {"q": "What is the capital of Russia?", "a": "Moscow"},
+      {"q": "What is the capital of Brazil?", "a": "Brasilia"},
+      {"q": "What is the capital of Canada?", "a": "Ottawa"},
+      {"q": "What is the capital of Australia?", "a": "Canberra"}
+    ]
+  },
+  {
+    "category": "Science",
+    "questions": [
+      {"q": "What is the speed of light?", "a": "299792458 meters per second"},
+      {"q": "What is gravity?", "a": "A force that attracts objects with mass"},
+      {"q": "What is photosynthesis?", "a": "Process where plants convert light to energy"},
+      {"q": "What is DNA?", "a": "Deoxyribonucleic acid, carrier of genetic information"},
+      {"q": "What is an atom?", "a": "The smallest unit of matter"},
+      {"q": "What is water made of?", "a": "Two hydrogen atoms and one oxygen atom (H2O)"},
+      {"q": "What is the sun?", "a": "A star at the center of our solar system"},
+      {"q": "What causes rain?", "a": "Water vapor condensing in clouds and falling"},
+      {"q": "What is oxygen?", "a": "A chemical element essential for life"},
+      {"q": "What is evolution?", "a": "The process of species changing over time"}
+    ]
+  },
+  {
+    "category": "History",
+    "questions": [
+      {"q": "Who wrote Romeo and Juliet?", "a": "William Shakespeare"},
+      {"q": "Who painted the Mona Lisa?", "a": "Leonardo da Vinci"},
+      {"q": "Who discovered gravity?", "a": "Isaac Newton"},
+      {"q": "Who invented the telephone?", "a": "Alexander Graham Bell"},
+      {"q": "Who was the first president of the USA?", "a": "George Washington"},
+      {"q": "Who invented the light bulb?", "a": "Thomas Edison"},
+      {"q": "Who discovered America?", "a": "Christopher Columbus"},
+      {"q": "Who wrote Hamlet?", "a": "William Shakespeare"},
+      {"q": "Who painted the Sistine Chapel?", "a": "Michelangelo"},
+      {"q": "Who invented the airplane?", "a": "The Wright Brothers"}
+    ]
+  },
+  {
+    "category": "Technology",
+    "questions": [
+      {"q": "What is artificial intelligence?", "a": "Computer systems that can perform tasks requiring human intelligence"},
+      {"q": "What is machine learning?", "a": "Algorithms that learn from data without explicit programming"},
+      {"q": "What is a neural network?", "a": "A computing system inspired by biological neural networks"},
+      {"q": "What is the internet?", "a": "A global network of interconnected computers"},
+      {"q": "What is a computer?", "a": "An electronic device that processes data"},
+      {"q": "What is programming?", "a": "Writing instructions for computers to execute"},
+      {"q": "What is a database?", "a": "An organized collection of structured data"},
+      {"q": "What is cloud computing?", "a": "Delivery of computing services over the internet"},
+      {"q": "What is encryption?", "a": "Converting data into a coded format for security"},
+      {"q": "What is an algorithm?", "a": "A step-by-step procedure for solving a problem"}
+    ]
+  },
+  {
+    "category": "Language",
+    "questions": [
+      {"q": "What is a noun?", "a": "A word that names a person, place, thing, or idea"},
+      {"q": "What is a verb?", "a": "A word that expresses an action or state of being"},
+      {"q": "What is an adjective?", "a": "A word that describes or modifies a noun"},
+      {"q": "What is a sentence?", "a": "A group of words expressing a complete thought"},
+      {"q": "What is grammar?", "a": "The rules governing the structure of language"},
+      {"q": "What is a metaphor?", "a": "A figure of speech comparing two unlike things"},
+      {"q": "What is a synonym?", "a": "A word with the same or similar meaning as another"},
+      {"q": "What is an antonym?", "a": "A word with opposite meaning to another"},
+      {"q": "What is punctuation?", "a": "Marks used to clarify meaning in writing"},
+      {"q": "What is a paragraph?", "a": "A group of related sentences about one topic"}
+    ]
+  },
+  {
+    "category": "Logic",
+    "questions": [
+      {"q": "What is recursion?", "a": "A function that calls itself"},
+      {"q": "What is a paradox?", "a": "A statement that contradicts itself"},
+      {"q": "What is deduction?", "a": "Reasoning from general principles to specific conclusions"},
+      {"q": "What is induction?", "a": "Reasoning from specific observations to general principles"},
+      {"q": "What is a hypothesis?", "a": "A proposed explanation that can be tested"},
+      {"q": "What is proof?", "a": "Evidence establishing the truth of a statement"},
+      {"q": "What is causation?", "a": "The relationship between cause and effect"},
+      {"q": "What is correlation?", "a": "A relationship between two variables"},
+      {"q": "What is an axiom?", "a": "A statement accepted as true without proof"},
+      {"q": "What is a theorem?", "a": "A statement proven based on axioms and logic"}
+    ]
+  },
+  {
+    "category": "Philosophy",
+    "questions": [
+      {"q": "What is consciousness?", "a": "The state of being aware of one's existence and surroundings"},
+      {"q": "What is ethics?", "a": "The study of moral principles and values"},
+      {"q": "What is knowledge?", "a": "Justified true belief or understanding"},
+      {"q": "What is reality?", "a": "The state of things as they actually exist"},
+      {"q": "What is truth?", "a": "Correspondence with facts or reality"},
+      {"q": "What is free will?", "a": "The ability to make choices independently"},
+      {"q": "What is justice?", "a": "Fairness in treatment and distribution"},
+      {"q": "What is beauty?", "a": "A quality that gives pleasure to the senses or mind"},
+      {"q": "What is meaning?", "a": "The significance or purpose of something"},
+      {"q": "What is wisdom?", "a": "Deep understanding and good judgment"}
+    ]
+  },
+  {
+    "category": "Biology",
+    "questions": [
+      {"q": "What is a cell?", "a": "The basic unit of life"},
+      {"q": "What is mitosis?", "a": "Cell division producing two identical daughter cells"},
+      {"q": "What is a gene?", "a": "A unit of heredity made of DNA"},
+      {"q": "What is metabolism?", "a": "Chemical processes that maintain life"},
+      {"q": "What is an ecosystem?", "a": "A community of organisms and their environment"},
+      {"q": "What is a species?", "a": "A group of organisms that can interbreed"},
+      {"q": "What is homeostasis?", "a": "Maintaining stable internal conditions"},
+      {"q": "What is natural selection?", "a": "Survival and reproduction of the fittest"},
+      {"q": "What is a protein?", "a": "A large molecule made of amino acids"},
+      {"q": "What is respiration?", "a": "Process of converting glucose to energy"}
+    ]
+  },
+  {
+    "category": "Physics",
+    "questions": [
+      {"q": "What is energy?", "a": "The capacity to do work"},
+      {"q": "What is force?", "a": "A push or pull on an object"},
+      {"q": "What is momentum?", "a": "Mass times velocity"},
+      {"q": "What is acceleration?", "a": "Rate of change of velocity"},
+      {"q": "What is friction?", "a": "Resistance to motion between surfaces"},
+      {"q": "What is electricity?", "a": "Flow of electric charge"},
+      {"q": "What is magnetism?", "a": "Force exerted by magnets"},
+      {"q": "What is a wave?", "a": "A disturbance that transfers energy"},
+      {"q": "What is temperature?", "a": "Measure of average kinetic energy"},
+      {"q": "What is pressure?", "a": "Force per unit area"}
+    ]
+  }
+]
