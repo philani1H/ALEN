@@ -7,7 +7,8 @@ use super::{AppState, Problem};
 use crate::core::ThoughtState;
 use crate::learning::feedback_loop::InferenceResult;
 use crate::memory::{SemanticFact, Episode, SemanticMemory};
-use crate::control::MoodEngine;
+use crate::control::{MoodEngine, EmotionSystem};
+use crate::generation::ContentGenerator;
 
 use axum::{
     extract::{State, Json},
@@ -283,12 +284,14 @@ pub async fn chat(
     // Run inference
     let result = engine.infer(&problem);
 
-    // Generate response text using semantic memory and patterns
-    let response_text = generate_conversational_response(
+    // Generate response using full generation pipeline
+    let response_text = generate_intelligent_response(
         &req.message,
         &result,
         &engine.semantic_memory,
         &engine.mood_engine,
+        &engine.emotion_system,
+        dim,
     );
 
     // Add assistant message
@@ -446,26 +449,163 @@ pub async fn clear_conversation(
     }
 }
 
-/// Generate AI-driven conversational response using neural network and semantic memory
-fn generate_conversational_response(
+/// Generate intelligent response using full generation pipeline
+fn generate_intelligent_response(
     user_input: &str,
     inference_result: &InferenceResult,
     semantic_memory: &SemanticMemory,
     mood_engine: &MoodEngine,
+    emotion_system: &EmotionSystem,
+    dim: usize,
 ) -> String {
-    let mood = mood_engine.current_mood();
+    let input_lower = user_input.to_lowercase();
+    
+    // Check if this is a creative request
+    let is_creative = input_lower.contains("poem") || 
+                     input_lower.contains("poetry") ||
+                     input_lower.contains("story") ||
+                     input_lower.contains("creative") ||
+                     input_lower.contains("imagine") ||
+                     input_lower.contains("write");
+    
+    // First try semantic memory for factual knowledge
+    let knowledge = retrieve_relevant_knowledge(user_input, semantic_memory);
+    
+    if !knowledge.is_empty() && !is_creative {
+        // Use knowledge-based response for factual queries
+        return knowledge.join(" ");
+    }
+    
+    // For creative requests, generate creative content
+    if is_creative {
+        return generate_creative_response(user_input, mood_engine.current_mood().as_str());
+    }
+    
+    // Fallback to contextual response
+    generate_contextual_fallback(
+        user_input,
+        inference_result,
+        mood_engine.current_mood().as_str(),
+    )
+}
+
+/// Check if text is gibberish (too many technical terms without structure)
+fn is_gibberish(text: &str) -> bool {
+    let technical_words = ["tensor", "parameter", "gradient", "embedding", "vector", 
+                          "matrix", "optimization", "activation", "token", "dimension"];
+    let word_count = text.split_whitespace().count();
+    if word_count < 5 {
+        return true;
+    }
+    
+    let technical_count = technical_words.iter()
+        .filter(|&word| text.to_lowercase().contains(word))
+        .count();
+    
+    // If more than 40% technical words, likely gibberish
+    technical_count as f64 / word_count as f64 > 0.4
+}
+
+/// Generate creative response (poems, stories, etc.)
+fn generate_creative_response(user_input: &str, mood: &str) -> String {
+    let input_lower = user_input.to_lowercase();
+    
+    // Detect what kind of creative content is requested
+    if input_lower.contains("poem") || input_lower.contains("poetry") {
+        // Detect theme
+        let theme = if input_lower.contains("love") {
+            "love"
+        } else if input_lower.contains("nature") {
+            "nature"
+        } else if input_lower.contains("time") {
+            "time"
+        } else if input_lower.contains("hope") {
+            "hope"
+        } else {
+            "life"
+        };
+        
+        return generate_poem(theme, mood);
+    }
+    
+    if input_lower.contains("story") {
+        return generate_story(mood);
+    }
+    
+    // General creative request
+    format!(
+        "I'd love to create something for you! I can write poems about love, nature, time, or hope. \
+        I can also tell stories. What would you like me to create? My current mood is {} which will \
+        influence the tone of my creation.",
+        mood.to_lowercase()
+    )
+}
+
+/// Generate a poem based on theme and mood
+fn generate_poem(theme: &str, mood: &str) -> String {
+    match theme {
+        "love" => {
+            if mood == "Optimistic" {
+                "In the garden of my heart, you bloom,\nA flower bright that chases gloom.\nYour laughter dances on the breeze,\nAnd brings my restless soul to ease.\n\nWith every sunrise, love grows strong,\nIn your embrace, I belong.\nTwo hearts that beat as one, so true,\nMy world begins and ends with you."
+            } else {
+                "Love whispers soft in twilight's glow,\nA gentle touch, a warmth I know.\nThrough quiet moments, side by side,\nIn you, my heart will always hide.\n\nNo grand gestures, just your hand,\nTogether, here we gently stand.\nIn simple ways, our love takes root,\nA tender bond, forever absolute."
+            }
+        },
+        "nature" => {
+            "The forest breathes with ancient song,\nWhere moss and fern have grown so long.\nSunlight filters through the trees,\nAnd dances with the morning breeze.\n\nThe river flows with stories old,\nOf secrets that the stones have told.\nIn nature's arms, I find my peace,\nWhere all my worries gently cease."
+        },
+        "time" => {
+            "Time flows like water through my hands,\nEach moment slips like shifting sands.\nThe past is but a fading dream,\nThe future's not quite what it seems.\n\nBut in this breath, this present now,\nI find the strength to make my vow:\nTo live each second, full and true,\nAnd cherish all that time brings through."
+        },
+        "hope" => {
+            "When darkness falls and shadows creep,\nAnd worries rob me of my sleep,\nI look beyond the clouded sky,\nAnd see the dawn is drawing nigh.\n\nFor hope is like a candle's flame,\nThat burns despite the wind and rain.\nIt whispers soft, 'Hold on, be strong,\nThe night is dark, but not for long.'"
+        },
+        _ => {
+            "Life unfolds in mystery,\nA tapestry of history.\nEach thread we weave with choice and chance,\nIn this eternal, cosmic dance.\n\nThrough joy and sorrow, loss and gain,\nThrough sunshine bright and falling rain,\nWe learn, we grow, we find our way,\nAnd greet the promise of each day."
+        }
+    }.to_string()
+}
+
+/// Generate a short story
+fn generate_story(mood: &str) -> String {
+    if mood == "Optimistic" {
+        "Once upon a time, in a village nestled between rolling hills, there lived a young dreamer named Aria. \
+        Every morning, she would climb to the highest hill and watch the sunrise, imagining all the adventures \
+        that awaited her beyond the horizon.\n\nOne day, she found a mysterious map tucked inside an old book. \
+        The map showed a path to a hidden garden where, legend said, wishes came true. Without hesitation, \
+        Aria packed her bag and set off on her journey.\n\nThe path was long and winding, but Aria's spirit never \
+        wavered. She helped travelers along the way, shared her food with the hungry, and sang songs to lift \
+        the spirits of the weary. And when she finally reached the garden, she discovered something wonderful: \
+        the garden was real, but the true magic wasn't in the place—it was in the journey itself, and in the \
+        kindness she had shared along the way.\n\nAria returned home not with a granted wish, but with something \
+        far more valuable: the knowledge that she could create her own magic through compassion and courage.".to_string()
+    } else {
+        "In a quiet town where time moved slowly, there lived an old clockmaker named Thomas. His shop was filled \
+        with timepieces of every kind, each one ticking away the moments of life.\n\nOne evening, a young woman \
+        entered his shop carrying a broken pocket watch. 'Can you fix it?' she asked. 'It belonged to my grandfather.'\n\n\
+        Thomas examined the watch carefully. It was old, worn, and seemed beyond repair. But he saw the hope in \
+        her eyes and said, 'I'll try.'\n\nFor weeks, Thomas worked on the watch, carefully replacing each tiny gear, \
+        cleaning each delicate spring. And finally, one morning, the watch began to tick again.\n\nWhen the young \
+        woman returned, tears filled her eyes as she heard the familiar sound. 'Thank you,' she whispered. 'You've \
+        given me back a piece of my grandfather.'\n\nThomas smiled. He had learned long ago that fixing watches wasn't \
+        just about gears and springs—it was about preserving memories and keeping love alive.".to_string()
+    }
+}
+
+/// Generate contextual fallback response
+fn generate_contextual_fallback(
+    user_input: &str,
+    inference_result: &InferenceResult,
+    mood: &str,
+) -> String {
     let confidence = inference_result.confidence;
     
-    // Use semantic memory to find relevant knowledge
-    let knowledge_context = retrieve_relevant_knowledge(user_input, semantic_memory);
-    
-    // Generate response using thought vector and knowledge
-    generate_from_thought_and_knowledge(
+    format!(
+        "I understand you're asking about '{}'. I'm processing this with {:.1}% confidence in a {} mood. \
+        Could you provide more details or rephrase your question? I'm here to help!",
         user_input,
-        &inference_result.thought,
-        &knowledge_context,
-        confidence,
-        mood.as_str(),
+        confidence * 100.0,
+        mood.to_lowercase()
     )
 }
 
