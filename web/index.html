@@ -330,25 +330,71 @@
 
         /* Reasoning chain display */
         .reasoning-chain {
-            background: #fff;
-            border-left: 4px solid #667eea;
-            padding: 15px;
-            margin: 15px 0;
-            border-radius: 5px;
+            background: #e7f3ff;
+            border: 2px solid #667eea;
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .reasoning-chain:hover {
+            background: #d4e9ff;
+        }
+
+        .reasoning-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: bold;
+            color: #667eea;
+            padding: 5px;
+        }
+
+        .reasoning-toggle {
+            font-size: 1.2em;
+            transition: transform 0.3s;
+        }
+
+        .reasoning-toggle.open {
+            transform: rotate(180deg);
+        }
+
+        .reasoning-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-out;
+        }
+
+        .reasoning-content.show {
+            max-height: 500px;
+            margin-top: 10px;
         }
 
         .reasoning-step {
-            padding: 10px;
-            margin: 8px 0;
-            background: #f9f9f9;
+            padding: 8px;
+            margin: 5px 0;
+            background: #fff;
             border-radius: 5px;
             border-left: 3px solid #764ba2;
+            font-size: 0.9em;
         }
 
         .reasoning-step .step-number {
             font-weight: bold;
             color: #667eea;
             margin-right: 8px;
+        }
+
+        /* Separate response content */
+        .response-content {
+            background: #fff;
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 8px;
+            border: 2px solid #e0e0e0;
+            line-height: 1.6;
         }
 
         /* Feedback buttons */
@@ -1230,18 +1276,26 @@ capital of Germany -> Berlin</textarea>
             let responseHTML = '<div class="role">🤖 ALEN</div>';
             responseHTML += '<div class="content">';
             
-            // Show reasoning steps first
+            // Show reasoning steps in collapsible box
             if (result.reasoning_steps && result.reasoning_steps.length > 0) {
-                responseHTML += '<div class="reasoning-chain">';
-                responseHTML += '<h4>🧠 Reasoning Process:</h4>';
+                const reasoningId = 'reasoning-' + Date.now();
+                responseHTML += `<div class="reasoning-chain" onclick="toggleReasoning('${reasoningId}')">`;
+                responseHTML += '<div class="reasoning-header">';
+                responseHTML += '<span>🧠 Thought Process (click to expand)</span>';
+                responseHTML += '<span class="reasoning-toggle" id="' + reasoningId + '-toggle">▼</span>';
+                responseHTML += '</div>';
+                responseHTML += `<div class="reasoning-content" id="${reasoningId}">`;
                 result.reasoning_steps.forEach((step, index) => {
                     responseHTML += `<div class="reasoning-step"><span class="step-number">Step ${index + 1}:</span> ${step}</div>`;
                 });
                 responseHTML += '</div>';
+                responseHTML += '</div>';
             }
             
-            // Show the actual response
+            // Show the actual response in separate box
+            responseHTML += '<div class="response-content">';
             responseHTML += renderMarkdownWithLatex(result.message || result.response || result.text || 'No response');
+            responseHTML += '</div>';
             responseHTML += '</div>';
             
             // Add metadata
@@ -1291,6 +1345,20 @@ capital of Germany -> Berlin</textarea>
 
         function setExampleChat(text) {
             document.getElementById('chat-input').value = text;
+        }
+
+        // Toggle reasoning display
+        function toggleReasoning(id) {
+            const content = document.getElementById(id);
+            const toggle = document.getElementById(id + '-toggle');
+            
+            if (content.classList.contains('show')) {
+                content.classList.remove('show');
+                toggle.classList.remove('open');
+            } else {
+                content.classList.add('show');
+                toggle.classList.add('open');
+            }
         }
 
         // Feedback functions
