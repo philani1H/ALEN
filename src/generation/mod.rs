@@ -2,13 +2,18 @@
 //!
 //! Generates outputs from thought states:
 //! - Text Generation: Vocabulary-based decoding
+//! - Poetry Generation: Mood-aware creative text (p_t = softmax(W_out·h_t + b))
 //! - Image Generation: Simple diffusion-like process
 //! - Video Generation: Temporal sequence generation
 //! - Content synthesis and controlled generation
 
 pub mod video;
+pub mod text_decoder;
+pub mod poetry;
 
 pub use video::{VideoGenerator, VideoGenConfig, GeneratedVideo, MotionType};
+pub use text_decoder::{TextDecoder, Vocabulary as DecoderVocabulary};
+pub use poetry::{PoetryGenerator, PoetryStyle, PoetryTheme};
 
 use crate::core::{ThoughtState, Activation, DenseLayer};
 use nalgebra::{DMatrix, DVector};

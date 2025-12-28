@@ -450,6 +450,11 @@ impl EmotionSystem {
             .collect()
     }
 
+    /// Get current emotional state
+    pub fn get_state(&self) -> EmotionalState {
+        self.limbic.get_state()
+    }
+
     fn timestamp() -> f64 {
         std::time::SystemTime::now()
             .duration_since(std::time::UNIX_EPOCH)

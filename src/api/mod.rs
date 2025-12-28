@@ -1230,6 +1230,94 @@ pub async fn generate_image(
     })
 }
 
+/// Poem generation request
+#[derive(Debug, Deserialize)]
+pub struct GeneratePoemRequest {
+    /// Input theme/prompt
+    pub prompt: String,
+    /// Number of lines
+    #[serde(default = "default_poem_lines")]
+    pub lines: usize,
+    /// Poetry theme (optional)
+    pub theme: Option<String>,
+    /// Use haiku format (3 lines, 5-7-5)
+    #[serde(default)]
+    pub haiku: bool,
+}
+
+fn default_poem_lines() -> usize { 4 }
+
+/// Poem generation response
+#[derive(Debug, Serialize)]
+pub struct GeneratePoemResponse {
+    pub success: bool,
+    pub poem: String,
+    pub lines_generated: usize,
+    pub theme: String,
+    pub mood: String,
+    pub confidence: f64,
+}
+
+/// Generate poem from prompt with mood-aware creativity
+/// Implements: p_t = softmax(W_out·h_t + b) with mood modulation
+pub async fn generate_poem(
+    State(state): State<Arc<AppState>>,
+    Json(req): Json<GeneratePoemRequest>,
+) -> impl IntoResponse {
+    use crate::generation::{PoetryGenerator, PoetryTheme};
+
+    let mut engine = state.engine.lock().await;
+    let dim = state.config.dimension;
+
+    // Create problem and get thought state
+    let problem = Problem::new(&req.prompt, dim);
+    let result = engine.infer(&problem);
+
+    // Get current emotional state and bias
+    let emotion = engine.emotion_system.get_state();
+    let bias = &engine.bias_controller.current_bias;
+
+    // Determine theme from string
+    let theme = match req.theme.as_deref() {
+        Some("love") => Some(PoetryTheme::Love),
+        Some("nature") => Some(PoetryTheme::Nature),
+        Some("time") => Some(PoetryTheme::Time),
+        Some("loss") => Some(PoetryTheme::Loss),
+        Some("hope") => Some(PoetryTheme::Hope),
+        Some("dreams") => Some(PoetryTheme::Dreams),
+        Some("freedom") => Some(PoetryTheme::Freedom),
+        Some("journey") => Some(PoetryTheme::Journey),
+        Some("silence") => Some(PoetryTheme::Silence),
+        Some("fire") => Some(PoetryTheme::Fire),
+        Some("ocean") => Some(PoetryTheme::Ocean),
+        Some("stars") => Some(PoetryTheme::Stars),
+        _ => None, // Auto-detect from prompt
+    };
+
+    // Create poetry generator
+    let mut generator = PoetryGenerator::new(dim);
+
+    // Generate poem
+    let poem = if req.haiku {
+        generator.generate_with_emotion(&result.thought, &emotion, &bias, theme, 3)
+    } else {
+        generator.generate_with_emotion(&result.thought, &emotion, &bias, theme, req.lines)
+    };
+
+    // Get mood description
+    let classified_emotion = emotion.classify();
+    let mood_desc = format!("{:?}", classified_emotion);
+
+    Json(GeneratePoemResponse {
+        success: true,
+        poem: poem.clone(),
+        lines_generated: poem.lines().count(),
+        theme: theme.map(|t| format!("{:?}", t)).unwrap_or_else(|| "Auto".to_string()),
+        mood: mood_desc,
+        confidence: result.confidence,
+    })
+}
+
 /// Comprehensive training request
 #[derive(Debug, Deserialize)]
 pub struct ComprehensiveTrainRequest {
@@ -1704,6 +1792,7 @@ pub fn create_router(state: Arc<AppState>) -> Router {
         .route("/generate/image", post(generate_image))
         .route("/generate/video", post(generate_video))
         .route("/generate/video/interpolate", post(generate_video_interpolation))
+        .route("/generate/poem", post(generate_poem))
 
         // Multimodal endpoints
         .route("/multimodal/image", post(process_image))
