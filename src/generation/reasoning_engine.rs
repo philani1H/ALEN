@@ -13,6 +13,7 @@ use crate::core::{ThoughtState, BiasVector};
 use crate::memory::SemanticMemory;
 use crate::control::emotions::EmotionalState;
 use crate::generation::factual_decoder::FactualThresholds;
+use crate::reasoning::chain_of_thought::{ChainOfThoughtReasoner, ReasoningChain, ReasoningStep};
 use serde::{Deserialize, Serialize};
 
 /// Reasoning engine for multi-modal generation
@@ -23,6 +24,8 @@ pub struct ReasoningEngine {
     pub thresholds: FactualThresholds,
     /// Current emotional state for mood-aware generation
     pub emotional_state: Option<EmotionalState>,
+    /// Chain-of-thought reasoner for multi-step reasoning
+    pub chain_reasoner: ChainOfThoughtReasoner,
 }
 
 impl ReasoningEngine {
@@ -31,6 +34,7 @@ impl ReasoningEngine {
             dimension,
             thresholds,
             emotional_state: None,
+            chain_reasoner: ChainOfThoughtReasoner::default(),
         }
     }
 
@@ -375,6 +379,138 @@ impl ReasoningEngine {
 
         delta
     }
+
+    /// Perform multi-step reasoning with knowledge anchoring at each step
+    ///
+    /// Combines chain-of-thought reasoning with knowledge verification.
+    /// Each reasoning step generates a latent that is verified against knowledge.
+    ///
+    /// Returns: ReasoningChain with knowledge-verified steps
+    pub fn reason_multi_step(
+        &self,
+        problem: &str,
+        memory: &SemanticMemory,
+        bias: &BiasVector,
+    ) -> Result<MultiStepReasoning, Box<dyn std::error::Error>> {
+        // 1. Decompose problem using chain-of-thought
+        let chain = self.chain_reasoner.reason(problem);
+
+        // 2. For each step, compute knowledge-anchored latent
+        let mut verified_steps = Vec::new();
+        let mut all_verified = true;
+
+        for step in &chain.steps {
+            // Compute latent for this reasoning step
+            let step_latent = self.compute_latent_from_concept(
+                &step.description,
+                memory,
+                bias,
+            )?;
+
+            // Create verified step with both reasoning and latent
+            let verified_step = VerifiedReasoningStep {
+                step: step.step,
+                description: step.description.clone(),
+                operator: step.operator.clone(),
+                latent_result: step_latent.clone(),
+                original_confidence: step.confidence,
+            };
+
+            if !step_latent.verification.verified {
+                all_verified = false;
+            }
+
+            verified_steps.push(verified_step);
+        }
+
+        // 3. Compute overall confidence from all steps
+        let avg_confidence = if !verified_steps.is_empty() {
+            verified_steps.iter()
+                .map(|s| s.latent_result.verification.confidence)
+                .sum::<f64>() / verified_steps.len() as f64
+        } else {
+            0.0
+        };
+
+        Ok(MultiStepReasoning {
+            problem: problem.to_string(),
+            chain,
+            verified_steps,
+            all_steps_verified: all_verified,
+            overall_confidence: avg_confidence,
+        })
+    }
+
+    /// Generate latent from multi-step reasoning
+    ///
+    /// Combines all reasoning steps into a final latent vector
+    pub fn latent_from_multi_step_reasoning(
+        &self,
+        multi_step: &MultiStepReasoning,
+        bias: &BiasVector,
+    ) -> Result<LatentResult, Box<dyn std::error::Error>> {
+        if multi_step.verified_steps.is_empty() {
+            return Err("No reasoning steps to combine".into());
+        }
+
+        // Combine all step latents with weighted averaging
+        let mut combined_latent = vec![0.0; self.dimension];
+        let mut total_weight = 0.0;
+
+        for step in &multi_step.verified_steps {
+            let weight = step.latent_result.verification.confidence;
+            total_weight += weight;
+
+            for (i, &val) in step.latent_result.latent.iter().enumerate() {
+                combined_latent[i] += val * weight;
+            }
+        }
+
+        // Normalize by total weight
+        if total_weight > 1e-10 {
+            for val in combined_latent.iter_mut() {
+                *val /= total_weight;
+            }
+        }
+
+        // Normalize vector
+        let norm: f64 = combined_latent.iter().map(|x| x * x).sum::<f64>().sqrt();
+        if norm > 1e-10 {
+            for val in combined_latent.iter_mut() {
+                *val /= norm;
+            }
+        }
+
+        // Get supporting facts from all steps
+        let mut all_supporting_facts: Vec<String> = multi_step.verified_steps.iter()
+            .flat_map(|s| s.latent_result.verification.supporting_facts.clone())
+            .collect();
+        all_supporting_facts.dedup();
+
+        Ok(LatentResult {
+            latent: combined_latent,
+            concept_vector: multi_step.verified_steps[0].latent_result.concept_vector.clone(),
+            knowledge_vector: multi_step.verified_steps[0].latent_result.knowledge_vector.clone(),
+            creativity_vector: multi_step.verified_steps[0].latent_result.creativity_vector.clone(),
+            alpha: bias.creativity,
+            verification: LatentVerification {
+                verified: multi_step.all_steps_verified,
+                confidence: multi_step.overall_confidence,
+                max_similarity: multi_step.verified_steps.iter()
+                    .map(|s| s.latent_result.verification.max_similarity)
+                    .fold(0.0, f64::max),
+                supporting_facts: all_supporting_facts,
+                reason: format!(
+                    "Multi-step reasoning: {} steps, {} verified",
+                    multi_step.verified_steps.len(),
+                    multi_step.verified_steps.iter().filter(|s| s.latent_result.verification.verified).count()
+                ),
+            },
+            knowledge_facts_used: multi_step.verified_steps.iter()
+                .map(|s| s.latent_result.knowledge_facts_used)
+                .sum(),
+        })
+    }
 }
 
 /// Result of latent computation
@@ -409,6 +545,64 @@ pub struct LatentVerification {
     pub supporting_facts: Vec<String>,
     /// Reason for verification result
     pub reason: String,
+}
+
+/// Single step in multi-step reasoning with knowledge verification
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct VerifiedReasoningStep {
+    /// Step number
+    pub step: usize,
+    /// Description of this step
+    pub description: String,
+    /// Operator used in reasoning
+    pub operator: String,
+    /// Knowledge-anchored latent for this step
+    pub latent_result: LatentResult,
+    /// Original confidence from chain-of-thought
+    pub original_confidence: f64,
+}
+
+/// Result of multi-step reasoning with knowledge anchoring
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct MultiStepReasoning {
+    /// Problem being solved
+    pub problem: String,
+    /// Original reasoning chain
+    pub chain: ReasoningChain,
+    /// Verified steps with knowledge-anchored latents
+    pub verified_steps: Vec<VerifiedReasoningStep>,
+    /// Whether all steps passed verification
+    pub all_steps_verified: bool,
+    /// Overall confidence across all steps
+    pub overall_confidence: f64,
+}
+
+impl MultiStepReasoning {
+    /// Get summary of multi-step reasoning
+    pub fn summary(&self) -> String {
+        let mut summary = format!("Problem: {}\n", self.problem);
+        summary.push_str(&format!("Total Steps: {}\n", self.verified_steps.len()));
+        summary.push_str(&format!("All Verified: {}\n", self.all_steps_verified));
+        summary.push_str(&format!("Overall Confidence: {:.3}\n\n", self.overall_confidence));
+
+        for step in &self.verified_steps {
+            summary.push_str(&format!("Step {}: {}\n", step.step, step.description));
+            summary.push_str(&format!("  Operator: {}\n", step.operator));
+            summary.push_str(&format!("  Verified: {}\n", step.latent_result.verification.verified));
+            summary.push_str(&format!("  Confidence: {:.3}\n", step.latent_result.verification.confidence));
+            summary.push_str(&format!("  Knowledge facts: {}\n", step.latent_result.knowledge_facts_used));
+
+            if !step.latent_result.verification.supporting_facts.is_empty() {
+                summary.push_str("  Supporting knowledge:\n");
+                for fact in step.latent_result.verification.supporting_facts.iter().take(2) {
+                    summary.push_str(&format!("    • {}\n", fact));
+                }
+            }
+            summary.push('\n');
+        }
+
+        summary
+    }
 }
 
 #[cfg(test)]

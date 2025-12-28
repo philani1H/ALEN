@@ -29,6 +29,7 @@ pub use explanation_decoder::{
 };
 pub use reasoning_engine::{
     ReasoningEngine, LatentResult, LatentVerification,
+    MultiStepReasoning, VerifiedReasoningStep,
 };
 pub use knowledge_visual::{
     KnowledgeImageGenerator, KnowledgeImage, KnowledgeVideo, KnowledgeVisualConfig,
