@@ -1,0 +1,66 @@
+[package]
+name = "alen"
+version = "0.2.0"
+edition = "2021"
+authors = ["Philani H"]
+description = "ALEN - Advanced Learning Engine with Neural Verification. A deliberative reasoning AI system that learns by proving understanding."
+repository = "https://github.com/philani1H/ALEN"
+keywords = ["ai", "machine-learning", "reasoning", "neural-network", "verification"]
+categories = ["science", "algorithms"]
+license = "MIT"
+readme = "README.md"
+
+[dependencies]
+# Math and Linear Algebra
+nalgebra = "0.32"
+ndarray = "0.15"
+num-complex = "0.4"
+rand = "0.8"
+rand_distr = "0.4"
+
+# Serialization
+serde = { version = "1.0", features = ["derive"] }
+serde_json = "1.0"
+
+# Async Runtime and Web Framework
+tokio = { version = "1.0", features = ["full"] }
+axum = { version = "0.7", features = ["multipart"] }
+tower = "0.4"
+tower-http = { version = "0.5", features = ["cors", "trace", "limit"] }
+
+# Database/Storage
+rusqlite = { version = "0.31", features = ["bundled"] }
+bincode = "1.3"
+
+# Logging
+tracing = "0.1"
+tracing-subscriber = { version = "0.3", features = ["env-filter"] }
+
+# Utilities
+uuid = { version = "1.0", features = ["v4", "serde"] }
+chrono = { version = "0.4", features = ["serde"] }
+thiserror = "1.0"
+anyhow = "1.0"
+
+# Base64 encoding
+base64 = "0.21"
+
+# Hashing
+sha2 = "0.10"
+
+[dev-dependencies]
+tokio-test = "0.4"
+tempfile = "3.0"
+
+[lib]
+name = "alen"
+path = "src/lib.rs"
+
+[[bin]]
+name = "alen"
+path = "src/main.rs"
+
+[profile.release]
+opt-level = 3
+lto = true
+codegen-units = 1
