@@ -1160,10 +1160,49 @@ capital of Germany -> Berlin</textarea>
 
             hideLoading('chat-loading');
             
-            // Use enhanced rendering for response
-            const responseDiv = document.createElement('div');
-            chatResult.appendChild(responseDiv);
-            renderFormattedResponse(responseDiv.id || 'temp-' + Date.now(), result);
+            // Show ALEN's response with reasoning
+            const alenMsg = document.createElement('div');
+            alenMsg.className = 'chat-message assistant';
+            
+            let responseHTML = '<div class="role">🤖 ALEN</div>';
+            responseHTML += '<div class="content">';
+            
+            // Show reasoning steps first
+            if (result.reasoning_steps && result.reasoning_steps.length > 0) {
+                responseHTML += '<div class="reasoning-chain">';
+                responseHTML += '<h4>🧠 Reasoning Process:</h4>';
+                result.reasoning_steps.forEach((step, index) => {
+                    responseHTML += `<div class="reasoning-step"><span class="step-number">Step ${index + 1}:</span> ${step}</div>`;
+                });
+                responseHTML += '</div>';
+            }
+            
+            // Show the actual response
+            responseHTML += renderMarkdownWithLatex(result.message || result.response || result.text || 'No response');
+            responseHTML += '</div>';
+            
+            // Add metadata
+            if (result.confidence || result.mood || result.emotion) {
+                responseHTML += '<div class="response-meta">';
+                if (result.confidence) {
+                    responseHTML += `<span class="meta-item">📊 Confidence: ${(result.confidence * 100).toFixed(1)}%</span>`;
+                }
+                if (result.mood) {
+                    responseHTML += `<span class="meta-item">😊 Mood: ${result.mood}</span>`;
+                }
+                if (result.emotion) {
+                    responseHTML += `<span class="meta-item">💭 Emotion: ${result.emotion}</span>`;
+                }
+                responseHTML += '</div>';
+            }
+            
+            alenMsg.innerHTML = responseHTML;
+            chatResult.appendChild(alenMsg);
+            
+            // Trigger MathJax rendering
+            if (window.MathJax) {
+                MathJax.typesetPromise([alenMsg]).catch((err) => console.log('MathJax error:', err));
+            }
             
             // Scroll to bottom
             chatResult.scrollTop = chatResult.scrollHeight;
