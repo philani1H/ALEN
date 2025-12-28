@@ -42,6 +42,7 @@ use axum::{
     routing::{get, post, delete},
     Router,
 };
+use tower_http::services::ServeDir;
 use serde::{Deserialize, Serialize};
 use std::sync::Arc;
 use tokio::sync::Mutex;
@@ -2046,6 +2047,9 @@ pub fn create_router(state: Arc<AppState>) -> Router {
 
         // Learning rate
         .route("/learning/reset", post(reset_learning_rate))
+
+        // Serve static web interface
+        .nest_service("/", ServeDir::new("web"))
 
         .with_state(state)
 }
