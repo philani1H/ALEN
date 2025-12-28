@@ -1,0 +1,122 @@
+[
+  {
+    "category": "Complex Mathematics",
+    "questions": [
+      {"q": "What is the derivative of sin(x)?", "a": "cos(x)", "difficulty": "medium"},
+      {"q": "Solve: x^2 - 5x + 6 = 0", "a": "x = 2 or x = 3", "difficulty": "medium"},
+      {"q": "What is the integral of 1/x?", "a": "ln|x| + C", "difficulty": "medium"},
+      {"q": "Calculate: lim(x→0) sin(x)/x", "a": "1", "difficulty": "hard"},
+      {"q": "What is the Pythagorean theorem?", "a": "a² + b² = c²", "difficulty": "easy"},
+      {"q": "Find the area of a circle with radius 3", "a": "9π or approximately 28.27", "difficulty": "easy"},
+      {"q": "What is e^(iπ) + 1?", "a": "0 (Euler's identity)", "difficulty": "hard"},
+      {"q": "Solve: 2^x = 8", "a": "x = 3", "difficulty": "easy"},
+      {"q": "What is the quadratic formula?", "a": "x = (-b ± √(b²-4ac)) / 2a", "difficulty": "medium"},
+      {"q": "Calculate: ∫(0 to 1) x² dx", "a": "1/3", "difficulty": "hard"}
+    ]
+  },
+  {
+    "category": "Advanced Science",
+    "questions": [
+      {"q": "What is Newton's second law?", "a": "F = ma (Force equals mass times acceleration)", "difficulty": "easy"},
+      {"q": "What is the speed of light in vacuum?", "a": "299,792,458 m/s or approximately 3×10⁸ m/s", "difficulty": "easy"},
+      {"q": "Explain photosynthesis", "a": "Plants convert light energy, water, and CO2 into glucose and oxygen", "difficulty": "medium"},
+      {"q": "What is DNA?", "a": "Deoxyribonucleic acid - the molecule that carries genetic information", "difficulty": "easy"},
+      {"q": "What is entropy?", "a": "A measure of disorder or randomness in a system", "difficulty": "hard"},
+      {"q": "Explain quantum superposition", "a": "A quantum system can exist in multiple states simultaneously until measured", "difficulty": "hard"},
+      {"q": "What is the difference between mitosis and meiosis?", "a": "Mitosis produces identical cells, meiosis produces sex cells with half the chromosomes", "difficulty": "medium"},
+      {"q": "What causes seasons on Earth?", "a": "The tilt of Earth's axis as it orbits the Sun", "difficulty": "medium"},
+      {"q": "What is the uncertainty principle?", "a": "You cannot simultaneously know both position and momentum of a particle with perfect precision", "difficulty": "hard"},
+      {"q": "Explain natural selection", "a": "Organisms with advantageous traits are more likely to survive and reproduce", "difficulty": "medium"}
+    ]
+  },
+  {
+    "category": "Programming & Algorithms",
+    "questions": [
+      {"q": "What is Big O notation?", "a": "A way to describe the time or space complexity of an algorithm", "difficulty": "medium"},
+      {"q": "Explain recursion", "a": "A function that calls itself to solve smaller instances of the same problem", "difficulty": "medium"},
+      {"q": "What is a binary search tree?", "a": "A tree where left children are smaller and right children are larger than the parent", "difficulty": "medium"},
+      {"q": "What is the difference between stack and queue?", "a": "Stack is LIFO (Last In First Out), Queue is FIFO (First In First Out)", "difficulty": "easy"},
+      {"q": "What is dynamic programming?", "a": "An optimization technique that stores solutions to subproblems to avoid recomputation", "difficulty": "hard"},
+      {"q": "Explain what a hash table is", "a": "A data structure that maps keys to values using a hash function for O(1) average lookup", "difficulty": "medium"},
+      {"q": "What is the time complexity of quicksort?", "a": "O(n log n) average case, O(n²) worst case", "difficulty": "hard"},
+      {"q": "What is a linked list?", "a": "A data structure where elements are stored in nodes with pointers to the next node", "difficulty": "easy"},
+      {"q": "Explain polymorphism", "a": "The ability of objects to take multiple forms - same interface, different implementations", "difficulty": "medium"},
+      {"q": "What is a closure in programming?", "a": "A function that captures and remembers variables from its surrounding scope", "difficulty": "hard"}
+    ]
+  },
+  {
+    "category": "Philosophy & Logic",
+    "questions": [
+      {"q": "What is the trolley problem?", "a": "A thought experiment about whether to sacrifice one to save many", "difficulty": "medium"},
+      {"q": "Explain Occam's Razor", "a": "The simplest explanation is usually the correct one", "difficulty": "easy"},
+      {"q": "What is the Ship of Theseus paradox?", "a": "If all parts are replaced, is it still the same object?", "difficulty": "hard"},
+      {"q": "What is epistemology?", "a": "The study of knowledge - what we know and how we know it", "difficulty": "medium"},
+      {"q": "Explain the categorical imperative", "a": "Act only according to rules you'd want to be universal laws", "difficulty": "hard"},
+      {"q": "What is solipsism?", "a": "The idea that only one's own mind is certain to exist", "difficulty": "hard"},
+      {"q": "What is utilitarianism?", "a": "The ethical theory that the best action maximizes overall happiness", "difficulty": "medium"},
+      {"q": "Explain the problem of induction", "a": "Past observations don't guarantee future outcomes will be the same", "difficulty": "hard"},
+      {"q": "What is determinism?", "a": "The idea that all events are caused by prior events, leaving no room for free will", "difficulty": "medium"},
+      {"q": "What is the difference between deductive and inductive reasoning?", "a": "Deductive goes from general to specific, inductive goes from specific to general", "difficulty": "medium"}
+    ]
+  },
+  {
+    "category": "World History",
+    "questions": [
+      {"q": "When did World War II end?", "a": "1945", "difficulty": "easy"},
+      {"q": "Who was the first president of the United States?", "a": "George Washington", "difficulty": "easy"},
+      {"q": "What year did the Berlin Wall fall?", "a": "1989", "difficulty": "medium"},
+      {"q": "What was the Renaissance?", "a": "A period of cultural rebirth in Europe from 14th-17th century", "difficulty": "medium"},
+      {"q": "Who wrote the Communist Manifesto?", "a": "Karl Marx and Friedrich Engels", "difficulty": "medium"},
+      {"q": "What was the Industrial Revolution?", "a": "The transition to machine-based manufacturing in the 18th-19th centuries", "difficulty": "medium"},
+      {"q": "When did the Roman Empire fall?", "a": "476 AD (Western Roman Empire)", "difficulty": "medium"},
+      {"q": "What was the Cold War?", "a": "The geopolitical tension between the US and Soviet Union from 1947-1991", "difficulty": "easy"},
+      {"q": "Who discovered penicillin?", "a": "Alexander Fleming", "difficulty": "easy"},
+      {"q": "What was the Magna Carta?", "a": "A 1215 document limiting the power of the English king", "difficulty": "hard"}
+    ]
+  },
+  {
+    "category": "Language & Literature",
+    "questions": [
+      {"q": "What is a metaphor?", "a": "A figure of speech comparing two unlike things without using 'like' or 'as'", "difficulty": "easy"},
+      {"q": "Who wrote '1984'?", "a": "George Orwell", "difficulty": "easy"},
+      {"q": "What is iambic pentameter?", "a": "A poetic meter with five iambs (unstressed-stressed syllable pairs) per line", "difficulty": "hard"},
+      {"q": "What is the difference between their, there, and they're?", "a": "Their = possession, there = place, they're = they are", "difficulty": "easy"},
+      {"q": "What is alliteration?", "a": "Repetition of the same sound at the beginning of adjacent words", "difficulty": "easy"},
+      {"q": "Who wrote 'To Kill a Mockingbird'?", "a": "Harper Lee", "difficulty": "easy"},
+      {"q": "What is a sonnet?", "a": "A 14-line poem with a specific rhyme scheme", "difficulty": "medium"},
+      {"q": "What is the Oxford comma?", "a": "A comma before 'and' in a list: apples, oranges, and bananas", "difficulty": "medium"},
+      {"q": "What is personification?", "a": "Giving human qualities to non-human things", "difficulty": "easy"},
+      {"q": "What is stream of consciousness?", "a": "A narrative technique that presents thoughts as they occur", "difficulty": "hard"}
+    ]
+  },
+  {
+    "category": "Economics & Business",
+    "questions": [
+      {"q": "What is supply and demand?", "a": "The relationship between availability of a product and desire for it, determining price", "difficulty": "easy"},
+      {"q": "What is GDP?", "a": "Gross Domestic Product - the total value of goods and services produced in a country", "difficulty": "easy"},
+      {"q": "What is inflation?", "a": "The rate at which the general level of prices increases over time", "difficulty": "easy"},
+      {"q": "What is opportunity cost?", "a": "The value of the next best alternative you give up when making a choice", "difficulty": "medium"},
+      {"q": "What is a monopoly?", "a": "When a single company dominates a market with no competition", "difficulty": "easy"},
+      {"q": "What is compound interest?", "a": "Interest calculated on both principal and accumulated interest", "difficulty": "medium"},
+      {"q": "What is the difference between stocks and bonds?", "a": "Stocks are ownership shares, bonds are loans to companies/governments", "difficulty": "medium"},
+      {"q": "What is market capitalization?", "a": "The total value of a company's outstanding shares", "difficulty": "medium"},
+      {"q": "What is fiscal policy?", "a": "Government use of taxation and spending to influence the economy", "difficulty": "hard"},
+      {"q": "What is the law of diminishing returns?", "a": "Adding more of one input while holding others constant eventually yields smaller increases in output", "difficulty": "hard"}
+    ]
+  },
+  {
+    "category": "Psychology & Neuroscience",
+    "questions": [
+      {"q": "What is cognitive dissonance?", "a": "Mental discomfort from holding contradictory beliefs or values", "difficulty": "medium"},
+      {"q": "What is classical conditioning?", "a": "Learning through association, like Pavlov's dogs", "difficulty": "easy"},
+      {"q": "What is the difference between short-term and long-term memory?", "a": "Short-term holds info briefly, long-term stores it permanently", "difficulty": "easy"},
+      {"q": "What is neuroplasticity?", "a": "The brain's ability to reorganize and form new neural connections", "difficulty": "medium"},
+      {"q": "What is the placebo effect?", "a": "Improvement in condition due to belief in treatment, not the treatment itself", "difficulty": "medium"},
+      {"q": "What is confirmation bias?", "a": "The tendency to seek information that confirms existing beliefs", "difficulty": "medium"},
+      {"q": "What is the Dunning-Kruger effect?", "a": "When people with low ability overestimate their competence", "difficulty": "hard"},
+      {"q": "What is operant conditioning?", "a": "Learning through rewards and punishments", "difficulty": "medium"},
+      {"q": "What is the bystander effect?", "a": "People are less likely to help when others are present", "difficulty": "medium"},
+      {"q": "What is the difference between correlation and causation?", "a": "Correlation means things occur together, causation means one causes the other", "difficulty": "medium"}
+    ]
+  }
+]

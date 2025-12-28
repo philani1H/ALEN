@@ -4,6 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ALEN - Advanced Learning Engine</title>
+    <!-- MathJax for LaTeX rendering -->
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <!-- Marked.js for Markdown rendering -->
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <!-- Highlight.js for code syntax highlighting -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
     <style>
         * {
             margin: 0;
@@ -189,6 +197,158 @@
 
         .info-box p {
             margin: 5px 0;
+        }
+
+        /* Media display styles */
+        .media-container {
+            margin: 20px 0;
+            padding: 15px;
+            background: #f9f9f9;
+            border-radius: 10px;
+            border: 2px solid #667eea;
+        }
+
+        .image-display {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            margin: 10px 0;
+        }
+
+        .video-player {
+            width: 100%;
+            max-width: 800px;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+            margin: 10px 0;
+        }
+
+        .video-controls {
+            display: flex;
+            gap: 10px;
+            margin-top: 10px;
+            flex-wrap: wrap;
+        }
+
+        .video-controls button {
+            padding: 8px 16px;
+            font-size: 0.9em;
+        }
+
+        /* Formula/LaTeX display */
+        .formula-display {
+            background: #fff;
+            padding: 20px;
+            margin: 15px 0;
+            border-radius: 8px;
+            border: 2px solid #667eea;
+            overflow-x: auto;
+            font-size: 1.1em;
+        }
+
+        /* Chat message styles */
+        .chat-message {
+            margin: 15px 0;
+            padding: 15px;
+            border-radius: 10px;
+            animation: fadeIn 0.3s;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .chat-message.user {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            margin-left: 20%;
+        }
+
+        .chat-message.assistant {
+            background: #f0f0f0;
+            margin-right: 20%;
+        }
+
+        .chat-message .role {
+            font-weight: bold;
+            margin-bottom: 8px;
+            font-size: 0.9em;
+            opacity: 0.8;
+        }
+
+        .chat-message .content {
+            line-height: 1.6;
+        }
+
+        .chat-message .content p {
+            margin: 10px 0;
+        }
+
+        .chat-message .content code {
+            background: rgba(0,0,0,0.1);
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-family: 'Courier New', monospace;
+        }
+
+        .chat-message .content pre {
+            background: #2d2d2d;
+            color: #f8f8f2;
+            padding: 15px;
+            border-radius: 5px;
+            overflow-x: auto;
+            margin: 10px 0;
+        }
+
+        .chat-message .content pre code {
+            background: none;
+            padding: 0;
+        }
+
+        /* Emoji support */
+        .emoji {
+            font-size: 1.2em;
+            margin: 0 2px;
+        }
+
+        /* Response metadata */
+        .response-meta {
+            margin-top: 10px;
+            padding: 10px;
+            background: rgba(102, 126, 234, 0.1);
+            border-radius: 5px;
+            font-size: 0.85em;
+            color: #666;
+        }
+
+        .response-meta .meta-item {
+            display: inline-block;
+            margin-right: 15px;
+        }
+
+        /* Reasoning chain display */
+        .reasoning-chain {
+            background: #fff;
+            border-left: 4px solid #667eea;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 5px;
+        }
+
+        .reasoning-step {
+            padding: 10px;
+            margin: 8px 0;
+            background: #f9f9f9;
+            border-radius: 5px;
+            border-left: 3px solid #764ba2;
+        }
+
+        .reasoning-step .step-number {
+            font-weight: bold;
+            color: #667eea;
+            margin-right: 8px;
         }
 
         .mood-display {
@@ -430,6 +590,16 @@ capital of Germany -> Berlin</textarea>
                     </div>
                     <button onclick="sendChat()">Send Message <span id="chat-loading"></span></button>
                     <button class="example-button" onclick="clearChat()">Start New Conversation</button>
+                    
+                    <div style="margin-top: 15px;">
+                        <strong>Example Questions:</strong><br>
+                        <button class="example-button" onclick="setExampleChat('Explain the quadratic formula: $x = \\frac{-b \\pm \\sqrt{b^2-4ac}}{2a}$')">Math Formula</button>
+                        <button class="example-button" onclick="setExampleChat('What is Einstein\\'s mass-energy equivalence? Show the formula.')">Physics Formula</button>
+                        <button class="example-button" onclick="setExampleChat('Generate an image of a sunset 🌅')">Image Generation</button>
+                        <button class="example-button" onclick="setExampleChat('Create a video of waves 🌊')">Video Generation</button>
+                        <button class="example-button" onclick="setExampleChat('Explain neural networks with emojis 🧠💡')">With Emojis</button>
+                    </div>
+                    
                     <div id="chat-result"></div>
                 </div>
 
@@ -639,6 +809,236 @@ capital of Germany -> Berlin</textarea>
             }
         }
 
+        // Enhanced rendering functions
+        function renderFormattedResponse(elementId, response) {
+            const el = document.getElementById(elementId);
+            if (!el) return;
+
+            let html = '';
+
+            // Check if response has text/content
+            const text = response.response || response.text || response.content || '';
+            
+            // Render text with markdown and LaTeX support
+            if (text) {
+                html += '<div class="chat-message assistant">';
+                html += '<div class="role">🤖 ALEN</div>';
+                html += '<div class="content">' + renderMarkdownWithLatex(text) + '</div>';
+                
+                // Add metadata if available
+                if (response.confidence || response.mood || response.emotion) {
+                    html += '<div class="response-meta">';
+                    if (response.confidence) {
+                        html += `<span class="meta-item">📊 Confidence: ${(response.confidence * 100).toFixed(1)}%</span>`;
+                    }
+                    if (response.mood) {
+                        html += `<span class="meta-item">😊 Mood: ${response.mood}</span>`;
+                    }
+                    if (response.emotion) {
+                        html += `<span class="meta-item">💭 Emotion: ${response.emotion}</span>`;
+                    }
+                    html += '</div>';
+                }
+                html += '</div>';
+            }
+
+            // Render reasoning chain if available
+            if (response.reasoning_steps || response.reasoning) {
+                html += renderReasoningChain(response.reasoning_steps || response.reasoning);
+            }
+
+            // Render image if available
+            if (response.image_data || response.image) {
+                html += renderImage(response.image_data || response.image, response.width, response.height);
+            }
+
+            // Render video if available
+            if (response.frames || response.video_data) {
+                html += renderVideo(response.frames || response.video_data, response.fps || 30);
+            }
+
+            el.innerHTML = html;
+            el.className = 'result success';
+
+            // Trigger MathJax rendering
+            if (window.MathJax) {
+                MathJax.typesetPromise([el]).catch((err) => console.log('MathJax error:', err));
+            }
+
+            // Highlight code blocks
+            if (window.hljs) {
+                el.querySelectorAll('pre code').forEach((block) => {
+                    hljs.highlightElement(block);
+                });
+            }
+        }
+
+        function renderMarkdownWithLatex(text) {
+            // Convert markdown to HTML
+            let html = text;
+            
+            // Handle inline LaTeX: $...$
+            html = html.replace(/\$([^\$]+)\$/g, '\\($1\\)');
+            
+            // Handle display LaTeX: $$...$$
+            html = html.replace(/\$\$([^\$]+)\$\$/g, '\\[$1\\]');
+            
+            // Convert markdown if marked.js is available
+            if (window.marked) {
+                html = marked.parse(html);
+            } else {
+                // Basic markdown conversion
+                html = html.replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>');
+                html = html.replace(/\*(.+?)\*/g, '<em>$1</em>');
+                html = html.replace(/`(.+?)`/g, '<code>$1</code>');
+                html = html.replace(/\n/g, '<br>');
+            }
+            
+            return html;
+        }
+
+        function renderReasoningChain(steps) {
+            if (!steps || steps.length === 0) return '';
+            
+            let html = '<div class="reasoning-chain">';
+            html += '<h4>🧠 Reasoning Process:</h4>';
+            
+            if (Array.isArray(steps)) {
+                steps.forEach((step, index) => {
+                    html += '<div class="reasoning-step">';
+                    html += `<span class="step-number">Step ${index + 1}:</span>`;
+                    html += typeof step === 'string' ? step : (step.description || step.text || JSON.stringify(step));
+                    html += '</div>';
+                });
+            } else {
+                html += '<div class="reasoning-step">' + steps + '</div>';
+            }
+            
+            html += '</div>';
+            return html;
+        }
+
+        function renderImage(imageData, width = 64, height = 64) {
+            if (!imageData) return '';
+            
+            let html = '<div class="media-container">';
+            html += '<h4>🖼️ Generated Image:</h4>';
+            
+            // If imageData is a base64 string or URL
+            if (typeof imageData === 'string' && (imageData.startsWith('data:') || imageData.startsWith('http'))) {
+                html += `<img src="${imageData}" class="image-display" alt="Generated image">`;
+            } else {
+                // Convert pixel data to canvas
+                const canvasId = 'canvas-' + Date.now();
+                html += `<canvas id="${canvasId}" class="image-display" width="${width}" height="${height}"></canvas>`;
+                
+                // Render to canvas after DOM update
+                setTimeout(() => {
+                    const canvas = document.getElementById(canvasId);
+                    if (canvas) {
+                        const ctx = canvas.getContext('2d');
+                        const pixels = typeof imageData === 'string' ? imageData.split(',').map(parseFloat) : imageData;
+                        const imageDataObj = ctx.createImageData(width, height);
+                        
+                        for (let i = 0; i < pixels.length && i < imageDataObj.data.length; i++) {
+                            imageDataObj.data[i] = Math.floor(pixels[i] * 255);
+                            if (i % 4 === 3) imageDataObj.data[i] = 255; // Alpha channel
+                        }
+                        
+                        ctx.putImageData(imageDataObj, 0, 0);
+                    }
+                }, 100);
+            }
+            
+            html += '</div>';
+            return html;
+        }
+
+        function renderVideo(frames, fps = 30) {
+            if (!frames || frames.length === 0) return '';
+            
+            const videoId = 'video-' + Date.now();
+            const canvasId = 'video-canvas-' + Date.now();
+            
+            let html = '<div class="media-container">';
+            html += '<h4>🎬 Generated Video:</h4>';
+            html += `<canvas id="${canvasId}" class="video-player" width="640" height="480"></canvas>`;
+            html += '<div class="video-controls">';
+            html += `<button onclick="playVideo('${canvasId}', '${videoId}')">▶️ Play</button>`;
+            html += `<button onclick="pauseVideo('${videoId}')">⏸️ Pause</button>`;
+            html += `<button onclick="stopVideo('${videoId}')">⏹️ Stop</button>`;
+            html += `<span id="${videoId}-status">Ready</span>`;
+            html += '</div>';
+            html += '</div>';
+            
+            // Store frames data
+            window['videoFrames_' + videoId] = frames;
+            window['videoFps_' + videoId] = fps;
+            
+            return html;
+        }
+
+        // Video playback functions
+        let videoIntervals = {};
+
+        function playVideo(canvasId, videoId) {
+            const canvas = document.getElementById(canvasId);
+            if (!canvas) return;
+            
+            const frames = window['videoFrames_' + videoId];
+            const fps = window['videoFps_' + videoId] || 30;
+            
+            if (!frames) return;
+            
+            const ctx = canvas.getContext('2d');
+            let currentFrame = 0;
+            
+            // Clear any existing interval
+            if (videoIntervals[videoId]) {
+                clearInterval(videoIntervals[videoId]);
+            }
+            
+            videoIntervals[videoId] = setInterval(() => {
+                if (currentFrame >= frames.length) {
+                    currentFrame = 0; // Loop
+                }
+                
+                // Render frame
+                const frameData = typeof frames[currentFrame] === 'string' 
+                    ? frames[currentFrame].split(',').map(parseFloat) 
+                    : frames[currentFrame];
+                
+                const imageData = ctx.createImageData(canvas.width, canvas.height);
+                for (let i = 0; i < frameData.length && i < imageData.data.length; i++) {
+                    imageData.data[i] = Math.floor(frameData[i] * 255);
+                    if (i % 4 === 3) imageData.data[i] = 255;
+                }
+                ctx.putImageData(imageData, 0, 0);
+                
+                const statusEl = document.getElementById(videoId + '-status');
+                if (statusEl) {
+                    statusEl.textContent = `Frame ${currentFrame + 1}/${frames.length}`;
+                }
+                
+                currentFrame++;
+            }, 1000 / fps);
+        }
+
+        function pauseVideo(videoId) {
+            if (videoIntervals[videoId]) {
+                clearInterval(videoIntervals[videoId]);
+                delete videoIntervals[videoId];
+                const statusEl = document.getElementById(videoId + '-status');
+                if (statusEl) statusEl.textContent = 'Paused';
+            }
+        }
+
+        function stopVideo(videoId) {
+            pauseVideo(videoId);
+            const statusEl = document.getElementById(videoId + '-status');
+            if (statusEl) statusEl.textContent = 'Stopped';
+        }
+
         async function apiCall(endpoint, method = 'GET', body = null) {
             try {
                 const options = {
@@ -737,6 +1137,16 @@ capital of Germany -> Berlin</textarea>
             const max_tokens = parseInt(document.getElementById('chat-tokens').value);
             const include_context = parseInt(document.getElementById('chat-context').value);
 
+            // Show user message
+            const chatResult = document.getElementById('chat-result');
+            const userMsg = document.createElement('div');
+            userMsg.className = 'chat-message user';
+            userMsg.innerHTML = `
+                <div class="role">👤 You</div>
+                <div class="content">${message}</div>
+            `;
+            chatResult.appendChild(userMsg);
+
             const result = await apiCall('/chat', 'POST', {
                 message,
                 max_tokens,
@@ -749,12 +1159,23 @@ capital of Germany -> Berlin</textarea>
             }
 
             hideLoading('chat-loading');
-            showResult('chat-result', result);
+            
+            // Use enhanced rendering for response
+            const responseDiv = document.createElement('div');
+            chatResult.appendChild(responseDiv);
+            renderFormattedResponse(responseDiv.id || 'temp-' + Date.now(), result);
+            
+            // Scroll to bottom
+            chatResult.scrollTop = chatResult.scrollHeight;
         }
 
         function clearChat() {
             conversationId = null;
             document.getElementById('chat-result').innerHTML = '<p class="info-box">Started new conversation</p>';
+        }
+
+        function setExampleChat(text) {
+            document.getElementById('chat-input').value = text;
         }
 
         async function loadConversationHistory() {
@@ -869,7 +1290,7 @@ capital of Germany -> Berlin</textarea>
                 noise_level: parseFloat(document.getElementById('gen-img-noise').value)
             });
             hideLoading('gen-img-loading');
-            showResult('gen-img-result', result);
+            renderFormattedResponse('gen-img-result', result);
         }
 
         async function generateVideo() {
@@ -882,7 +1303,7 @@ capital of Germany -> Berlin</textarea>
                 motion_type: document.getElementById('gen-vid-motion').value
             });
             hideLoading('gen-vid-loading');
-            showResult('gen-vid-result', result);
+            renderFormattedResponse('gen-vid-result', result);
         }
 
         // Memory functions

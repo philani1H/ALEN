@@ -1,0 +1,142 @@
+[
+  {
+    "category": "Mathematics with Formulas",
+    "questions": [
+      {
+        "q": "What is the quadratic formula?",
+        "a": "The quadratic formula is: $x = \\frac{-b \\pm \\sqrt{b^2-4ac}}{2a}$ where $a$, $b$, and $c$ are coefficients from the equation $ax^2 + bx + c = 0$",
+        "difficulty": "medium"
+      },
+      {
+        "q": "Explain the Pythagorean theorem",
+        "a": "The Pythagorean theorem states: $a^2 + b^2 = c^2$ where $c$ is the hypotenuse and $a$, $b$ are the other two sides of a right triangle",
+        "difficulty": "easy"
+      },
+      {
+        "q": "What is Euler's identity?",
+        "a": "Euler's identity is: $e^{i\\pi} + 1 = 0$ which connects five fundamental mathematical constants",
+        "difficulty": "hard"
+      },
+      {
+        "q": "Define the derivative",
+        "a": "The derivative is: $f'(x) = \\lim_{h \\to 0} \\frac{f(x+h) - f(x)}{h}$ which represents the rate of change",
+        "difficulty": "medium"
+      },
+      {
+        "q": "What is the integral of x?",
+        "a": "The integral is: $\\int x \\, dx = \\frac{x^2}{2} + C$ where $C$ is the constant of integration",
+        "difficulty": "medium"
+      }
+    ]
+  },
+  {
+    "category": "Physics with Formulas",
+    "questions": [
+      {
+        "q": "What is Einstein's mass-energy equivalence?",
+        "a": "Einstein's equation is: $E = mc^2$ where $E$ is energy, $m$ is mass, and $c$ is the speed of light",
+        "difficulty": "medium"
+      },
+      {
+        "q": "State Newton's second law",
+        "a": "Newton's second law: $F = ma$ where $F$ is force, $m$ is mass, and $a$ is acceleration",
+        "difficulty": "easy"
+      },
+      {
+        "q": "What is the wave equation?",
+        "a": "The wave equation is: $v = f\\lambda$ where $v$ is velocity, $f$ is frequency, and $\\lambda$ is wavelength",
+        "difficulty": "medium"
+      }
+    ]
+  },
+  {
+    "category": "Emoji Communication",
+    "questions": [
+      {
+        "q": "Describe happiness with emojis",
+        "a": "Happiness can be expressed as: 😊 😃 🎉 ✨ 💖 representing joy, celebration, and positive emotions",
+        "difficulty": "easy"
+      },
+      {
+        "q": "What emojis represent learning?",
+        "a": "Learning emojis: 📚 🧠 💡 ✏️ 🎓 representing books, brain, ideas, writing, and education",
+        "difficulty": "easy"
+      },
+      {
+        "q": "Express technology with emojis",
+        "a": "Technology: 💻 🖥️ 📱 🤖 ⚙️ 🔧 representing computers, phones, robots, and tools",
+        "difficulty": "easy"
+      },
+      {
+        "q": "Show nature with emojis",
+        "a": "Nature: 🌳 🌺 🌊 ⛰️ 🌞 🌙 ⭐ representing trees, flowers, water, mountains, sun, moon, stars",
+        "difficulty": "easy"
+      },
+      {
+        "q": "Describe emotions with emojis",
+        "a": "Emotions: 😊 happy, 😢 sad, 😠 angry, 😨 scared, 😮 surprised, 🤔 thinking, 😴 tired",
+        "difficulty": "easy"
+      }
+    ]
+  },
+  {
+    "category": "Image Generation Prompts",
+    "questions": [
+      {
+        "q": "Generate an image of a sunset",
+        "a": "A sunset image would show: warm orange and pink colors, sun near horizon, silhouettes, peaceful atmosphere 🌅",
+        "difficulty": "medium"
+      },
+      {
+        "q": "Create an image of a neural network",
+        "a": "A neural network visualization: interconnected nodes, layers, connections with weights, data flow 🧠💡",
+        "difficulty": "medium"
+      },
+      {
+        "q": "Generate a mountain landscape",
+        "a": "Mountain landscape: tall peaks, valleys, trees, sky, clouds, natural beauty ⛰️🌲",
+        "difficulty": "medium"
+      }
+    ]
+  },
+  {
+    "category": "Video Generation Concepts",
+    "questions": [
+      {
+        "q": "Describe a video of ocean waves",
+        "a": "Ocean waves video: rhythmic motion, water flowing, foam, blue colors, peaceful movement 🌊",
+        "difficulty": "medium"
+      },
+      {
+        "q": "Create a video of rotating shapes",
+        "a": "Rotating shapes: geometric forms spinning, smooth motion, 3D effect, continuous rotation 🔄",
+        "difficulty": "medium"
+      },
+      {
+        "q": "Generate a video of growing plants",
+        "a": "Plant growth: time-lapse effect, stems extending, leaves unfurling, natural development 🌱",
+        "difficulty": "medium"
+      }
+    ]
+  },
+  {
+    "category": "Professional Communication",
+    "questions": [
+      {
+        "q": "How do you write a professional email?",
+        "a": "Professional email structure: 1) Clear subject line 2) Formal greeting 3) Concise body 4) Call to action 5) Professional closing 📧",
+        "difficulty": "medium"
+      },
+      {
+        "q": "What makes a good presentation?",
+        "a": "Good presentation: Clear structure, engaging visuals, concise points, audience focus, confident delivery 📊",
+        "difficulty": "medium"
+      },
+      {
+        "q": "Explain active listening",
+        "a": "Active listening: Full attention, eye contact, no interrupting, asking questions, showing understanding 👂",
+        "difficulty": "medium"
+      }
+    ]
+  }
+]
