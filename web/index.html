@@ -351,6 +351,69 @@
             margin-right: 8px;
         }
 
+        /* Feedback buttons */
+        .feedback-buttons {
+            margin-top: 10px;
+            display: flex;
+            gap: 10px;
+        }
+
+        .feedback-btn {
+            padding: 5px 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 0.85em;
+            transition: all 0.2s;
+        }
+
+        .feedback-btn.positive {
+            background: #28a745;
+            color: white;
+        }
+
+        .feedback-btn.positive:hover {
+            background: #218838;
+        }
+
+        .feedback-btn.negative {
+            background: #dc3545;
+            color: white;
+        }
+
+        .feedback-btn.negative:hover {
+            background: #c82333;
+        }
+
+        .feedback-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .feedback-input {
+            margin-top: 10px;
+            display: none;
+        }
+
+        .feedback-input.show {
+            display: block;
+        }
+
+        .feedback-input textarea {
+            width: 100%;
+            min-height: 60px;
+            padding: 8px;
+            border: 2px solid #667eea;
+            border-radius: 5px;
+            font-size: 0.9em;
+        }
+
+        .feedback-input button {
+            margin-top: 5px;
+            padding: 5px 15px;
+            font-size: 0.85em;
+        }
+
         .mood-display {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
@@ -1196,6 +1259,19 @@ capital of Germany -> Berlin</textarea>
                 responseHTML += '</div>';
             }
             
+            // Add feedback buttons
+            const msgId = 'msg-' + Date.now();
+            responseHTML += `
+                <div class="feedback-buttons">
+                    <button class="feedback-btn positive" onclick="giveFeedback('${msgId}', 'positive', '${message.replace(/'/g, "\\'")}', '${(result.message || '').replace(/'/g, "\\'")}')">👍 Helpful</button>
+                    <button class="feedback-btn negative" onclick="giveFeedback('${msgId}', 'negative', '${message.replace(/'/g, "\\'")}', '${(result.message || '').replace(/'/g, "\\'")}')">👎 Not Helpful</button>
+                </div>
+                <div id="${msgId}-feedback" class="feedback-input">
+                    <textarea id="${msgId}-text" placeholder="How can I improve? (optional)"></textarea>
+                    <button onclick="submitFeedback('${msgId}', '${message.replace(/'/g, "\\'")}', '${(result.message || '').replace(/'/g, "\\'")}')">Submit Feedback</button>
+                </div>
+            `;
+            
             alenMsg.innerHTML = responseHTML;
             chatResult.appendChild(alenMsg);
             
@@ -1215,6 +1291,68 @@ capital of Germany -> Berlin</textarea>
 
         function setExampleChat(text) {
             document.getElementById('chat-input').value = text;
+        }
+
+        // Feedback functions
+        function giveFeedback(msgId, type, userMsg, alenResponse) {
+            const feedbackDiv = document.getElementById(msgId + '-feedback');
+            const buttons = document.querySelectorAll(`#${msgId}-feedback`).parentElement?.querySelectorAll('.feedback-btn');
+            
+            if (type === 'positive') {
+                // Positive feedback - submit immediately
+                submitFeedback(msgId, userMsg, alenResponse, type, '');
+            } else {
+                // Negative feedback - show input for improvement suggestions
+                feedbackDiv.classList.add('show');
+            }
+        }
+
+        async function submitFeedback(msgId, userMsg, alenResponse, type, improvementText) {
+            const feedbackText = improvementText || document.getElementById(msgId + '-text')?.value || '';
+            const feedbackType = type || 'negative';
+            
+            // Send feedback to API
+            const result = await apiCall('/feedback', 'POST', {
+                user_message: userMsg,
+                alen_response: alenResponse,
+                feedback_type: feedbackType,
+                improvement_suggestion: feedbackText,
+                timestamp: new Date().toISOString()
+            });
+            
+            // Disable feedback buttons
+            const buttons = document.querySelectorAll(`button[onclick*="${msgId}"]`);
+            buttons.forEach(btn => {
+                btn.disabled = true;
+                btn.style.opacity = '0.5';
+            });
+            
+            // Hide feedback input
+            const feedbackDiv = document.getElementById(msgId + '-feedback');
+            if (feedbackDiv) {
+                feedbackDiv.style.display = 'none';
+            }
+            
+            // Show thank you message
+            const thankYou = document.createElement('div');
+            thankYou.style.cssText = 'margin-top: 10px; padding: 8px; background: #d4edda; border-radius: 5px; color: #155724; font-size: 0.85em;';
+            thankYou.textContent = feedbackType === 'positive' 
+                ? '✅ Thank you! Your positive feedback helps me learn.' 
+                : '✅ Thank you! I will learn from your feedback to improve.';
+            
+            const msgElement = document.querySelector(`#${msgId}-feedback`).parentElement;
+            if (msgElement) {
+                msgElement.appendChild(thankYou);
+            }
+            
+            // If negative feedback with text, train on it
+            if (feedbackType === 'negative' && feedbackText) {
+                await apiCall('/train', 'POST', {
+                    input: userMsg,
+                    expected_output: feedbackText,
+                    context: ['user feedback', 'improvement']
+                });
+            }
         }
 
         async function loadConversationHistory() {

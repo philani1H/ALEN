@@ -17,6 +17,8 @@ use serde::{Deserialize, Serialize};
 use std::sync::Arc;
 use chrono::{DateTime, Utc};
 use uuid::Uuid;
+use std::fs::OpenOptions;
+use std::io::Write;
 
 /// Conversation message
 #[derive(Debug, Clone, Serialize, Deserialize)]
@@ -470,17 +472,28 @@ fn generate_conversational_response(
 /// Retrieve relevant knowledge from semantic memory
 fn retrieve_relevant_knowledge(query: &str, semantic_memory: &SemanticMemory) -> Vec<String> {
     let mut knowledge = Vec::new();
+    let query_lower = query.to_lowercase();
     
-    // Extract key concepts from query
-    let concepts: Vec<&str> = query.split_whitespace()
-        .filter(|w| w.len() > 3)
-        .collect();
+    // First try searching the full query
+    if let Ok(facts) = semantic_memory.search_by_concept(&query_lower, 3) {
+        for fact in facts {
+            knowledge.push(fact.content.clone());
+        }
+    }
     
-    // Search for each concept
-    for concept in concepts.iter().take(3) {
-        if let Ok(facts) = semantic_memory.search_by_concept(concept, 2) {
-            for fact in facts {
-                knowledge.push(fact.content.clone());
+    // If no results, try individual words
+    if knowledge.is_empty() {
+        let concepts: Vec<&str> = query_lower.split_whitespace()
+            .filter(|w| w.len() > 2)  // Changed from 3 to 2
+            .collect();
+        
+        for concept in concepts.iter().take(3) {
+            if let Ok(facts) = semantic_memory.search_by_concept(concept, 2) {
+                for fact in facts {
+                    if !knowledge.contains(&fact.content) {
+                        knowledge.push(fact.content.clone());
+                    }
+                }
             }
         }
     }
@@ -596,4 +609,71 @@ fn generate_from_thought_patterns(
     response_parts.push("Could you provide more context or specific aspects you'd like me to focus on?".to_string());
     
     response_parts.join(" ")
+}
+
+/// Feedback request structure
+#[derive(Debug, Deserialize)]
+pub struct FeedbackRequest {
+    pub user_message: String,
+    pub alen_response: String,
+    pub feedback_type: String,  // "positive" or "negative"
+    pub improvement_suggestion: Option<String>,
+    pub timestamp: String,
+}
+
+/// Submit user feedback for learning
+pub async fn submit_feedback(
+    State(state): State<Arc<AppState>>,
+    Json(req): Json<FeedbackRequest>,
+) -> impl IntoResponse {
+    // Log feedback to file for analysis
+    let feedback_log = format!(
+        "=== Feedback {} ===\nTimestamp: {}\nUser: {}\nALEN: {}\nType: {}\nSuggestion: {}\n\n",
+        if req.feedback_type == "positive" { "✅" } else { "❌" },
+        req.timestamp,
+        req.user_message,
+        req.alen_response,
+        req.feedback_type,
+        req.improvement_suggestion.as_deref().unwrap_or("None")
+    );
+    
+    // Append to feedback log file
+    if let Ok(mut file) = OpenOptions::new()
+        .create(true)
+        .append(true)
+        .open("storage/feedback.log")
+    {
+        let _ = writeln!(file, "{}", feedback_log);
+    }
+    
+    // If negative feedback with suggestion, add to semantic memory for learning
+    if req.feedback_type == "negative" {
+        if let Some(suggestion) = req.improvement_suggestion {
+            if !suggestion.is_empty() {
+                let mut engine = state.engine.lock().await;
+                
+                // Store the improved response in semantic memory
+                let fact = SemanticFact {
+                    id: Uuid::new_v4().to_string(),
+                    concept: req.user_message.clone(),
+                    content: suggestion.clone(),
+                    embedding: vec![0.0; state.config.dimension],
+                    confidence: 0.9,
+                    reinforcement_count: 1,
+                    last_accessed: Utc::now(),
+                    source: Some("user_feedback".to_string()),
+                    category: Some("improvement".to_string()),
+                    related_concepts: vec![],
+                };
+                
+                let _ = engine.semantic_memory.store(&fact);
+            }
+        }
+    }
+    
+    Json(serde_json::json!({
+        "success": true,
+        "message": "Feedback received and will be used for learning",
+        "feedback_type": req.feedback_type
+    }))
 }

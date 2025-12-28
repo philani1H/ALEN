@@ -1977,6 +1977,7 @@ pub fn create_router(state: Arc<AppState>) -> Router {
         .route("/system-prompt/update", post(conversation::update_system_prompt))
         .route("/system-prompt/set-default", post(conversation::set_default_system_prompt))
         .route("/system-prompt/get-default", get(conversation::get_default_system_prompt))
+        .route("/feedback", post(conversation::submit_feedback))
 
         // Training endpoints
         .route("/train", post(train))
