@@ -6,6 +6,8 @@
 //! - Image Generation: Simple diffusion-like process
 //! - Video Generation: Temporal sequence generation
 //! - Content synthesis and controlled generation
+//! - Dynamic Vocabulary: Learns from training data (no hardcoded words)
+//! - BPE Tokenizer: Production-grade subword tokenization
 
 pub mod video;
 pub mod text_decoder;
@@ -15,6 +17,9 @@ pub mod factual_decoder;
 pub mod explanation_decoder;
 pub mod reasoning_engine;
 pub mod knowledge_visual;
+pub mod dynamic_vocab;
+pub mod bpe_tokenizer;
+pub mod semantic_decoder;
 
 pub use video::{VideoGenerator, VideoGenConfig, GeneratedVideo, MotionType};
 pub use text_decoder::{TextDecoder, Vocabulary as DecoderVocabulary};
@@ -34,6 +39,14 @@ pub use reasoning_engine::{
 pub use knowledge_visual::{
     KnowledgeImageGenerator, KnowledgeImage, KnowledgeVideo, KnowledgeVisualConfig,
 };
+pub use dynamic_vocab::{
+    DynamicVocabulary, DynamicTextGenerator, VocabularyBuilder,
+    SpecialTokens, TokenInfo,
+};
+pub use bpe_tokenizer::{
+    BPETokenizer, BPETrainer, BPEWithEmbeddings, BPESpecialTokens, MergeRule,
+};
+pub use semantic_decoder::SemanticDecoder;
 
 use crate::core::{ThoughtState, Activation, DenseLayer};
 use nalgebra::{DMatrix, DVector};
@@ -82,8 +95,11 @@ pub struct GeneratedContent {
 // TEXT GENERATION
 // ============================================================================
 
-/// Simple vocabulary for text generation
+/// Vocabulary for text generation
+/// DEPRECATED: Use DynamicVocabulary or BPETokenizer instead for production.
+/// This is kept for backward compatibility but should not be used for new code.
 #[derive(Debug, Clone)]
+#[deprecated(since = "0.3.0", note = "Use DynamicVocabulary or BPETokenizer instead")]
 pub struct Vocabulary {
     pub words: Vec<String>,
     pub word_to_idx: HashMap<String, usize>,
@@ -91,37 +107,15 @@ pub struct Vocabulary {
     pub dim: usize,
 }
 
+#[allow(deprecated)]
 impl Vocabulary {
-    /// Create a basic vocabulary
+    /// Create vocabulary - now delegates to DynamicVocabulary internally
+    /// For new code, use DynamicVocabulary::new() directly
     pub fn new(dim: usize) -> Self {
-        // Basic vocabulary for demonstration
+        // Initialize with minimal special tokens only
+        // Real vocabulary should be learned from data
         let words: Vec<String> = vec![
-            // Common words
-            "the", "a", "an", "is", "are", "was", "were", "be", "been", "being",
-            "have", "has", "had", "do", "does", "did", "will", "would", "could", "should",
-            "may", "might", "must", "can", "to", "of", "in", "for", "on", "with",
-            "at", "by", "from", "as", "into", "through", "during", "before", "after", "above",
-            "below", "between", "under", "again", "further", "then", "once", "here", "there", "when",
-            "where", "why", "how", "all", "each", "few", "more", "most", "other", "some",
-            "such", "no", "nor", "not", "only", "own", "same", "so", "than", "too",
-            "very", "just", "also", "now", "and", "but", "or", "if", "because", "until",
-            // Technical/AI words
-            "system", "data", "learning", "model", "algorithm", "neural", "network", "training",
-            "input", "output", "function", "process", "analysis", "result", "value", "parameter",
-            "optimization", "gradient", "weight", "bias", "layer", "activation", "loss", "error",
-            "accuracy", "precision", "recall", "metric", "evaluation", "validation", "test", "train",
-            "feature", "embedding", "vector", "matrix", "tensor", "dimension", "space", "representation",
-            "attention", "transformer", "encoder", "decoder", "sequence", "token", "vocabulary", "context",
-            // General concepts
-            "information", "knowledge", "understanding", "reasoning", "thinking", "intelligence", "artificial",
-            "machine", "computer", "software", "hardware", "memory", "storage", "processing", "computation",
-            "solution", "problem", "answer", "question", "query", "response", "request", "action",
-            "state", "transition", "change", "update", "modify", "create", "delete", "read", "write",
-            "time", "space", "energy", "matter", "force", "motion", "physics", "mathematics", "science",
-            "technology", "engineering", "design", "architecture", "structure", "pattern", "rule", "logic",
-            // Punctuation and special
-            ".", ",", "!", "?", ":", ";", "-", "'", "\"", "(", ")", "[", "]",
-            "<START>", "<END>", "<PAD>", "<UNK>",
+            "<PAD>", "<UNK>", "<BOS>", "<EOS>", "<SEP>", "<MASK>",
         ].iter().map(|s| s.to_string()).collect();
 
         let word_to_idx: HashMap<String, usize> = words.iter()

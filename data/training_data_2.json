@@ -1,0 +1,95 @@
+{
+  "categories": {
+    "computer_science": {
+      "algorithms": [
+        {"input": "What is Big O notation?", "output": "A mathematical notation describing the upper bound of an algorithm's time or space complexity", "reasoning": "Measures worst-case performance"},
+        {"input": "What is the time complexity of binary search?", "output": "O(log n)", "reasoning": "Halves search space each iteration"},
+        {"input": "What is the time complexity of bubble sort?", "output": "O(n²)", "reasoning": "Nested loops comparing adjacent elements"},
+        {"input": "What is the time complexity of merge sort?", "output": "O(n log n)", "reasoning": "Divide and conquer with linear merge"},
+        {"input": "What is a hash table?", "output": "A data structure that maps keys to values using a hash function for O(1) average lookup", "reasoning": "Key-value storage"},
+        {"input": "What is recursion?", "output": "A function that calls itself to solve smaller subproblems", "reasoning": "Base case + recursive case"},
+        {"input": "What is dynamic programming?", "output": "Solving complex problems by breaking them into overlapping subproblems and storing results", "reasoning": "Memoization or tabulation"},
+        {"input": "What is a greedy algorithm?", "output": "An algorithm that makes locally optimal choices at each step", "reasoning": "May not find global optimum"},
+        {"input": "What is BFS?", "output": "Breadth-First Search explores all neighbors at current depth before moving deeper", "reasoning": "Uses a queue"},
+        {"input": "What is DFS?", "output": "Depth-First Search explores as far as possible along each branch before backtracking", "reasoning": "Uses a stack or recursion"}
+      ],
+      "data_structures": [
+        {"input": "What is an array?", "output": "A contiguous block of memory storing elements of the same type with O(1) index access", "reasoning": "Fixed size, random access"},
+        {"input": "What is a linked list?", "output": "A sequence of nodes where each node contains data and a pointer to the next node", "reasoning": "Dynamic size, O(n) access"},
+        {"input": "What is a stack?", "output": "A LIFO (Last In First Out) data structure with push and pop operations", "reasoning": "Like a stack of plates"},
+        {"input": "What is a queue?", "output": "A FIFO (First In First Out) data structure with enqueue and dequeue operations", "reasoning": "Like a line of people"},
+        {"input": "What is a binary tree?", "output": "A tree where each node has at most two children (left and right)", "reasoning": "Hierarchical structure"},
+        {"input": "What is a binary search tree?", "output": "A binary tree where left children are smaller and right children are larger than parent", "reasoning": "Enables O(log n) search"},
+        {"input": "What is a heap?", "output": "A complete binary tree where parent is greater (max-heap) or smaller (min-heap) than children", "reasoning": "Used for priority queues"},
+        {"input": "What is a graph?", "output": "A collection of vertices (nodes) connected by edges", "reasoning": "Can be directed or undirected"}
+      ],
+      "programming_concepts": [
+        {"input": "What is object-oriented programming?", "output": "A paradigm based on objects containing data (attributes) and code (methods)", "reasoning": "Encapsulation, inheritance, polymorphism"},
+        {"input": "What is inheritance?", "output": "A mechanism where a class inherits properties and methods from a parent class", "reasoning": "Code reuse and hierarchy"},
+        {"input": "What is polymorphism?", "output": "The ability of objects to take many forms, allowing same interface for different types", "reasoning": "Method overriding/overloading"},
+        {"input": "What is encapsulation?", "output": "Bundling data and methods that operate on that data within a single unit, hiding internal state", "reasoning": "Information hiding"},
+        {"input": "What is abstraction?", "output": "Hiding complex implementation details and showing only necessary features", "reasoning": "Simplifies interface"},
+        {"input": "What is a closure?", "output": "A function that captures variables from its enclosing scope", "reasoning": "Remembers environment"},
+        {"input": "What is garbage collection?", "output": "Automatic memory management that reclaims memory no longer in use", "reasoning": "Prevents memory leaks"},
+        {"input": "What is a pointer?", "output": "A variable that stores the memory address of another variable", "reasoning": "Direct memory access"}
+      ],
+      "machine_learning": [
+        {"input": "What is supervised learning?", "output": "Learning from labeled data where the model learns to map inputs to known outputs", "reasoning": "Classification and regression"},
+        {"input": "What is unsupervised learning?", "output": "Learning patterns from unlabeled data without predefined outputs", "reasoning": "Clustering, dimensionality reduction"},
+        {"input": "What is a neural network?", "output": "A computational model inspired by biological neurons, with layers of interconnected nodes", "reasoning": "Universal function approximator"},
+        {"input": "What is backpropagation?", "output": "Algorithm for computing gradients by propagating errors backward through the network", "reasoning": "Chain rule application"},
+        {"input": "What is gradient descent?", "output": "Optimization algorithm that iteratively moves toward minimum by following negative gradient", "reasoning": "θ = θ - α∇L"},
+        {"input": "What is overfitting?", "output": "When a model learns training data too well, including noise, and fails to generalize", "reasoning": "High variance, low bias"},
+        {"input": "What is underfitting?", "output": "When a model is too simple to capture the underlying pattern in data", "reasoning": "High bias, low variance"},
+        {"input": "What is a loss function?", "output": "A function measuring how far model predictions are from actual values", "reasoning": "MSE, cross-entropy, etc."},
+        {"input": "What is regularization?", "output": "Techniques to prevent overfitting by adding penalty for model complexity", "reasoning": "L1, L2, dropout"},
+        {"input": "What is a transformer?", "output": "A neural network architecture using self-attention to process sequences in parallel", "reasoning": "Attention is all you need"},
+        {"input": "What is attention in deep learning?", "output": "A mechanism allowing models to focus on relevant parts of input when producing output", "reasoning": "Weighted sum of values"},
+        {"input": "What is a CNN?", "output": "Convolutional Neural Network uses convolution layers to detect spatial patterns", "reasoning": "Good for images"},
+        {"input": "What is an RNN?", "output": "Recurrent Neural Network processes sequences by maintaining hidden state", "reasoning": "Good for sequences"},
+        {"input": "What is LSTM?", "output": "Long Short-Term Memory is an RNN variant with gates to handle long-range dependencies", "reasoning": "Forget, input, output gates"},
+        {"input": "What is batch normalization?", "output": "Normalizing layer inputs to have zero mean and unit variance during training", "reasoning": "Stabilizes training"}
+      ]
+    },
+    "chemistry": {
+      "basics": [
+        {"input": "What is an atom?", "output": "The smallest unit of matter that retains the properties of an element", "reasoning": "Protons, neutrons, electrons"},
+        {"input": "What is a molecule?", "output": "Two or more atoms bonded together", "reasoning": "H2O, CO2, etc."},
+        {"input": "What is the periodic table?", "output": "An arrangement of elements by atomic number showing periodic trends in properties", "reasoning": "Organized by electron configuration"},
+        {"input": "What is an ion?", "output": "An atom or molecule with a net electric charge due to loss or gain of electrons", "reasoning": "Cation (+) or anion (-)"},
+        {"input": "What is a covalent bond?", "output": "A chemical bond formed by sharing electrons between atoms", "reasoning": "Nonmetals bonding"},
+        {"input": "What is an ionic bond?", "output": "A chemical bond formed by transfer of electrons from one atom to another", "reasoning": "Metal + nonmetal"},
+        {"input": "What is pH?", "output": "A measure of acidity/basicity on a scale of 0-14, where 7 is neutral", "reasoning": "pH = -log[H+]"},
+        {"input": "What is Avogadro's number?", "output": "6.022 × 10²³, the number of particles in one mole", "reasoning": "Fundamental constant"}
+      ],
+      "reactions": [
+        {"input": "What is a chemical reaction?", "output": "A process where reactants transform into products through breaking and forming bonds", "reasoning": "Conservation of mass"},
+        {"input": "What is an exothermic reaction?", "output": "A reaction that releases heat to the surroundings", "reasoning": "ΔH < 0"},
+        {"input": "What is an endothermic reaction?", "output": "A reaction that absorbs heat from the surroundings", "reasoning": "ΔH > 0"},
+        {"input": "What is a catalyst?", "output": "A substance that speeds up a reaction without being consumed", "reasoning": "Lowers activation energy"},
+        {"input": "What is oxidation?", "output": "Loss of electrons or increase in oxidation state", "reasoning": "OIL RIG: Oxidation Is Loss"},
+        {"input": "What is reduction?", "output": "Gain of electrons or decrease in oxidation state", "reasoning": "OIL RIG: Reduction Is Gain"}
+      ]
+    },
+    "biology": {
+      "cells": [
+        {"input": "What is a cell?", "output": "The basic structural and functional unit of all living organisms", "reasoning": "Building block of life"},
+        {"input": "What is DNA?", "output": "Deoxyribonucleic acid, a molecule carrying genetic instructions for life", "reasoning": "Double helix structure"},
+        {"input": "What is RNA?", "output": "Ribonucleic acid, involved in protein synthesis and gene expression", "reasoning": "mRNA, tRNA, rRNA"},
+        {"input": "What is mitosis?", "output": "Cell division producing two identical daughter cells", "reasoning": "Growth and repair"},
+        {"input": "What is meiosis?", "output": "Cell division producing four genetically different gametes with half the chromosomes", "reasoning": "Sexual reproduction"},
+        {"input": "What is the mitochondria?", "output": "The powerhouse of the cell, producing ATP through cellular respiration", "reasoning": "Energy production"},
+        {"input": "What is photosynthesis?", "output": "Process where plants convert light energy, CO2, and water into glucose and oxygen", "reasoning": "6CO2 + 6H2O → C6H12O6 + 6O2"},
+        {"input": "What is cellular respiration?", "output": "Process of breaking down glucose to produce ATP energy", "reasoning": "C6H12O6 + 6O2 → 6CO2 + 6H2O + ATP"}
+      ],
+      "genetics": [
+        {"input": "What is a gene?", "output": "A segment of DNA that codes for a specific protein or trait", "reasoning": "Unit of heredity"},
+        {"input": "What is a chromosome?", "output": "A structure of DNA and proteins containing many genes", "reasoning": "Humans have 46"},
+        {"input": "What is a mutation?", "output": "A change in the DNA sequence", "reasoning": "Can be beneficial, harmful, or neutral"},
+        {"input": "What is natural selection?", "output": "Process where organisms better adapted to environment survive and reproduce more", "reasoning": "Mechanism of evolution"},
+        {"input": "What is a genotype?", "output": "The genetic makeup of an organism", "reasoning": "AA, Aa, aa"},
+        {"input": "What is a phenotype?", "output": "The observable characteristics of an organism", "reasoning": "Result of genotype + environment"}
+      ]
+    }
+  }
+}

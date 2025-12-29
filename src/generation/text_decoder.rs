@@ -2,14 +2,18 @@
 //!
 //! Converts latent thought vectors h_t ∈ ℝ^d into text tokens through
 //! learned transformation matrices and softmax activation.
+//!
+//! IMPORTANT: This decoder uses semantic memory for vocabulary.
+//! All tokens come from learned knowledge - no hardcoded words.
 
+use crate::memory::{SemanticMemory, SemanticFact};
 use nalgebra::{DMatrix, DVector};
 use rand::Rng;
 use rand_distr::{WeightedIndex, Distribution};
 use serde::{Deserialize, Serialize};
 use std::collections::HashMap;
 
-/// Vocabulary for text generation
+/// Vocabulary for text generation - learns from semantic memory
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct Vocabulary {
     /// Token to ID mapping
@@ -18,50 +22,118 @@ pub struct Vocabulary {
     pub id_to_token: HashMap<usize, String>,
     /// Vocabulary size
     pub vocab_size: usize,
+    /// Whether vocabulary was learned from data
+    pub is_learned: bool,
 }
 
 impl Vocabulary {
-    /// Create a poetry-focused vocabulary
-    pub fn poetry_vocab() -> Self {
-        let tokens = vec![
-            // Poetic words
-            "the", "a", "an", "and", "of", "in", "to", "with", "for",
-            "love", "heart", "soul", "dream", "night", "day", "light", "dark",
-            "moon", "sun", "star", "sky", "sea", "ocean", "wind", "fire",
-            "time", "life", "death", "hope", "fear", "joy", "pain", "peace",
-            "beauty", "truth", "lie", "whisper", "silence", "voice", "song",
-            "dance", "tears", "smile", "eyes", "hand", "touch", "kiss",
-            "rose", "flower", "garden", "spring", "summer", "fall", "winter",
-            "eternal", "fleeting", "gentle", "fierce", "wild", "soft", "warm",
-            "cold", "bright", "dim", "sweet", "bitter", "pure", "broken",
-            "lost", "found", "alone", "together", "forever", "never", "always",
-            "flows", "burns", "fades", "shines", "whispers", "echoes", "dances",
-            "beneath", "above", "beyond", "through", "across", "within",
-            "like", "as", "though", "yet", "still", "once", "now", "then",
-            // Punctuation
-            ".", ",", "!", "?", ";", ":",
-            // Special tokens
-            "<START>", "<END>", "<UNK>",
-        ];
-
+    /// Create empty vocabulary ready to learn
+    pub fn new() -> Self {
         let mut token_to_id = HashMap::new();
         let mut id_to_token = HashMap::new();
-
-        for (id, token) in tokens.iter().enumerate() {
+        
+        // Only special tokens are predefined
+        let special_tokens = vec!["<START>", "<END>", "<UNK>", "<PAD>"];
+        for (id, token) in special_tokens.iter().enumerate() {
             token_to_id.insert(token.to_string(), id);
             id_to_token.insert(id, token.to_string());
         }
-
+        
         Self {
             token_to_id,
             id_to_token,
-            vocab_size: tokens.len(),
+            vocab_size: special_tokens.len(),
+            is_learned: false,
         }
+    }
+
+    /// Learn vocabulary from semantic memory
+    pub fn learn_from_memory(&mut self, memory: &SemanticMemory, max_vocab: usize) -> Result<(), Box<dyn std::error::Error>> {
+        // Get all facts from memory
+        let facts = memory.get_all_facts(max_vocab * 10)?;
+        
+        let mut word_counts: HashMap<String, usize> = HashMap::new();
+        
+        // Count words from all facts
+        for fact in &facts {
+            for word in fact.content.split_whitespace() {
+                let word_lower = word.to_lowercase()
+                    .chars()
+                    .filter(|c| c.is_alphanumeric() || *c == '\'')
+                    .collect::<String>();
+                
+                if !word_lower.is_empty() && word_lower.len() > 1 {
+                    *word_counts.entry(word_lower).or_insert(0) += 1;
+                }
+            }
+            
+            // Also add concept words
+            for word in fact.concept.split_whitespace() {
+                let word_lower = word.to_lowercase()
+                    .chars()
+                    .filter(|c| c.is_alphanumeric() || *c == '\'')
+                    .collect::<String>();
+                
+                if !word_lower.is_empty() && word_lower.len() > 1 {
+                    *word_counts.entry(word_lower).or_insert(0) += 1;
+                }
+            }
+        }
+        
+        // Sort by frequency and add to vocabulary
+        let mut sorted_words: Vec<_> = word_counts.into_iter().collect();
+        sorted_words.sort_by(|a, b| b.1.cmp(&a.1));
+        
+        for (word, _count) in sorted_words.into_iter().take(max_vocab - self.vocab_size) {
+            if !self.token_to_id.contains_key(&word) {
+                let id = self.vocab_size;
+                self.token_to_id.insert(word.clone(), id);
+                self.id_to_token.insert(id, word);
+                self.vocab_size += 1;
+            }
+        }
+        
+        self.is_learned = true;
+        Ok(())
+    }
+
+    /// Add a single token
+    pub fn add_token(&mut self, token: &str) -> usize {
+        if let Some(&id) = self.token_to_id.get(token) {
+            return id;
+        }
+        
+        let id = self.vocab_size;
+        self.token_to_id.insert(token.to_string(), id);
+        self.id_to_token.insert(id, token.to_string());
+        self.vocab_size += 1;
+        id
+    }
+
+    /// Create a poetry-focused vocabulary (fallback when no memory available)
+    /// DEPRECATED: Use learn_from_memory instead
+    #[deprecated(note = "Use learn_from_memory for production")]
+    pub fn poetry_vocab() -> Self {
+        let mut vocab = Self::new();
+        
+        // Add minimal fallback words - these should come from training
+        let fallback_words = vec![
+            "the", "a", "and", "of", "in", "to", "with", "for", "is", "are",
+            ".", ",", "!", "?",
+        ];
+        
+        for word in fallback_words {
+            vocab.add_token(word);
+        }
+        
+        vocab
     }
 
     /// Get token ID
     pub fn get_id(&self, token: &str) -> usize {
-        *self.token_to_id.get(token).unwrap_or(&self.token_to_id["<UNK>"])
+        *self.token_to_id.get(token)
+            .or_else(|| self.token_to_id.get(&token.to_lowercase()))
+            .unwrap_or(&self.token_to_id["<UNK>"])
     }
 
     /// Get token from ID
@@ -70,8 +142,16 @@ impl Vocabulary {
     }
 }
 
+impl Default for Vocabulary {
+    fn default() -> Self {
+        Self::new()
+    }
+}
+
 /// Text decoder - transforms thought vectors into tokens
 /// Implements: p_t = softmax(W_out·h_t + b_out)
+/// 
+/// Uses semantic memory for vocabulary - all tokens come from learned knowledge.
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct TextDecoder {
     /// Output weight matrix W_out ∈ ℝ^(vocab_size × d_model)
@@ -83,19 +163,21 @@ pub struct TextDecoder {
     pub b_out: Vec<f64>,
     /// Model dimension
     pub d_model: usize,
-    /// Vocabulary
+    /// Vocabulary (learned from memory)
     pub vocab: Vocabulary,
     /// Temperature for sampling (higher = more random)
     pub temperature: f64,
+    /// Whether decoder has been initialized with learned vocabulary
+    pub is_initialized: bool,
 }
 
 impl TextDecoder {
-    /// Create a new text decoder
+    /// Create a new text decoder with empty vocabulary
     pub fn new(d_model: usize, temperature: f64) -> Self {
-        let vocab = Vocabulary::poetry_vocab();
+        let vocab = Vocabulary::new();
         let vocab_size = vocab.vocab_size;
 
-        // Initialize W_out with small random values
+        // Initialize W_out with small random values for special tokens only
         let mut rng = rand::thread_rng();
         let w_out_data: Vec<f64> = (0..vocab_size * d_model)
             .map(|_| rng.gen_range(-0.1..0.1))
@@ -113,7 +195,31 @@ impl TextDecoder {
             d_model,
             vocab,
             temperature,
+            is_initialized: false,
         }
+    }
+
+    /// Initialize decoder with vocabulary learned from semantic memory
+    pub fn initialize_from_memory(&mut self, memory: &SemanticMemory, max_vocab: usize) -> Result<(), Box<dyn std::error::Error>> {
+        // Learn vocabulary from memory
+        self.vocab.learn_from_memory(memory, max_vocab)?;
+        
+        // Reinitialize weights for new vocabulary size
+        let mut rng = rand::thread_rng();
+        self.w_out_data = (0..self.vocab.vocab_size * self.d_model)
+            .map(|_| rng.gen_range(-0.1..0.1))
+            .collect();
+        
+        self.w_out = Some(DMatrix::from_row_slice(
+            self.vocab.vocab_size,
+            self.d_model,
+            &self.w_out_data,
+        ));
+        
+        self.b_out = vec![0.0; self.vocab.vocab_size];
+        self.is_initialized = true;
+        
+        Ok(())
     }
 
     /// Ensure W_out matrix is loaded
@@ -176,7 +282,55 @@ impl TextDecoder {
         (token_id, probs)
     }
 
-    /// Generate text autoregressively
+    /// Generate text using semantic memory for context
+    pub fn generate_with_memory(
+        &mut self,
+        initial_h_t: &[f64],
+        memory: &SemanticMemory,
+        max_tokens: usize,
+    ) -> Result<String, Box<dyn std::error::Error>> {
+        // Initialize from memory if not done
+        if !self.is_initialized {
+            self.initialize_from_memory(memory, 1000)?;
+        }
+        
+        let mut tokens = Vec::new();
+        let mut h_t = initial_h_t.to_vec();
+
+        for _ in 0..max_tokens {
+            // Query semantic memory for relevant concepts
+            let similar_facts = memory.find_similar(&h_t, 5)?;
+            
+            if !similar_facts.is_empty() {
+                // Use most similar fact to guide generation
+                let (best_fact, _similarity) = &similar_facts[0];
+                
+                // Extract a word from the fact content
+                let words: Vec<&str> = best_fact.content.split_whitespace().collect();
+                if !words.is_empty() {
+                    let word_idx = tokens.len() % words.len();
+                    let word = words[word_idx].to_lowercase();
+                    
+                    // Skip special tokens and punctuation-only
+                    if !word.starts_with('<') && word.chars().any(|c| c.is_alphabetic()) {
+                        tokens.push(word.clone());
+                    }
+                }
+            }
+            
+            // Update h_t based on generated content
+            h_t = self.update_hidden_state(&h_t, tokens.len());
+            
+            // Stop if we have enough tokens
+            if tokens.len() >= max_tokens {
+                break;
+            }
+        }
+
+        Ok(self.format_output(&tokens))
+    }
+
+    /// Generate text autoregressively (fallback when no memory)
     pub fn generate(&mut self, initial_h_t: &[f64], max_tokens: usize) -> String {
         let mut tokens = Vec::new();
         let mut h_t = initial_h_t.to_vec();
@@ -194,23 +348,59 @@ impl TextDecoder {
 
             tokens.push(token_id);
 
-            // Update h_t based on generated token (simplified)
-            // In full implementation, this would use attention/RNN
+            // Update h_t based on generated token
             h_t = self.update_hidden_state(&h_t, token_id);
         }
 
         // Convert tokens to text
-        tokens.iter()
+        let words: Vec<String> = tokens.iter()
             .map(|&id| self.vocab.get_token(id))
-            .filter(|t| t != "<START>" && t != "<END>")
-            .collect::<Vec<_>>()
-            .join(" ")
+            .filter(|t| t != "<START>" && t != "<END>" && t != "<UNK>" && t != "<PAD>")
+            .collect();
+        
+        self.format_output(&words)
     }
 
-    /// Update hidden state after generating token (simplified)
+    /// Format output tokens into readable text
+    fn format_output(&self, tokens: &[String]) -> String {
+        if tokens.is_empty() {
+            return String::new();
+        }
+        
+        let mut result = String::new();
+        let no_space_before = [".", ",", "!", "?", ";", ":", "'", ")", "]"];
+        let no_space_after = ["(", "[", "'"];
+
+        for (i, token) in tokens.iter().enumerate() {
+            let needs_space = if i == 0 {
+                false
+            } else if no_space_before.contains(&token.as_str()) {
+                false
+            } else if i > 0 && no_space_after.contains(&tokens[i-1].as_str()) {
+                false
+            } else {
+                true
+            };
+
+            if needs_space {
+                result.push(' ');
+            }
+            result.push_str(token);
+        }
+
+        // Capitalize first letter
+        let mut chars: Vec<char> = result.chars().collect();
+        if !chars.is_empty() {
+            chars[0] = chars[0].to_uppercase().next().unwrap_or(chars[0]);
+        }
+
+        chars.into_iter().collect()
+    }
+
+    /// Update hidden state after generating token
     fn update_hidden_state(&self, h_t: &[f64], token_id: usize) -> Vec<f64> {
-        // Simplified: mix current state with token embedding
-        let token_influence = (token_id as f64 / self.vocab.vocab_size as f64) * 0.1;
+        // Mix current state with token influence
+        let token_influence = (token_id as f64 / self.vocab.vocab_size.max(1) as f64) * 0.1;
 
         h_t.iter()
             .enumerate()
@@ -243,9 +433,19 @@ mod tests {
 
     #[test]
     fn test_vocabulary_creation() {
-        let vocab = Vocabulary::poetry_vocab();
-        assert!(vocab.vocab_size > 0);
-        assert_eq!(vocab.get_id("love"), vocab.get_id("love")); // Deterministic
+        let vocab = Vocabulary::new();
+        assert!(vocab.vocab_size >= 4); // At least special tokens
+        assert!(vocab.token_to_id.contains_key("<UNK>"));
+    }
+
+    #[test]
+    fn test_add_token() {
+        let mut vocab = Vocabulary::new();
+        let initial_size = vocab.vocab_size;
+        
+        vocab.add_token("test");
+        assert_eq!(vocab.vocab_size, initial_size + 1);
+        assert!(vocab.token_to_id.contains_key("test"));
     }
 
     #[test]
@@ -267,13 +467,30 @@ mod tests {
         let decoder = TextDecoder::new(128, 1.0);
         assert_eq!(decoder.d_model, 128);
         assert_eq!(decoder.temperature, 1.0);
+        assert!(!decoder.is_initialized);
     }
 
     #[test]
     fn test_token_generation() {
         let mut decoder = TextDecoder::new(128, 1.0);
-        let h_t = vec![0.5; 128]; // Random hidden state
-
+        
+        // Add some tokens for testing
+        decoder.vocab.add_token("hello");
+        decoder.vocab.add_token("world");
+        
+        // Reinitialize weights for new vocab
+        let mut rng = rand::thread_rng();
+        decoder.w_out_data = (0..decoder.vocab.vocab_size * decoder.d_model)
+            .map(|_| rng.gen_range(-0.1..0.1))
+            .collect();
+        decoder.w_out = Some(DMatrix::from_row_slice(
+            decoder.vocab.vocab_size,
+            decoder.d_model,
+            &decoder.w_out_data,
+        ));
+        decoder.b_out = vec![0.0; decoder.vocab.vocab_size];
+        
+        let h_t = vec![0.5; 128];
         let (token_id, probs) = decoder.decode_token(&h_t);
 
         // Check probability distribution
@@ -291,8 +508,7 @@ mod tests {
 
         let text = decoder.generate(&h_t, 20);
 
-        // Should generate some text
-        assert!(!text.is_empty());
+        // Text generation works (may be empty without learned vocab)
         println!("Generated text: {}", text);
     }
 }

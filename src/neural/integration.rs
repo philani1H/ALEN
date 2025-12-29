@@ -1,11 +1,13 @@
 //! Integration Layer
 //!
-//! Bridges the neural network with ALEN's existing reasoning system
+//! Bridges the neural network with ALEN's existing reasoning system.
+//! Uses BPE tokenization for production-grade text processing.
 
 use super::alen_network::{ALENNetwork, ALENConfig, ALENForwardResult};
 use super::tensor::Tensor;
 use super::trainer::{Adam, MSELoss, LossFunction};
 use crate::core::{ThoughtState, Problem, OperatorType};
+use crate::generation::{BPETokenizer, BPETrainer};
 use std::collections::HashMap;
 
 /// Neural-enhanced reasoning engine
@@ -23,13 +25,20 @@ pub struct NeuralReasoningEngine {
     pub epsilon_2: f32,
     /// Operator performance tracking
     pub operator_rewards: HashMap<usize, Vec<f32>>,
+    /// BPE tokenizer for text processing
+    pub tokenizer: Option<BPETokenizer>,
+    /// Whether tokenizer has been trained
+    pub tokenizer_trained: bool,
 }
 
 impl NeuralReasoningEngine {
     pub fn new(config: ALENConfig, learning_rate: f32) -> Self {
-        let network = ALENNetwork::new(config);
+        let network = ALENNetwork::new(config.clone());
         let optimizer = Adam::new(learning_rate);
         let loss_fn = MSELoss;
+        
+        // Initialize BPE tokenizer
+        let tokenizer = Some(BPETokenizer::new(config.vocab_size));
         
         Self {
             network,
@@ -39,14 +48,77 @@ impl NeuralReasoningEngine {
             epsilon_1: 1.0,
             epsilon_2: 0.5,
             operator_rewards: HashMap::new(),
+            tokenizer,
+            tokenizer_trained: false,
         }
     }
 
-    /// Convert text to token IDs (simple hash-based tokenization)
+    /// Train the BPE tokenizer on a corpus
+    pub fn train_tokenizer(&mut self, texts: &[String], num_merges: usize) {
+        if let Some(ref mut tokenizer) = self.tokenizer {
+            tokenizer.train(texts, num_merges);
+            self.tokenizer_trained = true;
+        }
+    }
+
+    /// Train tokenizer using BPETrainer for better control
+    pub fn train_tokenizer_from_corpus(&mut self, texts: &[String]) {
+        let trainer = BPETrainer::new(self.network.config.vocab_size)
+            .with_min_frequency(2);
+        
+        self.tokenizer = Some(trainer.train(texts));
+        self.tokenizer_trained = true;
+    }
+
+    /// Convert text to token IDs using BPE tokenization
     pub fn tokenize(&self, text: &str) -> Vec<usize> {
+        if let Some(ref tokenizer) = self.tokenizer {
+            if self.tokenizer_trained {
+                return tokenizer.encode(text);
+            }
+        }
+        
+        // Fallback: character-level with vocabulary constraint
+        // This ensures we always have valid token IDs even before training
         text.chars()
-            .map(|c| (c as usize) % self.network.config.vocab_size)
+            .filter(|c| !c.is_whitespace())
+            .map(|c| {
+                // Use character code modulo vocab size for deterministic mapping
+                let code = c as usize;
+                // Reserve first 256 IDs for special tokens and common chars
+                (code % (self.network.config.vocab_size - 256)) + 256
+            })
             .collect()
+    }
+
+    /// Decode token IDs back to text
+    pub fn decode(&self, ids: &[usize]) -> String {
+        if let Some(ref tokenizer) = self.tokenizer {
+            if self.tokenizer_trained {
+                return tokenizer.decode(ids);
+            }
+        }
+        
+        // Fallback: convert IDs back to characters
+        ids.iter()
+            .filter_map(|&id| {
+                if id >= 256 {
+                    let code = (id - 256) % 128 + 32; // Map to printable ASCII
+                    char::from_u32(code as u32)
+                } else {
+                    None
+                }
+            })
+            .collect()
+    }
+
+    /// Get vocabulary size
+    pub fn vocab_size(&self) -> usize {
+        if let Some(ref tokenizer) = self.tokenizer {
+            tokenizer.vocab_size()
+        } else {
+            self.network.config.vocab_size
+        }
     }
 
     /// Train on a problem with verification
@@ -171,19 +243,27 @@ impl NeuralReasoningEngine {
             stats.iter().map(|s| s.success_rate).sum::<f32>() / stats.len() as f32
         };
         
+        let tokenizer_status = if self.tokenizer_trained {
+            format!("BPE trained (vocab: {})", self.vocab_size())
+        } else {
+            "BPE not trained (using fallback)".to_string()
+        };
+        
         format!(
             "Neural Reasoning Engine Summary:\n\
              Steps: {}\n\
              Total operator usage: {}\n\
              Average success rate: {:.2}%\n\
              Network parameters: {}\n\
-             Verification thresholds: ε₁={}, ε₂={}",
+             Verification thresholds: ε₁={}, ε₂={}\n\
+             Tokenizer: {}",
             self.step,
             total_usage,
             avg_success * 100.0,
             self.network.num_parameters(),
             self.epsilon_1,
-            self.epsilon_2
+            self.epsilon_2,
+            tokenizer_status
         )
     }
 }

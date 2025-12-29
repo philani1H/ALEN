@@ -1,0 +1,107 @@
+{
+  "categories": {
+    "language": {
+      "grammar": [
+        {"input": "What is a noun?", "output": "A word that represents a person, place, thing, or idea", "reasoning": "Examples: dog, city, happiness"},
+        {"input": "What is a verb?", "output": "A word that expresses an action, occurrence, or state of being", "reasoning": "Examples: run, is, think"},
+        {"input": "What is an adjective?", "output": "A word that describes or modifies a noun", "reasoning": "Examples: big, red, happy"},
+        {"input": "What is an adverb?", "output": "A word that modifies a verb, adjective, or other adverb", "reasoning": "Examples: quickly, very, well"},
+        {"input": "What is a pronoun?", "output": "A word that takes the place of a noun", "reasoning": "Examples: he, she, it, they"},
+        {"input": "What is a preposition?", "output": "A word showing relationship between a noun and other words", "reasoning": "Examples: in, on, at, by"},
+        {"input": "What is a conjunction?", "output": "A word that connects words, phrases, or clauses", "reasoning": "Examples: and, but, or, because"},
+        {"input": "What is the subject of a sentence?", "output": "The person, place, thing, or idea that performs the action", "reasoning": "Who or what the sentence is about"},
+        {"input": "What is the predicate of a sentence?", "output": "The part of the sentence containing the verb and information about the subject", "reasoning": "What the subject does or is"}
+      ],
+      "writing": [
+        {"input": "What is a thesis statement?", "output": "A sentence stating the main argument or point of an essay", "reasoning": "Usually at end of introduction"},
+        {"input": "What is a paragraph?", "output": "A group of sentences about one main idea, starting with a topic sentence", "reasoning": "Building block of essays"},
+        {"input": "What is an introduction?", "output": "The opening section that presents the topic and thesis", "reasoning": "Hook, background, thesis"},
+        {"input": "What is a conclusion?", "output": "The closing section that summarizes main points and provides closure", "reasoning": "Restate thesis, summarize, final thought"},
+        {"input": "What is a metaphor?", "output": "A figure of speech comparing two unlike things without using like or as", "reasoning": "Life is a journey"},
+        {"input": "What is a simile?", "output": "A figure of speech comparing two things using like or as", "reasoning": "Fast as lightning"},
+        {"input": "What is alliteration?", "output": "Repetition of the same consonant sound at the beginning of nearby words", "reasoning": "Peter Piper picked peppers"}
+      ]
+    },
+    "logic": {
+      "propositional": [
+        {"input": "What is a logical AND?", "output": "True only when both operands are true", "reasoning": "A ∧ B"},
+        {"input": "What is a logical OR?", "output": "True when at least one operand is true", "reasoning": "A ∨ B"},
+        {"input": "What is a logical NOT?", "output": "Inverts the truth value", "reasoning": "¬A"},
+        {"input": "What is a logical implication?", "output": "If A then B, false only when A is true and B is false", "reasoning": "A → B"},
+        {"input": "What is a tautology?", "output": "A statement that is always true regardless of input values", "reasoning": "A ∨ ¬A"},
+        {"input": "What is a contradiction?", "output": "A statement that is always false regardless of input values", "reasoning": "A ∧ ¬A"},
+        {"input": "What is De Morgan's Law?", "output": "¬(A ∧ B) = ¬A ∨ ¬B and ¬(A ∨ B) = ¬A ∧ ¬B", "reasoning": "Negation distributes and flips operator"},
+        {"input": "What is modus ponens?", "output": "If P→Q and P, then Q", "reasoning": "Valid inference rule"},
+        {"input": "What is modus tollens?", "output": "If P→Q and ¬Q, then ¬P", "reasoning": "Denying the consequent"}
+      ],
+      "reasoning": [
+        {"input": "What is deductive reasoning?", "output": "Reasoning from general premises to specific conclusions", "reasoning": "If premises true, conclusion must be true"},
+        {"input": "What is inductive reasoning?", "output": "Reasoning from specific observations to general conclusions", "reasoning": "Conclusion is probable, not certain"},
+        {"input": "What is a syllogism?", "output": "A logical argument with two premises and a conclusion", "reasoning": "All A are B, All B are C, therefore All A are C"},
+        {"input": "What is a fallacy?", "output": "An error in reasoning that makes an argument invalid", "reasoning": "Ad hominem, straw man, etc."},
+        {"input": "What is the ad hominem fallacy?", "output": "Attacking the person making the argument rather than the argument itself", "reasoning": "Irrelevant to truth of claim"},
+        {"input": "What is the straw man fallacy?", "output": "Misrepresenting someone's argument to make it easier to attack", "reasoning": "Attacking a weaker version"},
+        {"input": "What is circular reasoning?", "output": "Using the conclusion as a premise in the argument", "reasoning": "Begging the question"}
+      ]
+    },
+    "history": {
+      "world_history": [
+        {"input": "When did World War I begin?", "output": "1914", "reasoning": "Triggered by assassination of Archduke Franz Ferdinand"},
+        {"input": "When did World War II end?", "output": "1945", "reasoning": "Germany surrendered May, Japan August"},
+        {"input": "What was the Renaissance?", "output": "A cultural movement in Europe from 14th-17th century emphasizing art, science, and humanism", "reasoning": "Rebirth of classical learning"},
+        {"input": "What was the Industrial Revolution?", "output": "A period of major industrialization from late 1700s to mid 1800s", "reasoning": "Shift from agrarian to industrial economy"},
+        {"input": "When did the French Revolution begin?", "output": "1789", "reasoning": "Storming of the Bastille on July 14"},
+        {"input": "What was the Cold War?", "output": "A period of geopolitical tension between the US and Soviet Union from 1947-1991", "reasoning": "No direct military conflict"},
+        {"input": "When did the Berlin Wall fall?", "output": "1989", "reasoning": "November 9, 1989"}
+      ],
+      "ancient_history": [
+        {"input": "When were the Egyptian pyramids built?", "output": "Around 2560 BCE (Great Pyramid of Giza)", "reasoning": "Old Kingdom period"},
+        {"input": "Who was Alexander the Great?", "output": "King of Macedonia who created one of the largest empires in ancient history", "reasoning": "356-323 BCE"},
+        {"input": "What was the Roman Empire?", "output": "An ancient civilization centered in Rome that dominated the Mediterranean", "reasoning": "27 BCE - 476 CE (Western)"},
+        {"input": "What was the Silk Road?", "output": "Ancient trade routes connecting East and West, trading silk, spices, and ideas", "reasoning": "From China to Mediterranean"}
+      ]
+    },
+    "geography": {
+      "physical": [
+        {"input": "What is the largest ocean?", "output": "Pacific Ocean", "reasoning": "Covers about 63 million square miles"},
+        {"input": "What is the longest river?", "output": "Nile River (or Amazon by some measurements)", "reasoning": "Approximately 6,650 km"},
+        {"input": "What is the highest mountain?", "output": "Mount Everest at 8,849 meters", "reasoning": "Located in the Himalayas"},
+        {"input": "What is the largest desert?", "output": "Antarctic Desert (or Sahara for hot deserts)", "reasoning": "Antarctica is technically a desert"},
+        {"input": "What causes earthquakes?", "output": "Movement of tectonic plates along fault lines", "reasoning": "Release of built-up stress"},
+        {"input": "What causes volcanoes?", "output": "Magma rising through Earth's crust, often at plate boundaries", "reasoning": "Subduction zones, hotspots"},
+        {"input": "What is the water cycle?", "output": "Continuous movement of water through evaporation, condensation, precipitation, and collection", "reasoning": "Hydrological cycle"}
+      ],
+      "political": [
+        {"input": "What is the largest country by area?", "output": "Russia", "reasoning": "About 17.1 million square kilometers"},
+        {"input": "What is the most populous country?", "output": "India (as of 2023)", "reasoning": "Over 1.4 billion people"},
+        {"input": "How many continents are there?", "output": "7: Africa, Antarctica, Asia, Australia, Europe, North America, South America", "reasoning": "Some models count differently"},
+        {"input": "What is the capital of Japan?", "output": "Tokyo", "reasoning": "Largest metropolitan area in the world"},
+        {"input": "What is the capital of France?", "output": "Paris", "reasoning": "City of Light"},
+        {"input": "What is the capital of Australia?", "output": "Canberra", "reasoning": "Not Sydney or Melbourne"}
+      ]
+    },
+    "philosophy": {
+      "ethics": [
+        {"input": "What is utilitarianism?", "output": "An ethical theory that the best action maximizes overall happiness or utility", "reasoning": "Greatest good for greatest number"},
+        {"input": "What is deontology?", "output": "An ethical theory based on rules and duties, regardless of consequences", "reasoning": "Kant's categorical imperative"},
+        {"input": "What is virtue ethics?", "output": "An ethical theory focusing on developing good character traits", "reasoning": "Aristotle's approach"},
+        {"input": "What is the trolley problem?", "output": "A thought experiment about whether to divert a trolley to kill one person instead of five", "reasoning": "Tests moral intuitions"},
+        {"input": "What is moral relativism?", "output": "The view that moral judgments are not universally true but relative to culture or individual", "reasoning": "No objective morality"}
+      ],
+      "epistemology": [
+        {"input": "What is epistemology?", "output": "The branch of philosophy concerned with knowledge, belief, and justification", "reasoning": "Theory of knowledge"},
+        {"input": "What is empiricism?", "output": "The view that knowledge comes primarily from sensory experience", "reasoning": "Locke, Hume, Berkeley"},
+        {"input": "What is rationalism?", "output": "The view that knowledge comes primarily from reason, not experience", "reasoning": "Descartes, Leibniz, Spinoza"},
+        {"input": "What is skepticism?", "output": "The view that certain knowledge is impossible or that we should doubt our beliefs", "reasoning": "Questioning assumptions"},
+        {"input": "What is Descartes' cogito?", "output": "I think, therefore I am (Cogito ergo sum)", "reasoning": "Foundation of certainty"}
+      ],
+      "metaphysics": [
+        {"input": "What is metaphysics?", "output": "The branch of philosophy studying the fundamental nature of reality", "reasoning": "Being, existence, causation"},
+        {"input": "What is determinism?", "output": "The view that all events are determined by prior causes", "reasoning": "No free will"},
+        {"input": "What is free will?", "output": "The ability to make choices that are not determined by prior causes", "reasoning": "Libertarian free will"},
+        {"input": "What is dualism?", "output": "The view that mind and body are distinct substances", "reasoning": "Descartes' mind-body dualism"},
+        {"input": "What is materialism?", "output": "The view that only physical matter exists", "reasoning": "Mind is physical"}
+      ]
+    }
+  }
+}

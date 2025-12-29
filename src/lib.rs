@@ -47,6 +47,7 @@ pub mod neural;
 pub mod reasoning;
 pub mod storage;
 pub mod math;
+pub mod training;
 
 // Re-export commonly used types at the crate level
 pub use core::{
@@ -74,6 +75,13 @@ pub use generation::{
     TextGenerator, ImageGenerator, ContentGenerator,
     GenerationConfig, GeneratedContent,
     VideoGenerator, VideoGenConfig, GeneratedVideo, MotionType,
+    // Dynamic vocabulary (learns from data, no hardcoded words)
+    DynamicVocabulary, DynamicTextGenerator, VocabularyBuilder,
+    SpecialTokens, TokenInfo,
+    // BPE Tokenizer (production-grade subword tokenization)
+    BPETokenizer, BPETrainer, BPEWithEmbeddings, BPESpecialTokens,
+    // Semantic decoder (uses learned memory)
+    SemanticDecoder,
 };
 
 pub use memory::{
@@ -124,6 +132,13 @@ pub use api::{
 };
 
 pub use storage::{StorageConfig, StorageStats};
+
+// Re-export training types
+pub use training::{
+    TrainingData, TrainingExample, DataLoader, DataCategory,
+    Tokenizer, TokenizerConfig, TokenizedBatch,
+    TrainingPipeline, PipelineConfig, TrainingStats,
+};
 
 /// Version of the library
 pub const VERSION: &str = env!("CARGO_PKG_VERSION");

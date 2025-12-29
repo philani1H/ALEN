@@ -2,9 +2,14 @@
 //!
 //! Provides natural conversational interface for human interaction with ALEN.
 //! Maintains conversation history, context, and personality.
+//!
+//! Uses Intent Extraction: I = (τ, θ, C) to understand prompts before responding.
+//! - τ = task vector (what to do)
+//! - θ = target variables (what it's about)
+//! - C = constraint set (how to do it)
 
 use super::{AppState, Problem};
-use crate::core::ThoughtState;
+use crate::core::{ThoughtState, IntentExtractor, IntentState, TaskType, ResponseEnergy};
 use crate::learning::feedback_loop::InferenceResult;
 use crate::memory::{SemanticFact, Episode, SemanticMemory};
 use crate::control::{MoodEngine, EmotionSystem};
@@ -450,6 +455,7 @@ pub async fn clear_conversation(
 }
 
 /// Generate intelligent response using full generation pipeline
+/// Now uses Intent Extraction: I = (τ, θ, C) before generation
 fn generate_intelligent_response(
     user_input: &str,
     inference_result: &InferenceResult,
@@ -457,6 +463,261 @@ fn generate_intelligent_response(
     mood_engine: &MoodEngine,
     emotion_system: &EmotionSystem,
     dim: usize,
+) -> String {
+    // Step 1: Extract intent I = (τ, θ, C)
+    let intent_extractor = IntentExtractor::new(dim);
+    let intent = intent_extractor.extract(user_input);
+    
+    // Step 2: Route based on task type τ
+    let response = match intent.task.primary_task {
+        TaskType::Explain => generate_explanation_response(user_input, &intent, semantic_memory, mood_engine),
+        TaskType::Summarize => generate_summary_response(user_input, &intent, semantic_memory),
+        TaskType::Solve => generate_solve_response(user_input, &intent, inference_result),
+        TaskType::Generate => generate_creative_response_with_intent(user_input, &intent, mood_engine.current_mood().as_str()),
+        TaskType::List => generate_list_response(user_input, &intent, semantic_memory),
+        TaskType::Compare => generate_comparison_response(user_input, &intent, semantic_memory),
+        TaskType::Define => generate_definition_response(user_input, &intent, semantic_memory),
+        TaskType::Analyze => generate_analysis_response(user_input, &intent, inference_result, semantic_memory),
+        TaskType::Debug => generate_debug_response(user_input, &intent, inference_result),
+        TaskType::Verify => generate_verification_response(user_input, &intent, inference_result),
+        _ => generate_general_response(user_input, &intent, inference_result, semantic_memory, mood_engine),
+    };
+    
+    // Step 3: Apply constraints C and verify response energy
+    let response_energy = ResponseEnergy::default();
+    let energy = response_energy.compute(&intent, &response);
+    
+    // If energy too high (response doesn't satisfy constraints), try to improve
+    if energy > 0.5 {
+        apply_constraints_to_response(&response, &intent)
+    } else {
+        response
+    }
+}
+
+/// Generate explanation response (TaskType::Explain)
+fn generate_explanation_response(
+    user_input: &str,
+    intent: &IntentState,
+    semantic_memory: &SemanticMemory,
+    mood_engine: &MoodEngine,
+) -> String {
+    let knowledge = retrieve_relevant_knowledge(user_input, semantic_memory);
+    
+    if !knowledge.is_empty() {
+        let mut response = knowledge.join(" ");
+        
+        // Add explanation structure based on constraints
+        if intent.constraints.format.include_math == Some(true) {
+            response.push_str(" This can be expressed mathematically.");
+        }
+        
+        // Adjust for audience (technical level)
+        if let Some(level) = intent.constraints.style.technical_level {
+            if level < 0.3 {
+                response = simplify_response(&response);
+            }
+        }
+        
+        response
+    } else {
+        format!(
+            "I'd like to explain '{}' for you. Could you provide more context about what specific aspect you'd like me to focus on?",
+            extract_topic(user_input)
+        )
+    }
+}
+
+/// Generate summary response (TaskType::Summarize)
+fn generate_summary_response(
+    user_input: &str,
+    intent: &IntentState,
+    semantic_memory: &SemanticMemory,
+) -> String {
+    let knowledge = retrieve_relevant_knowledge(user_input, semantic_memory);
+    
+    if !knowledge.is_empty() {
+        // Apply length constraints
+        let max_words = intent.constraints.length.max_words.unwrap_or(50);
+        let summary = truncate_to_words(&knowledge.join(" "), max_words);
+        format!("Summary: {}", summary)
+    } else {
+        "I don't have enough information to summarize. Could you provide the content you'd like me to summarize?".to_string()
+    }
+}
+
+/// Generate solve response (TaskType::Solve)
+fn generate_solve_response(
+    user_input: &str,
+    intent: &IntentState,
+    inference_result: &InferenceResult,
+) -> String {
+    let confidence = inference_result.confidence;
+    
+    if confidence > 0.7 {
+        format!(
+            "Solution (confidence: {:.1}%): Processing your problem about '{}'. The reasoning operators have analyzed this with {} candidates considered.",
+            confidence * 100.0,
+            extract_topic(user_input),
+            inference_result.candidates_considered
+        )
+    } else {
+        format!(
+            "I'm working on solving '{}' but my confidence is {:.1}%. Could you provide more details or constraints?",
+            extract_topic(user_input),
+            confidence * 100.0
+        )
+    }
+}
+
+/// Generate creative response with intent awareness
+fn generate_creative_response_with_intent(
+    user_input: &str,
+    intent: &IntentState,
+    mood: &str,
+) -> String {
+    let input_lower = user_input.to_lowercase();
+    
+    // Check for specific creative types
+    if input_lower.contains("poem") || input_lower.contains("poetry") {
+        let theme = detect_theme(&input_lower);
+        return generate_poem(&theme, mood);
+    }
+    
+    if input_lower.contains("story") {
+        return generate_story(mood);
+    }
+    
+    // General creative request
+    format!(
+        "I'd love to create something for you! Based on your request about '{}', I can write poems, stories, or other creative content. My current mood is {} which will influence the tone. What would you like?",
+        extract_topic(user_input),
+        mood.to_lowercase()
+    )
+}
+
+/// Generate list response (TaskType::List)
+fn generate_list_response(
+    user_input: &str,
+    intent: &IntentState,
+    semantic_memory: &SemanticMemory,
+) -> String {
+    let knowledge = retrieve_relevant_knowledge(user_input, semantic_memory);
+    
+    if !knowledge.is_empty() {
+        let items: Vec<String> = knowledge.iter()
+            .enumerate()
+            .map(|(i, k)| format!("{}. {}", i + 1, k))
+            .collect();
+        items.join("\n")
+    } else {
+        format!("I don't have a list for '{}' yet. Could you specify what items you'd like me to list?", extract_topic(user_input))
+    }
+}
+
+/// Generate comparison response (TaskType::Compare)
+fn generate_comparison_response(
+    user_input: &str,
+    intent: &IntentState,
+    semantic_memory: &SemanticMemory,
+) -> String {
+    let targets: Vec<String> = intent.targets.iter()
+        .map(|t| t.name.clone())
+        .collect();
+    
+    if targets.len() >= 2 {
+        format!(
+            "Comparing {} and {}: I'll analyze the similarities and differences. Let me search my knowledge base for relevant information.",
+            targets[0], targets[1]
+        )
+    } else {
+        "To compare, I need at least two items. What would you like me to compare?".to_string()
+    }
+}
+
+/// Generate definition response (TaskType::Define)
+fn generate_definition_response(
+    user_input: &str,
+    intent: &IntentState,
+    semantic_memory: &SemanticMemory,
+) -> String {
+    let topic = extract_topic(user_input);
+    let knowledge = retrieve_relevant_knowledge(&topic, semantic_memory);
+    
+    if !knowledge.is_empty() {
+        format!("Definition of {}: {}", topic, knowledge[0])
+    } else {
+        format!("I don't have a definition for '{}' in my knowledge base yet. Would you like to teach me?", topic)
+    }
+}
+
+/// Generate analysis response (TaskType::Analyze)
+fn generate_analysis_response(
+    user_input: &str,
+    intent: &IntentState,
+    inference_result: &InferenceResult,
+    semantic_memory: &SemanticMemory,
+) -> String {
+    let knowledge = retrieve_relevant_knowledge(user_input, semantic_memory);
+    let confidence = inference_result.confidence;
+    
+    let mut analysis = format!(
+        "Analysis of '{}' (confidence: {:.1}%):\n",
+        extract_topic(user_input),
+        confidence * 100.0
+    );
+    
+    if !knowledge.is_empty() {
+        analysis.push_str(&format!("Based on my knowledge: {}\n", knowledge.join(" ")));
+    }
+    
+    analysis.push_str(&format!(
+        "Reasoning operator used: {}\nCandidates considered: {}",
+        inference_result.operator_id,
+        inference_result.candidates_considered
+    ));
+    
+    analysis
+}
+
+/// Generate debug response (TaskType::Debug)
+fn generate_debug_response(
+    user_input: &str,
+    intent: &IntentState,
+    inference_result: &InferenceResult,
+) -> String {
+    format!(
+        "Debug analysis for '{}': I'm examining this with {:.1}% confidence. The {} operator processed {} candidates. Could you describe the specific issue or error you're encountering?",
+        extract_topic(user_input),
+        inference_result.confidence * 100.0,
+        inference_result.operator_id,
+        inference_result.candidates_considered
+    )
+}
+
+/// Generate verification response (TaskType::Verify)
+fn generate_verification_response(
+    user_input: &str,
+    intent: &IntentState,
+    inference_result: &InferenceResult,
+) -> String {
+    let verified = inference_result.energy.verified;
+    let confidence = inference_result.confidence;
+    
+    if verified && confidence > 0.7 {
+        format!("Verification: The statement about '{}' appears to be consistent with my knowledge (confidence: {:.1}%).", extract_topic(user_input), confidence * 100.0)
+    } else {
+        format!("Verification: I cannot fully verify '{}' (confidence: {:.1}%). More information may be needed.", extract_topic(user_input), confidence * 100.0)
+    }
+}
+
+/// Generate general response for unknown task types
+fn generate_general_response(
+    user_input: &str,
+    intent: &IntentState,
+    inference_result: &InferenceResult,
+    semantic_memory: &SemanticMemory,
+    mood_engine: &MoodEngine,
 ) -> String {
     let input_lower = user_input.to_lowercase();
     
@@ -472,21 +733,72 @@ fn generate_intelligent_response(
     let knowledge = retrieve_relevant_knowledge(user_input, semantic_memory);
     
     if !knowledge.is_empty() && !is_creative {
-        // Use knowledge-based response for factual queries
         return knowledge.join(" ");
     }
     
-    // For creative requests, generate creative content
+    // For creative requests
     if is_creative {
         return generate_creative_response(user_input, mood_engine.current_mood().as_str());
     }
     
-    // Fallback to contextual response
+    // Fallback
     generate_contextual_fallback(
         user_input,
         inference_result,
         mood_engine.current_mood().as_str(),
     )
+}
+
+/// Apply constraints to response
+fn apply_constraints_to_response(response: &str, intent: &IntentState) -> String {
+    let mut result = response.to_string();
+    
+    // Apply length constraint
+    if let Some(max_words) = intent.constraints.length.max_words {
+        result = truncate_to_words(&result, max_words);
+    }
+    
+    // Remove excluded content
+    for exclude in &intent.constraints.content.must_exclude {
+        result = result.replace(exclude, "");
+    }
+    
+    result
+}
+
+/// Helper: Extract main topic from input
+fn extract_topic(input: &str) -> String {
+    let skip_words = ["what", "is", "the", "a", "an", "how", "does", "do", "can", "you", "explain", "tell", "me", "about"];
+    input.split_whitespace()
+        .filter(|w| !skip_words.contains(&w.to_lowercase().as_str()))
+        .take(3)
+        .collect::<Vec<_>>()
+        .join(" ")
+}
+
+/// Helper: Detect theme from input
+fn detect_theme(input: &str) -> String {
+    if input.contains("love") { "love".to_string() }
+    else if input.contains("nature") { "nature".to_string() }
+    else if input.contains("time") { "time".to_string() }
+    else if input.contains("hope") { "hope".to_string() }
+    else { "life".to_string() }
+}
+
+/// Helper: Truncate to word count
+fn truncate_to_words(text: &str, max_words: usize) -> String {
+    text.split_whitespace()
+        .take(max_words)
+        .collect::<Vec<_>>()
+        .join(" ")
+}
+
+/// Helper: Simplify response for non-technical audience
+fn simplify_response(text: &str) -> String {
+    // Remove overly technical terms
+    text.replace("neural network", "AI system")
+        .replace("algorithm", "method")
+        .replace("optimization", "improvement")
 }
 
 /// Check if text is gibberish (too many technical terms without structure)

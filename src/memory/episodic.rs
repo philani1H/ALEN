@@ -206,9 +206,50 @@ impl EpisodicMemory {
         }
     }
 
-    /// Find similar episodes by problem input
+    /// Find similar episodes by problem input using embedding similarity
     pub fn find_similar(&self, input: &str, limit: usize) -> SqlResult<Vec<Episode>> {
-        // Simple text-based similarity (in production, would use vector similarity)
+        // Get all episodes and compute similarity based on thought vectors
+        let mut stmt = self.conn.prepare(
+            "SELECT id, problem_input, answer_output, thought_vector, verified,
+                    confidence_score, energy, operator_id, created_at, tags
+             FROM episodes 
+             WHERE verified = 1
+             ORDER BY confidence_score DESC
+             LIMIT ?1"
+        )?;
+
+        let mut rows = stmt.query(params![(limit * 10) as i64])?; // Get more for filtering
+        
+        let mut episodes = Vec::new();
+        while let Some(row) = rows.next()? {
+            episodes.push(self.row_to_episode(row)?);
+        }
+        
+        // If we have a small dataset, use text matching as fallback
+        if episodes.is_empty() {
+            return self.find_similar_by_text(input, limit);
+        }
+        
+        // Compute input embedding (using hash-based approach for consistency)
+        let input_embedding = Self::compute_text_embedding(input);
+        
+        // Score episodes by cosine similarity
+        let mut scored: Vec<(Episode, f64)> = episodes.into_iter()
+            .map(|ep| {
+                let sim = Self::cosine_similarity(&input_embedding, &ep.thought_vector);
+                (ep, sim)
+            })
+            .collect();
+        
+        // Sort by similarity
+        scored.sort_by(|a, b| b.1.partial_cmp(&a.1).unwrap_or(std::cmp::Ordering::Equal));
+        
+        // Return top results
+        Ok(scored.into_iter().take(limit).map(|(ep, _)| ep).collect())
+    }
+
+    /// Fallback text-based similarity search
+    fn find_similar_by_text(&self, input: &str, limit: usize) -> SqlResult<Vec<Episode>> {
         let mut stmt = self.conn.prepare(
             "SELECT id, problem_input, answer_output, thought_vector, verified,
                     confidence_score, energy, operator_id, created_at, tags
@@ -227,6 +268,66 @@ impl EpisodicMemory {
         }
         
         Ok(episodes)
+    }
+
+    /// Compute a deterministic embedding for text (for similarity comparison)
+    fn compute_text_embedding(text: &str) -> Vec<f64> {
+        let dim = 64; // Standard dimension
+        let mut embedding = vec![0.0; dim];
+        
+        // Use character n-grams for robust embedding
+        let text_lower = text.to_lowercase();
+        let chars: Vec<char> = text_lower.chars().collect();
+        
+        for i in 0..chars.len() {
+            // Unigrams
+            let hash = chars[i] as u64;
+            let idx = (hash % dim as u64) as usize;
+            embedding[idx] += 1.0;
+            
+            // Bigrams
+            if i + 1 < chars.len() {
+                let hash = (chars[i] as u64).wrapping_mul(31).wrapping_add(chars[i+1] as u64);
+                let idx = (hash % dim as u64) as usize;
+                embedding[idx] += 0.5;
+            }
+            
+            // Trigrams
+            if i + 2 < chars.len() {
+                let hash = (chars[i] as u64).wrapping_mul(31).wrapping_mul(31)
+                    .wrapping_add((chars[i+1] as u64).wrapping_mul(31))
+                    .wrapping_add(chars[i+2] as u64);
+                let idx = (hash % dim as u64) as usize;
+                embedding[idx] += 0.25;
+            }
+        }
+        
+        // Normalize
+        let norm: f64 = embedding.iter().map(|x| x * x).sum::<f64>().sqrt();
+        if norm > 1e-10 {
+            for v in &mut embedding {
+                *v /= norm;
+            }
+        }
+        
+        embedding
+    }
+
+    /// Compute cosine similarity between two vectors
+    fn cosine_similarity(a: &[f64], b: &[f64]) -> f64 {
+        if a.len() != b.len() || a.is_empty() {
+            return 0.0;
+        }
+        
+        let dot: f64 = a.iter().zip(b.iter()).map(|(x, y)| x * y).sum();
+        let norm_a: f64 = a.iter().map(|x| x * x).sum::<f64>().sqrt();
+        let norm_b: f64 = b.iter().map(|x| x * x).sum::<f64>().sqrt();
+        
+        if norm_a < 1e-10 || norm_b < 1e-10 {
+            return 0.0;
+        }
+        
+        dot / (norm_a * norm_b)
     }
 
     /// Get top episodes by confidence
