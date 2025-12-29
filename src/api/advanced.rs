@@ -18,7 +18,7 @@ use crate::reasoning::{
     ChainOfThoughtReasoner, ReasoningChain,
     LogicalInference, Premise, Conclusion,
 };
-use crate::neural::{NeuralReasoningEngine, ALENConfig};
+use crate::neural::{NeuralReasoningEngine, ALENConfig, UniversalNetworkConfig, TransformerConfig};
 
 /// Shared state for advanced endpoints
 pub struct AdvancedState {
@@ -30,12 +30,32 @@ pub struct AdvancedState {
 
 impl AdvancedState {
     pub fn new() -> Self {
-        let config = ALENConfig::default();
+        let alen_config = ALENConfig::default();
+        let universal_config = UniversalNetworkConfig {
+            input_dim: 512,
+            audience_dim: 64,
+            memory_dim: 256,
+            solution_dim: 256,
+            explanation_dim: 512,
+            solve_hidden: vec![512, 256],
+            verify_hidden: vec![256, 128],
+            explain_hidden: vec![512, 256],
+            transformer_config: TransformerConfig::default(),
+            dropout: 0.1,
+            alpha: 1.0,
+            beta: 0.5,
+            gamma: 0.5,
+        };
         Self {
             math_solver: Arc::new(Mutex::new(MathSolver::new())),
             chain_reasoner: Arc::new(Mutex::new(ChainOfThoughtReasoner::default())),
             logic_engine: Arc::new(Mutex::new(LogicalInference::new())),
-            neural_engine: Arc::new(Mutex::new(NeuralReasoningEngine::new(config, 0.001))),
+            neural_engine: Arc::new(Mutex::new(NeuralReasoningEngine::new(
+                alen_config,
+                universal_config,
+                256,
+                10,
+            ))),
         }
     }
 }
@@ -206,18 +226,17 @@ pub async fn advanced_infer(
     };
     
     // Use neural engine
-    let engine = state.neural_engine.lock().await;
-    let result = engine.infer(&req.question);
+    let mut engine = state.neural_engine.lock().await;
+    let result = engine.reason(&req.question);
     
-    reasoning_steps.push(format!("Neural operator: {}", result.operator_name));
-    reasoning_steps.push(format!("Verification error: {:.4}", result.verification_error));
+    reasoning_steps.push(format!("Neural reasoning steps: {}", result.steps.len()));
+    reasoning_steps.push(format!("Final confidence: {:.4}", result.confidence));
     
     Ok(Json(AdvancedInferResponse {
-        answer: format!("Processed with {} reasoning modes", 
-            1 + if req.use_math_solver { 1 } else { 0 } + if req.use_chain_of_thought { 1 } else { 0 }),
-        confidence: if result.verified { 1.0 - result.verification_error } else { 0.0 },
+        answer: result.answer.clone(),
+        confidence: result.confidence as f64,
         reasoning_steps,
-        operator_used: result.operator_name,
+        operator_used: "neural_reasoning".to_string(),
         verified: result.verified,
         math_result,
         chain,

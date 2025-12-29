@@ -116,7 +116,7 @@ impl SolveBranch {
         let augmented_dim = config.input_dim + config.audience_dim + config.memory_dim;
         
         // Input projection to transformer dimension
-        let input_proj = Linear::new(augmented_dim, config.transformer_config.d_model);
+        let input_proj = Linear::new(augmented_dim, config.transformer_config.d_model, true);
         
         // Transformer encoder
         let transformer = TransformerEncoder::new(config.transformer_config.clone());
@@ -128,14 +128,14 @@ impl SolveBranch {
         
         let mut prev_dim = config.transformer_config.d_model;
         for &hidden_dim in &config.solve_hidden {
-            hidden_layers.push(Linear::new(prev_dim, hidden_dim));
-            layer_norms.push(LayerNorm::new(hidden_dim, 1e-5));
+            hidden_layers.push(Linear::new(prev_dim, hidden_dim, true));
+            layer_norms.push(LayerNorm::new(vec![hidden_dim], 1e-5));
             dropouts.push(Dropout::new(config.dropout));
             prev_dim = hidden_dim;
         }
         
         // Output projection
-        let output_proj = Linear::new(prev_dim, config.solution_dim);
+        let output_proj = Linear::new(prev_dim, config.solution_dim, true);
         
         Self {
             input_proj,
@@ -153,7 +153,7 @@ impl SolveBranch {
         let mut h = self.input_proj.forward(augmented_input);
         
         // Transformer encoding
-        h = self.transformer.forward(&h);
+        h = self.transformer.forward_embedded(&h, None);
         
         // Hidden layers with residual connections
         for i in 0..self.hidden_layers.len() {
@@ -161,7 +161,7 @@ impl SolveBranch {
             h = self.hidden_layers[i].forward(&h);
             h = self.layer_norms[i].forward(&h);
             h = h.gelu(); // GELU activation
-            h = self.dropouts[i].forward(&h, training);
+            h = self.dropouts[i].forward(&h);
             
             // Residual connection if dimensions match
             if h.shape() == h_prev.shape() {
@@ -199,14 +199,14 @@ impl VerificationBranch {
         
         let mut prev_dim = input_dim;
         for &hidden_dim in &config.verify_hidden {
-            hidden_layers.push(Linear::new(prev_dim, hidden_dim));
-            layer_norms.push(LayerNorm::new(hidden_dim, 1e-5));
+            hidden_layers.push(Linear::new(prev_dim, hidden_dim, true));
+            layer_norms.push(LayerNorm::new(vec![hidden_dim], 1e-5));
             dropouts.push(Dropout::new(config.dropout));
             prev_dim = hidden_dim;
         }
         
         // Output: single probability
-        let output_layer = Linear::new(prev_dim, 1);
+        let output_layer = Linear::new(prev_dim, 1, true);
         
         Self {
             hidden_layers,
@@ -226,7 +226,7 @@ impl VerificationBranch {
             h = self.hidden_layers[i].forward(&h);
             h = self.layer_norms[i].forward(&h);
             h = h.relu();
-            h = self.dropouts[i].forward(&h, training);
+            h = self.dropouts[i].forward(&h);
         }
         
         // Output with sigmoid
@@ -263,17 +263,17 @@ impl ExplanationBranch {
         
         let mut prev_dim = input_dim;
         for &hidden_dim in &config.explain_hidden {
-            hidden_layers.push(Linear::new(prev_dim, hidden_dim));
-            layer_norms.push(LayerNorm::new(hidden_dim, 1e-5));
+            hidden_layers.push(Linear::new(prev_dim, hidden_dim, true));
+            layer_norms.push(LayerNorm::new(vec![hidden_dim], 1e-5));
             dropouts.push(Dropout::new(config.dropout));
             prev_dim = hidden_dim;
         }
         
         // Audience attention
-        let audience_attention = Linear::new(config.audience_dim, prev_dim);
+        let audience_attention = Linear::new(config.audience_dim, prev_dim, true);
         
         // Output projection
-        let output_proj = Linear::new(prev_dim, config.explanation_dim);
+        let output_proj = Linear::new(prev_dim, config.explanation_dim, true);
         
         Self {
             hidden_layers,
@@ -300,12 +300,12 @@ impl ExplanationBranch {
             h = self.hidden_layers[i].forward(&h);
             h = self.layer_norms[i].forward(&h);
             h = h.gelu();
-            h = self.dropouts[i].forward(&h, training);
+            h = self.dropouts[i].forward(&h);
         }
         
         // Audience attention
         let audience_weights = self.audience_attention.forward(audience_profile);
-        let audience_weights = audience_weights.softmax(1);
+        let audience_weights = audience_weights.softmax();
         h = h.mul(&audience_weights);
         
         // Output projection
@@ -393,7 +393,7 @@ impl UniversalExpertNetwork {
             .mean();
         
         // Verification loss (binary cross-entropy)
-        let v = output.verification_prob.get_scalar();
+        let v = output.verification_prob.mean();
         let verification_loss = if target_verification > 0.5 {
             -(target_verification * v.ln() + (1.0 - target_verification) * (1.0 - v).ln())
         } else {

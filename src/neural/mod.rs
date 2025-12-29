@@ -43,7 +43,7 @@ pub use alen_network::{
     ThoughtDecoder, ThoughtVerifier, ALENForwardResult, CandidateEvaluation,
 };
 pub use integration::{
-    NeuralReasoningEngine, VerifiedTrainingResult, NeuralInferenceResult,
+    VerifiedTrainingResult, NeuralInferenceResult,
     OperatorStatistics,
 };
 pub use universal_network::{

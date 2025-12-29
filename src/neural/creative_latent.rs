@@ -38,7 +38,7 @@ impl NoiseInjector {
     /// z_creative = z + ε, where ε ~ N(0, σ²I)
     pub fn inject(&self, latent: &Tensor, step: usize) -> Tensor {
         let current_sigma = self.schedule.get_sigma(self.sigma, step);
-        let noise = Tensor::randn(latent.shape()) * current_sigma;
+        let noise = Tensor::randn(latent.shape()) .scale(current_sigma);
         latent.add(&noise)
     }
     
@@ -48,10 +48,10 @@ impl NoiseInjector {
         let shape = latent.shape();
         
         // Generate base noise
-        let base_noise = Tensor::randn(&[shape[0], 1]) * current_sigma;
+        let base_noise = Tensor::randn(vec![shape[0], 1]).scale(current_sigma);
         
         // Generate independent noise
-        let independent_noise = Tensor::randn(shape) * current_sigma;
+        let independent_noise = Tensor::randn(shape) .scale(current_sigma);
         
         // Combine: ε = α * base + (1-α) * independent
         let structured = base_noise.broadcast(shape).mul_scalar(correlation);
@@ -554,7 +554,7 @@ mod tests {
     #[test]
     fn test_noise_injection() {
         let injector = NoiseInjector::new(0.1, NoiseSchedule::Constant);
-        let latent = Tensor::randn(&[2, 128]);
+        let latent = Tensor::randn(vec![2, 128]);
         
         let noisy = injector.inject(&latent, 0);
         
@@ -564,7 +564,7 @@ mod tests {
     #[test]
     fn test_temperature_sampling() {
         let sampler = TemperatureSampler::new(1.0, TemperatureSchedule::Constant);
-        let logits = Tensor::randn(&[2, 10]);
+        let logits = Tensor::randn(vec![2, 10]);
         
         let samples = sampler.sample(&logits, 0);
         

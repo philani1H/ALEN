@@ -37,23 +37,28 @@ pub struct AdvancedALENSystem {
     
     /// Training step counter
     step: usize,
+    
+    /// Memory dimension (cached from config)
+    memory_dim: usize,
 }
 
 impl AdvancedALENSystem {
     pub fn new(config: AdvancedALENConfig) -> Self {
         // Initialize universal network
         let universal_config = UniversalNetworkConfig {
-            problem_input_dim: config.problem_input_dim,
-            audience_profile_dim: config.audience_profile_dim,
-            memory_retrieval_dim: config.memory_retrieval_dim,
-            solution_embedding_dim: config.solution_embedding_dim,
-            explanation_embedding_dim: config.explanation_embedding_dim,
-            solve_hidden_dims: config.solve_hidden_dims.clone(),
-            verify_hidden_dims: config.verify_hidden_dims.clone(),
-            explain_hidden_dims: config.explain_hidden_dims.clone(),
+            input_dim: config.problem_input_dim,
+            audience_dim: config.audience_profile_dim,
+            memory_dim: config.memory_retrieval_dim,
+            solution_dim: config.solution_embedding_dim,
+            explanation_dim: config.explanation_embedding_dim,
+            solve_hidden: config.solve_hidden_dims.clone(),
+            verify_hidden: config.verify_hidden_dims.clone(),
+            explain_hidden: config.explain_hidden_dims.clone(),
             transformer_config: config.transformer_config.clone(),
-            dropout_rate: config.dropout_rate,
-            loss_weights: config.loss_weights,
+            dropout: config.dropout_rate,
+            alpha: config.loss_weights.0,
+            beta: config.loss_weights.1,
+            gamma: config.loss_weights.2,
         };
         
         let universal_network = UniversalExpertNetwork::new(universal_config);
@@ -103,6 +108,7 @@ impl AdvancedALENSystem {
             creative_controller,
             meta_controller,
             step: 0,
+            memory_dim: config.memory_retrieval_dim,
         }
     }
     
@@ -119,7 +125,7 @@ impl AdvancedALENSystem {
             let (_, memory_tensor) = self.memory_network.forward_with_memory(problem_input, 5);
             memory_tensor
         } else {
-            Tensor::zeros(&[problem_input.shape()[0], self.universal_network.config.memory_retrieval_dim])
+            Tensor::zeros(vec![problem_input.shape()[0], self.memory_dim])
         };
         
         // Universal network forward pass
@@ -131,6 +137,7 @@ impl AdvancedALENSystem {
         );
         
         // Apply creative exploration to solution embedding
+        let exploration_applied = matches!(exploration_mode, ExplorationMode::Gaussian | ExplorationMode::Structured { .. });
         let creative_solution = self.creative_controller.explore(
             &output.solution_embedding,
             exploration_mode,
@@ -143,7 +150,7 @@ impl AdvancedALENSystem {
         AdvancedForwardResult {
             output,
             memory_stats,
-            exploration_applied: matches!(exploration_mode, ExplorationMode::Gaussian | ExplorationMode::Structured { .. }),
+            exploration_applied,
         }
     }
     
@@ -173,14 +180,14 @@ impl AdvancedALENSystem {
         let loss = self.universal_network.compute_loss(
             &output,
             target_solution,
-            target_explanation,
             verification_target,
+            target_explanation,
         );
         
         // Policy gradient update (for discrete outputs)
         // Simplified: use verification score as reward
         let reward = verification_target;
-        let log_prob = output.verification_prob.ln().item();
+        let log_prob = output.verification_prob.mean().ln();
         self.policy_trainer.add_experience(log_prob, reward);
         
         // Train policy gradient every N steps
@@ -193,10 +200,10 @@ impl AdvancedALENSystem {
         // Store in memory if verification is high
         if verification_target > 0.8 {
             self.memory_network.store_verified_solution(
-                problem_input.to_vec(),
-                output.solution_embedding.to_vec(),
-                output.explanation_embedding.to_vec(),
-                verification_target,
+                problem_input.to_vec().iter().map(|&x| x as f64).collect(),
+                output.solution_embedding.to_vec().iter().map(|&x| x as f64).collect(),
+                output.explanation_embedding.to_vec().iter().map(|&x| x as f64).collect(),
+                verification_target as f64,
             );
         }
         
@@ -397,7 +404,7 @@ impl MathProblemSolver {
         // Decode solution and explanation
         let solution = self.decode_solution(&result.output.solution_embedding);
         let explanation = self.decode_explanation(&result.output.explanation_embedding);
-        let confidence = result.output.verification_prob.item();
+        let confidence = result.output.verification_prob.mean();
         
         MathSolution {
             solution,
@@ -409,7 +416,7 @@ impl MathProblemSolver {
     
     fn encode_problem(&self, problem: &str) -> Tensor {
         // Simplified encoding
-        Tensor::randn(&[1, 512])
+        Tensor::randn(vec![1, 512])
     }
     
     fn encode_audience(&self, level: AudienceLevel) -> Tensor {
@@ -487,7 +494,7 @@ impl CodeGenerationSystem {
         // Decode to code
         let code = self.decode_code(&tokens);
         let explanation = self.decode_explanation(&result.output.explanation_embedding);
-        let confidence = result.output.verification_prob.item();
+        let confidence = result.output.verification_prob.mean();
         
         CodeSolution {
             code,
@@ -498,7 +505,7 @@ impl CodeGenerationSystem {
     }
     
     fn encode_specification(&self, spec: &str) -> Tensor {
-        Tensor::randn(&[1, 512])
+        Tensor::randn(vec![1, 512])
     }
     
     fn encode_language(&self, language: ProgrammingLanguage) -> Tensor {

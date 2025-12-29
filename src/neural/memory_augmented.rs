@@ -88,7 +88,7 @@ impl MemoryBank {
             memories: VecDeque::new(),
             max_size,
             embedding_dim,
-            memory_proj: Linear::new(embedding_dim * 3, memory_dim),
+            memory_proj: Linear::new(embedding_dim * 3, memory_dim, true),
         }
     }
     
@@ -182,7 +182,8 @@ impl MemoryBank {
     
     /// Project memory to memory dimension
     pub fn project_memory(&self, memory_retrieval: &[f64]) -> Tensor {
-        let tensor = Tensor::from_vec(memory_retrieval.to_vec(), &[1, memory_retrieval.len()]);
+        let vec_f32: Vec<f32> = memory_retrieval.iter().map(|&x| x as f32).collect();
+        let tensor = Tensor::from_vec(vec_f32, &[1, memory_retrieval.len()]);
         self.memory_proj.forward(&tensor)
     }
     
@@ -239,7 +240,7 @@ impl MemoryAugmentedNetwork {
     ) -> Self {
         Self {
             memory_bank: MemoryBank::new(max_memories, embedding_dim, memory_dim),
-            input_embedder: Linear::new(input_dim, embedding_dim),
+            input_embedder: Linear::new(input_dim, embedding_dim, true),
         }
     }
     
@@ -250,7 +251,8 @@ impl MemoryAugmentedNetwork {
         let input_vec = input_embedding.to_vec();
         
         // Retrieve from memory
-        let memory_retrieval = self.memory_bank.retrieve(&input_vec, top_k);
+        let input_vec_f64: Vec<f64> = input_vec.iter().map(|&x| x as f64).collect();
+        let memory_retrieval = self.memory_bank.retrieve(&input_vec_f64, top_k);
         let memory_tensor = self.memory_bank.project_memory(&memory_retrieval);
         
         (input_embedding, memory_tensor)

@@ -103,7 +103,7 @@ impl MAML {
             // Forward pass (simplified)
             let pred = self.forward(params, input);
             let loss = pred.sub(target).pow(2.0).mean();
-            total_loss += loss.item();
+            total_loss += loss;
         }
         
         total_loss / data.samples.len() as f32
@@ -125,7 +125,7 @@ impl MAML {
         
         for (name, param) in params {
             // Simplified: random gradient
-            let grad = Tensor::randn(param.shape()) * loss;
+            let grad = Tensor::randn(param.shape()) .scale(loss);
             grads.insert(name.clone(), grad);
         }
         
@@ -174,19 +174,19 @@ impl LearnedOptimizer {
         // Input projection: [gradient, parameter, momentum] -> hidden
         optimizer_params.insert(
             "input_proj".to_string(),
-            Tensor::randn(&[param_dim * 3, hidden_dim]) * 0.01,
+            Tensor::randn(vec![param_dim * 3, hidden_dim]) .scale(0.01),
         );
         
         // Recurrent weights
         optimizer_params.insert(
             "recurrent".to_string(),
-            Tensor::randn(&[hidden_dim, hidden_dim]) * 0.01,
+            Tensor::randn(vec![hidden_dim, hidden_dim]) .scale(0.01),
         );
         
         // Output projection: hidden -> update
         optimizer_params.insert(
             "output_proj".to_string(),
-            Tensor::randn(&[hidden_dim, param_dim]) * 0.01,
+            Tensor::randn(vec![hidden_dim, param_dim]) .scale(0.01),
         );
         
         Self {
@@ -297,8 +297,10 @@ impl GradientStats {
     }
     
     fn update(&mut self, gradient: &Tensor) {
-        let grad_mean = gradient.mean().item();
-        let grad_var = gradient.var().item();
+        let grad_mean = gradient.mean();
+        // Variance calculation: E[(x - mean)^2]
+        let mean_tensor = Tensor::ones(gradient.shape()).scale(grad_mean);
+        let grad_var = gradient.sub(&mean_tensor).pow(2.0).mean();
         
         self.count += 1;
         let alpha = 1.0 / self.count as f32;
@@ -377,7 +379,7 @@ impl CurriculumLearning {
     }
     
     /// Sample task based on difficulty
-    pub fn sample_task(&self, tasks: &[Task]) -> Option<&Task> {
+    pub fn sample_task<'a>(&self, tasks: &'a [Task]) -> Option<&'a Task> {
         if tasks.is_empty() {
             return None;
         }
@@ -499,7 +501,7 @@ impl MetaLearningController {
         for _ in 0..10 {
             for (name, param) in params.iter_mut() {
                 // Compute gradient (simplified)
-                let grad = Tensor::randn(param.shape()) * 0.01;
+                let grad = Tensor::randn(param.shape()) .scale(0.01);
                 
                 // Get momentum
                 let mom = momentum.get(name).unwrap();
@@ -553,17 +555,17 @@ mod tests {
         let task = Task {
             initial_params: {
                 let mut params = HashMap::new();
-                params.insert("weight".to_string(), Tensor::randn(&[10, 10]));
+                params.insert("weight".to_string(), Tensor::randn(vec![10, 10]));
                 params
             },
             support_set: DataSet {
                 samples: vec![
-                    (Tensor::randn(&[1, 10]), Tensor::randn(&[1, 10])),
+                    (Tensor::randn(vec![1, 10]), Tensor::randn(vec![1, 10])),
                 ],
             },
             query_set: DataSet {
                 samples: vec![
-                    (Tensor::randn(&[1, 10]), Tensor::randn(&[1, 10])),
+                    (Tensor::randn(vec![1, 10]), Tensor::randn(vec![1, 10])),
                 ],
             },
         };
