@@ -10,6 +10,7 @@
 pub mod curiosity;
 pub mod emotions;
 pub mod mood;
+pub mod frequency_governor;
 
 pub use curiosity::{
     CuriosityEngine, Prediction, Observation, Surprise,
@@ -22,6 +23,9 @@ pub use emotions::{
 };
 pub use mood::{
     MoodEngine, MoodState, Mood, MoodStatistics,
+};
+pub use frequency_governor::{
+    FrequencyGovernor, FrequencyAllocation, ProblemCharacteristics, ProblemType,
 };
 
 use crate::core::{ThoughtState, BiasVector};

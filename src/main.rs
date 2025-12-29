@@ -230,6 +230,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error + Send + Sync>> {
             dimension: app_config.dimension,
             normalize: true,
             vocab_size: 10000,
+            use_bpe: false,
         },
         evaluator_confidence_threshold: 0.6,  // Stricter for testing
         evaluator_energy_threshold: 0.5,

@@ -20,6 +20,7 @@ pub mod knowledge_visual;
 pub mod dynamic_vocab;
 pub mod bpe_tokenizer;
 pub mod semantic_decoder;
+pub mod confidence_decoder;
 
 pub use video::{VideoGenerator, VideoGenConfig, GeneratedVideo, MotionType};
 pub use text_decoder::{TextDecoder, Vocabulary as DecoderVocabulary};
@@ -47,6 +48,10 @@ pub use bpe_tokenizer::{
     BPETokenizer, BPETrainer, BPEWithEmbeddings, BPESpecialTokens, MergeRule,
 };
 pub use semantic_decoder::SemanticDecoder;
+pub use confidence_decoder::{
+    ConfidenceDecoder, DecoderOutput, RefusalReason, UncertaintyBreakdown,
+    CalibrationParams, CalibrationMetrics, CalibrationBin,
+};
 
 use crate::core::{ThoughtState, Activation, DenseLayer};
 use nalgebra::{DMatrix, DVector};
@@ -380,9 +385,9 @@ impl ImageGenerator {
         }
 
         // Normalize to [0, 1]
-        let min_val = current.min();
-        let max_val = current.max();
-        let range = (max_val - min_val).max(1e-10);
+        let min_val = current.iter().cloned().fold(f64::INFINITY, f64::min);
+        let max_val = current.iter().cloned().fold(f64::NEG_INFINITY, f64::max);
+        let range = (max_val - min_val).max(1e-10_f64);
 
         current.iter()
             .map(|x| ((x - min_val) / range).clamp(0.0, 1.0))

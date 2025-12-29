@@ -895,6 +895,7 @@ impl MultimodalEncoder {
                 dimension: embedding_dim,
                 normalize: true,
                 vocab_size: 10000,
+                use_bpe: false,
             }),
             image_encoder: ImageEncoder::new(embedding_dim),
             video_encoder: VideoEncoder::new(embedding_dim),

@@ -383,14 +383,17 @@ impl ProofEngine {
             }
         }
 
+        let proof_depth = successful_paths.iter().map(|p| p.steps.len()).max().unwrap_or(0);
+        let path_count = successful_paths.len();
+        
         ProofResult {
             verified,
             answer: best_answer.map(|(v, _)| Answer { value: v, structure: None, initial_confidence: 1.0 - energy_breakdown.total }),
             successful_paths,
             backward_checks,
             proof_energy: energy_breakdown.total,
-            proof_depth: successful_paths.iter().map(|p| p.steps.len()).max().unwrap_or(0),
-            path_count: successful_paths.len(),
+            proof_depth,
+            path_count,
             energy_breakdown,
         }
     }
@@ -606,9 +609,10 @@ impl HybridReasoner {
         let symbolic_conf = 1.0 - proof_result.proof_energy;
         let blended = (1.0 - self.blend_factor) * symbolic_conf + self.blend_factor * neural_conf;
         let verified = proof_result.verified && blended > 0.6;
+        let answer = proof_result.answer.clone();
 
         HybridResult {
-            answer: proof_result.answer,
+            answer,
             verified,
             symbolic_confidence: symbolic_conf,
             neural_confidence: neural_conf,

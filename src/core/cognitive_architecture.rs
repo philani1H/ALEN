@@ -192,7 +192,7 @@ impl SmallAttention {
     pub fn new(dim: usize) -> Self {
         use rand::Rng;
         let mut rng = rand::thread_rng();
-        let init = || (0..dim * dim).map(|_| rng.gen_range(-0.1..0.1)).collect();
+        let mut init = || (0..dim * dim).map(|_| rng.gen_range(-0.1..0.1)).collect();
         Self { dim, w_q: init(), w_k: init(), w_v: init() }
     }
 
@@ -616,8 +616,10 @@ impl ConstrainedCreativity {
     }
 
     fn text_similarity(&self, a: &str, b: &str) -> f64 {
-        let a_words: std::collections::HashSet<_> = a.to_lowercase().split_whitespace().collect();
-        let b_words: std::collections::HashSet<_> = b.to_lowercase().split_whitespace().collect();
+        let a_lower = a.to_lowercase();
+        let b_lower = b.to_lowercase();
+        let a_words: std::collections::HashSet<_> = a_lower.split_whitespace().collect();
+        let b_words: std::collections::HashSet<_> = b_lower.split_whitespace().collect();
         
         let intersection = a_words.intersection(&b_words).count() as f64;
         let union = a_words.union(&b_words).count() as f64;

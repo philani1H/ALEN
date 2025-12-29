@@ -170,7 +170,7 @@ impl IntentExtractor {
         let mut distribution = HashMap::new();
 
         for task_type in TaskType::all() {
-            let mut score = 0.0;
+            let mut score: f64 = 0.0;
             for keyword in task_type.keywords() {
                 if lower.contains(keyword) {
                     score += 0.3;
