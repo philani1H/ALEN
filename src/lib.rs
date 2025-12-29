@@ -48,6 +48,9 @@ pub mod reasoning;
 pub mod storage;
 pub mod math;
 pub mod training;
+pub mod confidence;
+pub mod verification;
+pub mod explanation;
 
 // Re-export commonly used types at the crate level
 pub use core::{

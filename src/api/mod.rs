@@ -16,8 +16,10 @@ pub mod conversation;
 pub mod media_training;
 pub mod emotions;
 pub mod export;
+pub mod user_modeling;
 
 pub use conversation::ConversationManager;
+pub use user_modeling::{UserModelingManager, UserState, UserArchetype, ResponseDepth};
 
 use crate::core::{
     Problem, OperatorManager, OperatorStats,
@@ -90,6 +92,7 @@ impl Default for EngineConfig {
                 dimension: 128,
                 normalize: true,
                 vocab_size: 10000,
+                use_bpe: false,
             },
             evaluator_confidence_threshold: 0.6,  // Stricter for testing
             evaluator_energy_threshold: 0.5,
@@ -119,6 +122,10 @@ pub struct ReasoningEngine {
     pub mood_engine: MoodEngine,
     /// Emotion system - reactive emotional processing
     pub emotion_system: EmotionSystem,
+    /// Active learning system - human-like learning
+    pub active_learning: crate::learning::ActiveLearningSystem,
+    /// Self-learning system - learns from conversations over time
+    pub self_learning: crate::learning::SelfLearningSystem,
     /// Configuration
     pub config: EngineConfig,
 }
@@ -142,6 +149,8 @@ impl ReasoningEngine {
         let bias_controller = BiasController::new();
         let mood_engine = MoodEngine::new();
         let emotion_system = EmotionSystem::new();
+        let active_learning = crate::learning::ActiveLearningSystem::new();
+        let self_learning = crate::learning::SelfLearningSystem::new();
 
         Ok(Self {
             operators,
@@ -153,6 +162,8 @@ impl ReasoningEngine {
             bias_controller,
             mood_engine,
             emotion_system,
+            active_learning,
+            self_learning,
             config,
         })
     }
@@ -178,6 +189,8 @@ impl ReasoningEngine {
         let bias_controller = BiasController::new();
         let mood_engine = MoodEngine::new();
         let emotion_system = EmotionSystem::new();
+        let active_learning = crate::learning::ActiveLearningSystem::new();
+        let self_learning = crate::learning::SelfLearningSystem::new();
 
         Ok(Self {
             operators,
@@ -189,6 +202,8 @@ impl ReasoningEngine {
             bias_controller,
             mood_engine,
             emotion_system,
+            active_learning,
+            self_learning,
             config,
         })
     }

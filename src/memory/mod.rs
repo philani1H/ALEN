@@ -10,9 +10,17 @@ pub mod episodic;
 pub mod semantic;
 pub mod semantic_store;
 pub mod embeddings;
+pub mod concept_compression;
+pub mod input_embeddings;
 
 // Re-export main types
 pub use episodic::{EpisodicMemory, Episode, EpisodeStatistics};
 pub use semantic::{SemanticMemory, SemanticFact, SemanticStatistics};
 pub use semantic_store::{SemanticStore, SemanticEntry, SemanticStats};
 pub use embeddings::{EmbeddingEngine, EmbeddingConfig, EmbeddingBatch};
+pub use concept_compression::{
+    Concept, ConceptType, ProofSkeleton,
+    MemoryDecay, ConceptExtractor, CompressionManager,
+    EpisodeData, CompressionResult, CompressionStats,
+    ProtectedKnowledge,
+};

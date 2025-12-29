@@ -20,6 +20,8 @@ mod policy_gradient;
 mod creative_latent;
 mod meta_learning;
 mod advanced_integration;
+mod self_discovery;
+mod neural_reasoning_engine;
 
 pub use tensor::{Tensor, TensorShape, Device};
 pub use layers::{Linear, LayerNorm, Dropout, Embedding, Conv1D};
@@ -68,4 +70,14 @@ pub use advanced_integration::{
     AdvancedALENSystem, AdvancedALENConfig, AdvancedForwardResult,
     AdvancedTrainingMetrics, SystemStats, MathProblemSolver, MathSolution,
     CodeGenerationSystem, CodeSolution, AudienceLevel, ProgrammingLanguage,
+};
+pub use self_discovery::{
+    SelfDiscoveryLoop, KnowledgeEncoder, TransformationBank, TransformationType,
+    TransformationOperator, ConsistencyVerifier, KnowledgeIntegrator,
+    ExplanationGenerator, ExplanationLevel, UncertaintyEstimator,
+    DiscoveryResult, DiscoveryStats,
+};
+pub use neural_reasoning_engine::{
+    NeuralReasoningEngine, NeuralReasoningStep, NeuralReasoningTrace,
+    VerificationResult as NeuralVerificationResult, EngineStats,
 };

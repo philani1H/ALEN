@@ -80,6 +80,8 @@ impl Default for UniversalNetworkConfig {
                 n_layers: 6,
                 dropout: 0.1,
                 max_seq_len: 512,
+                vocab_size: 10000,
+                layer_norm_eps: 1e-5,
             },
             dropout: 0.1,
             alpha: 0.5,

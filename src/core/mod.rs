@@ -20,6 +20,8 @@ pub mod unified_cognition;
 pub mod intent_extraction;
 pub mod proof_system;
 pub mod cognitive_architecture;
+pub mod self_questioning;
+pub mod proof_graph;
 
 // Re-export main types for convenience
 pub use state::{ThoughtState, BiasVector, Problem, ThoughtMetadata};
@@ -60,7 +62,8 @@ pub use intent_extraction::{
 // Re-export proof system types
 pub use proof_system::{
     Problem as ProofProblem, Answer, SolutionPath, ReasoningStep, Transformation,
-    KnowledgeBase, Axiom, InferenceRule, VerifiedFact, CachedProof, BackwardCheck,
+    KnowledgeBase, Axiom, InferenceRule, VerifiedFact, CachedProof,
+    BackwardCheck as ProofBackwardCheck,  // Renamed to avoid conflict
     ProofGraph, ProofNode, ProofNodeType, ProofEdge, EdgeDirection,
     ProofEngine, ProofEnergyWeights, ProofResult, ProofEnergyBreakdown,
     HybridReasoner, NeuralConfidence, HybridResult, ReasoningMode,
@@ -76,4 +79,20 @@ pub use cognitive_architecture::{
     UnderstandingTest, UnderstandingResult, UnderstandingBreakdown,
     ConstrainedCreativity, CreativeResult,
     CognitiveSystem, CognitiveResponse, ResponseType,
+};
+
+// Re-export self-questioning types
+pub use self_questioning::{
+    EpistemicUncertainty, ConfidenceFunctional, VerificationProcedure, VerificationType,
+    SelfQuestioningOperator, AlternativeInterpretation, AlternativeType,
+    QuestioningEnergyWeights, SelfQuestioningVerificationResult,
+    MultiPathAgreement, PathSolution, ReasoningPathType,
+    SelfCorrectionTrigger,
+};
+
+// Re-export proof graph types
+pub use proof_graph::{
+    FormalProofGraph, FormalProofNode, FormalProofEdge, ProofPath,
+    NodeId, FormalNodeType, NodeContent, FormalInferenceRule, Justification,
+    PathVerification, GraphVerification, GraphMetadata,
 };

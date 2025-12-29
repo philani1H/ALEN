@@ -219,7 +219,7 @@ impl TrainingPipeline {
             // Verified learning
             if self.config.use_verification {
                 let knowledge_item = crate::knowledge::KnowledgeItem {
-                    category: crate::knowledge::KnowledgeCategory::GeneralKnowledge,
+                    category: crate::knowledge::KnowledgeCategory::ComputerScience,
                     subcategory: example.subcategory.clone().unwrap_or_default(),
                     input: example.input.clone(),
                     output: example.output.clone(),

@@ -86,6 +86,8 @@ fn create_config() -> AdvancedALENConfig {
             d_ff: 512,
             dropout: 0.1,
             max_seq_len: 256,
+            vocab_size: 1000,
+            layer_norm_eps: 1e-5,
         },
         dropout_rate: 0.1,
         loss_weights: (0.5, 0.3, 0.2),

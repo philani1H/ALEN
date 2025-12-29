@@ -168,6 +168,7 @@ impl VerifiedLearner {
                 dimension,
                 normalize: true,
                 vocab_size: 10000,
+                use_bpe: false,
             }),
             knowledge: KnowledgeBase::new(),
             session: VerifiedLearningSession::default(),

@@ -2,8 +2,13 @@
 //!
 //! Stores specific past experiences and training attempts.
 //! Only accepts verified (learned) paths.
+//!
+//! CRITICAL: Uses INPUT EMBEDDINGS for similarity search (Fix #1)
+//! - input_embedding: For similarity/retrieval (semantic space)
+//! - thought_vector: For reasoning/verification (thought space)
 
 use crate::core::{ThoughtState, Problem, EnergyResult};
+use crate::memory::input_embeddings::{InputEmbedder, EnhancedEpisode as NewEnhancedEpisode};
 use rusqlite::{Connection, params, Result as SqlResult};
 use serde::{Deserialize, Serialize};
 use std::path::Path;
@@ -84,6 +89,34 @@ impl Episode {
         self.tags.push(tag.to_string());
         self
     }
+    
+    /// Compute text embedding (simple hash-based for now)
+    fn compute_text_embedding(text: &str) -> Vec<f64> {
+        use std::collections::hash_map::DefaultHasher;
+        use std::hash::{Hash, Hasher};
+        
+        let dimension = 128;
+        let mut embedding = vec![0.0; dimension];
+        
+        for (i, word) in text.split_whitespace().enumerate() {
+            let mut hasher = DefaultHasher::new();
+            word.hash(&mut hasher);
+            let hash = hasher.finish();
+            
+            let idx = (hash as usize) % dimension;
+            embedding[idx] += 1.0;
+        }
+        
+        // Normalize
+        let norm: f64 = embedding.iter().map(|x| x * x).sum::<f64>().sqrt();
+        if norm > 1e-10 {
+            for val in embedding.iter_mut() {
+                *val /= norm;
+            }
+        }
+        
+        embedding
+    }
 }
 
 /// Episodic Memory Storage
@@ -94,6 +127,8 @@ pub struct EpisodicMemory {
     min_confidence: f64,
     /// Only store verified episodes
     require_verified: bool,
+    /// Input embedder for semantic space (Fix #1)
+    embedder: InputEmbedder,
 }
 
 impl EpisodicMemory {
@@ -106,6 +141,7 @@ impl EpisodicMemory {
                 id TEXT PRIMARY KEY,
                 problem_input TEXT NOT NULL,
                 answer_output TEXT NOT NULL,
+                input_embedding BLOB NOT NULL,
                 thought_vector BLOB NOT NULL,
                 verified INTEGER NOT NULL,
                 confidence_score REAL NOT NULL,
@@ -133,6 +169,7 @@ impl EpisodicMemory {
             conn,
             min_confidence: 0.5,
             require_verified: true,
+            embedder: InputEmbedder::new(128), // Default dimension
         })
     }
 
@@ -152,6 +189,7 @@ impl EpisodicMemory {
     }
 
     /// Store an episode (only if it meets criteria)
+    /// CRITICAL: Computes INPUT EMBEDDING for similarity search (Fix #1)
     pub fn store(&self, episode: &Episode) -> SqlResult<bool> {
         // Check if episode meets storage criteria
         if self.require_verified && !episode.verified {
@@ -161,7 +199,12 @@ impl EpisodicMemory {
             return Ok(false);
         }
 
-        let vector_bytes = bincode::serialize(&episode.thought_vector)
+        // CRITICAL FIX #1: Compute input embedding in SEMANTIC SPACE
+        let input_embedding = self.embedder.embed(&episode.problem_input);
+        let input_embedding_bytes = bincode::serialize(&input_embedding)
+            .map_err(|e| rusqlite::Error::ToSqlConversionFailure(Box::new(e)))?;
+
+        let thought_vector_bytes = bincode::serialize(&episode.thought_vector)
             .map_err(|e| rusqlite::Error::ToSqlConversionFailure(Box::new(e)))?;
         
         let tags_json = serde_json::to_string(&episode.tags)
@@ -169,14 +212,15 @@ impl EpisodicMemory {
 
         self.conn.execute(
             "INSERT OR REPLACE INTO episodes 
-             (id, problem_input, answer_output, thought_vector, verified, 
+             (id, problem_input, answer_output, input_embedding, thought_vector, verified, 
               confidence_score, energy, operator_id, created_at, tags)
-             VALUES (?1, ?2, ?3, ?4, ?5, ?6, ?7, ?8, ?9, ?10)",
+             VALUES (?1, ?2, ?3, ?4, ?5, ?6, ?7, ?8, ?9, ?10, ?11)",
             params![
                 episode.id,
                 episode.problem_input,
                 episode.answer_output,
-                vector_bytes,
+                input_embedding_bytes,
+                thought_vector_bytes,
                 episode.verified as i32,
                 episode.confidence_score,
                 episode.energy,
@@ -192,7 +236,7 @@ impl EpisodicMemory {
     /// Retrieve an episode by ID
     pub fn get(&self, id: &str) -> SqlResult<Option<Episode>> {
         let mut stmt = self.conn.prepare(
-            "SELECT id, problem_input, answer_output, thought_vector, verified,
+            "SELECT id, problem_input, answer_output, input_embedding, thought_vector, verified,
                     confidence_score, energy, operator_id, created_at, tags
              FROM episodes WHERE id = ?1"
         )?;
@@ -206,42 +250,46 @@ impl EpisodicMemory {
         }
     }
 
-    /// Find similar episodes by problem input using embedding similarity
+    /// Find similar episodes by problem input using INPUT EMBEDDINGS (Fix #1)
+    /// CRITICAL: Uses input_embedding (semantic space), NOT thought_vector
     pub fn find_similar(&self, input: &str, limit: usize) -> SqlResult<Vec<Episode>> {
-        // Get all episodes and compute similarity based on thought vectors
+        // CRITICAL FIX #1: Compute query embedding in INPUT/SEMANTIC SPACE
+        let query_embedding = self.embedder.embed(input);
+        
+        // Get ALL verified episodes with their INPUT EMBEDDINGS
         let mut stmt = self.conn.prepare(
-            "SELECT id, problem_input, answer_output, thought_vector, verified,
+            "SELECT id, problem_input, answer_output, input_embedding, thought_vector, verified,
                     confidence_score, energy, operator_id, created_at, tags
              FROM episodes 
-             WHERE verified = 1
-             ORDER BY confidence_score DESC
-             LIMIT ?1"
+             WHERE verified = 1"
         )?;
 
-        let mut rows = stmt.query(params![(limit * 10) as i64])?; // Get more for filtering
+        let mut rows = stmt.query([])?;
         
         let mut episodes = Vec::new();
         while let Some(row) = rows.next()? {
             episodes.push(self.row_to_episode(row)?);
         }
         
-        // If we have a small dataset, use text matching as fallback
+        // If empty, return empty
         if episodes.is_empty() {
-            return self.find_similar_by_text(input, limit);
+            return Ok(vec![]);
         }
         
-        // Compute input embedding (using hash-based approach for consistency)
-        let input_embedding = Self::compute_text_embedding(input);
-        
-        // Score episodes by cosine similarity
+        // CRITICAL FIX #1: Score episodes by INPUT EMBEDDING similarity
+        // NOT by thought vector similarity!
         let mut scored: Vec<(Episode, f64)> = episodes.into_iter()
             .map(|ep| {
-                let sim = Self::cosine_similarity(&input_embedding, &ep.thought_vector);
+                // Get stored input embedding (already computed during store())
+                let ep_embedding = self.embedder.embed(&ep.problem_input);
+                
+                // Compare in INPUT SPACE (semantic similarity)
+                let sim = self.embedder.similarity(&query_embedding, &ep_embedding);
                 (ep, sim)
             })
             .collect();
         
-        // Sort by similarity
+        // Sort by similarity score (highest first)
         scored.sort_by(|a, b| b.1.partial_cmp(&a.1).unwrap_or(std::cmp::Ordering::Equal));
         
         // Return top results
@@ -333,7 +381,7 @@ impl EpisodicMemory {
     /// Get top episodes by confidence
     pub fn get_top_episodes(&self, limit: usize) -> SqlResult<Vec<Episode>> {
         let mut stmt = self.conn.prepare(
-            "SELECT id, problem_input, answer_output, thought_vector, verified,
+            "SELECT id, problem_input, answer_output, input_embedding, thought_vector, verified,
                     confidence_score, energy, operator_id, created_at, tags
              FROM episodes 
              WHERE verified = 1
@@ -354,7 +402,7 @@ impl EpisodicMemory {
     /// Get episodes by operator
     pub fn get_by_operator(&self, operator_id: &str, limit: usize) -> SqlResult<Vec<Episode>> {
         let mut stmt = self.conn.prepare(
-            "SELECT id, problem_input, answer_output, thought_vector, verified,
+            "SELECT id, problem_input, answer_output, input_embedding, thought_vector, verified,
                     confidence_score, energy, operator_id, created_at, tags
              FROM episodes
              WHERE operator_id = ?1
@@ -375,7 +423,7 @@ impl EpisodicMemory {
     /// Get all episodes (for export)
     pub fn get_all_episodes(&self, limit: usize) -> SqlResult<Vec<Episode>> {
         let mut stmt = self.conn.prepare(
-            "SELECT id, problem_input, answer_output, thought_vector, verified,
+            "SELECT id, problem_input, answer_output, input_embedding, thought_vector, verified,
                     confidence_score, energy, operator_id, created_at, tags
              FROM episodes
              ORDER BY created_at DESC
@@ -434,17 +482,19 @@ impl EpisodicMemory {
 
     /// Helper to convert a row to Episode
     fn row_to_episode(&self, row: &rusqlite::Row) -> SqlResult<Episode> {
-        let vector_bytes: Vec<u8> = row.get(3)?;
-        let thought_vector: Vec<f64> = bincode::deserialize(&vector_bytes)
+        // Skip input_embedding (index 3) - we don't need it in the Episode struct
+        // It's only used for similarity search
+        let thought_vector_bytes: Vec<u8> = row.get(4)?;
+        let thought_vector: Vec<f64> = bincode::deserialize(&thought_vector_bytes)
             .map_err(|e| rusqlite::Error::FromSqlConversionFailure(
-                3, rusqlite::types::Type::Blob, Box::new(e)
+                4, rusqlite::types::Type::Blob, Box::new(e)
             ))?;
         
-        let tags_json: String = row.get(9)?;
+        let tags_json: String = row.get(10)?;
         let tags: Vec<String> = serde_json::from_str(&tags_json)
             .unwrap_or_default();
 
-        let created_str: String = row.get(8)?;
+        let created_str: String = row.get(9)?;
         let created_at = DateTime::parse_from_rfc3339(&created_str)
             .map(|dt| dt.with_timezone(&Utc))
             .unwrap_or_else(|_| Utc::now());
@@ -454,10 +504,10 @@ impl EpisodicMemory {
             problem_input: row.get(1)?,
             answer_output: row.get(2)?,
             thought_vector,
-            verified: row.get::<_, i32>(4)? != 0,
-            confidence_score: row.get(5)?,
-            energy: row.get(6)?,
-            operator_id: row.get(7)?,
+            verified: row.get::<_, i32>(5)? != 0,
+            confidence_score: row.get(6)?,
+            energy: row.get(7)?,
+            operator_id: row.get(8)?,
             created_at,
             tags,
         })

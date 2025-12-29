@@ -2,7 +2,15 @@
 //!
 //! Implements the "try again" logic by adjusting operator weights
 //! based on whether the verification succeeded.
-//! w_i ← w_i + η(reward - E(ψ_i))
+//! 
+//! Now uses epistemic reward function:
+//! R = w₁V + w₂P + w₃C - w₄H
+//!
+//! Where:
+//! - V = Verification success (forward + backward)
+//! - P = Proof consistency (energy-based)
+//! - C = Confidence calibration (accuracy)
+//! - H = Hallucination penalty (guessing without proof)
 
 use crate::core::{
     ThoughtState, Problem, OperatorManager,
@@ -10,6 +18,10 @@ use crate::core::{
     SelectionStrategy,
 };
 use crate::memory::{EpisodicMemory, Episode};
+use crate::learning::epistemic_reward::{
+    EpistemicRewardCalculator, EpistemicReward, RewardWeights,
+    EpistemicOperatorStats,
+};
 use serde::{Deserialize, Serialize};
 use std::collections::HashMap;
 
@@ -96,6 +108,10 @@ pub struct FeedbackLoop {
     current_learning_rate: f64,
     /// Training iteration counter
     iteration_count: u64,
+    /// Epistemic reward calculator (anti-hallucination)
+    epistemic_reward: EpistemicRewardCalculator,
+    /// Operator statistics with epistemic metrics
+    operator_stats: HashMap<String, EpistemicOperatorStats>,
 }
 
 impl FeedbackLoop {
@@ -111,6 +127,21 @@ impl FeedbackLoop {
             SelectionStrategy::Softmax { temperature: 0.5 },
         );
 
+        // Initialize epistemic reward calculator
+        let epistemic_reward = EpistemicRewardCalculator::default();
+
+        // Initialize operator stats
+        let mut operator_stats = HashMap::new();
+        for (id, op) in &operators.operators {
+            operator_stats.insert(
+                id.clone(),
+                EpistemicOperatorStats::new(
+                    id.clone(),
+                    format!("{:?}", op.operator_type),
+                ),
+            );
+        }
+
         Self {
             operators,
             evaluator,
@@ -118,6 +149,8 @@ impl FeedbackLoop {
             config,
             current_learning_rate,
             iteration_count: 0,
+            epistemic_reward,
+            operator_stats,
         }
     }
 
@@ -154,21 +187,29 @@ impl FeedbackLoop {
                     best_evaluation = Some(evaluation.clone());
                 }
 
-                // Calculate reward for this operator
-                let reward = if evaluation.should_commit {
-                    // Positive reward for verified answer
-                    1.0 - evaluation.energy.total
-                } else if evaluation.energy.verified {
-                    // Partial reward for good but not fully verified
-                    0.5 * (1.0 - evaluation.energy.total)
-                } else {
-                    // Small negative reward for unverified
-                    -0.1 * evaluation.energy.total
-                };
+                // Calculate epistemic reward: R = w₁V + w₂P + w₃C - w₄H
+                let has_proof = evaluation.backward_check.passes;
+                let claimed_confidence = candidate.confidence;
+                
+                let epistemic_reward = self.epistemic_reward.calculate_reward(
+                    candidate,
+                    problem,
+                    &evaluation.energy,
+                    claimed_confidence,
+                    has_proof,
+                );
 
-                // Step 5: Update operator weight
+                // Use epistemic reward (not just energy)
+                let reward = epistemic_reward.total;
+
+                // Step 5: Update operator weight with epistemic reward
                 self.operators.update_weights(op_id, reward, self.current_learning_rate);
                 *rewards.entry(op_id.clone()).or_insert(0.0) += reward;
+
+                // Update operator stats with epistemic metrics
+                if let Some(stats) = self.operator_stats.get_mut(op_id) {
+                    stats.update(&epistemic_reward, &self.epistemic_reward);
+                }
 
                 // Check if this candidate should be committed (Step 4)
                 if evaluation.should_commit {
@@ -298,6 +339,40 @@ impl FeedbackLoop {
     /// Get operator statistics
     pub fn get_operator_stats(&self) -> Vec<crate::core::OperatorStats> {
         self.operators.get_statistics()
+    }
+
+    /// Get epistemic operator statistics (with hallucination metrics)
+    pub fn get_epistemic_stats(&self) -> Vec<EpistemicOperatorStats> {
+        self.operator_stats.values().cloned().collect()
+    }
+
+    /// Get hallucination rate across all operators
+    pub fn get_hallucination_rate(&self) -> f64 {
+        let total_attempts: u64 = self.operator_stats.values()
+            .map(|s| s.attempts)
+            .sum();
+        let total_hallucinations: u64 = self.operator_stats.values()
+            .map(|s| s.hallucinations)
+            .sum();
+
+        if total_attempts == 0 {
+            return 0.0;
+        }
+
+        total_hallucinations as f64 / total_attempts as f64
+    }
+
+    /// Get average earned confidence (not claimed)
+    pub fn get_earned_confidence(&self) -> f64 {
+        if self.operator_stats.is_empty() {
+            return 0.0;
+        }
+
+        let sum: f64 = self.operator_stats.values()
+            .map(|s| s.earned_confidence)
+            .sum();
+
+        sum / self.operator_stats.len() as f64
     }
 
     /// Get reference to operators
