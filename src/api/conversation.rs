@@ -936,7 +936,7 @@ fn retrieve_relevant_knowledge(query: &str, semantic_memory: &SemanticMemory) ->
     // If no results, try individual words
     if knowledge.is_empty() {
         let concepts: Vec<&str> = query_lower.split_whitespace()
-            .filter(|w| w.len() > 2)  // Changed from 3 to 2
+            .filter(|w| !is_stopword(w))
             .collect();
         
         for concept in concepts.iter().take(3) {
@@ -951,6 +951,42 @@ fn retrieve_relevant_knowledge(query: &str, semantic_memory: &SemanticMemory) ->
     }
     
     knowledge
+}
+
+/// Check if a word is a stopword (common words with little semantic value)
+/// Preserves important short terms like "AI", "ML", "OS", "DB", etc.
+fn is_stopword(word: &str) -> bool {
+    // Common English stopwords that don't carry semantic meaning
+    const STOPWORDS: &[(&str, bool)] = &[
+        // Articles
+        ("a", true), ("an", true), ("the", true),
+        // Pronouns
+        ("i", true), ("me", true), ("my", true), ("we", true), ("us", true),
+        ("you", true), ("he", true), ("she", true), ("it", true), ("they", true),
+        // Prepositions
+        ("in", true), ("on", true), ("at", true), ("to", true), ("of", true),
+        ("for", true), ("by", true), ("as", true),
+        // Conjunctions
+        ("and", true), ("or", true), ("but", true),
+        // Common verbs
+        ("is", true), ("am", true), ("are", true), ("was", true), ("be", true),
+        ("do", true), ("does", true), ("did", true), ("has", true), ("have", true),
+        // Question words (keep these as they indicate intent)
+        ("what", false), ("how", false), ("why", false), ("when", false), ("where", false),
+        // Other common words
+        ("this", true), ("that", true), ("with", true), ("from", true),
+    ];
+    
+    // Check against stopword list
+    for (stopword, should_filter) in STOPWORDS {
+        if word == *stopword && *should_filter {
+            return true;
+        }
+    }
+    
+    // Keep all other words, including important short terms like:
+    // AI, ML, OS, DB, UI, UX, Go, C++, etc.
+    false
 }
 
 /// Generate response from thought vector and knowledge base
@@ -1128,4 +1164,98 @@ pub async fn submit_feedback(
         "message": "Feedback received and will be used for learning",
         "feedback_type": req.feedback_type
     }))
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn test_stopword_filtering() {
+        // Common stopwords should be filtered
+        assert!(is_stopword("the"));
+        assert!(is_stopword("a"));
+        assert!(is_stopword("an"));
+        assert!(is_stopword("is"));
+        assert!(is_stopword("and"));
+        assert!(is_stopword("or"));
+        assert!(is_stopword("to"));
+        assert!(is_stopword("of"));
+        assert!(is_stopword("in"));
+        assert!(is_stopword("for"));
+        
+        // Important short technical terms should NOT be filtered
+        assert!(!is_stopword("ai"));
+        assert!(!is_stopword("ml"));
+        assert!(!is_stopword("os"));
+        assert!(!is_stopword("db"));
+        assert!(!is_stopword("ui"));
+        assert!(!is_stopword("ux"));
+        assert!(!is_stopword("go"));
+        assert!(!is_stopword("c++"));
+        assert!(!is_stopword("io"));
+        assert!(!is_stopword("id"));
+        
+        // Question words should NOT be filtered (they indicate intent)
+        assert!(!is_stopword("what"));
+        assert!(!is_stopword("how"));
+        assert!(!is_stopword("why"));
+        assert!(!is_stopword("when"));
+        assert!(!is_stopword("where"));
+        
+        // Regular words should NOT be filtered
+        assert!(!is_stopword("machine"));
+        assert!(!is_stopword("learning"));
+        assert!(!is_stopword("neural"));
+        assert!(!is_stopword("network"));
+        assert!(!is_stopword("algorithm"));
+    }
+
+    #[test]
+    fn test_extract_topic() {
+        assert_eq!(extract_topic("what is machine learning"), "machine learning");
+        assert_eq!(extract_topic("explain neural networks"), "neural networks");
+        assert_eq!(extract_topic("how does AI work"), "AI work");
+        assert_eq!(extract_topic("tell me about databases"), "databases");
+    }
+
+    #[test]
+    fn test_detect_theme() {
+        assert_eq!(detect_theme("write a poem about love"), "love");
+        assert_eq!(detect_theme("nature is beautiful"), "nature");
+        assert_eq!(detect_theme("time flies"), "time");
+        assert_eq!(detect_theme("hope for tomorrow"), "hope");
+        assert_eq!(detect_theme("random text"), "life");
+    }
+
+    #[test]
+    fn test_truncate_to_words() {
+        let text = "This is a long sentence with many words in it";
+        assert_eq!(truncate_to_words(text, 3), "This is a");
+        assert_eq!(truncate_to_words(text, 5), "This is a long sentence");
+        assert_eq!(truncate_to_words(text, 100), text);
+    }
+
+    #[test]
+    fn test_is_gibberish() {
+        // Technical jargon without structure should be gibberish
+        assert!(is_gibberish("tensor gradient embedding vector matrix"));
+        
+        // Normal sentences should not be gibberish
+        assert!(!is_gibberish("The neural network uses tensors for computation"));
+        assert!(!is_gibberish("Machine learning is a subset of artificial intelligence"));
+        
+        // Very short text should be gibberish
+        assert!(is_gibberish("hi"));
+        assert!(is_gibberish("ok"));
+    }
+
+    #[test]
+    fn test_simplify_response() {
+        let technical = "The neural network uses an optimization algorithm";
+        let simplified = simplify_response(technical);
+        assert!(simplified.contains("AI system"));
+        assert!(simplified.contains("method"));
+        assert!(simplified.contains("improvement"));
+    }
 }
