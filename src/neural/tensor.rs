@@ -596,6 +596,145 @@ impl Tensor {
             .map(|i| self.data[i * cols..(i + 1) * cols].to_vec())
             .collect()
     }
+    
+    /// Get scalar value (for 1-element tensors)
+    pub fn item(&self) -> f32 {
+        if self.data.len() != 1 {
+            panic!("item() requires tensor with exactly 1 element, got {}", self.data.len());
+        }
+        self.data[0]
+    }
+    
+    /// Slice tensor along dimension 0
+    pub fn slice(&self, index: usize, dim: usize) -> Vec<f32> {
+        if dim != 0 {
+            panic!("slice currently only supports dim=0");
+        }
+        if index >= self.shape.dim(0) {
+            panic!("slice index {} out of bounds for dimension 0 with size {}", index, self.shape.dim(0));
+        }
+        
+        let stride = self.data.len() / self.shape.dim(0);
+        self.data[index * stride..(index + 1) * stride].to_vec()
+    }
+    
+    /// Concatenate tensors along dimension
+    pub fn concat(&self, other: &Tensor, dim: usize) -> Tensor {
+        if dim >= self.shape.ndim() {
+            panic!("concat dim {} out of bounds", dim);
+        }
+        
+        // Simple case: concatenate along last dimension
+        if dim == self.shape.ndim() - 1 {
+            let mut new_shape = self.shape.0.clone();
+            new_shape[dim] += other.shape.0[dim];
+            
+            let mut new_data = Vec::new();
+            let self_stride = self.shape.0[dim];
+            let other_stride = other.shape.0[dim];
+            let batch_size = self.data.len() / self_stride;
+            
+            for i in 0..batch_size {
+                new_data.extend_from_slice(&self.data[i * self_stride..(i + 1) * self_stride]);
+                new_data.extend_from_slice(&other.data[i * other_stride..(i + 1) * other_stride]);
+            }
+            
+            Tensor::new(new_data, new_shape)
+        } else {
+            // For other dimensions, just append data
+            let mut new_shape = self.shape.0.clone();
+            new_shape[dim] += other.shape.0[dim];
+            
+            let mut new_data = self.data.clone();
+            new_data.extend_from_slice(&other.data);
+            
+            Tensor::new(new_data, new_shape)
+        }
+    }
+    
+    /// Compute variance
+    pub fn var(&self) -> Tensor {
+        let mean_val = self.mean();
+        let squared_diff: Vec<f32> = self.data.iter()
+            .map(|&x| (x - mean_val).powi(2))
+            .collect();
+        let variance = squared_diff.iter().sum::<f32>() / self.data.len() as f32;
+        Tensor::new(vec![variance], vec![1])
+    }
+    
+    /// Subtract tensors
+    pub fn sub(&self, other: &Tensor) -> Tensor {
+        if self.shape != other.shape {
+            panic!("sub requires same shape tensors");
+        }
+        
+        let data: Vec<f32> = self.data.iter()
+            .zip(other.data.iter())
+            .map(|(a, b)| a - b)
+            .collect();
+        
+        Tensor::new(data, self.shape.clone())
+    }
+    
+    /// Element-wise power
+    pub fn pow(&self, exponent: f32) -> Tensor {
+        let data: Vec<f32> = self.data.iter()
+            .map(|&x| x.powf(exponent))
+            .collect();
+        
+        Tensor::new(data, self.shape.clone())
+    }
+    
+    /// Natural logarithm
+    pub fn ln(&self) -> Tensor {
+        let data: Vec<f32> = self.data.iter()
+            .map(|&x| x.ln())
+            .collect();
+        
+        Tensor::new(data, self.shape.clone())
+    }
+    
+    /// Multiply by scalar
+    pub fn mul_scalar(&self, scalar: f32) -> Tensor {
+        self.scale(scalar)
+    }
+    
+    /// Add unsqueeze dimension
+    pub fn unsqueeze(&self, dim: usize) -> Tensor {
+        let mut new_shape = self.shape.0.clone();
+        new_shape.insert(dim, 1);
+        Tensor::new(self.data.clone(), new_shape)
+    }
+    
+    /// Broadcast to new shape
+    pub fn broadcast(&self, new_shape: &[usize]) -> Tensor {
+        // Simple broadcasting: repeat data to match new shape
+        let new_size: usize = new_shape.iter().product();
+        let old_size = self.data.len();
+        
+        if new_size % old_size != 0 {
+            panic!("broadcast: new size must be multiple of old size");
+        }
+        
+        let repeat = new_size / old_size;
+        let mut new_data = Vec::with_capacity(new_size);
+        
+        for _ in 0..repeat {
+            new_data.extend_from_slice(&self.data);
+        }
+        
+        Tensor::new(new_data, new_shape.to_vec())
+    }
+    
+    /// Create tensor from vec with shape
+    pub fn from_vec(data: Vec<f32>, shape: &[usize]) -> Tensor {
+        Tensor::new(data, shape.to_vec())
+    }
+    
+    /// Get shape
+    pub fn shape(&self) -> &[usize] {
+        &self.shape.0
+    }
 }
 
 // Operator overloads
