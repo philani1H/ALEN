@@ -33,6 +33,11 @@ futures = "0.3"
 rusqlite = { version = "0.31", features = ["bundled"] }
 bincode = "1.3"
 
+# Vector Database for AI/LLM
+# Using in-memory vector store for now (can upgrade to Lance/Qdrant later)
+# lance = "0.10"  # Rust-native vector DB (requires arrow/parquet)
+# For now, we'll use optimized in-memory vector storage
+
 # Logging
 tracing = "0.1"
 tracing-subscriber = { version = "0.3", features = ["env-filter"] }
