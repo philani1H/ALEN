@@ -1,13 +1,12 @@
-//! Reasoning Engine - Multi-Modal Generation with Knowledge Anchoring
+//! Reasoning Engine - DEPRECATED FOR GENERATION
 //!
-//! Implements: h_latent = concept_vector + knowledge_vector + α * creativity_vector
+//! CRITICAL: This module is DEPRECATED for text generation.
+//! Use LatentDecoder instead for all text generation.
 //!
-//! Key Features:
-//! - Combines concept understanding, learned knowledge, and controlled creativity
-//! - Knowledge anchoring: verifies generated latents against semantic memory
-//! - Creativity injection: α parameter controls balance between faithful/creative
-//! - Latent propagation: temporal consistency for video generation
-//! - Multi-modal support: images, video, audio
+//! This module does RETRIEVAL (fact.content) which is MEMORIZATION.
+//! For understanding-based reasoning, use: NeuralChainOfThoughtReasoner with LatentDecoder
+//!
+//! This is kept only for backward compatibility.
 
 use crate::core::{ThoughtState, BiasVector};
 use crate::memory::SemanticMemory;

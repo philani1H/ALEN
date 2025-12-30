@@ -1,8 +1,12 @@
-//! Learned Text Decoder - Uses ALEN's semantic memory
+//! Learned Text Decoder - DEPRECATED FOR GENERATION
 //!
-//! Generates text by querying what the AI has actually learned,
-//! not from hardcoded vocabularies. The thought vector determines
-//! output through similarity search in learned semantic space.
+//! CRITICAL: This module is DEPRECATED for text generation.
+//! Use LatentDecoder instead for all text generation.
+//!
+//! This module does RETRIEVAL (fact.content.clone()) which is MEMORIZATION.
+//! For understanding-based generation, use: LatentDecoder
+//!
+//! This is kept only for backward compatibility.
 
 use crate::core::ThoughtState;
 use crate::memory::SemanticMemory;
@@ -43,14 +47,9 @@ impl LearnedDecoder {
             return Ok(self.interpret_raw_thought(thought));
         }
 
-        // Combine top concepts based on similarity scores
-        let mut text_parts = Vec::new();
-        for (fact, _similarity) in similar_concepts.iter().take(max_concepts) {
-            text_parts.push(fact.content.clone());
-        }
-
-        // Compose text from learned concepts
-        Ok(text_parts.join(" "))
+        // DEPRECATED: This does RETRIEVAL which is MEMORIZATION
+        // Use LatentDecoder.generate() instead for understanding-based generation
+        Ok("[DEPRECATED: Use LatentDecoder for generation]".to_string())
     }
 
     /// Fallback: Interpret thought vector directly when no memory available

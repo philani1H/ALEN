@@ -1,14 +1,18 @@
-//! Confidence-Calibrated Decoder
+//! Confidence-Calibrated Decoder - UNDERSTANDING, NOT MEMORIZATION
 //!
 //! Ensures output confidence matches actual accuracy.
 //! Key principle: Only answer when confidence justifies it.
+//!
+//! CRITICAL: This module is DEPRECATED for answer generation.
+//! Use LatentDecoder instead for all text generation.
+//!
+//! This module is kept ONLY for confidence calibration logic.
+//! It should NEVER retrieve answer_output for generation.
 //!
 //! Mathematical Foundation:
 //! - Calibration: P(correct | confidence = c) ≈ c
 //! - Refusal threshold: τ below which system says "I don't know"
 //! - Uncertainty quantification: Multiple sources of uncertainty
-//!
-//! This prevents hallucination by refusing to answer when uncertain.
 
 use serde::{Deserialize, Serialize};
 use crate::memory::Episode;
@@ -132,9 +136,11 @@ impl ConfidenceDecoder {
             );
         }
 
-        // Provide answer with calibrated confidence
+        // DEPRECATED: This should NOT be used for generation
+        // Use LatentDecoder.generate() instead
+        // This is kept only for backward compatibility and testing
         DecoderOutput::answer(
-            best_episode.answer_output.clone(),
+            "[DEPRECATED: Use LatentDecoder for generation]".to_string(),
             calibrated_confidence,
             similarity,
             UncertaintyBreakdown {

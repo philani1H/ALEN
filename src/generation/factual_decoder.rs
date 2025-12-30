@@ -1,13 +1,12 @@
-//! Factual Text Decoder - Strict Knowledge Verification
+//! Factual Text Decoder - DEPRECATED FOR GENERATION
 //!
-//! Implements: h_factual = f(W_c·c_t + W_m·m_neutral + W_τ·τ_factual + b)
+//! CRITICAL: This module is DEPRECATED for text generation.
+//! Use LatentDecoder instead for all text generation.
 //!
-//! Key Features:
-//! - NO HALLUCINATIONS: Every token verified against knowledge vectors
-//! - Cosine similarity threshold (φ_strict) enforces truthfulness
-//! - Deterministic decoding (argmax or low temperature)
-//! - Neutral mood vector (no creative bias)
-//! - Knowledge anchoring with semantic memory
+//! This module does RETRIEVAL (fact.content) which is MEMORIZATION.
+//! For understanding-based generation with verification, use: LatentDecoder
+//!
+//! This is kept only for backward compatibility and verification logic.
 
 use crate::core::{ThoughtState, BiasVector};
 use crate::memory::{SemanticMemory, SemanticFact};

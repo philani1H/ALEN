@@ -1,10 +1,12 @@
-//! Text Decoder - Implements p_t = softmax(W_out·h_t + b)
+//! Text Decoder - DEPRECATED FOR GENERATION
 //!
-//! Converts latent thought vectors h_t ∈ ℝ^d into text tokens through
-//! learned transformation matrices and softmax activation.
+//! CRITICAL: This module is DEPRECATED for text generation.
+//! Use LatentDecoder instead for all text generation.
 //!
-//! IMPORTANT: This decoder uses semantic memory for vocabulary.
-//! All tokens come from learned knowledge - no hardcoded words.
+//! This module is kept ONLY for vocabulary building.
+//! It should NEVER use fact.content for generation.
+//!
+//! For generation, use: LatentDecoder in src/generation/latent_decoder.rs
 
 use crate::memory::{SemanticMemory, SemanticFact};
 use nalgebra::{DMatrix, DVector};
@@ -48,15 +50,18 @@ impl Vocabulary {
     }
 
     /// Learn vocabulary from semantic memory
+    /// DEPRECATED: Use LatentDecoder for pattern learning instead
     pub fn learn_from_memory(&mut self, memory: &SemanticMemory, max_vocab: usize) -> Result<(), Box<dyn std::error::Error>> {
         // Get all facts from memory
         let facts = memory.get_all_facts(max_vocab * 10)?;
         
         let mut word_counts: HashMap<String, usize> = HashMap::new();
         
-        // Count words from all facts
+        // DEPRECATED: This extracts vocabulary only, NOT for generation
+        // For generation, use LatentDecoder which learns patterns
         for fact in &facts {
-            for word in fact.content.split_whitespace() {
+            // Extract tokens from concept only (not content)
+            for word in fact.concept.split_whitespace() {
                 let word_lower = word.to_lowercase()
                     .chars()
                     .filter(|c| c.is_alphanumeric() || *c == '\'')

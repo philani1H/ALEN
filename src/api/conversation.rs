@@ -285,6 +285,9 @@ pub async fn chat(
         }
     }
     
+    // UNDERSTANDING-BASED GENERATION (NO RETRIEVAL)
+    // NeuralChainOfThoughtReasoner uses LatentDecoder internally
+    // This generates from learned patterns, NOT by retrieving stored answers
     use crate::reasoning::NeuralChainOfThoughtReasoner;
     let mut neural_reasoner = NeuralChainOfThoughtReasoner::new(
         engine.operators.clone(),

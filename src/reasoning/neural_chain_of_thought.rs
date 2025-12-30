@@ -8,6 +8,7 @@
 use serde::{Deserialize, Serialize};
 use crate::core::{ThoughtState, Problem, OperatorManager, Evaluator, EnergyResult};
 use crate::memory::SemanticMemory;
+use crate::generation::LatentDecoder;
 
 /// A single reasoning step with real neural processing
 #[derive(Debug, Clone, Serialize, Deserialize)]
@@ -104,8 +105,10 @@ pub struct NeuralChainOfThoughtReasoner {
     operators: OperatorManager,
     /// Evaluator for thought quality
     evaluator: Evaluator,
-    /// Semantic memory for context
+    /// Semantic memory for context (patterns only, not answers)
     semantic_memory: SemanticMemory,
+    /// Latent decoder for text generation (NO RETRIEVAL)
+    latent_decoder: LatentDecoder,
     /// Maximum reasoning steps
     max_steps: usize,
     /// Minimum confidence threshold
@@ -126,10 +129,14 @@ impl NeuralChainOfThoughtReasoner {
         min_confidence: f64,
         temperature: f64,
     ) -> Self {
+        let mut latent_decoder = LatentDecoder::new(dimension, 20);
+        latent_decoder.set_temperature(temperature);
+        
         Self {
             operators,
             evaluator,
             semantic_memory,
+            latent_decoder,
             max_steps,
             min_confidence,
             dimension,
@@ -261,94 +268,21 @@ impl NeuralChainOfThoughtReasoner {
         }
     }
 
-    /// Decode thought vector into text using REAL semantic memory (not retrieval)
+    /// Decode thought vector into text using LATENT GENERATION (NO RETRIEVAL)
+    /// Implements: Y = Decoder_φ(z) where z = latent reasoning context
     fn decode_thought_to_text(&self, thought: &ThoughtState) -> (String, f64) {
-        // Find concepts that match this thought from semantic memory
-        let matches = self.semantic_memory
-            .find_similar(&thought.vector, 10)
-            .unwrap_or_default();
-
-        if matches.is_empty() {
-            return (
-                "I don't have enough information to answer this confidently.".to_string(),
-                0.0
-            );
-        }
-
-        // Generate answer by composing from matching concepts
-        // This is GENERATION, not retrieval - we're creating new text
-        let mut answer_components: Vec<(String, f64)> = Vec::new();
-        let mut total_similarity = 0.0;
-
-        for (fact, similarity) in matches.iter() {
-            if *similarity > 0.3 {
-                answer_components.push((fact.content.clone(), *similarity));
-                total_similarity += similarity;
-            }
-        }
-
-        if answer_components.is_empty() {
-            return (
-                "I'm not confident enough to provide an answer.".to_string(),
-                0.0
-            );
-        }
-
-        // Calculate confidence based on match quality
-        let confidence = (total_similarity / answer_components.len() as f64).min(1.0);
-
-        // Generate text by intelligently combining concepts
-        // Use temperature to control creativity in combination
-        let answer = if answer_components.len() == 1 {
-            // Single strong match - use directly
-            answer_components[0].0.clone()
-        } else {
-            // Multiple matches - synthesize with temperature-based creativity
-            self.synthesize_answer(&answer_components)
-        };
-
-        (answer, confidence)
+        // PURE GENERATION from latent space - NO RETRIEVAL
+        // The decoder generates text from learned patterns in thought space
+        self.latent_decoder.generate(thought)
+    }
+    
+    /// Learn from thought-text pair (stores patterns, NOT answers)
+    pub fn learn_pattern(&mut self, thought: &ThoughtState, text: &str) {
+        // Store pattern in latent space, not the answer itself
+        self.latent_decoder.learn(thought, text);
     }
 
-    /// Synthesize answer from multiple concept matches
-    /// Uses temperature to control creativity in synthesis
-    fn synthesize_answer(&self, components: &[(String, f64)]) -> String {
-        if components.is_empty() {
-            return String::new();
-        }
 
-        // Sort by similarity
-        let mut sorted = components.to_vec();
-        sorted.sort_by(|a, b| b.1.partial_cmp(&a.1).unwrap_or(std::cmp::Ordering::Equal));
-
-        // With high temperature, combine more concepts creatively
-        let num_to_use = if self.temperature > 0.7 {
-            sorted.len().min(5)
-        } else if self.temperature > 0.4 {
-            sorted.len().min(3)
-        } else {
-            sorted.len().min(2)
-        };
-
-        let selected: Vec<String> = sorted.iter()
-            .take(num_to_use)
-            .map(|(content, _)| content.clone())
-            .collect();
-
-        if selected.len() == 1 {
-            selected[0].clone()
-        } else {
-            // Intelligently combine concepts
-            // High temperature = more creative combinations
-            if self.temperature > 0.7 {
-                format!("Based on my understanding: {}. Additionally, {}.", 
-                    selected[0], 
-                    selected[1..].join(", and "))
-            } else {
-                format!("{}. {}", selected[0], selected.get(1).unwrap_or(&String::new()))
-            }
-        }
-    }
 }
 
 #[cfg(test)]

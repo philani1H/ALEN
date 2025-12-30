@@ -1,7 +1,13 @@
-//! Semantic Memory Module
+//! Semantic Memory Module - UNDERSTANDING, NOT MEMORIZATION
 //!
-//! Stores general knowledge and verified facts.
-//! This is the long-term knowledge base.
+//! Stores CONCEPT PATTERNS in latent space, not raw facts.
+//! 
+//! CRITICAL PRINCIPLES:
+//! 1. embedding: Concept pattern in latent space
+//! 2. content: For VERIFICATION/DEBUGGING ONLY (not for retrieval)
+//! 3. System generates answers from embeddings via LatentDecoder
+//!
+//! This is NOT a lookup table. It's a pattern recognition system.
 
 use crate::core::ThoughtState;
 use rusqlite::{Connection, params, Result as SqlResult};
@@ -10,24 +16,30 @@ use std::path::Path;
 use uuid::Uuid;
 use chrono::{DateTime, Utc};
 
-/// A semantic fact or concept
+/// A semantic concept pattern in latent space
+/// 
+/// CRITICAL: This stores CONCEPT PATTERNS, not memorized facts.
+/// - embedding: The learned concept pattern in latent space
+/// - content: For VERIFICATION/DEBUGGING ONLY (never used for generation)
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct SemanticFact {
     /// Unique identifier
     pub id: String,
     /// The concept or topic
     pub concept: String,
-    /// The fact or knowledge content
+    /// The content (FOR VERIFICATION/DEBUGGING ONLY - never retrieved)
+    /// Answers are ALWAYS generated from embedding via LatentDecoder
     pub content: String,
-    /// Embedding vector for similarity search
+    /// Embedding vector - CONCEPT PATTERN in latent space
+    /// This is what the system learns and uses for generation
     pub embedding: Vec<f64>,
-    /// Confidence in this fact (0.0 - 1.0)
+    /// Confidence in this concept pattern (0.0 - 1.0)
     pub confidence: f64,
-    /// Number of times this fact was reinforced
+    /// Number of times this pattern was reinforced
     pub reinforcement_count: u32,
-    /// Last time this fact was accessed
+    /// Last time this pattern was accessed
     pub last_accessed: DateTime<Utc>,
-    /// Source of this fact
+    /// Source of this pattern
     pub source: Option<String>,
     /// Category/domain
     pub category: Option<String>,

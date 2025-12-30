@@ -1,13 +1,20 @@
-//! ALEN Generation Module
+//! ALEN Generation Module - UNDERSTANDING, NOT MEMORIZATION
 //!
-//! Generates outputs from thought states:
-//! - Text Generation: Vocabulary-based decoding
-//! - Poetry Generation: Mood-aware creative text (p_t = softmax(W_out·h_t + b))
-//! - Image Generation: Simple diffusion-like process
-//! - Video Generation: Temporal sequence generation
-//! - Content synthesis and controlled generation
-//! - Dynamic Vocabulary: Learns from training data (no hardcoded words)
-//! - BPE Tokenizer: Production-grade subword tokenization
+//! PRIMARY DECODER: LatentDecoder (src/generation/latent_decoder.rs)
+//! - Generates from learned patterns in latent space
+//! - NO RETRIEVAL of stored answers
+//! - Pure understanding-based generation
+//!
+//! DEPRECATED DECODERS (kept for backward compatibility):
+//! - text_decoder, learned_decoder, factual_decoder, semantic_decoder
+//! - These do RETRIEVAL which is MEMORIZATION
+//! - Use LatentDecoder instead
+//!
+//! Other modules:
+//! - Poetry Generation: Mood-aware creative text
+//! - Image/Video Generation: Visual content
+//! - Dynamic Vocabulary: Token learning
+//! - BPE Tokenizer: Subword tokenization
 
 pub mod video;
 pub mod text_decoder;
@@ -21,6 +28,7 @@ pub mod dynamic_vocab;
 pub mod bpe_tokenizer;
 pub mod semantic_decoder;
 pub mod confidence_decoder;
+pub mod latent_decoder;
 
 pub use video::{VideoGenerator, VideoGenConfig, GeneratedVideo, MotionType};
 pub use text_decoder::{TextDecoder, Vocabulary as DecoderVocabulary};
@@ -48,6 +56,7 @@ pub use bpe_tokenizer::{
     BPETokenizer, BPETrainer, BPEWithEmbeddings, BPESpecialTokens, MergeRule,
 };
 pub use semantic_decoder::SemanticDecoder;
+pub use latent_decoder::{LatentDecoder, LatentDecoderStats};
 pub use confidence_decoder::{
     ConfidenceDecoder, DecoderOutput, RefusalReason, UncertaintyBreakdown,
     CalibrationParams, CalibrationMetrics, CalibrationBin,

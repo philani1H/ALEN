@@ -1,9 +1,12 @@
-//! Probabilistic Decoder
+//! Probabilistic Decoder - DEPRECATED FOR GENERATION
 //!
-//! Implements: P_θ(Y | Z, u) = Π_t P_θ(y_t | y_<t, Z, u)
+//! CRITICAL: This module is DEPRECATED for text generation.
+//! Use LatentDecoder instead for all text generation.
 //!
-//! Autoregressive generation with temperature-scaled sampling
-//! for probabilistic text generation.
+//! This module does RETRIEVAL (fact.content) which is MEMORIZATION.
+//! For understanding-based generation, use: LatentDecoder
+//!
+//! This is kept only for backward compatibility.
 
 use crate::core::ThoughtState;
 use crate::memory::SemanticMemory;

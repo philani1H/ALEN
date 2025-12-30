@@ -83,7 +83,9 @@ pub use generation::{
     SpecialTokens, TokenInfo,
     // BPE Tokenizer (production-grade subword tokenization)
     BPETokenizer, BPETrainer, BPEWithEmbeddings, BPESpecialTokens,
-    // Semantic decoder (uses learned memory)
+    // PRIMARY DECODER: Understanding-based generation (NO RETRIEVAL)
+    LatentDecoder, LatentDecoderStats,
+    // DEPRECATED: Semantic decoder (uses retrieval - use LatentDecoder instead)
     SemanticDecoder,
 };
 
