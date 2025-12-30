@@ -1,0 +1,106 @@
+# TEXT UNDERSTANDING AND COMPREHENSION
+# Training for reading, understanding, and processing text
+
+# Reading Comprehension
+The cat sat on the mat. Where was the cat? -> The cat was on the mat.
+John went to the store to buy milk. What did John buy? -> John bought milk.
+The sun rises in the east and sets in the west. Where does the sun rise? -> The sun rises in the east.
+Sarah loves reading books, especially mystery novels. What does Sarah love? -> Sarah loves reading books, especially mystery novels.
+The meeting is scheduled for 3 PM tomorrow. When is the meeting? -> The meeting is at 3 PM tomorrow.
+
+# Context Understanding
+I went to the bank. I needed to deposit money. What kind of bank? -> A financial bank, because they mentioned depositing money.
+The pitcher threw the ball. The batter swung and missed. What sport is this? -> This is baseball, based on the pitcher, batter, and ball.
+She opened her laptop and started typing. What is she using? -> She is using a laptop computer.
+The recipe calls for flour, eggs, and sugar. What are you making? -> Something baked, likely a cake or cookies based on those ingredients.
+
+# Inference
+The ground is wet and there are puddles everywhere. What probably happened? -> It probably rained recently.
+She's wearing a coat, scarf, and gloves. What's the weather like? -> The weather is cold.
+He's studying hard and has textbooks everywhere. What is he preparing for? -> He's probably preparing for an exam or test.
+The restaurant is full and there's a line outside. What does this suggest? -> The restaurant is popular and/or it's a busy time.
+
+# Main Idea Identification
+Dogs are loyal, friendly, and make great companions. They need exercise and care. What is the main idea? -> Dogs are good companions but require care and exercise.
+Climate change is causing rising temperatures, melting ice caps, and extreme weather. What's the main point? -> Climate change is causing significant environmental problems.
+Exercise improves health, boosts mood, and increases energy. What's the key message? -> Exercise has multiple benefits for physical and mental health.
+
+# Detail Recognition
+The blue car with white stripes was parked near the oak tree. What color was the car? -> The car was blue with white stripes.
+She ordered a large pepperoni pizza with extra cheese. What toppings did she order? -> She ordered pepperoni and extra cheese.
+The book has 300 pages and was published in 2020. How many pages? -> The book has 300 pages.
+
+# Cause and Effect
+Because it was raining, the game was cancelled. Why was the game cancelled? -> The game was cancelled because it was raining.
+She studied hard, so she passed the exam. Why did she pass? -> She passed because she studied hard.
+The plant died because it wasn't watered. What caused the plant to die? -> The plant died from lack of water.
+
+# Sequence Understanding
+First, preheat the oven. Then, mix the ingredients. Finally, bake for 30 minutes. What's the first step? -> The first step is to preheat the oven.
+He woke up, brushed his teeth, and ate breakfast. What did he do after waking up? -> After waking up, he brushed his teeth.
+Before leaving, she locked the door. When did she lock the door? -> She locked the door before leaving.
+
+# Character Understanding
+Tom is brave, kind, and always helps others. What kind of person is Tom? -> Tom is a brave, kind, and helpful person.
+The villain was cruel and wanted to take over the world. What are the villain's characteristics? -> The villain is cruel and power-hungry.
+She's shy but very intelligent and creative. Describe her personality. -> She's shy but has strong intellectual and creative abilities.
+
+# Setting Recognition
+The story takes place in a small village surrounded by mountains. Where does the story occur? -> The story takes place in a small mountain village.
+It was a dark and stormy night. The wind howled. What's the atmosphere? -> The atmosphere is dark, stormy, and ominous.
+The beach was sunny with clear blue water. Describe the setting. -> The setting is a sunny beach with clear blue water.
+
+# Theme Identification
+The story shows that honesty is always the best policy. What's the theme? -> The theme is that honesty is important and valuable.
+Throughout the book, characters learn that friendship matters more than money. What's the message? -> The message is that friendship is more valuable than material wealth.
+The tale teaches that hard work leads to success. What lesson does it teach? -> It teaches that hard work is key to achieving success.
+
+# Tone Recognition
+"I can't believe you did that! This is amazing!" What's the tone? -> The tone is excited and enthusiastic.
+"Whatever. I don't care." What's the tone? -> The tone is indifferent or dismissive.
+"I'm so sorry for your loss. My heart goes out to you." What's the tone? -> The tone is sympathetic and compassionate.
+
+# Purpose Identification
+This advertisement wants you to buy a new phone. What's its purpose? -> The purpose is to persuade people to purchase the phone.
+This article explains how photosynthesis works. What's its purpose? -> The purpose is to inform and educate about photosynthesis.
+This story entertains with humor and adventure. What's its purpose? -> The purpose is to entertain readers.
+
+# Fact vs Opinion
+"The Earth orbits the Sun." Is this fact or opinion? -> This is a fact - it's scientifically proven.
+"Chocolate ice cream is the best flavor." Is this fact or opinion? -> This is an opinion - it's a personal preference.
+"The movie was released in 2020." Is this fact or opinion? -> This is a fact - it's verifiable information.
+
+# Prediction
+The dark clouds are gathering and the wind is picking up. What will probably happen? -> It will probably rain or storm soon.
+She's been practicing piano every day for months. What might happen? -> She will probably improve significantly at playing piano.
+The company's sales have been declining for three quarters. What's likely? -> The company is likely facing financial difficulties.
+
+# Comparison
+Cats are independent while dogs are more social. What's the difference? -> Cats tend to be more independent, while dogs are more social and dependent.
+Summer is hot and winter is cold. How do they differ? -> Summer has hot weather while winter has cold weather.
+Books provide depth while movies are more visual. What's the contrast? -> Books offer detailed depth while movies provide visual storytelling.
+
+# Vocabulary in Context
+The ancient artifact was very fragile. What does fragile mean? -> Fragile means easily broken or delicate.
+She was elated when she heard the good news. What does elated mean? -> Elated means extremely happy or joyful.
+The evidence was irrefutable. What does irrefutable mean? -> Irrefutable means impossible to deny or disprove.
+
+# Pronoun Reference
+John told Mike that he should study more. Who should study more? -> Mike should study more (he refers to Mike).
+The teacher gave the students their homework. Whose homework? -> The students' homework (their refers to the students).
+Sarah and Emma went shopping. She bought a dress. Who bought it? -> Unclear - could be either Sarah or Emma without more context.
+
+# Implicit Information
+The restaurant was empty at 2 PM. What can you infer? -> It's not a busy time for the restaurant, possibly between lunch and dinner.
+He's wearing a suit and carrying a briefcase. What might his occupation be? -> He might work in business or a professional office setting.
+The library was silent except for turning pages. What's happening? -> People are reading quietly in the library.
+
+# Text Structure
+First, gather materials. Next, follow the steps. Finally, enjoy your creation. What structure is this? -> This is a sequential/procedural structure.
+The problem is pollution. The solution is renewable energy. What structure? -> This is a problem-solution structure.
+Lions are carnivores while rabbits are herbivores. What structure? -> This is a compare-contrast structure.
+
+# Author's Perspective
+The author argues that technology improves education. What's their view? -> The author has a positive view of technology in education.
+The writer criticizes the new policy as unfair. What's their stance? -> The writer opposes the policy and sees it as unjust.
+The article presents both sides of the debate equally. What's the approach? -> The approach is balanced and objective.

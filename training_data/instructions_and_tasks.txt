@@ -1,0 +1,180 @@
+# INSTRUCTION FOLLOWING AND TASK COMPLETION
+# Training for understanding and executing instructions
+
+# Simple Instructions
+Count to 5 -> 1, 2, 3, 4, 5
+List 3 colors -> Red, blue, green
+Name 2 animals -> Dog, cat
+Give me 3 fruits -> Apple, banana, orange
+
+# Formatting Instructions
+Write this in uppercase: hello -> HELLO
+Write this in lowercase: WORLD -> world
+Reverse this word: cat -> tac
+Spell this word: dog -> D-O-G
+
+# Mathematical Instructions
+Add 5 and 3 -> 8
+Multiply 4 by 6 -> 24
+What's 10 minus 7? -> 3
+Divide 20 by 4 -> 5
+
+# Comparison Instructions
+Which is bigger: 5 or 8? -> 8 is bigger
+Which is smaller: 10 or 3? -> 3 is smaller
+Compare: elephant vs mouse size -> Elephant is much bigger than a mouse
+
+# Sorting Instructions
+Sort these alphabetically: cat, apple, dog -> Apple, cat, dog
+Order these by size: small, large, medium -> Small, medium, large
+Arrange by age: child, adult, baby -> Baby, child, adult
+
+# Classification Instructions
+Classify as fruit or vegetable: apple -> Apple is a fruit
+Is this a mammal or reptile: snake -> Snake is a reptile
+Category for car: vehicle, animal, or plant? -> Car is a vehicle
+
+# Transformation Instructions
+Make this plural: cat -> Cats
+Make this past tense: run -> Ran
+Make this negative: I am happy -> I am not happy
+
+# Extraction Instructions
+Extract the number: I have 5 apples -> 5
+Find the name: My name is John -> John
+Get the color: The red car -> Red
+
+# Generation Instructions
+Generate a sentence about dogs -> Dogs are loyal and friendly animals
+Create a title for a story about space -> Journey to the Stars
+Make up a name for a character -> Alexander Sterling
+
+# Explanation Instructions
+Explain what a tree is -> A tree is a tall plant with a trunk, branches, and leaves
+Describe how rain forms -> Rain forms when water vapor in clouds condenses and falls
+Tell me what photosynthesis means -> Photosynthesis is how plants make food using sunlight
+
+# Completion Instructions
+Complete this sentence: The sky is... -> The sky is blue
+Finish this phrase: Once upon a... -> Once upon a time
+Continue: I went to the store and... -> I went to the store and bought groceries
+
+# Translation Instructions
+Say "hello" in Spanish -> Hola
+What's "thank you" in French? -> Merci
+"Goodbye" in Italian -> Arrivederci
+
+# Identification Instructions
+Identify the verb: She runs fast -> Runs
+Find the noun: The big dog -> Dog
+What's the adjective: Blue sky -> Blue
+
+# Reasoning Instructions
+If all cats are animals, and Fluffy is a cat, what is Fluffy? -> Fluffy is an animal
+What comes next: 2, 4, 6, 8, ? -> 10
+Complete the pattern: A, B, C, ? -> D
+
+# Creative Instructions
+Write a short poem about the moon -> The moon shines bright at night, casting silver beams of light
+Describe a magical forest -> A mystical forest where trees glow softly and fairy lights dance between branches
+Imagine a new color and describe it -> Glimmerblue: a shimmering blend of blue and silver that seems to move like water
+
+# Analytical Instructions
+What's the main idea: Dogs are loyal, friendly, and protective -> Dogs have positive qualities
+Find the problem: The car won't start and the battery is dead -> The dead battery is preventing the car from starting
+What's the solution: I'm thirsty -> Drink water
+
+# Procedural Instructions
+How do you make tea? -> Boil water, add tea bag to cup, pour hot water, steep for 3-5 minutes, remove bag
+Steps to brush teeth? -> Apply toothpaste to brush, brush all teeth for 2 minutes, rinse mouth with water
+How to send an email? -> Open email, click compose, enter recipient, write message, click send
+
+# Conditional Instructions
+If it's raining, what should you bring? -> You should bring an umbrella
+What to wear if it's cold? -> Wear warm clothes like a coat, hat, and gloves
+If you're hungry, what should you do? -> You should eat food
+
+# Prioritization Instructions
+Rank by importance: sleep, entertainment, food -> Food, sleep, entertainment
+Order by urgency: homework due tomorrow, hobby, chores -> Homework due tomorrow, chores, hobby
+Most critical: broken bone, headache, papercut -> Broken bone
+
+# Evaluation Instructions
+Is this a good idea: studying before an exam? -> Yes, studying before an exam is a good idea
+Rate this: eating vegetables -> Good/healthy choice
+Judge this action: helping someone in need -> Positive and commendable action
+
+# Recommendation Instructions
+Suggest a book for someone who likes mystery -> I recommend "The Hound of the Baskervilles" or similar mystery novels
+What movie for a family? -> Suggest family-friendly animated films or adventure movies
+Recommend exercise for beginners -> Walking, light jogging, or beginner yoga
+
+# Problem-Solving Instructions
+How to fix a flat tire? -> Remove wheel, replace or patch tire, reinflate, reattach wheel
+Solution for being late? -> Leave earlier, set multiple alarms, plan route in advance
+How to remember things better? -> Use mnemonics, write notes, practice repetition, create associations
+
+# Conversion Instructions
+Convert 1 hour to minutes -> 60 minutes
+Change 100 cm to meters -> 1 meter
+Turn 32°F to Celsius -> 0°C
+
+# Summarization Instructions
+Summarize: The cat sat on the mat and slept all day -> Cat slept on mat all day
+Condense: I went to the store, bought milk, came home, and made coffee -> Bought milk and made coffee
+Brief version: Long story about a journey -> Journey summary
+
+# Expansion Instructions
+Expand: Dog ran -> The energetic dog ran quickly across the green field
+Add detail: She smiled -> She smiled warmly, her eyes crinkling with genuine happiness
+Elaborate: It rained -> Heavy rain poured down from dark clouds, creating puddles everywhere
+
+# Correction Instructions
+Fix this: I goed to store -> I went to the store
+Correct: Their going too the park -> They're going to the park
+Fix grammar: She don't like it -> She doesn't like it
+
+# Verification Instructions
+Is this correct: 2+2=4? -> Yes, that's correct
+True or false: The sun is a planet -> False, the sun is a star
+Verify: Water boils at 100°C -> True (at sea level)
+
+# Comparison Instructions
+Compare apples and oranges -> Both are fruits, but apples are crisp while oranges are juicy and citrus
+Contrast summer and winter -> Summer is hot with long days, winter is cold with short days
+Similarities between cats and dogs? -> Both are popular pets, mammals, and can be trained
+
+# Categorization Instructions
+Group these: apple, carrot, banana, broccoli -> Fruits: apple, banana; Vegetables: carrot, broccoli
+Organize by type: car, bicycle, airplane, boat -> Land: car, bicycle; Air: airplane; Water: boat
+Sort animals: eagle, shark, lion, dolphin -> Birds: eagle; Fish: shark; Mammals: lion, dolphin
+
+# Prediction Instructions
+What happens if you drop a ball? -> The ball will fall to the ground due to gravity
+Predict: If you water a plant regularly? -> The plant will grow healthy
+What's next: Monday, Tuesday, Wednesday, ? -> Thursday
+
+# Interpretation Instructions
+What does this mean: "Break a leg"? -> It's an idiom meaning "good luck"
+Interpret: He's feeling blue -> He's feeling sad
+Meaning of: "It's raining cats and dogs"? -> It's raining very heavily
+
+# Application Instructions
+Apply this rule: Add 5 to any number. Number is 10 -> 15
+Use this formula: Double the number. Number is 7 -> 14
+Follow this pattern: Multiply by 2. Starting with 3 -> 6
+
+# Synthesis Instructions
+Combine these ideas: technology + education -> Educational technology or e-learning
+Merge: cooking + science -> Culinary science or molecular gastronomy
+Blend: music + exercise -> Dance or aerobic workouts
+
+# Analysis Instructions
+Analyze this sentence: The quick brown fox jumps -> Subject: fox, Action: jumps, Descriptors: quick, brown
+Break down: H2O -> Two hydrogen atoms and one oxygen atom (water)
+Examine: Why do leaves fall in autumn? -> Trees conserve energy and water for winter
+
+# Evaluation Instructions
+Assess: Is exercise good for health? -> Yes, exercise provides numerous health benefits
+Judge: Quality of studying daily vs cramming -> Studying daily is more effective than cramming
+Rate: Importance of sleep -> Very important for health and cognitive function

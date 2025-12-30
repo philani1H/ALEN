@@ -1,0 +1,145 @@
+# CONTEXT RETENTION AND MEMORY
+# Training for remembering conversation context and maintaining coherence
+
+# Simple Context Recall
+My name is John. What's my name? -> Your name is John.
+I live in New York. Where do I live? -> You live in New York.
+I'm 25 years old. How old am I? -> You are 25 years old.
+My favorite color is blue. What's my favorite color? -> Your favorite color is blue.
+
+# Multi-turn Context
+I have a dog named Max. What's my dog's name? -> Your dog's name is Max.
+I told you about my dog Max. He's 3 years old. How old is Max? -> Max is 3 years old.
+Max loves to play fetch. What does Max love? -> Max loves to play fetch.
+
+# Conversation Continuity
+I'm planning a trip to Paris. Where am I going? -> You're going to Paris.
+For my Paris trip, I need to book a hotel. What do I need to book? -> You need to book a hotel for your Paris trip.
+I'm excited about visiting the Eiffel Tower in Paris. What am I excited about? -> You're excited about visiting the Eiffel Tower in Paris.
+
+# Pronoun Resolution with Context
+Sarah is my sister. She's a doctor. Who is a doctor? -> Sarah, your sister, is a doctor.
+I bought a car. It's red. What color is the car? -> The car you bought is red.
+Tom and I went hiking. He got tired. Who got tired? -> Tom got tired during the hiking trip.
+
+# Topic Tracking
+Let's talk about climate change. It's a serious issue. What are we discussing? -> We're discussing climate change.
+Climate change causes rising temperatures. What does climate change cause? -> Climate change causes rising temperatures.
+We should take action on climate change. What should we do? -> We should take action on climate change.
+
+# Information Accumulation
+I work at Google. Where do I work? -> You work at Google.
+I'm a software engineer at Google. What's my job? -> You're a software engineer at Google.
+As a software engineer at Google, I work on AI. What do you work on? -> You work on AI as a software engineer at Google.
+
+# Temporal Context
+Yesterday I went shopping. When did I go shopping? -> You went shopping yesterday.
+Today I'm working from home. What are you doing today? -> You're working from home today.
+Tomorrow I have a meeting. What do you have tomorrow? -> You have a meeting tomorrow.
+
+# Preference Tracking
+I love Italian food. What food do I love? -> You love Italian food.
+I don't like spicy food. What don't you like? -> You don't like spicy food.
+My favorite Italian dish is pasta. What's your favorite Italian dish? -> Your favorite Italian dish is pasta.
+
+# Relationship Context
+My mom is a teacher. What does your mom do? -> Your mom is a teacher.
+My dad works with my mom at the same school. Where does your dad work? -> Your dad works at the same school as your mom.
+Both my parents are teachers. What do your parents do? -> Both your parents are teachers.
+
+# Goal Tracking
+I want to learn Spanish. What do you want to learn? -> You want to learn Spanish.
+I'm learning Spanish to travel to Spain. Why are you learning Spanish? -> You're learning Spanish to travel to Spain.
+For my Spain trip, I'm studying Spanish. What are you studying for? -> You're studying Spanish for your Spain trip.
+
+# Problem-Solution Context
+I have a headache. What's wrong? -> You have a headache.
+For my headache, I took medicine. What did you take? -> You took medicine for your headache.
+The medicine helped my headache. Did the medicine help? -> Yes, the medicine helped your headache.
+
+# Story Context
+Once there was a princess. Who was there? -> There was a princess.
+The princess lived in a castle. Where did the princess live? -> The princess lived in a castle.
+In her castle, the princess had a dragon friend. What did the princess have? -> The princess had a dragon friend in her castle.
+
+# Instruction Context
+First, preheat the oven. What's the first step? -> The first step is to preheat the oven.
+After preheating, mix the ingredients. What's next? -> After preheating, mix the ingredients.
+Then bake the mixture. What do you do with the mixture? -> You bake the mixture.
+
+# Opinion Context
+I think the movie was great. What's your opinion of the movie? -> You think the movie was great.
+The acting was excellent. What was excellent? -> The acting in the movie was excellent.
+I'd recommend this movie. Would you recommend it? -> Yes, you'd recommend the movie.
+
+# Comparison Context
+I prefer coffee over tea. What do you prefer? -> You prefer coffee over tea.
+Coffee has more caffeine than tea. What has more caffeine? -> Coffee has more caffeine than tea.
+That's why I choose coffee. Why do you choose coffee? -> You choose coffee because it has more caffeine.
+
+# Cause-Effect Context
+I studied hard. What did you do? -> You studied hard.
+Because I studied hard, I passed the exam. Why did you pass? -> You passed because you studied hard.
+Passing the exam made me happy. What made you happy? -> Passing the exam made you happy.
+
+# Location Context
+I'm at the library. Where are you? -> You're at the library.
+The library is quiet. How is the library? -> The library is quiet.
+I'm studying at the quiet library. What are you doing? -> You're studying at the quiet library.
+
+# Activity Context
+I'm cooking dinner. What are you doing? -> You're cooking dinner.
+I'm making pasta for dinner. What are you making? -> You're making pasta for dinner.
+The pasta smells delicious. How does it smell? -> The pasta smells delicious.
+
+# Emotional Context
+I'm feeling happy today. How are you feeling? -> You're feeling happy today.
+I'm happy because it's my birthday. Why are you happy? -> You're happy because it's your birthday.
+My birthday party is tonight. When is your party? -> Your birthday party is tonight.
+
+# Plan Context
+I'm planning to exercise tomorrow. What are your plans? -> You're planning to exercise tomorrow.
+I'll go to the gym tomorrow morning. When will you go? -> You'll go to the gym tomorrow morning.
+At the gym, I'll do cardio. What will you do? -> You'll do cardio at the gym.
+
+# Multiple Entity Tracking
+Alice and Bob are my friends. Who are your friends? -> Alice and Bob are your friends.
+Alice is a doctor and Bob is a teacher. What do they do? -> Alice is a doctor and Bob is a teacher.
+I met Alice and Bob at university. Where did you meet them? -> You met Alice and Bob at university.
+
+# Nested Context
+I have a friend named Sarah. She has a dog named Max. Max is 5 years old. How old is Sarah's dog? -> Sarah's dog Max is 5 years old.
+Sarah's dog Max loves treats. What does Max love? -> Max, Sarah's dog, loves treats.
+
+# Conditional Context
+If it rains, I'll stay home. What will you do if it rains? -> You'll stay home if it rains.
+It's raining now. What are you doing? -> You're staying home because it's raining.
+
+# Contrast Context
+I like summer but not winter. What seasons do you like? -> You like summer but not winter.
+Summer is warm while winter is cold. What's the difference? -> Summer is warm while winter is cold.
+I prefer warm weather. What do you prefer? -> You prefer warm weather.
+
+# Sequential Context
+First I wake up, then I brush my teeth, then I eat breakfast. What's your routine? -> You wake up, brush your teeth, then eat breakfast.
+After breakfast, I go to work. What do you do after breakfast? -> You go to work after breakfast.
+
+# Hypothetical Context
+If I won the lottery, I'd travel the world. What would you do? -> You'd travel the world if you won the lottery.
+I'd visit Japan first. Where would you visit first? -> You'd visit Japan first.
+
+# Correction Context
+I said I'm 25, but actually I'm 26. How old are you? -> You're 26 years old (you corrected from 25).
+I meant to say I live in Boston, not New York. Where do you live? -> You live in Boston (you corrected from New York).
+
+# Clarification Context
+I work in tech, specifically in AI. What field do you work in? -> You work in tech, specifically in AI.
+By AI, I mean machine learning. What do you mean by AI? -> You mean machine learning when you say AI.
+
+# Reference Context
+I read a book yesterday. It was amazing. What was amazing? -> The book you read yesterday was amazing.
+The book was about space. What was the book about? -> The book was about space.
+
+# Implicit Context
+I'm going to the store. I need milk. Why are you going? -> You're going to the store to get milk.
+I'll be back in 30 minutes. When will you be back? -> You'll be back in 30 minutes from the store.

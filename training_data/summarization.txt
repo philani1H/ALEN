@@ -1,0 +1,106 @@
+# SUMMARIZATION TRAINING
+# Teaching the model to condense and summarize information
+
+# Short Text Summarization
+The quick brown fox jumps over the lazy dog. This sentence contains all letters of the alphabet. -> A pangram sentence with all alphabet letters featuring a fox and dog.
+Yesterday, I went to the store, bought groceries, came home, and cooked dinner. -> I shopped for groceries and cooked dinner yesterday.
+The meeting lasted three hours. We discussed the budget, timeline, and team assignments. -> Three-hour meeting covered budget, timeline, and assignments.
+
+# Paragraph Summarization
+Climate change is one of the most pressing issues of our time. Rising temperatures are causing ice caps to melt, sea levels to rise, and weather patterns to become more extreme. Scientists warn that without immediate action, the consequences could be catastrophic for future generations. -> Climate change causes rising temperatures, melting ice, and extreme weather, requiring urgent action to prevent catastrophic consequences.
+
+The internet has revolutionized how we communicate, work, and access information. It has connected billions of people worldwide, enabled remote work, and made knowledge accessible to anyone with a connection. However, it has also raised concerns about privacy, misinformation, and digital addiction. -> The internet revolutionized communication and information access globally but raised concerns about privacy, misinformation, and addiction.
+
+Exercise provides numerous health benefits. It strengthens the heart, improves circulation, builds muscle, and boosts mental health. Regular physical activity can reduce the risk of chronic diseases like diabetes and heart disease. Experts recommend at least 150 minutes of moderate exercise per week. -> Exercise strengthens the body, improves mental health, reduces disease risk, with experts recommending 150 minutes weekly.
+
+# Story Summarization
+Once upon a time, a young girl named Alice fell down a rabbit hole into a magical world. She met strange creatures, attended a mad tea party, and played croquet with the Queen of Hearts. After many adventures, she woke up to find it was all a dream. -> Alice falls into a magical world, has adventures with strange creatures, and discovers it was a dream.
+
+A poor boy finds a golden ticket in a chocolate bar, winning a tour of Willy Wonka's mysterious chocolate factory. He and four other children explore the magical factory, but the others misbehave and face consequences. The boy's kindness earns him ownership of the factory. -> A poor boy wins a factory tour, other children misbehave, and his kindness earns him the factory.
+
+# Article Summarization
+A new study published in the Journal of Medicine found that people who sleep 7-8 hours per night have better health outcomes than those who sleep less or more. The research followed 10,000 participants over 10 years, tracking their sleep patterns and health. Researchers concluded that consistent, adequate sleep is crucial for long-term health. -> A 10-year study of 10,000 people found that 7-8 hours of sleep nightly leads to better health outcomes.
+
+# Multi-paragraph Summarization
+Artificial intelligence is transforming industries worldwide. In healthcare, AI helps diagnose diseases and develop treatments. In transportation, self-driving cars are becoming reality. In education, AI personalizes learning experiences. However, these advances raise ethical questions about job displacement, privacy, and decision-making. Experts debate how to balance innovation with responsibility. -> AI transforms healthcare, transportation, and education but raises ethical concerns about jobs, privacy, and responsibility.
+
+# Key Points Extraction
+The report covers three main areas: 1) Sales increased 20% this quarter. 2) Customer satisfaction improved to 95%. 3) New product launches are planned for next year. What are the key points? -> Key points: 20% sales increase, 95% customer satisfaction, new products planned.
+
+The presentation discussed market trends, competitor analysis, and growth strategies. What were the main topics? -> Main topics: market trends, competitor analysis, and growth strategies.
+
+# Main Idea Summary
+The article argues that renewable energy is essential for combating climate change, citing solar and wind power as viable alternatives to fossil fuels. -> Renewable energy like solar and wind is essential for fighting climate change.
+
+The book explores themes of love, loss, and redemption through the story of a family over three generations. -> The book explores love, loss, and redemption across three generations of a family.
+
+# Event Sequence Summary
+First, the team researched the problem. Then, they developed a solution. Next, they tested it. Finally, they implemented it successfully. -> The team researched, developed, tested, and successfully implemented a solution.
+
+She woke up, exercised, showered, ate breakfast, and went to work. -> She completed her morning routine and went to work.
+
+# Dialogue Summary
+"I think we should go to the beach," said Tom. "No, I prefer the mountains," replied Sarah. "How about we compromise and go camping by a lake?" suggested Mike. Everyone agreed. -> Tom wanted the beach, Sarah preferred mountains, and Mike's lake camping compromise was accepted.
+
+# Argument Summary
+The author argues that social media has negative effects on mental health, citing studies showing increased anxiety and depression among heavy users. However, they acknowledge benefits like staying connected with friends and family. -> Social media negatively affects mental health per studies, though it helps maintain connections.
+
+# Process Summary
+To bake a cake: mix dry ingredients, add wet ingredients, pour into pan, bake at 350°F for 30 minutes, cool, and frost. -> Baking a cake involves mixing ingredients, baking at 350°F for 30 minutes, cooling, and frosting.
+
+# Comparison Summary
+Study A found that exercise improves mood, while Study B found it reduces stress. Both agree exercise benefits mental health. -> Both studies confirm exercise benefits mental health through mood improvement and stress reduction.
+
+# Problem-Solution Summary
+The city faced traffic congestion. Officials implemented a new public transit system and bike lanes. Traffic decreased by 30%. -> The city reduced traffic congestion 30% by adding public transit and bike lanes.
+
+# Cause-Effect Summary
+Deforestation leads to habitat loss, which causes species extinction, resulting in ecosystem imbalance. -> Deforestation causes habitat loss, species extinction, and ecosystem imbalance.
+
+# Timeline Summary
+1990: Company founded. 2000: First major product launched. 2010: Expanded internationally. 2020: Became industry leader. -> Company grew from founding in 1990 to industry leader by 2020 through product launches and expansion.
+
+# Character Summary
+John is a 35-year-old teacher who loves reading, enjoys hiking on weekends, and volunteers at the local library. He's kind, patient, and dedicated to his students. -> John is a kind, patient 35-year-old teacher who enjoys reading, hiking, and volunteering.
+
+# Setting Summary
+The story takes place in a small coastal town in Maine during the 1950s. The town has a fishing industry, a lighthouse, and close-knit community. -> The story is set in a 1950s Maine coastal fishing town with a lighthouse and tight community.
+
+# Theme Summary
+Throughout the novel, characters learn that true happiness comes from relationships, not material possessions. The story emphasizes family, friendship, and community. -> The novel's theme is that relationships, not possessions, bring true happiness.
+
+# Data Summary
+The survey of 1,000 people found: 60% prefer coffee, 30% prefer tea, 10% prefer neither. Most coffee drinkers consume 2-3 cups daily. -> Survey shows 60% prefer coffee (mostly 2-3 cups daily), 30% tea, 10% neither.
+
+# Opinion Summary
+The reviewer praised the movie's cinematography and acting but criticized the weak plot and slow pacing. Overall rating: 3/5 stars. -> Reviewer gave 3/5 stars, praising visuals and acting but criticizing plot and pacing.
+
+# Instructions Summary
+To reset your password: 1) Click "Forgot Password" 2) Enter your email 3) Check your inbox 4) Click the reset link 5) Create a new password. -> Password reset: Click forgot password, enter email, use reset link, create new password.
+
+# Abstract Summary
+This research examines the effects of meditation on stress levels in college students. 100 students practiced meditation for 8 weeks. Results showed significant stress reduction and improved focus. -> Study of 100 students found 8 weeks of meditation significantly reduced stress and improved focus.
+
+# News Summary
+A major earthquake struck the region yesterday, measuring 7.2 on the Richter scale. Hundreds are injured, buildings collapsed, and rescue efforts are underway. International aid is being mobilized. -> A 7.2 earthquake caused injuries and building collapses, with rescue and international aid efforts underway.
+
+# Biography Summary
+Marie Curie was a pioneering physicist and chemist who discovered radium and polonium. She was the first woman to win a Nobel Prize and the only person to win Nobel Prizes in two different sciences. Her work laid the foundation for modern nuclear physics. -> Marie Curie discovered radium and polonium, won two Nobel Prizes in different sciences, and pioneered nuclear physics.
+
+# Technical Summary
+The software update includes bug fixes, performance improvements, new features like dark mode and voice commands, and enhanced security protocols. -> Update includes bug fixes, performance improvements, dark mode, voice commands, and better security.
+
+# Meeting Summary
+The team meeting covered Q4 results (exceeded targets), upcoming projects (three new initiatives), budget allocation (approved), and team expansion (hiring two new members). -> Meeting covered Q4 success, three new projects, approved budget, and two new hires.
+
+# Book Summary
+"To Kill a Mockingbird" tells the story of Scout Finch growing up in the American South during the 1930s. Her father, a lawyer, defends a Black man falsely accused of rape, teaching Scout about justice, prejudice, and moral courage. -> Scout Finch learns about justice and prejudice when her lawyer father defends a falsely accused Black man in 1930s South.
+
+# Lecture Summary
+The professor discussed the causes of World War I: nationalism, imperialism, militarism, and alliance systems. The assassination of Archduke Franz Ferdinand was the immediate trigger. The war lasted from 1914-1918 and reshaped Europe. -> WWI (1914-1918) was caused by nationalism, imperialism, militarism, and alliances, triggered by Franz Ferdinand's assassination.
+
+# Email Summary
+Dear Team, I wanted to update you on the project status. We've completed phases 1 and 2 ahead of schedule. Phase 3 begins next week. Great work everyone! Best, Manager -> Manager reports phases 1-2 completed early, phase 3 starts next week, praises team.
+
+# Report Summary
+The annual report shows revenue increased 15%, expenses decreased 5%, and profit margins improved to 20%. Customer retention is at 90%. The company is positioned for continued growth. -> Annual report shows 15% revenue increase, 5% expense decrease, 20% profit margin, 90% retention, and growth potential.
