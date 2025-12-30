@@ -12,6 +12,7 @@ mod tensor;
 mod layers;
 mod transformer;
 mod transformer_decoder;
+mod large_models;
 mod learned_operators;
 mod trainer;
 mod alen_network;
@@ -38,6 +39,10 @@ pub use transformer::{
 pub use transformer_decoder::{
     TransformerDecoder, TransformerDecoderBlock, CausalSelfAttention,
     CrossAttention, TransformerEnhancedDecoder, TransformerDecoderStats,
+};
+pub use large_models::{
+    ModelSize, LargeModelConfig, LargeLanguageModel, LargeModelStats,
+    LargeTransformerLayer, LargeMultiHeadAttention, LargeFeedForward,
 };
 pub use learned_operators::{
     NeuralOperator, NeuralOperatorBank, OperatorConfig,
