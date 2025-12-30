@@ -82,11 +82,11 @@ impl ThresholdCalibrator {
 
         // Initialize with lenient thresholds to allow trained responses
         let mut thresholds = HashMap::new();
-        thresholds.insert("conversation".to_string(), 0.60);  // Lenient for conversation
-        thresholds.insert("general".to_string(), 0.65);       // Moderate for general
-        thresholds.insert("math".to_string(), 0.70);          // Stricter for math
-        thresholds.insert("logic".to_string(), 0.70);         // Stricter for logic
-        thresholds.insert("code".to_string(), 0.68);          // Moderate for code
+        thresholds.insert("conversation".to_string(), 0.50);  // Allow 50%+ confidence
+        thresholds.insert("general".to_string(), 0.55);       // Allow 55%+ confidence
+        thresholds.insert("math".to_string(), 0.60);          // Math requires 60%+
+        thresholds.insert("logic".to_string(), 0.60);         // Logic requires 60%+
+        thresholds.insert("code".to_string(), 0.58);          // Code requires 58%+
 
         Self {
             outcomes: Vec::new(),
@@ -215,12 +215,12 @@ impl ThresholdCalibrator {
 
     /// Default threshold based on risk tolerance
     fn default_threshold_for_risk(&self, delta: f64) -> f64 {
-        // Lenient threshold to allow trained responses
+        // Very lenient threshold to allow trained responses
         // Higher risk tolerance → lower threshold
-        // Conversation (delta=0.2): 0.55
-        // General (delta=0.1): 0.58
-        // Math (delta=0.01): 0.648
-        0.55 + (0.1 * (1.0 - delta))
+        // Conversation (delta=0.2): 0.48
+        // General (delta=0.1): 0.51
+        // Math (delta=0.01): 0.549
+        0.48 + (0.1 * (1.0 - delta))
     }
 
     /// Get calibration statistics for a domain

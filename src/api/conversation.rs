@@ -253,12 +253,12 @@ pub async fn chat(
         // CRITICAL FIX #2: Use lenient threshold to allow trained responses
         let domain = DomainClassifier::classify(&req.message);
         let threshold = match domain.as_str() {
-            "conversation" => 0.60,
-            "general" => 0.65,
-            "math" => 0.70,
-            "logic" => 0.70,
-            "code" => 0.68,
-            _ => 0.65,
+            "conversation" => 0.45,  // Allow responses with 45%+ confidence
+            "general" => 0.50,       // Allow responses with 50%+ confidence
+            "math" => 0.55,          // Math requires 55%+ confidence
+            "logic" => 0.55,         // Logic requires 55%+ confidence
+            "code" => 0.52,          // Code requires 52%+ confidence
+            _ => 0.50,
         };
 
         // CRITICAL FIX #3: Compute integrated confidence
