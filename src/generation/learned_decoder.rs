@@ -111,12 +111,9 @@ impl LearnedDecoder {
             let concepts = memory.find_similar(&varied_thought.vector, 3)?;
 
             if !concepts.is_empty() {
-                // Combine concepts into a poetic line
-                let line_concepts: Vec<String> = concepts.iter()
-                    .map(|(fact, _)| fact.content.clone())
-                    .collect();
-
-                poem_lines.push(line_concepts.join(" "));
+                // DEPRECATED: This does RETRIEVAL (memorization)
+                // Use LatentDecoder.generate() instead
+                poem_lines.push("[DEPRECATED: Use LatentDecoder]".to_string());
             } else {
                 // Use theme if no learned concepts
                 poem_lines.push(format!("{} patterns", theme));
@@ -155,9 +152,11 @@ impl LearnedDecoder {
         let mut concept_sources = Vec::new();
 
         for (fact, similarity) in similar_concepts.iter().take(max_concepts) {
-            text_parts.push(fact.content.clone());
+            // DEPRECATED: This does RETRIEVAL (memorization)
+            // Use LatentDecoder.generate() instead
+            text_parts.push("[DEPRECATED]".to_string());
             concept_sources.push(ConceptSource {
-                concept: fact.content.clone(),
+                concept: "[DEPRECATED: Use LatentDecoder]".to_string(),
                 similarity: *similarity,
                 confidence: fact.confidence,
             });
