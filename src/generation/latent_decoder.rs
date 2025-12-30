@@ -18,7 +18,7 @@ use serde::{Deserialize, Serialize};
 use std::collections::HashMap;
 
 /// Latent pattern in thought space
-#[derive(Debug, Clone)]
+#[derive(Debug, Clone, Serialize, Deserialize)]
 struct LatentPattern {
     /// Pattern weights in thought space
     weights: Vec<f64>,
@@ -68,7 +68,7 @@ impl LatentPattern {
 }
 
 /// Token generator from concept activations
-#[derive(Debug, Clone)]
+#[derive(Debug, Clone, Serialize, Deserialize)]
 struct ConceptToTokenNetwork {
     /// Concept → Token probability weights (learned)
     weights: HashMap<String, HashMap<String, f64>>,
@@ -180,6 +180,7 @@ impl ConceptToTokenNetwork {
 }
 
 /// Latent Space Decoder - generates text from understanding
+#[derive(Serialize, Deserialize)]
 pub struct LatentDecoder {
     /// Learned patterns in latent space
     patterns: Vec<LatentPattern>,
@@ -334,6 +335,20 @@ impl LatentDecoder {
             vocabulary_size,
             total_associations,
         }
+    }
+    
+    /// Save to file
+    pub fn save(&self, path: &std::path::Path) -> Result<(), Box<dyn std::error::Error>> {
+        let data = bincode::serialize(self)?;
+        std::fs::write(path, data)?;
+        Ok(())
+    }
+    
+    /// Load from file
+    pub fn load(path: &std::path::Path) -> Result<Self, Box<dyn std::error::Error>> {
+        let data = std::fs::read(path)?;
+        let decoder = bincode::deserialize(&data)?;
+        Ok(decoder)
     }
 }
 

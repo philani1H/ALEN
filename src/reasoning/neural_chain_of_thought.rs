@@ -9,6 +9,7 @@ use serde::{Deserialize, Serialize};
 use crate::core::{ThoughtState, Problem, OperatorManager, Evaluator, EnergyResult};
 use crate::memory::SemanticMemory;
 use crate::generation::LatentDecoder;
+use std::sync::{Arc, Mutex};
 
 /// A single reasoning step with real neural processing
 #[derive(Debug, Clone, Serialize, Deserialize)]
@@ -107,8 +108,8 @@ pub struct NeuralChainOfThoughtReasoner {
     evaluator: Evaluator,
     /// Semantic memory for context (patterns only, not answers)
     semantic_memory: SemanticMemory,
-    /// Latent decoder for text generation (NO RETRIEVAL)
-    latent_decoder: LatentDecoder,
+    /// Latent decoder for text generation (NO RETRIEVAL) - SHARED/PERSISTENT
+    latent_decoder: Arc<Mutex<LatentDecoder>>,
     /// Maximum reasoning steps
     max_steps: usize,
     /// Minimum confidence threshold
@@ -124,13 +125,17 @@ impl NeuralChainOfThoughtReasoner {
         operators: OperatorManager,
         evaluator: Evaluator,
         semantic_memory: SemanticMemory,
+        latent_decoder: Arc<Mutex<LatentDecoder>>,
         dimension: usize,
         max_steps: usize,
         min_confidence: f64,
         temperature: f64,
     ) -> Self {
-        let mut latent_decoder = LatentDecoder::new(dimension, 20);
-        latent_decoder.set_temperature(temperature);
+        // Set temperature on shared decoder
+        {
+            let mut decoder = latent_decoder.lock().unwrap();
+            decoder.set_temperature(temperature);
+        }
         
         Self {
             operators,
@@ -273,13 +278,15 @@ impl NeuralChainOfThoughtReasoner {
     fn decode_thought_to_text(&self, thought: &ThoughtState) -> (String, f64) {
         // PURE GENERATION from latent space - NO RETRIEVAL
         // The decoder generates text from learned patterns in thought space
-        self.latent_decoder.generate(thought)
+        let decoder = self.latent_decoder.lock().unwrap();
+        decoder.generate(thought)
     }
     
     /// Learn from thought-text pair (stores patterns, NOT answers)
     pub fn learn_pattern(&mut self, thought: &ThoughtState, text: &str) {
         // Store pattern in latent space, not the answer itself
-        self.latent_decoder.learn(thought, text);
+        let mut decoder = self.latent_decoder.lock().unwrap();
+        decoder.learn(thought, text);
     }
 
 

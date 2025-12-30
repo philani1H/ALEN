@@ -152,6 +152,22 @@ fn main() -> Result<(), Box<dyn std::error::Error + Send + Sync>> {
     println!("Successful: {}/{} ({:.1}%)", successful, total, 100.0 * successful as f64 / total as f64);
     println!();
     
+    // SAVE LATENT DECODER
+    println!("Saving trained LatentDecoder...");
+    let decoder_path = storage.base_dir.join("latent_decoder.bin");
+    {
+        let decoder = engine.latent_decoder.lock().unwrap();
+        let stats = decoder.stats();
+        println!("  Patterns: {} active / {} total", stats.active_patterns, stats.total_patterns);
+        println!("  Vocabulary: {} tokens", stats.vocabulary_size);
+        println!("  Associations: {}", stats.total_associations);
+        if let Err(e) = decoder.save(&decoder_path) {
+            eprintln!("⚠ Failed to save LatentDecoder: {}", e);
+        }
+    }
+    println!("✓ LatentDecoder saved to: {:?}", decoder_path);
+    println!();
+    
     // Test the trained model
     println!("======================================================================");
     println!("TESTING");

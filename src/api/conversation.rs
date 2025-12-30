@@ -286,13 +286,14 @@ pub async fn chat(
     }
     
     // UNDERSTANDING-BASED GENERATION (NO RETRIEVAL)
-    // NeuralChainOfThoughtReasoner uses LatentDecoder internally
+    // NeuralChainOfThoughtReasoner uses SHARED LatentDecoder
     // This generates from learned patterns, NOT by retrieving stored answers
     use crate::reasoning::NeuralChainOfThoughtReasoner;
     let mut neural_reasoner = NeuralChainOfThoughtReasoner::new(
         engine.operators.clone(),
         engine.evaluator.clone(),
         temp_semantic,
+        engine.latent_decoder.clone(),  // PASS SHARED DECODER
         dim,
         10,  // max reasoning steps
         0.5, // min confidence
