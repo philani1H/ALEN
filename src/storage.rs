@@ -5,10 +5,15 @@
 //! - Automatic database initialization
 //! - Migration support
 //! - Backup and recovery
+//! - Vector database for AI/LLM embeddings
+
+pub mod vector_store;
 
 use std::path::{Path, PathBuf};
 use std::fs;
 use std::env;
+
+pub use vector_store::{VectorStore, VectorEntry};
 
 /// Storage configuration for production deployment
 #[derive(Debug, Clone)]

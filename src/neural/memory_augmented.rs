@@ -68,6 +68,7 @@ impl MemoryEntry {
 // PART 2: MEMORY BANK
 // ============================================================================
 
+#[derive(Debug, Clone)]
 pub struct MemoryBank {
     /// Stored memories
     memories: VecDeque<MemoryEntry>,
@@ -223,6 +224,7 @@ pub struct MemoryStats {
 // PART 3: MEMORY-AUGMENTED NETWORK
 // ============================================================================
 
+#[derive(Debug, Clone)]
 pub struct MemoryAugmentedNetwork {
     /// Memory bank
     memory_bank: MemoryBank,

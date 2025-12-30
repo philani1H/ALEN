@@ -48,6 +48,7 @@ use tower_http::services::ServeDir;
 use serde::{Deserialize, Serialize};
 use std::sync::Arc;
 use tokio::sync::Mutex;
+use std::sync::{Arc as StdArc, Mutex as StdMutex};
 
 /// Shared application state
 pub struct AppState {
@@ -126,6 +127,8 @@ pub struct ReasoningEngine {
     pub active_learning: crate::learning::ActiveLearningSystem,
     /// Self-learning system - learns from conversations over time
     pub self_learning: crate::learning::SelfLearningSystem,
+    /// Latent decoder - PERSISTENT pattern-based text generation
+    pub latent_decoder: StdArc<StdMutex<crate::generation::LatentDecoder>>,
     /// Configuration
     pub config: EngineConfig,
 }
@@ -151,6 +154,7 @@ impl ReasoningEngine {
         let emotion_system = EmotionSystem::new();
         let active_learning = crate::learning::ActiveLearningSystem::new();
         let self_learning = crate::learning::SelfLearningSystem::new();
+        let latent_decoder = StdArc::new(StdMutex::new(crate::generation::LatentDecoder::new(config.dimension, 100)));
 
         Ok(Self {
             operators,
@@ -164,6 +168,7 @@ impl ReasoningEngine {
             emotion_system,
             active_learning,
             self_learning,
+            latent_decoder,
             config,
         })
     }
@@ -191,6 +196,25 @@ impl ReasoningEngine {
         let emotion_system = EmotionSystem::new();
         let active_learning = crate::learning::ActiveLearningSystem::new();
         let self_learning = crate::learning::SelfLearningSystem::new();
+        
+        // Load or create LatentDecoder
+        let decoder_path = storage.base_dir.join("latent_decoder.bin");
+        let latent_decoder = if decoder_path.exists() {
+            match crate::generation::LatentDecoder::load(&decoder_path) {
+                Ok(decoder) => {
+                    let stats = decoder.stats();
+                    eprintln!("✓ Loaded LatentDecoder: {} patterns, {} vocab", stats.active_patterns, stats.vocabulary_size);
+                    StdArc::new(StdMutex::new(decoder))
+                }
+                Err(e) => {
+                    eprintln!("⚠ Failed to load LatentDecoder: {}, creating new", e);
+                    StdArc::new(StdMutex::new(crate::generation::LatentDecoder::new(config.dimension, 100)))
+                }
+            }
+        } else {
+            eprintln!("Creating new LatentDecoder (no saved decoder found)");
+            StdArc::new(StdMutex::new(crate::generation::LatentDecoder::new(config.dimension, 100)))
+        };
 
         Ok(Self {
             operators,
@@ -204,6 +228,7 @@ impl ReasoningEngine {
             emotion_system,
             active_learning,
             self_learning,
+            latent_decoder,
             config,
         })
     }
@@ -219,6 +244,12 @@ impl ReasoningEngine {
             {
                 let episode = Episode::from_training(problem, thought, energy, op_id);
                 let _ = self.episodic_memory.store(&episode);
+                
+                // TRAIN LATENT DECODER - Learn pattern from thought to answer
+                if let Some(ref answer) = problem.target_answer {
+                    let mut decoder = self.latent_decoder.lock().unwrap();
+                    decoder.learn(thought, answer);
+                }
             }
         }
 

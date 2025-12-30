@@ -1,0 +1,62 @@
+# Visual Understanding Training Data
+# Teaches the model to understand and describe visual elements, images, and videos
+
+Q: How do you describe an image?
+A: To describe an image: Start with the main subject, then describe setting/background, note colors and lighting, mention composition, include relevant details, and convey the mood or atmosphere.
+
+Q: What elements make up visual composition?
+A: Key composition elements: 1) Subject placement (rule of thirds), 2) Balance (symmetry/asymmetry), 3) Leading lines, 4) Depth (foreground/background), 5) Framing, 6) Color harmony, 7) Negative space.
+
+Q: How do you understand a scene in a video?
+A: Analyze: Setting (location, time), Characters (who, what doing), Action (movement, events), Audio cues (dialogue, music, sounds), Mood (lighting, color grading), Context (what came before/after).
+
+Q: What are the basic elements of color theory?
+A: Color theory basics: Primary colors (red, blue, yellow), Secondary (orange, green, purple), Warm vs cool colors, Complementary pairs, Color psychology (red=energy, blue=calm), Saturation and value.
+
+Q: How do you describe lighting in an image?
+A: Describe lighting by: Direction (front, side, back), Quality (hard/soft shadows), Color temperature (warm/cool), Intensity (bright/dim), Source (natural/artificial), Mood created (dramatic, gentle).
+
+Q: What is perspective in visual media?
+A: Perspective types: 1) One-point (single vanishing point), 2) Two-point (two vanishing points), 3) Three-point (three vanishing points), 4) Aerial/bird's eye, 5) Worm's eye (from below).
+
+Q: How do you understand body language in images?
+A: Body language cues: Posture (open/closed), Facial expressions, Hand gestures, Eye contact/direction, Personal space, Movement/stillness. These convey emotions and relationships.
+
+Q: What makes an effective photograph?
+A: Effective photos have: Clear subject, Interesting composition, Good lighting, Appropriate depth of field, Decisive moment captured, Emotional connection, Technical quality.
+
+Q: How do you analyze video movement?
+A: Video movement analysis: Camera movement (pan, tilt, zoom, tracking), Subject movement (speed, direction), Editing pace (cuts, transitions), Rhythm and flow, Purpose of movement.
+
+Q: What are visual storytelling elements?
+A: Visual storytelling: Establishing shots (set context), Close-ups (emotion), Action sequences (events), Symbolic imagery (meaning), Visual metaphors, Color narratives, Continuity.
+
+Q: How do you describe texture in images?
+A: Texture description: Rough/smooth, Matte/glossy, Organic/geometric, Soft/hard, Pattern/random, How light interacts with surface, Tactile qualities implied.
+
+Q: What is visual hierarchy?
+A: Visual hierarchy guides attention: Size (larger = more important), Color (contrast draws eye), Position (top/center = priority), Isolation (separated elements stand out), Typography, White space.
+
+Q: How do you understand environmental context?
+A: Environmental understanding: Time of day (lighting cues), Season (vegetation, weather), Location type (urban/rural), Era/period (architecture, objects), Atmosphere (weather, mood).
+
+Q: What are key video editing concepts?
+A: Editing concepts: Cut (direct transition), Dissolve (overlap), Fade (to/from black), Match cut (visual similarity), Jump cut (time skip), Montage (compressed time/ideas).
+
+Q: How do you describe motion in video?
+A: Motion description: Speed (fast/slow), Direction (left/right, toward/away), Acceleration/deceleration, Smoothness/jerkiness, Purpose (chase, dance, walk), Emotional quality.
+
+Q: What is depth of field?
+A: Depth of field: Shallow (blurred background, focused subject), Deep (everything sharp), Bokeh (quality of blur), Focus point, Creating separation, Guiding attention.
+
+Q: How do you analyze facial expressions?
+A: Facial analysis: Eyes (wideness, direction), Eyebrows (raised, furrowed), Mouth (smile, frown, tension), Overall expression, Micro-expressions, Cultural context.
+
+Q: What makes good visual balance?
+A: Visual balance: Symmetrical (mirror image), Asymmetrical (unequal but balanced), Radial (around center point), Weight distribution, Tension and resolution.
+
+Q: How do you understand spatial relationships?
+A: Spatial relationships: Near/far, Above/below, Left/right, Inside/outside, Overlapping, Proximity (closeness implies relationship), Scale comparisons.
+
+Q: What is visual rhythm?
+A: Visual rhythm: Repetition of elements, Variation in pattern, Regular vs irregular, Creates movement and flow, Guides viewer's eye, Establishes tempo.

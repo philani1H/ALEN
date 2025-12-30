@@ -1,8 +1,12 @@
-//! Semantic Decoder - Converts thought vectors to text using learned representations
+//! Semantic Decoder - DEPRECATED FOR GENERATION
 //!
-//! Uses ALEN's learned thought representations to generate text.
-//! All output is derived from learned semantic memory - no hardcoded vocabulary.
-//! The decoder queries semantic memory to find concepts that match thought activations.
+//! CRITICAL: This module is DEPRECATED for text generation.
+//! Use LatentDecoder instead for all text generation.
+//!
+//! This module does RETRIEVAL (fact.content) which is MEMORIZATION.
+//! For understanding-based generation, use: LatentDecoder
+//!
+//! This is kept only for backward compatibility.
 
 use crate::core::ThoughtState;
 use crate::memory::{SemanticMemory, SemanticFact};

@@ -1,12 +1,12 @@
-//! Universal Explanation Decoder - Multi-Audience Knowledge Translation
+//! Universal Explanation Decoder - DEPRECATED FOR GENERATION
 //!
-//! Implements: h'_explain = f(h_knowledge, s_style, c_context)
+//! CRITICAL: This module is DEPRECATED for text generation.
+//! Use LatentDecoder instead for all text generation.
 //!
-//! Key Features:
-//! - Same knowledge → different audiences (child, elder, mathematician)
-//! - ZERO HALLUCINATIONS - same verification as FactualDecoder
-//! - Style vectors control vocabulary/tone, NOT truth
-//! - Projection operators: P_style(h_knowledge) → h_audience
+//! This module does RETRIEVAL (fact.content) which is MEMORIZATION.
+//! For understanding-based generation, use: LatentDecoder
+//!
+//! This is kept only for backward compatibility.
 
 use crate::core::{ThoughtState, BiasVector};
 use crate::memory::{SemanticMemory, SemanticFact};

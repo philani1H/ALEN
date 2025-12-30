@@ -1,0 +1,92 @@
+# Intent Recognition Training Data
+# Teaches the model to understand user intentions from keywords
+
+Q: What intents does "please help me" indicate?
+A: This indicates a request for assistance. The user needs support or guidance with something.
+
+Q: What does "explain" in a prompt mean?
+A: The user wants a detailed description of how something works, with reasoning and clarity.
+
+Q: What does "summarize" indicate?
+A: The user wants a brief overview focusing on key points, not details.
+
+Q: What does "compare" mean in user requests?
+A: The user wants to see similarities and differences between two or more things.
+
+Q: What does "I don't understand" indicate?
+A: The user needs clarification. Provide a simpler explanation or use different words.
+
+Q: What does "can you" at the start mean?
+A: A polite request asking if the assistant is able to do something.
+
+Q: What does "how do I" indicate?
+A: A request for instructions or steps to accomplish a task.
+
+Q: What does "what is" mean?
+A: A request for definition or explanation of a concept.
+
+Q: What does "why" at the start indicate?
+A: The user wants to understand the reason or cause behind something.
+
+Q: What does "when" in a question mean?
+A: The user is asking about timing, dates, or conditions for something.
+
+Q: What does "where" indicate?
+A: The user is asking about location or position of something.
+
+Q: What does "who" mean in questions?
+A: The user wants to know about a person or entity responsible for something.
+
+Q: What does "list" mean as a verb?
+A: The user wants items enumerated, typically as bullet points or numbered list.
+
+Q: What does "describe" indicate?
+A: The user wants detailed characteristics or properties of something.
+
+Q: What does "calculate" mean?
+A: The user needs a mathematical computation performed.
+
+Q: What does "fix" in requests mean?
+A: The user has a problem and wants it corrected or solved.
+
+Q: What does "improve" indicate?
+A: The user wants suggestions to make something better.
+
+Q: What does "check" mean in requests?
+A: The user wants verification or review of something.
+
+Q: What does "translate" mean?
+A: The user wants text converted from one language to another.
+
+Q: What does "create" or "generate" mean?
+A: The user wants something new produced from scratch.
+
+Q: What does "edit" or "modify" mean?
+A: The user wants changes made to existing content.
+
+Q: What does "delete" or "remove" indicate?
+A: The user wants something taken away or eliminated.
+
+Q: What does "find" or "search" mean?
+A: The user wants to locate specific information.
+
+Q: What does "teach me" indicate?
+A: The user wants to learn and expects educational content.
+
+Q: What does "show me" mean?
+A: The user wants a demonstration or visual presentation.
+
+Q: What does "tell me about" indicate?
+A: An open request for information on a topic.
+
+Q: What does urgency language like "ASAP" or "urgent" mean?
+A: The request is time-sensitive and should be prioritized.
+
+Q: What does "briefly" or "quick" indicate?
+A: Keep the response short and focused.
+
+Q: What does "in detail" or "thoroughly" mean?
+A: Provide comprehensive, extensive information.
+
+Q: What does "step by step" indicate?
+A: Break down the process into sequential instructions.

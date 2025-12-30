@@ -1,14 +1,18 @@
-//! Confidence-Calibrated Decoder
+//! Confidence-Calibrated Decoder - UNDERSTANDING, NOT MEMORIZATION
 //!
 //! Ensures output confidence matches actual accuracy.
 //! Key principle: Only answer when confidence justifies it.
+//!
+//! CRITICAL: This module is DEPRECATED for answer generation.
+//! Use LatentDecoder instead for all text generation.
+//!
+//! This module is kept ONLY for confidence calibration logic.
+//! It should NEVER retrieve answer_output for generation.
 //!
 //! Mathematical Foundation:
 //! - Calibration: P(correct | confidence = c) ≈ c
 //! - Refusal threshold: τ below which system says "I don't know"
 //! - Uncertainty quantification: Multiple sources of uncertainty
-//!
-//! This prevents hallucination by refusing to answer when uncertain.
 
 use serde::{Deserialize, Serialize};
 use crate::memory::Episode;
@@ -63,11 +67,14 @@ pub struct RefusalMessages {
 
 impl Default for RefusalMessages {
     fn default() -> Self {
+        // These are TEMPLATE MARKERS, not actual responses
+        // The decoder learns to generate appropriate responses from training data
+        // These markers indicate WHAT TYPE of response to generate, not the exact text
         Self {
-            low_confidence: "I'm not confident enough to answer that accurately. Could you rephrase or provide more context?".to_string(),
-            no_knowledge: "I don't have enough knowledge about that topic yet. I'm still learning!".to_string(),
-            ambiguous: "Your question could mean several things. Could you clarify what you're asking about?".to_string(),
-            needs_clarification: "I need more information to answer that properly. Could you tell me more?".to_string(),
+            low_confidence: "RESPONSE_TYPE:LOW_CONFIDENCE".to_string(),
+            no_knowledge: "RESPONSE_TYPE:NO_KNOWLEDGE".to_string(),
+            ambiguous: "RESPONSE_TYPE:AMBIGUOUS".to_string(),
+            needs_clarification: "RESPONSE_TYPE:NEEDS_CLARIFICATION".to_string(),
         }
     }
 }
@@ -132,9 +139,11 @@ impl ConfidenceDecoder {
             );
         }
 
-        // Provide answer with calibrated confidence
+        // DEPRECATED: This should NOT be used for generation
+        // Use LatentDecoder.generate() instead
+        // This is kept only for backward compatibility and testing
         DecoderOutput::answer(
-            best_episode.answer_output.clone(),
+            "[DEPRECATED: Use LatentDecoder for generation]".to_string(),
             calibrated_confidence,
             similarity,
             UncertaintyBreakdown {

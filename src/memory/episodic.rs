@@ -1,11 +1,15 @@
-//! Episodic Memory Module
+//! Episodic Memory Module - UNDERSTANDING, NOT MEMORIZATION
 //!
-//! Stores specific past experiences and training attempts.
+//! Stores PATTERNS and REASONING PATHS, not answers.
 //! Only accepts verified (learned) paths.
 //!
-//! CRITICAL: Uses INPUT EMBEDDINGS for similarity search (Fix #1)
-//! - input_embedding: For similarity/retrieval (semantic space)
-//! - thought_vector: For reasoning/verification (thought space)
+//! CRITICAL PRINCIPLES:
+//! 1. input_embedding: For similarity search in semantic space
+//! 2. thought_vector: Stores REASONING PATTERN (latent space)
+//! 3. answer_output: For VERIFICATION ONLY (not for retrieval/generation)
+//!
+//! The system NEVER retrieves answer_output for generation.
+//! Answers are ALWAYS generated from thought_vector via LatentDecoder.
 
 use crate::core::{ThoughtState, Problem, EnergyResult};
 use crate::memory::input_embeddings::{InputEmbedder, EnhancedEpisode as NewEnhancedEpisode};
@@ -16,23 +20,29 @@ use uuid::Uuid;
 use chrono::{DateTime, Utc};
 
 /// A single episode (training attempt or interaction)
+/// 
+/// CRITICAL: This stores REASONING PATTERNS, not memorized answers.
+/// - thought_vector: The learned reasoning pattern in latent space
+/// - answer_output: For VERIFICATION ONLY (never used for generation)
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct Episode {
     /// Unique identifier
     pub id: String,
     /// The problem that was solved
     pub problem_input: String,
-    /// The candidate answer (as text representation)
+    /// The answer (FOR VERIFICATION ONLY - never retrieved for generation)
+    /// Answers are ALWAYS generated from thought_vector via LatentDecoder
     pub answer_output: String,
-    /// The thought vector (serialized)
+    /// The thought vector - REASONING PATTERN in latent space
+    /// This is what the system learns and uses for generation
     pub thought_vector: Vec<f64>,
-    /// Whether this was verified
+    /// Whether this reasoning pattern was verified
     pub verified: bool,
-    /// Confidence score
+    /// Confidence in this reasoning pattern
     pub confidence_score: f64,
     /// Energy at time of storage
     pub energy: f64,
-    /// ID of operator that produced this
+    /// ID of operator that produced this reasoning
     pub operator_id: String,
     /// Timestamp of creation
     pub created_at: DateTime<Utc>,

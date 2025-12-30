@@ -1,12 +1,12 @@
-//! Poetry Generator - Mood-Aware Creative Text Generation
+//! Poetry Generator - DEPRECATED FOR GENERATION
 //!
-//! Integrates:
-//! - h_t (thought vector)
-//! - m_t (mood vector from BiasVector)
-//! - Creativity parameters
-//! - Semantic memory for vocabulary (no hardcoded words)
+//! CRITICAL: This module is DEPRECATED for text generation.
+//! Use LatentDecoder instead for all text generation.
 //!
-//! All poetry vocabulary comes from learned semantic memory.
+//! This module does RETRIEVAL (fact.content) which is MEMORIZATION.
+//! For understanding-based creative generation, use: LatentDecoder with high temperature
+//!
+//! This is kept only for backward compatibility.
 
 use super::text_decoder::{TextDecoder, Vocabulary};
 use super::semantic_decoder::SemanticDecoder;

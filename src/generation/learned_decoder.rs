@@ -1,8 +1,12 @@
-//! Learned Text Decoder - Uses ALEN's semantic memory
+//! Learned Text Decoder - DEPRECATED FOR GENERATION
 //!
-//! Generates text by querying what the AI has actually learned,
-//! not from hardcoded vocabularies. The thought vector determines
-//! output through similarity search in learned semantic space.
+//! CRITICAL: This module is DEPRECATED for text generation.
+//! Use LatentDecoder instead for all text generation.
+//!
+//! This module does RETRIEVAL (fact.content.clone()) which is MEMORIZATION.
+//! For understanding-based generation, use: LatentDecoder
+//!
+//! This is kept only for backward compatibility.
 
 use crate::core::ThoughtState;
 use crate::memory::SemanticMemory;
@@ -43,14 +47,9 @@ impl LearnedDecoder {
             return Ok(self.interpret_raw_thought(thought));
         }
 
-        // Combine top concepts based on similarity scores
-        let mut text_parts = Vec::new();
-        for (fact, _similarity) in similar_concepts.iter().take(max_concepts) {
-            text_parts.push(fact.content.clone());
-        }
-
-        // Compose text from learned concepts
-        Ok(text_parts.join(" "))
+        // DEPRECATED: This does RETRIEVAL which is MEMORIZATION
+        // Use LatentDecoder.generate() instead for understanding-based generation
+        Ok("[DEPRECATED: Use LatentDecoder for generation]".to_string())
     }
 
     /// Fallback: Interpret thought vector directly when no memory available
@@ -112,12 +111,9 @@ impl LearnedDecoder {
             let concepts = memory.find_similar(&varied_thought.vector, 3)?;
 
             if !concepts.is_empty() {
-                // Combine concepts into a poetic line
-                let line_concepts: Vec<String> = concepts.iter()
-                    .map(|(fact, _)| fact.content.clone())
-                    .collect();
-
-                poem_lines.push(line_concepts.join(" "));
+                // DEPRECATED: This does RETRIEVAL (memorization)
+                // Use LatentDecoder.generate() instead
+                poem_lines.push("[DEPRECATED: Use LatentDecoder]".to_string());
             } else {
                 // Use theme if no learned concepts
                 poem_lines.push(format!("{} patterns", theme));
@@ -156,9 +152,11 @@ impl LearnedDecoder {
         let mut concept_sources = Vec::new();
 
         for (fact, similarity) in similar_concepts.iter().take(max_concepts) {
-            text_parts.push(fact.content.clone());
+            // DEPRECATED: This does RETRIEVAL (memorization)
+            // Use LatentDecoder.generate() instead
+            text_parts.push("[DEPRECATED]".to_string());
             concept_sources.push(ConceptSource {
-                concept: fact.content.clone(),
+                concept: "[DEPRECATED: Use LatentDecoder]".to_string(),
                 similarity: *similarity,
                 confidence: fact.confidence,
             });
