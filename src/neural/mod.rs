@@ -25,6 +25,7 @@ mod neural_reasoning_engine;
 pub mod universal_expert;
 pub mod complete_integration;
 pub mod advanced_control;
+pub mod failure_reasoning;
 
 pub use tensor::{Tensor, TensorShape, Device};
 pub use layers::{Linear, LayerNorm, Dropout, Embedding, Conv1D};
