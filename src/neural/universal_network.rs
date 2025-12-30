@@ -318,8 +318,8 @@ impl ExplanationBranch {
 // ============================================================================
 
 pub struct UniversalExpertNetwork {
-    config: UniversalNetworkConfig,
-    
+    pub config: UniversalNetworkConfig,
+
     /// Three branches
     solve_branch: SolveBranch,
     verify_branch: VerificationBranch,

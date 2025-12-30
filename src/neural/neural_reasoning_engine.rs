@@ -532,10 +532,15 @@ impl NeuralReasoningEngine {
     /// Neural explanation: Generate human-readable explanation
     fn neural_explain(&self, _thought: &[f32], problem: &str) -> String {
         // Use Universal Expert Network to generate explanation
-        let problem_tensor = Tensor::from_vec(vec![0.0; self.thought_dim], &[1, self.thought_dim]);
-        let audience_tensor = Tensor::from_vec(vec![0.5; 64], &[1, 64]); // Medium audience level
-        let memory_tensor = Tensor::from_vec(vec![0.0; 256], &[1, 256]);
-        
+        // Use dimensions from universal network config
+        let input_dim = self.universal_network.config.input_dim;
+        let audience_dim = self.universal_network.config.audience_dim;
+        let memory_dim = self.universal_network.config.memory_dim;
+
+        let problem_tensor = Tensor::from_vec(vec![0.0; input_dim], &[1, input_dim]);
+        let audience_tensor = Tensor::from_vec(vec![0.5; audience_dim], &[1, audience_dim]); // Medium audience level
+        let memory_tensor = Tensor::from_vec(vec![0.0; memory_dim], &[1, memory_dim]);
+
         let explanation_output = self.universal_network.forward(
             &problem_tensor,
             &audience_tensor,
