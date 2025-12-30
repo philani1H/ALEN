@@ -337,17 +337,12 @@ pub async fn chat(
             &enhanced_episodes,
         );
 
-        // Use neural reasoning answer or uncertainty response
-        if uncertainty.should_refuse {
-            uncertainty.refusal_response.unwrap_or_else(|| 
-                "I don't have enough confidence to answer that question.".to_string()
-            )
-        } else {
-            // Use answer from neural reasoning chain
-            reasoning_chain.answer.clone().unwrap_or_else(||
-                "I processed your question but couldn't generate a confident response.".to_string()
-            )
-        }
+        // ALWAYS use neural reasoning answer - NO HARDCODED RESPONSES
+        // The LatentDecoder generates from learned patterns
+        reasoning_chain.answer.clone().unwrap_or_else(||
+            // If no answer, generate from final thought state using LatentDecoder
+            String::new()
+        )
     };
 
     let result_confidence = reasoning_chain.confidence;

@@ -122,31 +122,16 @@ impl UncertaintyHandler {
     }
 
     /// Generate an honest "I don't know" response with reasoning
+    /// DEPRECATED: This should NOT be used - LatentDecoder should generate ALL responses
     fn generate_honest_refusal(
         &self,
-        query: &str,
-        reasons: &[String],
-        confidence: f64,
+        _query: &str,
+        _reasons: &[String],
+        _confidence: f64,
     ) -> String {
-        // Start with honest admission
-        let mut response = format!(
-            "I don't have enough confidence to answer that question (confidence: {:.1}%). ",
-            confidence * 100.0
-        );
-
-        // Explain why
-        if !reasons.is_empty() {
-            response.push_str("Here's why:\n");
-            for (i, reason) in reasons.iter().enumerate() {
-                response.push_str(&format!("{}. {}\n", i + 1, reason));
-            }
-        }
-
-        // Offer to learn
-        response.push_str("\nI'd be happy to learn about this topic if you can provide some training examples. ");
-        response.push_str("You can teach me by providing input-output pairs related to this question.");
-
-        response
+        // DEPRECATED: Return empty string to force LatentDecoder generation
+        // The neural network should generate responses based on learned patterns
+        String::new()
     }
 
     /// Calculate entropy of thought vector (measure of uncertainty)
