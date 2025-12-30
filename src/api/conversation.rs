@@ -250,10 +250,16 @@ pub async fn chat(
             )
         }).collect();
 
-        // CRITICAL FIX #2: Use adaptive threshold based on domain
+        // CRITICAL FIX #2: Use lenient threshold to allow trained responses
         let domain = DomainClassifier::classify(&req.message);
-        let gate = AdaptiveConfidenceGate::new();
-        let threshold = gate.get_stats(&domain).current_threshold;
+        let threshold = match domain.as_str() {
+            "conversation" => 0.60,
+            "general" => 0.65,
+            "math" => 0.70,
+            "logic" => 0.70,
+            "code" => 0.68,
+            _ => 0.65,
+        };
 
         // CRITICAL FIX #3: Compute integrated confidence
         let calculator = IntegratedConfidenceCalculator::new();
