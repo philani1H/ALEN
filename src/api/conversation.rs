@@ -15,7 +15,7 @@
 use super::{AppState, Problem};
 use crate::core::ThoughtState;
 use crate::learning::feedback_loop::InferenceResult;
-use crate::memory::{Episode, SemanticMemory};
+use crate::memory::Episode;
 use crate::generation::{ContentGenerator, DynamicTextGenerator};
 use crate::confidence::{
     AdaptiveConfidenceGate, IntegratedConfidenceCalculator,
@@ -260,39 +260,13 @@ pub async fn chat(
 
     let problem = Problem::new(&full_input, dim);
 
-    // NEURAL REASONING: Use real neural chain-of-thought
-    // Create temporary semantic memory for reasoning (in-memory)
-    let temp_semantic = match SemanticMemory::in_memory(dim) {
-        Ok(mem) => mem,
-        Err(e) => {
-            return Json(ChatResponse {
-                conversation_id: conv_id,
-                message: format!("Error: Failed to initialize reasoning memory: {}", e),
-                confidence: 0.0,
-                energy: 0.0,
-                operator_used: "Error".to_string(),
-                thought_vector: vec![0.0; dim],
-                context_used: 0,
-                reasoning_steps: vec![format!("Memory initialization failed: {}", e)],
-            });
-        }
-    };
-    
-    // Copy facts from main semantic memory to temp
-    if let Ok(facts) = engine.semantic_memory.get_all_facts(100) {
-        for fact in facts {
-            let _ = temp_semantic.store(&fact);
-        }
-    }
-    
-    // UNDERSTANDING-BASED GENERATION (NO RETRIEVAL)
+    // UNDERSTANDING-BASED GENERATION (NO RETRIEVAL, NO MEMORY)
     // NeuralChainOfThoughtReasoner uses SHARED LatentDecoder
-    // This generates from learned patterns, NOT by retrieving stored answers
+    // This generates from learned patterns ONLY
     use crate::reasoning::NeuralChainOfThoughtReasoner;
     let mut neural_reasoner = NeuralChainOfThoughtReasoner::new(
         engine.operators.clone(),
         engine.evaluator.clone(),
-        temp_semantic,
         engine.latent_decoder.clone(),  // PASS SHARED DECODER
         dim,
         10,  // max reasoning steps

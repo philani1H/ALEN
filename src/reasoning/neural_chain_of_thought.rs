@@ -7,7 +7,6 @@
 
 use serde::{Deserialize, Serialize};
 use crate::core::{ThoughtState, Problem, OperatorManager, Evaluator, EnergyResult};
-use crate::memory::SemanticMemory;
 use crate::generation::LatentDecoder;
 use std::sync::{Arc, Mutex};
 
@@ -106,8 +105,6 @@ pub struct NeuralChainOfThoughtReasoner {
     operators: OperatorManager,
     /// Evaluator for thought quality
     evaluator: Evaluator,
-    /// Semantic memory for context (patterns only, not answers)
-    semantic_memory: SemanticMemory,
     /// Latent decoder for text generation (NO RETRIEVAL) - SHARED/PERSISTENT
     latent_decoder: Arc<Mutex<LatentDecoder>>,
     /// Maximum reasoning steps
@@ -124,7 +121,6 @@ impl NeuralChainOfThoughtReasoner {
     pub fn new(
         operators: OperatorManager,
         evaluator: Evaluator,
-        semantic_memory: SemanticMemory,
         latent_decoder: Arc<Mutex<LatentDecoder>>,
         dimension: usize,
         max_steps: usize,
@@ -140,7 +136,6 @@ impl NeuralChainOfThoughtReasoner {
         Self {
             operators,
             evaluator,
-            semantic_memory,
             latent_decoder,
             max_steps,
             min_confidence,
@@ -251,26 +246,11 @@ impl NeuralChainOfThoughtReasoner {
             .sqrt();
 
         // Find concepts that match the new thought using REAL semantic memory
-        let matching_concepts = self.semantic_memory
-            .find_similar(&after.vector, 3)
-            .unwrap_or_default();
-
-        if matching_concepts.is_empty() {
-            format!(
-                "{} operator transformed thought (magnitude: {:.3})",
-                operator, change
-            )
-        } else {
-            let concept_names: Vec<String> = matching_concepts.iter()
-                .map(|(fact, sim)| format!("{} ({:.0}%)", fact.concept, sim * 100.0))
-                .collect();
-
-            format!(
-                "{} operator shifted thinking toward: {}",
-                operator,
-                concept_names.join(", ")
-            )
-        }
+        // Pure neural transformation description
+        format!(
+            "{} operator transformed thought (magnitude: {:.3})",
+            operator, change
+        )
     }
 
     /// Decode thought vector into text using LATENT GENERATION (NO RETRIEVAL)
@@ -302,12 +282,12 @@ mod tests {
         let dim = 64;
         let operators = OperatorManager::new(dim);
         let evaluator = Evaluator::new(EnergyWeights::default(), 0.7);
-        let semantic_memory = SemanticMemory::in_memory(dim).unwrap();
+        let latent_decoder = Arc::new(Mutex::new(LatentDecoder::new(dim, 10)));
 
         let mut reasoner = NeuralChainOfThoughtReasoner::new(
             operators,
             evaluator,
-            semantic_memory,
+            latent_decoder,
             dim,
             5,
             0.6,

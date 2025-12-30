@@ -219,6 +219,10 @@ impl LatentDecoder {
             .map(|s| s.to_lowercase())
             .collect();
 
+        if tokens.is_empty() {
+            return;
+        }
+
         // Find or create pattern for this thought
         let mut best_pattern_idx = 0;
         let mut best_activation = 0.0;
@@ -231,17 +235,25 @@ impl LatentDecoder {
             }
         }
 
-        // Learn pattern → concept associations
-        // Extract concepts from tokens (simple: use tokens as concepts)
+        // If no pattern is activated, use the one with lowest reinforcement
+        if best_activation < 0.01 {
+            best_pattern_idx = self.patterns.iter()
+                .enumerate()
+                .min_by(|a, b| a.1.reinforcement.partial_cmp(&b.1.reinforcement).unwrap())
+                .map(|(idx, _)| idx)
+                .unwrap_or(0);
+        }
+
+        // Learn pattern → concept associations with HIGHER learning rate
         for token in &tokens {
             self.patterns[best_pattern_idx].learn(
                 &thought.vector,
                 token,
-                self.learning_rate
+                self.learning_rate * 5.0  // Increase learning rate
             );
 
-            // Learn concept → token associations
-            self.token_network.learn_association(token, &tokens, self.learning_rate);
+            // Learn concept → token associations with HIGHER learning rate
+            self.token_network.learn_association(token, &tokens, self.learning_rate * 5.0);
         }
     }
 
@@ -253,7 +265,8 @@ impl LatentDecoder {
         for pattern in &self.patterns {
             let activation = pattern.activation(&thought.vector);
             
-            if activation > 0.1 {
+            // Lower threshold to activate more patterns
+            if activation > 0.01 {
                 // Accumulate concept activations from this pattern
                 for (concept, weight) in &pattern.concept_activations {
                     let current = concept_activations.get(concept).copied().unwrap_or(0.0);
@@ -262,11 +275,21 @@ impl LatentDecoder {
             }
         }
 
+        // If no patterns activated, use all patterns with lower weight
         if concept_activations.is_empty() {
-            return (
-                "I don't have enough understanding to answer this.".to_string(),
-                0.0
-            );
+            for pattern in &self.patterns {
+                if pattern.reinforcement > 0.0 {
+                    for (concept, weight) in &pattern.concept_activations {
+                        let current = concept_activations.get(concept).copied().unwrap_or(0.0);
+                        concept_activations.insert(concept.clone(), current + weight * 0.1);
+                    }
+                }
+            }
+        }
+
+        // Still empty? Return empty string (let caller handle)
+        if concept_activations.is_empty() {
+            return (String::new(), 0.0);
         }
 
         // Step 2: Generate tokens from concept activations
@@ -296,14 +319,17 @@ impl LatentDecoder {
         }
 
         if generated_tokens.is_empty() {
-            return (
-                "I cannot generate a confident response.".to_string(),
-                0.0
-            );
+            // Return empty string, let caller handle
+            return (String::new(), 0.0);
         }
 
+        // Join tokens and calculate confidence
         let text = generated_tokens.join(" ");
-        let confidence = (total_confidence / generated_tokens.len() as f64).min(1.0);
+        let confidence = if generated_tokens.len() > 0 {
+            (total_confidence / generated_tokens.len() as f64).min(1.0)
+        } else {
+            0.0
+        };
 
         (text, confidence)
     }
