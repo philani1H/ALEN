@@ -484,7 +484,11 @@ impl KnowledgeVerifier {
     fn extract_domain(&self, question: &str) -> String {
         let lower = question.to_lowercase();
         
-        if lower.contains("math") || lower.contains("calculate") || lower.contains("equation") {
+        // Check for math-related patterns
+        if lower.contains("math") || lower.contains("calculate") || lower.contains("equation") ||
+           lower.contains('+') || lower.contains('-') || lower.contains('*') || lower.contains('/') ||
+           lower.contains("sum") || lower.contains("product") || lower.contains("divide") ||
+           lower.contains("multiply") || lower.contains("subtract") || lower.contains("add") {
             "mathematics".to_string()
         } else if lower.contains("physics") || lower.contains("force") || lower.contains("motion") {
             "physics".to_string()
@@ -494,9 +498,34 @@ impl KnowledgeVerifier {
     }
     
     fn semantic_similarity(&self, text1: &str, text2: &str) -> f64 {
-        // Simple word overlap similarity
-        let words1: Vec<&str> = text1.split_whitespace().collect();
-        let words2: Vec<&str> = text2.split_whitespace().collect();
+        // Extract numbers from both texts for math comparisons
+        let nums1: Vec<String> = text1.split(|c: char| !c.is_numeric() && c != '.')
+            .filter(|s| !s.is_empty())
+            .map(|s| s.to_string())
+            .collect();
+        let nums2: Vec<String> = text2.split(|c: char| !c.is_numeric() && c != '.')
+            .filter(|s| !s.is_empty())
+            .map(|s| s.to_string())
+            .collect();
+        
+        // Check if numeric answers match (important for math)
+        let mut num_match = 0;
+        for n1 in &nums1 {
+            if nums2.contains(n1) {
+                num_match += 1;
+            }
+        }
+        
+        // If the answer contains the correct numeric result, give high similarity
+        if num_match > 0 && !nums1.is_empty() {
+            return 0.9;
+        }
+        
+        // Simple word overlap similarity as fallback
+        let lower1 = text1.to_lowercase();
+        let lower2 = text2.to_lowercase();
+        let words1: Vec<&str> = lower1.split_whitespace().collect();
+        let words2: Vec<&str> = lower2.split_whitespace().collect();
         
         let mut matches = 0;
         for w1 in &words1 {
