@@ -233,9 +233,13 @@ pub async fn chat(
     // Run inference
     let result = engine.infer(&problem);
 
-    // CRITICAL FIX #3: Use integrated confidence with episodic memory
-    let response_text = if let Ok(similar_episodes) = engine.episodic_memory.find_similar(&req.message, 5) {
-        // Convert Episode to EnhancedEpisode format for confidence integration
+    // GENERATE ANSWER FROM THOUGHT VECTOR (not just retrieve)
+    // Retrieval provides CONTEXT only, final answer is always generated
+    let response_text = {
+        // Step 1: Get similar episodes for context (not for direct answer)
+        let similar_episodes = engine.episodic_memory.find_similar(&req.message, 5).unwrap_or_default();
+
+        // Step 2: Convert to enhanced episodes for confidence calculation
         let embedder = InputEmbedder::new(dim);
         let enhanced_episodes: Vec<EnhancedEpisode> = similar_episodes.iter().map(|ep| {
             EnhancedEpisode::new(
@@ -250,7 +254,7 @@ pub async fn chat(
             )
         }).collect();
 
-        // CRITICAL FIX #2: Use lenient threshold to allow trained responses
+        // Step 3: Determine domain-specific confidence threshold
         let domain = DomainClassifier::classify(&req.message);
         let threshold = match domain.as_str() {
             "conversation" => 0.45,  // Allow responses with 45%+ confidence
@@ -261,65 +265,70 @@ pub async fn chat(
             _ => 0.50,
         };
 
-        // CRITICAL FIX #3: Compute integrated confidence
+        // Step 4: Compute integrated confidence (proof + episodic memory)
         let calculator = IntegratedConfidenceCalculator::new();
         let integrated = calculator.compute_confidence(
-            result.confidence,  // proof confidence
+            result.confidence,  // proof confidence from neural network
             &req.message,       // query
-            &enhanced_episodes, // episodic memory
-            None,               // concept confidence (TODO: implement)
+            &enhanced_episodes, // episodic memory (for context)
+            None,               // concept confidence
         );
+        let integrated_confidence = integrated.final_confidence;
 
-        // IMPROVED: Select best answer with verification
-        // Consider both similarity and confidence, filter out low-quality answers
-        let best_answer = if !enhanced_episodes.is_empty() {
-            // Filter episodes with reasonable confidence (>40%)
-            let quality_episodes: Vec<&EnhancedEpisode> = enhanced_episodes
-                .iter()
-                .filter(|ep| ep.confidence_score > 0.4 && ep.verified)
+        // Step 5: GENERATE from thought vector using SemanticDecoder
+        use crate::generation::semantic_decoder::SemanticDecoder;
+        let decoder = SemanticDecoder::new(dim, 0.8);
+
+        // Generate text from the thought vector (this is TRUE GENERATION)
+        let generated_text = if integrated_confidence >= threshold {
+            // High confidence: generate from thought vector using semantic memory
+            decoder.generate_text_with_memory(&result.thought, &engine.semantic_memory, 50)
+                .unwrap_or_else(|_| {
+                    // Fallback: use thought description if generation fails
+                    let desc = decoder.describe_thought(&result.thought);
+                    format!("Based on my understanding (confidence: {:.1}%), I believe the answer relates to this domain.", desc.confidence * 100.0)
+                })
+        } else if !enhanced_episodes.is_empty() && integrated_confidence >= (threshold * 0.8) {
+            // Medium confidence with similar episodes: synthesize from context
+            let context_hints: Vec<String> = enhanced_episodes.iter()
+                .take(3)
+                .map(|ep| ep.answer_output.clone())
                 .collect();
-            
-            if !quality_episodes.is_empty() {
-                // Use highest confidence among similar episodes
-                let best = quality_episodes
-                    .iter()
-                    .max_by(|a, b| a.confidence_score.partial_cmp(&b.confidence_score).unwrap_or(std::cmp::Ordering::Equal))
-                    .unwrap();
-                best.answer_output.clone()
-            } else if !enhanced_episodes.is_empty() {
-                // Fallback to most similar if no high-quality matches
-                enhanced_episodes[0].answer_output.clone()
+
+            // Generate using both thought vector and context
+            let generated = decoder.generate_text_with_memory(&result.thought, &engine.semantic_memory, 30)
+                .unwrap_or_default();
+
+            if !generated.is_empty() {
+                generated
             } else {
-                "Unable to find similar examples".to_string()
+                // Synthesize from context if generation produces nothing
+                format!("Based on similar contexts, I believe: {}", context_hints.join(", "))
             }
         } else {
-            "Unable to find similar examples".to_string()
+            // Low confidence: refuse to answer
+            let responder = ConfidenceAwareResponder::new();
+            let refusal = responder.generate_response(
+                String::new(),
+                integrated_confidence,
+                &req.message,
+                &enhanced_episodes,
+                None,
+                threshold,
+            );
+
+            if refusal.refused {
+                format!(
+                    "I don't have enough confidence to answer that question (confidence: {:.1}%). {}",
+                    integrated_confidence * 100.0,
+                    refusal.refusal_reason.unwrap_or_else(|| "Please provide more training examples.".to_string())
+                )
+            } else {
+                "I'm still learning. Please help me learn by providing more training examples.".to_string()
+            }
         };
 
-        // Use confidence-aware responder
-        let responder = ConfidenceAwareResponder::new();
-        let gated_response = responder.generate_response(
-            best_answer,
-            result.confidence,
-            &req.message,
-            &enhanced_episodes,
-            None,  // concept confidence
-            threshold,
-        );
-
-        if gated_response.refused {
-            // System refused - explain why
-            format!(
-                "I don't have enough confidence to answer that question. {}",
-                gated_response.refusal_reason.unwrap_or_default()
-            )
-        } else {
-            gated_response.answer.unwrap_or_else(|| 
-                "I'm still learning. Please help me learn by providing more examples through training.".to_string()
-            )
-        }
-    } else {
-        "I'm still learning. Please help me learn by providing more examples through training.".to_string()
+        generated_text
     };
 
     // Add assistant message

@@ -613,7 +613,7 @@ mod tests {
     #[test]
     fn test_knowledge_encoder() {
         let encoder = KnowledgeEncoder::new(128, 64, vec![96]);
-        let x = Tensor::randn(&[1, 128]);
+        let x = Tensor::randn(vec![1, 128]);
         let z = encoder.encode(&x);
         
         assert_eq!(z.shape(), &[1, 64]);
@@ -622,7 +622,7 @@ mod tests {
     #[test]
     fn test_transformation_bank() {
         let bank = TransformationBank::new(64);
-        let z = Tensor::randn(&[1, 64]);
+        let z = Tensor::randn(vec![1, 64]);
         let candidates = bank.generate_candidates(&z, None);
         
         assert_eq!(candidates.len(), 6); // 6 transformation types
@@ -631,7 +631,7 @@ mod tests {
     #[test]
     fn test_consistency_verifier() {
         let mut verifier = ConsistencyVerifier::new(64, 0.5);
-        let z = Tensor::randn(&[1, 64]);
+        let z = Tensor::randn(vec![1, 64]);
         
         verifier.add_knowledge(z.clone());
         let score = verifier.verify(&z);
@@ -642,7 +642,7 @@ mod tests {
     #[test]
     fn test_self_discovery_loop() {
         let mut loop_system = SelfDiscoveryLoop::new(128, 64, 128, 0.5, 5);
-        let x = Tensor::randn(&[1, 128]);
+        let x = Tensor::randn(vec![1, 128]);
         
         let result = loop_system.discover_step(&x, None, ExplanationLevel::Detailed);
         

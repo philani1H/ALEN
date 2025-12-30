@@ -129,23 +129,34 @@ impl PositionalEncoding {
 
     /// Add positional encoding to input
     pub fn forward(&self, x: &Tensor) -> Tensor {
-        let seq_len = x.shape.dim(1);
-        assert!(seq_len <= self.max_seq_len, "Sequence too long");
-        
-        // Get positional encoding for this sequence length
-        let batch = x.shape.dim(0);
+        let ndim = x.shape.ndim();
+
+        // Handle both 2D [batch, d_model] and 3D [batch, seq_len, d_model] inputs
+        let (batch, seq_len, d_model) = if ndim == 2 {
+            // 2D input: [batch, d_model] - treat as single token (seq_len=1)
+            (x.shape.dim(0), 1, x.shape.dim(1))
+        } else if ndim == 3 {
+            // 3D input: [batch, seq_len, d_model]
+            (x.shape.dim(0), x.shape.dim(1), x.shape.dim(2))
+        } else {
+            panic!("PositionalEncoding expects 2D or 3D input, got {}D", ndim);
+        };
+
+        assert_eq!(d_model, self.d_model, "d_model mismatch");
+        assert!(seq_len <= self.max_seq_len, "Sequence too long: {} > {}", seq_len, self.max_seq_len);
+
         let mut output = x.to_vec();
-        
+
         for b in 0..batch {
             for s in 0..seq_len {
-                for d in 0..self.d_model {
-                    let idx = b * seq_len * self.d_model + s * self.d_model + d;
+                for d in 0..d_model {
+                    let idx = b * seq_len * d_model + s * d_model + d;
                     let pe_idx = s * self.d_model + d;
                     output[idx] += self.encoding.data[pe_idx];
                 }
             }
         }
-        
+
         let result = Tensor::new(output, x.shape.clone());
         self.dropout.forward(&result)
     }
@@ -300,27 +311,46 @@ impl MultiHeadSelfAttention {
 
     /// Forward pass
     pub fn forward(&self, x: &Tensor, mask: Option<&Tensor>) -> Tensor {
-        let batch = x.shape.dim(0);
-        let seq_len = x.shape.dim(1);
-        
+        let ndim = x.shape.ndim();
+        let is_2d = ndim == 2;
+
+        // Handle both 2D [batch, d_model] and 3D [batch, seq_len, d_model] inputs
+        let (batch, seq_len) = if is_2d {
+            // 2D input: [batch, d_model] - treat as single token (seq_len=1)
+            (x.shape.dim(0), 1)
+        } else if ndim == 3 {
+            // 3D input: [batch, seq_len, d_model]
+            (x.shape.dim(0), x.shape.dim(1))
+        } else {
+            panic!("MultiHeadSelfAttention expects 2D or 3D input, got {}D", ndim);
+        };
+
         // Project Q, K, V
         let q = self.w_q.forward(x);
         let k = self.w_k.forward(x);
         let v = self.w_v.forward(x);
-        
+
         // Reshape to [batch, heads, seq, d_k]
         let q = self.split_heads(&q, batch, seq_len);
         let k = self.split_heads(&k, batch, seq_len);
         let v = self.split_heads(&v, batch, seq_len);
-        
+
         // Scaled dot-product attention
         let attn_output = scaled_dot_product_attention(&q, &k, &v, mask);
-        
+
         // Concatenate heads
         let concat = self.concat_heads(&attn_output, batch, seq_len);
-        
+
         // Final projection
-        let output = self.w_o.forward(&concat);
+        let mut output = self.w_o.forward(&concat);
+
+        // If input was 2D, squeeze the seq_len dimension back to 2D
+        if is_2d && output.shape.ndim() == 3 {
+            // [batch, 1, d_model] -> [batch, d_model]
+            let new_shape = vec![output.shape.dim(0), output.shape.dim(2)];
+            output = Tensor::new(output.data, new_shape);
+        }
+
         self.dropout.forward(&output)
     }
 

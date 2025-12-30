@@ -318,8 +318,8 @@ impl ExplanationBranch {
 // ============================================================================
 
 pub struct UniversalExpertNetwork {
-    config: UniversalNetworkConfig,
-    
+    pub config: UniversalNetworkConfig,
+
     /// Three branches
     solve_branch: SolveBranch,
     verify_branch: VerificationBranch,
@@ -456,9 +456,9 @@ mod tests {
         let network = UniversalExpertNetwork::new(config.clone());
         
         let batch_size = 2;
-        let problem_input = Tensor::randn(&[batch_size, config.input_dim]);
-        let audience_profile = Tensor::randn(&[batch_size, config.audience_dim]);
-        let memory_retrieval = Tensor::randn(&[batch_size, config.memory_dim]);
+        let problem_input = Tensor::randn(vec![batch_size, config.input_dim]);
+        let audience_profile = Tensor::randn(vec![batch_size, config.audience_dim]);
+        let memory_retrieval = Tensor::randn(vec![batch_size, config.memory_dim]);
         
         let output = network.forward(
             &problem_input,

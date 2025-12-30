@@ -392,7 +392,7 @@ mod tests {
     #[test]
     fn test_policy_network() {
         let policy = PolicyNetwork::new(10, 1.0);
-        let logits = Tensor::randn(&[2, 10]);
+        let logits = Tensor::randn(vec![2, 10]);
         
         let (actions, log_probs) = policy.sample(&logits);
         
