@@ -227,7 +227,21 @@ pub async fn chat(
     // Get or create conversation
     let mut conv_store = state.conversation_manager.store.lock().await;
     let conv_id = conv_store.get_or_create(req.conversation_id.clone(), req.system_prompt.clone());
-    let conversation = conv_store.get_mut(&conv_id).unwrap();
+    let conversation = match conv_store.get_mut(&conv_id) {
+        Some(conv) => conv,
+        None => {
+            return Json(ChatResponse {
+                conversation_id: conv_id,
+                message: "Error: Failed to retrieve conversation".to_string(),
+                confidence: 0.0,
+                energy: 0.0,
+                operator_used: "Error".to_string(),
+                thought_vector: vec![0.0; dim],
+                context_used: 0,
+                reasoning_steps: vec!["Conversation retrieval failed".to_string()],
+            });
+        }
+    };
 
     // Add user message
     conversation.add_message(MessageRole::User, req.message.clone(), None, None);
@@ -248,10 +262,21 @@ pub async fn chat(
 
     // NEURAL REASONING: Use real neural chain-of-thought
     // Create temporary semantic memory for reasoning (in-memory)
-    let temp_semantic = SemanticMemory::in_memory(dim).unwrap_or_else(|_| {
-        // Fallback: create new in-memory instance
-        SemanticMemory::in_memory(dim).unwrap()
-    });
+    let temp_semantic = match SemanticMemory::in_memory(dim) {
+        Ok(mem) => mem,
+        Err(e) => {
+            return Json(ChatResponse {
+                conversation_id: conv_id,
+                message: format!("Error: Failed to initialize reasoning memory: {}", e),
+                confidence: 0.0,
+                energy: 0.0,
+                operator_used: "Error".to_string(),
+                thought_vector: vec![0.0; dim],
+                context_used: 0,
+                reasoning_steps: vec![format!("Memory initialization failed: {}", e)],
+            });
+        }
+    };
     
     // Copy facts from main semantic memory to temp
     if let Ok(facts) = engine.semantic_memory.get_all_facts(100) {
