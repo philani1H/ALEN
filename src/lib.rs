@@ -85,6 +85,8 @@ pub use generation::{
     BPETokenizer, BPETrainer, BPEWithEmbeddings, BPESpecialTokens,
     // PRIMARY DECODER: Understanding-based generation (NO RETRIEVAL)
     LatentDecoder, LatentDecoderStats,
+    // Alternative Neural Decoder (with bigram model and more sophisticated learning)
+    NeuralDecoder, NeuralDecoderStats,
     // DEPRECATED: Semantic decoder (uses retrieval - use LatentDecoder instead)
     SemanticDecoder,
 };
@@ -93,6 +95,11 @@ pub use memory::{
     EpisodicMemory, Episode, EpisodeStatistics,
     SemanticMemory, SemanticFact, SemanticStatistics,
     EmbeddingEngine, EmbeddingConfig,
+    // Three-Layer Adaptive Memory Architecture
+    SemanticUnit, SemanticUnitType, SemanticDomain, SemanticSource,
+    ErrorLogEntry, ErrorType, PatternConfidence, PatternType,
+    UserState, UserStyle, ExpertiseLevel, DecoderControl,
+    AdaptiveMemoryStore, AdaptiveMemoryStats,
 };
 
 pub use learning::{
