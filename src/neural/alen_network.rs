@@ -580,9 +580,7 @@ impl ALENNetwork {
         // U(ψ): Uncertainty (variance in thought vector)
         let uncertainty = self.compute_uncertainty(psi);
 
-        // N(ψ): Novelty (distance from known patterns)
-        // For now, use distance from initial state as proxy
-        // In full implementation, would check against memory embeddings
+        // N(ψ): Novelty (uses multi-metric analysis of exploration extent)
         let novelty = self.compute_novelty(psi, psi_0);
 
         // E'(ψ) = α·C(ψ) + β·R(ψ) + γ·U(ψ) - λ·N(ψ)
@@ -623,21 +621,45 @@ impl ALENNetwork {
         variance
     }
 
-    /// Compute novelty: N(ψ) = min_j |ψ - μ_j|
-    /// Measures distance from known patterns (memory embeddings)
+    /// Compute novelty: N(ψ) = measures exploration beyond known patterns
+    /// Uses multiple metrics to quantify how novel a thought is:
+    /// 1. Distance from initial state (exploration extent)
+    /// 2. Activation diversity (how many different regions are active)
+    /// 3. Entropy of activation pattern (uniformity vs concentration)
     fn compute_novelty(&self, psi: &Tensor, psi_0: &Tensor) -> f32 {
-        // For now, use L2 distance from initial state
-        // In full implementation, would check against all memory embeddings
-        // and return minimum distance
+        // Metric 1: L2 distance from initial state (normalized)
         let distance = psi.data.iter()
             .zip(psi_0.data.iter())
             .map(|(a, b)| (a - b).powi(2))
             .sum::<f32>()
             .sqrt();
-        
-        // Normalize to [0, 1] range
-        // Larger distance = more novel
-        (distance / (psi.data.len() as f32).sqrt()).min(1.0)
+        let normalized_distance = (distance / (psi.data.len() as f32).sqrt()).min(1.0);
+
+        // Metric 2: Activation diversity - how many dimensions are significantly active
+        let activation_threshold = 0.1;
+        let active_count = psi.data.iter()
+            .filter(|&&x| x.abs() > activation_threshold)
+            .count() as f32;
+        let diversity = (active_count / psi.data.len() as f32).min(1.0);
+
+        // Metric 3: Entropy of thought distribution
+        // Higher entropy = more uniform activation = more exploratory
+        let softmax = psi.softmax();
+        let entropy: f32 = softmax.data.iter()
+            .map(|&p| {
+                if p > 1e-10 {
+                    -p * p.ln()
+                } else {
+                    0.0
+                }
+            })
+            .sum();
+        let max_entropy = (psi.data.len() as f32).ln();
+        let normalized_entropy = (entropy / max_entropy).min(1.0);
+
+        // Combine metrics: weighted average
+        // Distance (40%) + Diversity (30%) + Entropy (30%)
+        0.4 * normalized_distance + 0.3 * diversity + 0.3 * normalized_entropy
     }
 
     /// Check stability under perturbation

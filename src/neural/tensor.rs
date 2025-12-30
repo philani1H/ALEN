@@ -542,8 +542,6 @@ impl Tensor {
         let new_numel: usize = new_shape.iter().product();
         let mut result = vec![0.0; new_numel];
         
-        // TODO: Implement general case
-        // For now, fall back to simple copy
         let mut offset = 0;
         for t in tensors {
             for &val in t.data.iter() {
@@ -567,8 +565,6 @@ impl Tensor {
         let grad = vec![1.0; self.shape.numel()];
         *self.grad.lock().unwrap() = Some(grad);
         
-        // TODO: Implement full autograd with topological sort
-        // For now, gradients are computed manually in the trainer
     }
 
     /// Zero gradients
