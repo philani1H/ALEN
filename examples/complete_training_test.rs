@@ -8,6 +8,7 @@ use alen::core::{Problem, ThoughtState, EnergyWeights};
 use alen::learning::LearningConfig;
 use alen::memory::EmbeddingConfig;
 use alen::generation::LatentDecoder;
+use alen::neural::{TransformerEnhancedDecoder, TransformerConfig};
 use std::fs;
 use std::path::Path;
 
@@ -94,6 +95,19 @@ fn main() -> Result<(), Box<dyn std::error::Error + Send + Sync>> {
     decoder.set_learning_rate(0.2);
     decoder.set_temperature(0.7);
     
+    // Initialize Transformer-enhanced decoder for better generation
+    let transformer_config = TransformerConfig {
+        d_model: 128,
+        n_heads: 4,
+        d_ff: 512,
+        n_layers: 2,
+        max_seq_len: 256,
+        vocab_size: 10000,
+        dropout: 0.1,
+        layer_norm_eps: 1e-5,
+    };
+    let mut transformer_decoder = TransformerEnhancedDecoder::new(128, transformer_config);
+    
     // =========================================================================
     // PHASE 1: Load and Train on All Training Data
     // =========================================================================
@@ -130,7 +144,7 @@ fn main() -> Result<(), Box<dyn std::error::Error + Send + Sync>> {
     let mut epoch = 0;
     
     // MORE training epochs for better learning
-    let num_epochs = 10;  // Increased from 3
+    let num_epochs = 10;
     for _ in 0..num_epochs {
         epoch += 1;
         for (input, output) in &all_pairs {
@@ -138,11 +152,14 @@ fn main() -> Result<(), Box<dyn std::error::Error + Send + Sync>> {
             let problem = Problem::training(input, output, 128);
             let result = engine.train(&problem);
             
-            // Train the decoder MULTIPLE times per example for better learning
+            // Train the LatentDecoder MULTIPLE times per example
             let thought = ThoughtState::from_input(input, 128);
-            for _ in 0..3 {  // Train decoder 3 times per example
+            for _ in 0..3 {
                 decoder.learn(&thought, output);
             }
+            
+            // Train the Transformer decoder
+            transformer_decoder.learn(&thought, output);
             
             if result.success {
                 successful += 1;
@@ -154,11 +171,19 @@ fn main() -> Result<(), Box<dyn std::error::Error + Send + Sync>> {
     }
     
     let decoder_stats = decoder.stats();
-    println!("\n  📊 Decoder Statistics:");
+    println!("\n  📊 LatentDecoder Statistics:");
     println!("     - Training count: {}", decoder_stats.training_count);
     println!("     - Active patterns: {}", decoder_stats.active_patterns);
     println!("     - Vocabulary size: {}", decoder_stats.vocabulary_size);
     println!("     - Total associations: {}", decoder_stats.total_associations);
+    
+    let transformer_stats = transformer_decoder.stats();
+    println!("\n  📊 Transformer Decoder Statistics:");
+    println!("     - Training count: {}", transformer_stats.training_count);
+    println!("     - Vocabulary size: {}", transformer_stats.vocab_size);
+    println!("     - Model dimension: {}", transformer_stats.d_model);
+    println!("     - Attention heads: {}", transformer_stats.n_heads);
+    println!("     - Layers: {}", transformer_stats.n_layers);
     
     // =========================================================================
     // PHASE 2: Test Understanding (NOT Memorization)
