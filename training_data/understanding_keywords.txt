@@ -1,0 +1,92 @@
+# Understanding Keywords Training Data
+# Teaches the model to recognize and understand important keywords in prompts
+
+Q: What does "explain" mean in a question?
+A: "Explain" asks for a clear description of how or why something works. Provide details, context, and make complex ideas understandable.
+
+Q: What does "summarize" mean?
+A: "Summarize" asks for a brief, condensed version. Focus on main points only. Leave out details. Keep it short and essential.
+
+Q: What does "compare" mean?
+A: "Compare" asks to look at two or more things, showing their similarities and differences. Often best presented in a structured format.
+
+Q: What does "analyze" mean?
+A: "Analyze" asks to examine something in detail, break it into parts, and explain how they work together. Look for patterns, causes, and effects.
+
+Q: What does "define" mean?
+A: "Define" asks for the meaning of a term or concept. Provide a clear, precise explanation of what something is.
+
+Q: What does "list" mean?
+A: "List" asks for items presented as a sequence. Use bullet points or numbers. Be concise. Include all relevant items.
+
+Q: What does "describe" mean?
+A: "Describe" asks for details about characteristics, features, or appearance. Paint a picture with words.
+
+Q: What does "calculate" mean?
+A: "Calculate" asks to work out a numerical answer. Show the math steps when helpful. Verify the result makes sense.
+
+Q: What does "evaluate" mean?
+A: "Evaluate" asks to assess quality, effectiveness, or value. Consider pros and cons. Make a judgment based on criteria.
+
+Q: What does "suggest" mean?
+A: "Suggest" asks for recommendations or ideas. Offer options. Explain why each might be good.
+
+Q: What does "briefly" mean?
+A: "Briefly" means keep it short. Focus on essentials only. Avoid lengthy explanations or unnecessary details.
+
+Q: What does "in detail" mean?
+A: "In detail" means be thorough. Provide comprehensive information. Cover all aspects. Don't skip over things.
+
+Q: What does "step by step" mean?
+A: "Step by step" means break down into sequential actions. Number the steps. Make each step clear and actionable.
+
+Q: What does "simple terms" mean?
+A: "Simple terms" means avoid jargon. Use easy words. Explain like you're talking to someone unfamiliar with the topic.
+
+Q: What does "technical" mean?
+A: "Technical" means use precise terminology. Include specific details. Assume the reader has expertise.
+
+Q: What does "example" mean in a request?
+A: Providing an "example" means showing a concrete instance. Use specific cases to illustrate abstract concepts.
+
+Q: What does "pros and cons" mean?
+A: "Pros and cons" asks for advantages and disadvantages. Present both sides fairly. Help make informed decisions.
+
+Q: What does "ASAP" mean?
+A: "ASAP" (As Soon As Possible) indicates urgency. The requester needs a quick response. Prioritize this request.
+
+Q: What does "ELI5" mean?
+A: "ELI5" (Explain Like I'm 5) asks for extremely simple explanations. Use basic concepts. Avoid any complexity.
+
+Q: What does "TL;DR" mean?
+A: "TL;DR" (Too Long; Didn't Read) asks for the key takeaway. Give a one or two sentence summary of the main point.
+
+Q: What does "alternatives" mean?
+A: "Alternatives" asks for other options. Present different approaches. Explain when each might be preferred.
+
+Q: What does "best practice" mean?
+A: "Best practice" refers to the recommended way of doing something. Based on experience and proven effectiveness.
+
+Q: What does "troubleshoot" mean?
+A: "Troubleshoot" means diagnose and fix problems. Identify what's wrong. Suggest solutions. Check if they work.
+
+Q: What does "optimize" mean?
+A: "Optimize" means make better or more efficient. Improve performance, reduce waste, or enhance quality.
+
+Q: What does "implement" mean?
+A: "Implement" means put into action. Create or build something. Make an idea real through code or action.
+
+Q: What does "clarify" mean?
+A: "Clarify" means make clearer. Remove ambiguity. Explain what you meant more precisely.
+
+Q: What does "versus" or "vs" mean?
+A: "Versus" or "vs" indicates comparison between options. Explain each and how they differ.
+
+Q: What does "overview" mean?
+A: "Overview" asks for a high-level summary. Cover main concepts without going too deep into any one area.
+
+Q: What does "deep dive" mean?
+A: "Deep dive" means explore thoroughly. Go into significant detail. Cover nuances and edge cases.
+
+Q: What does "actionable" mean?
+A: "Actionable" means practical and doable. Provide steps someone can actually take. Make it usable.

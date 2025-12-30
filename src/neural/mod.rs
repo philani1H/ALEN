@@ -1,15 +1,18 @@
 //! Neural Network Module for ALEN
 //!
 //! Implements real neural network components:
-//! - Transformer-based embeddings
+//! - Transformer-based embeddings with full attention mechanisms
 //! - Learned reasoning operators
 //! - Backpropagation training
 //! - GPU-ready tensor operations
 //! - Complete ALEN neural architecture with verification
+//! - Transformer decoder for autoregressive text generation
 
 mod tensor;
 mod layers;
 mod transformer;
+mod transformer_decoder;
+mod large_models;
 mod learned_operators;
 mod trainer;
 mod alen_network;
@@ -32,6 +35,14 @@ pub use layers::{Linear, LayerNorm, Dropout, Embedding, Conv1D};
 pub use transformer::{
     TransformerEncoder, TransformerConfig, AttentionBlock,
     PositionalEncoding, MultiHeadSelfAttention, FeedForwardNetwork,
+};
+pub use transformer_decoder::{
+    TransformerDecoder, TransformerDecoderBlock, CausalSelfAttention,
+    CrossAttention, TransformerEnhancedDecoder, TransformerDecoderStats,
+};
+pub use large_models::{
+    ModelSize, LargeModelConfig, LargeLanguageModel, LargeModelStats,
+    LargeTransformerLayer, LargeMultiHeadAttention, LargeFeedForward,
 };
 pub use learned_operators::{
     NeuralOperator, NeuralOperatorBank, OperatorConfig,

@@ -1,0 +1,62 @@
+# World Knowledge Training Data
+# Teaches the model comprehensive knowledge about the real world
+
+Q: What are the continents?
+A: The seven continents are: Africa, Antarctica, Asia, Australia/Oceania, Europe, North America, and South America. Asia is the largest, Australia the smallest.
+
+Q: What are the states of matter?
+A: Primary states: Solid (fixed shape, fixed volume), Liquid (no fixed shape, fixed volume), Gas (no fixed shape, no fixed volume). Also: Plasma (ionized gas), and exotic states like Bose-Einstein condensate.
+
+Q: How does photosynthesis work?
+A: Photosynthesis: Plants convert sunlight, water (H₂O), and carbon dioxide (CO₂) into glucose (C₆H₁₂O₆) and oxygen (O₂). Occurs in chloroplasts using chlorophyll. Equation: 6CO₂ + 6H₂O + light → C₆H₁₂O₆ + 6O₂
+
+Q: What is the water cycle?
+A: Water cycle: Evaporation (water to vapor), Condensation (vapor to clouds), Precipitation (rain/snow), Collection (in bodies of water), Runoff (to oceans), Transpiration (from plants). Continuous cycle.
+
+Q: How does the solar system work?
+A: Solar system: Sun at center (99.8% of mass), 8 planets orbit (Mercury, Venus, Earth, Mars, Jupiter, Saturn, Uranus, Neptune), plus dwarf planets, asteroids, comets. Gravity keeps everything in orbit.
+
+Q: What causes seasons?
+A: Seasons result from Earth's 23.5° axial tilt. As Earth orbits the Sun, different hemispheres receive more direct sunlight. Summer = tilted toward Sun, Winter = tilted away.
+
+Q: How does electricity work?
+A: Electricity: Flow of electrons through conductors. Voltage (pressure), Current (flow rate, amperes), Resistance (opposition, ohms). Ohm's Law: V = IR. Powers devices by converting electrical energy to other forms.
+
+Q: What is DNA?
+A: DNA (deoxyribonucleic acid): Double helix molecule carrying genetic instructions. Made of nucleotides (A, T, G, C). Genes are DNA segments coding for proteins. Heredity passes DNA parent to offspring.
+
+Q: How does the economy work?
+A: Economy: System of production, distribution, consumption of goods/services. Supply and demand set prices. Currency enables exchange. GDP measures output. Inflation, employment, trade are key indicators.
+
+Q: What is gravity?
+A: Gravity: Attractive force between masses. Newton: F = Gm₁m₂/r². Einstein: Mass curves spacetime, objects follow curved paths. Keeps planets orbiting, holds us to Earth, causes tides.
+
+Q: How does the human body work?
+A: Body systems: Circulatory (heart, blood), Respiratory (lungs, breathing), Digestive (stomach, intestines), Nervous (brain, nerves), Skeletal, Muscular, Immune, Endocrine (hormones), Reproductive.
+
+Q: What causes weather?
+A: Weather: Result of atmosphere, sun's heat, Earth's rotation. Uneven heating creates pressure differences causing wind. Water evaporates, condenses into clouds, precipitates. Fronts where air masses meet.
+
+Q: How does evolution work?
+A: Evolution: Species change over time through natural selection. Random mutations create variation. Traits improving survival/reproduction become more common. Over generations, populations adapt.
+
+Q: What is atomic structure?
+A: Atoms: Nucleus (protons +, neutrons 0) surrounded by electron cloud (-). Proton number = element identity. Electrons in shells/orbitals. Chemical bonds form by sharing or transferring electrons.
+
+Q: How does the internet work?
+A: Internet: Global network of computers using protocols (TCP/IP). Data travels in packets through routers. DNS translates domain names to IP addresses. HTTP/HTTPS for web, other protocols for email, etc.
+
+Q: What is climate vs weather?
+A: Weather: Short-term atmospheric conditions (today's temperature, rain). Climate: Long-term patterns (average temperature, seasonal patterns over decades). Climate change affects long-term trends.
+
+Q: How do vaccines work?
+A: Vaccines: Introduce weakened/inactive pathogen or its components. Immune system produces antibodies. Memory cells remember threat. Future exposure triggers rapid response, preventing illness.
+
+Q: What is renewable energy?
+A: Renewable energy: Solar (photovoltaic, thermal), Wind (turbines), Hydroelectric (dams), Geothermal (Earth's heat), Biomass (organic matter). Replenished naturally, unlike fossil fuels.
+
+Q: How does sound work?
+A: Sound: Mechanical waves through medium (air, water, solid). Source vibrates, creating pressure waves. Frequency = pitch (Hz), Amplitude = volume (dB). Speed varies by medium (~343 m/s in air).
+
+Q: What is democracy?
+A: Democracy: Government by the people. Citizens vote for representatives (representative democracy) or directly on issues (direct democracy). Key: free elections, rule of law, protection of rights, separation of powers.

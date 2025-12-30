@@ -1,0 +1,74 @@
+# Mathematical Formulas Training Data
+# Teaches the model to write and understand mathematical formulas professionally
+
+Q: How do you write the quadratic formula?
+A: The quadratic formula for ax² + bx + c = 0 is: x = (-b ± √(b² - 4ac)) / 2a. This gives both solutions where the parabola crosses the x-axis.
+
+Q: What is the Pythagorean theorem formula?
+A: The Pythagorean theorem: a² + b² = c², where a and b are legs of a right triangle and c is the hypotenuse.
+
+Q: How do you write the area of a circle?
+A: Area of a circle: A = πr², where r is the radius. For diameter d: A = π(d/2)² = πd²/4.
+
+Q: What is the formula for compound interest?
+A: Compound interest formula: A = P(1 + r/n)^(nt), where P = principal, r = annual rate, n = compounds per year, t = years.
+
+Q: How do you express the distance formula?
+A: Distance between two points (x₁, y₁) and (x₂, y₂): d = √[(x₂ - x₁)² + (y₂ - y₁)²]
+
+Q: What is the slope formula?
+A: Slope formula: m = (y₂ - y₁)/(x₂ - x₁), representing rise over run between two points.
+
+Q: How do you write the formula for velocity?
+A: Velocity formula: v = d/t (distance divided by time). For acceleration: v = v₀ + at.
+
+Q: What is Einstein's mass-energy equivalence?
+A: Einstein's famous equation: E = mc², where E = energy, m = mass, c = speed of light (≈3×10⁸ m/s).
+
+Q: How do you express the law of gravity?
+A: Newton's gravitational force: F = G(m₁m₂)/r², where G ≈ 6.67×10⁻¹¹ N⋅m²/kg².
+
+Q: What is the formula for kinetic energy?
+A: Kinetic energy: KE = ½mv², where m = mass and v = velocity.
+
+Q: How do you write the formula for standard deviation?
+A: Standard deviation: σ = √[Σ(xᵢ - μ)²/N], where μ = mean, N = count, xᵢ = each value.
+
+Q: What is the derivative formula?
+A: Derivative definition: f'(x) = lim(h→0) [f(x+h) - f(x)]/h. Power rule: d/dx(xⁿ) = nxⁿ⁻¹.
+
+Q: How do you express integration?
+A: Integral notation: ∫f(x)dx. Definite integral: ∫ₐᵇf(x)dx = F(b) - F(a), where F is antiderivative.
+
+Q: What is the formula for circumference?
+A: Circumference of a circle: C = 2πr = πd, where r = radius and d = diameter.
+
+Q: How do you write the volume of a sphere?
+A: Volume of a sphere: V = (4/3)πr³. Surface area: A = 4πr².
+
+Q: What is the binomial formula?
+A: Binomial expansion: (a + b)ⁿ = Σₖ₌₀ⁿ C(n,k)aⁿ⁻ᵏbᵏ, where C(n,k) = n!/(k!(n-k)!).
+
+Q: How do you express logarithm rules?
+A: Log rules: log(ab) = log(a) + log(b), log(a/b) = log(a) - log(b), log(aⁿ) = n⋅log(a).
+
+Q: What is the formula for permutations?
+A: Permutations: P(n,r) = n!/(n-r)! - arrangements where order matters.
+
+Q: How do you write combinations formula?
+A: Combinations: C(n,r) = n!/[r!(n-r)!] - selections where order doesn't matter.
+
+Q: What is the normal distribution formula?
+A: Normal distribution PDF: f(x) = (1/(σ√(2π)))e^(-(x-μ)²/(2σ²)), where μ = mean, σ = standard deviation.
+
+Q: How do you express trigonometric identities?
+A: Key identities: sin²θ + cos²θ = 1, tan θ = sin θ/cos θ, sin(2θ) = 2sinθcosθ.
+
+Q: What is Euler's formula?
+A: Euler's formula: e^(iπ) + 1 = 0, connecting e, i, π, 1, and 0. Also: e^(ix) = cos(x) + i⋅sin(x).
+
+Q: How do you write the present value formula?
+A: Present value: PV = FV/(1 + r)ⁿ, where FV = future value, r = rate, n = periods.
+
+Q: What is the formula for acceleration?
+A: Acceleration: a = Δv/Δt = (v - v₀)/t. With constant acceleration: d = v₀t + ½at².

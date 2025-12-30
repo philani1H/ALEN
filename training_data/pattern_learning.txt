@@ -1,0 +1,62 @@
+# Pattern Learning Training Data
+# Teaches the model to learn patterns and generalize knowledge
+
+Q: How do you learn from examples?
+A: I extract patterns from examples, identifying what's common and what varies. Then I generalize to apply patterns to new situations.
+
+Q: What is a pattern in learning?
+A: A pattern is a repeatable structure or relationship. In language: sentence structures. In math: formulas. In reasoning: logical sequences.
+
+Q: How do you generalize from specific examples?
+A: I identify the core principle that makes examples similar, abstract away specific details, then apply that principle to new cases.
+
+Q: How do you learn word meanings?
+A: From context: seeing how words are used in sentences, what words appear together, and what situations they describe.
+
+Q: How do you learn sentence structure?
+A: By observing patterns: subject-verb-object in statements, verb-first in questions, patterns of word order and punctuation.
+
+Q: How do you learn reasoning patterns?
+A: From examples of good reasoning: identifying premises, seeing how conclusions follow, recognizing valid argument structures.
+
+Q: How do you learn to answer questions?
+A: By seeing question-answer pairs, understanding what information satisfies a question, and matching patterns of inquiry.
+
+Q: How do you learn new concepts?
+A: By connecting to existing knowledge, seeing examples and non-examples, understanding defining characteristics and relationships.
+
+Q: How do you learn to express uncertainty?
+A: From training examples showing appropriate hedging language, contexts where uncertainty is expressed, and calibration of confidence.
+
+Q: How do you learn different tones of communication?
+A: By seeing examples of formal vs. casual text, observing word choice, sentence length, and stylistic markers.
+
+Q: How do you learn mathematical operations?
+A: From examples showing inputs, operations, and outputs. Identifying the transformation rule that connects them.
+
+Q: How do you learn to explain things?
+A: From examples of good explanations: clear structure, appropriate detail level, use of examples, building from simple to complex.
+
+Q: How do you learn conversational patterns?
+A: From dialogue examples: how to respond to questions, follow-up, maintain context, handle topic changes.
+
+Q: How do you improve with more training?
+A: More examples strengthen patterns, reveal edge cases, improve generalization, and reduce uncertainty.
+
+Q: What happens when patterns conflict?
+A: I consider context to determine which pattern applies, or acknowledge ambiguity when multiple interpretations are valid.
+
+Q: How do you learn from mistakes?
+A: By identifying what went wrong, understanding why, and updating patterns to avoid similar errors.
+
+Q: How do you learn to recognize intent?
+A: From patterns linking words/phrases to intentions: "how do I" indicates wanting instructions, "explain" indicates wanting understanding.
+
+Q: How do you learn domain knowledge?
+A: From training examples in that domain, building vocabulary, learning relationships, and understanding domain-specific patterns.
+
+Q: How do you know when you've learned something?
+A: When I can consistently apply the pattern to new examples, make correct predictions, and generalize appropriately.
+
+Q: How do you balance memorization and understanding?
+A: Memorization stores specific facts; understanding extracts patterns. Both are needed: facts ground learning, patterns enable generalization.

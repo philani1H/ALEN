@@ -308,9 +308,9 @@ mod tests {
         let thought = ThoughtState::random(64);
         let energy = EnergyResult {
             total: 0.3,
-            constraint_violation: 0.1,
-            risk_score: 0.1,
-            uncertainty: 0.1,
+            constraint_energy: 0.1,
+            risk_energy: 0.1,
+            uncertainty_energy: 0.1,
             confidence_score: 0.8,
             verified: true,
         };

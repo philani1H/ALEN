@@ -1,0 +1,62 @@
+# Media Generation Training Data
+# Teaches the model to understand and generate descriptions for images, videos, and media
+
+Q: How do you describe what to generate in an image?
+A: Specify: Subject (what/who), Action (what doing), Setting (where), Style (realistic, artistic), Mood (bright, dark, calm), Composition (close-up, wide), Colors, Lighting.
+
+Q: What makes a good image prompt?
+A: Good prompts include: Main subject clearly stated, Art style or medium, Lighting description, Color palette, Mood/atmosphere, Composition details, Level of detail wanted.
+
+Q: How do you describe a scene for video generation?
+A: Video description: Opening shot, Subject actions over time, Camera movement, Transitions, Sound/music mood, Duration, Pacing (fast/slow), Ending shot.
+
+Q: What elements define visual style?
+A: Visual styles: Photorealistic, Illustration, Cartoon, Anime, Oil painting, Watercolor, Digital art, Sketch, 3D render, Vintage, Modern, Minimalist.
+
+Q: How do you describe lighting for generation?
+A: Lighting descriptions: Golden hour (warm sunset), Blue hour (cool twilight), High key (bright, low contrast), Low key (dark, dramatic), Rim lighting, Soft diffused, Hard shadows, Neon, Candlelight.
+
+Q: What camera angles can be specified?
+A: Camera angles: Eye level, Low angle (looking up), High angle (looking down), Bird's eye, Dutch angle (tilted), Over-the-shoulder, Close-up, Medium shot, Wide shot, Extreme close-up.
+
+Q: How do you describe character appearance?
+A: Character description: Age, Gender, Body type, Hair (color, style, length), Eyes (color, shape), Skin tone, Clothing, Accessories, Expression, Pose, Distinguishing features.
+
+Q: What atmosphere descriptions work well?
+A: Atmosphere: Mysterious, Peaceful, Energetic, Melancholic, Romantic, Tense, Playful, Ethereal, Gritty, Nostalgic, Futuristic, Cozy, Ominous, Serene.
+
+Q: How do you describe environments?
+A: Environment details: Type (forest, city, room), Time (day/night, season), Weather, Vegetation, Architecture style, Scale, Condition (new, weathered), Inhabitants, Ambient sounds implied.
+
+Q: What textures can be specified?
+A: Texture descriptions: Smooth, Rough, Glossy, Matte, Metallic, Wooden, Stone, Fabric (silk, wool, denim), Organic, Crystalline, Wet, Dusty, Worn.
+
+Q: How do you describe motion for video?
+A: Motion description: Speed (slow-motion, real-time, time-lapse), Direction, Fluidity (smooth, jerky), Type (walking, running, floating, spinning), Camera motion (tracking, panning).
+
+Q: What color palettes can be described?
+A: Color descriptions: Warm/cool, Monochromatic, Complementary, Pastel, Vibrant, Muted, Earth tones, Neon, Black and white, Sepia, Specific colors with intensity.
+
+Q: How do you describe facial expressions?
+A: Expressions: Happy (smiling, laughing), Sad (frowning, tearful), Angry (furrowed brow), Surprised (wide eyes), Thoughtful (pensive), Neutral, Determined, Confused, Peaceful.
+
+Q: What composition techniques can be specified?
+A: Composition: Rule of thirds, Centered, Symmetrical, Leading lines, Frame within frame, Negative space, Foreground interest, Layered depth, Golden ratio.
+
+Q: How do you describe artistic influences?
+A: Style references: "In the style of [artist]", Art movement (Impressionist, Art Deco), Era (80s retro, Victorian), Medium (oil painting, pencil sketch), Genre (fantasy, sci-fi).
+
+Q: What makes descriptions specific enough for generation?
+A: Specificity: Use concrete nouns (not "building" but "Victorian mansion"), Quantify when possible, Include sensory details, Avoid vague terms, Layer details progressively.
+
+Q: How do you describe transitions for video?
+A: Transitions: Cut (instant change), Fade (gradual), Dissolve (overlap), Wipe, Zoom, Match cut (visual link), Jump cut, Morph, Split screen.
+
+Q: What emotional qualities affect generation?
+A: Emotional qualities: Warmth, Coldness, Energy, Calm, Tension, Release, Joy, Sorrow, Wonder, Fear, Hope, Nostalgia - affects colors, lighting, composition choices.
+
+Q: How do you describe realistic vs stylized generation?
+A: Realistic: Accurate proportions, natural lighting, photographic detail. Stylized: Exaggerated features, artistic interpretation, specific art style, may defy physics.
+
+Q: What background details enhance generation?
+A: Background details: Depth (layers), Activity (populated vs empty), Focus (sharp vs blurred), Relevance to subject, Environmental storytelling, Mood support.

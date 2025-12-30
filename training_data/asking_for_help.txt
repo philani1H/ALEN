@@ -1,0 +1,62 @@
+# Asking for Help Training Data
+# Teaches the model how users ask for help and how to respond
+
+Q: How do I ask for help effectively?
+A: Be specific about: 1) What you're trying to do 2) What you've already tried 3) What error or problem you're seeing 4) Any relevant context. This helps get better assistance.
+
+Q: What should I include when asking for technical help?
+A: Include: the error message, relevant code, what you expected, what happened instead, your environment (OS, versions), and steps to reproduce the issue.
+
+Q: How do I know when to ask for help?
+A: Ask when: you've been stuck for a while, the documentation isn't clear, you're unsure about best practices, you need a second opinion, or time is limited.
+
+Q: Is it okay to ask basic questions?
+A: Yes! Everyone starts somewhere. Basic questions are valid. Don't apologize for not knowing - asking is how we learn.
+
+Q: How do I ask for help without feeling embarrassed?
+A: Remember that asking shows initiative. Frame it positively: "I'm learning about X and want to understand Y better" rather than "I don't know anything."
+
+Q: What makes a good help request?
+A: A good request: states the goal clearly, provides context, shows what you've tried, asks specific questions, and is formatted readably.
+
+Q: How should I respond when someone asks for help?
+A: Be patient and kind. Understand their level. Give clear explanations. Offer examples. Check if they understand. Encourage follow-up questions.
+
+Q: What if I don't understand the help I received?
+A: Ask for clarification! Say "Could you explain that differently?" or "I'm not sure I understand the part about..." Don't pretend to understand.
+
+Q: How do I help someone debug their problem?
+A: Ask what they're trying to achieve, what they expected, what happened instead. Look at their code/setup. Explain the cause, not just the fix. Teach them to debug.
+
+Q: What if I can't solve someone's problem?
+A: Be honest: "I'm not sure about this, but here's what I do know..." or "This might be outside my expertise. You might want to check [resource]."
+
+Q: How do I ask for help learning something new?
+A: Say what you want to learn, your current knowledge level, how you learn best (examples, theory, hands-on), and any specific areas you're confused about.
+
+Q: What's the best way to describe a bug?
+A: Provide: steps to reproduce, expected behavior, actual behavior, environment details, and any error messages. Screenshots or screen recordings help too.
+
+Q: How do I ask for code review help?
+A: Share your code, explain what it does, mention specific concerns, ask targeted questions like "Is this approach efficient?" or "How could this be more readable?"
+
+Q: What if my question seems too complex?
+A: Break it into smaller parts. Ask about one aspect at a time. Provide background info. Consider what you really need to know first.
+
+Q: How do I request help with a decision?
+A: Present the options you're considering, the criteria that matter, your current thinking, and what's blocking your decision.
+
+Q: What's the etiquette for asking help online?
+A: Search first, provide details, format code properly, be patient, say thanks, update if you solve it yourself, don't cross-post without mentioning it.
+
+Q: How do I ask for help with a large project?
+A: Start with the big picture, then focus on the specific part you need help with. Don't dump everything at once. Be clear about what kind of help you need.
+
+Q: What if I'm helping someone and they get frustrated?
+A: Stay patient. Acknowledge their frustration. Slow down. Try a different explanation. Take a break if needed. Remember learning is hard.
+
+Q: How do I ask for help without revealing confidential info?
+A: Create a minimal example that shows the problem without sensitive data. Describe the general situation without specifics if needed.
+
+Q: What makes someone good at asking for help?
+A: They: do some research first, ask clear questions, provide context, show effort, accept feedback gracefully, thank helpers, and share what they learned.

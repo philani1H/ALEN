@@ -1,0 +1,98 @@
+# Coding Skills Training Data
+# Teaches the model programming concepts and how to write code
+
+Q: What is a variable in programming?
+A: A variable is a named container that stores a value. In Python: x = 5 creates a variable x with value 5. Variables can hold numbers, text, lists, or other data types.
+
+Q: How do I write a function in Python?
+A: Define a function using 'def': 
+def greet(name):
+    return f"Hello, {name}!"
+Then call it: greet("Alice") returns "Hello, Alice!"
+
+Q: What is a loop?
+A: A loop repeats code multiple times. For loop: for i in range(5): print(i) prints 0,1,2,3,4. While loop: while condition: ... continues until condition is false.
+
+Q: How do I handle errors in code?
+A: Use try-except blocks:
+try:
+    result = 10 / x
+except ZeroDivisionError:
+    result = 0
+This catches and handles errors gracefully.
+
+Q: What is a class in programming?
+A: A class is a blueprint for creating objects. It defines properties (attributes) and behaviors (methods). class Dog: def __init__(self, name): self.name = name
+
+Q: How do I read a file in Python?
+A: Use open():
+with open('file.txt', 'r') as f:
+    content = f.read()
+The 'with' statement ensures the file is properly closed.
+
+Q: What is recursion?
+A: Recursion is when a function calls itself. Example:
+def factorial(n):
+    if n <= 1: return 1
+    return n * factorial(n-1)
+Must have a base case to stop.
+
+Q: How do I sort a list?
+A: Use sorted() or .sort():
+numbers = [3, 1, 4, 1, 5]
+sorted_nums = sorted(numbers)  # Returns new list
+numbers.sort()  # Sorts in place
+
+Q: What is an API?
+A: An API (Application Programming Interface) is a way for programs to communicate. You send requests and receive responses. Example: weather_data = requests.get("api.weather.com/data")
+
+Q: How do I debug code?
+A: 1. Read error messages carefully 2. Use print() to check values 3. Use a debugger to step through code 4. Test small parts independently 5. Check for typos
+
+Q: What is version control?
+A: Version control tracks changes to code. Git is popular:
+git init - start repository
+git add . - stage changes
+git commit -m "message" - save changes
+git push - upload to remote
+
+Q: How do I write clean code?
+A: Use meaningful variable names, add comments, keep functions small, follow consistent formatting, avoid repetition (DRY principle), and write tests.
+
+Q: What is a database?
+A: A database stores and organizes data. SQL databases use tables:
+CREATE TABLE users (id INT, name TEXT);
+INSERT INTO users VALUES (1, 'Alice');
+SELECT * FROM users WHERE id = 1;
+
+Q: How do I handle user input?
+A: Get input: user_input = input("Enter name: "). Always validate: if user_input.strip(): process it. Never trust user input - sanitize it.
+
+Q: What is asynchronous programming?
+A: Async allows code to continue while waiting:
+async def fetch_data():
+    data = await get_from_server()
+    return data
+This doesn't block other operations.
+
+Q: How do I write a test?
+A: Use testing frameworks:
+def test_addition():
+    assert add(2, 3) == 5
+    assert add(-1, 1) == 0
+Run tests to verify code works correctly.
+
+Q: What is object-oriented programming?
+A: OOP organizes code around objects. Key concepts: Encapsulation (bundling data), Inheritance (reusing code), Polymorphism (same interface, different behavior), Abstraction (hiding complexity).
+
+Q: How do I optimize slow code?
+A: 1. Profile to find bottlenecks 2. Use efficient algorithms (O(n) vs O(n²)) 3. Cache repeated calculations 4. Use appropriate data structures 5. Consider parallel processing
+
+Q: What is type checking?
+A: Type checking verifies data types:
+def greet(name: str) -> str:
+    return f"Hello, {name}"
+Python uses type hints for documentation and tools like mypy.
+
+Q: How do I learn a new programming language?
+A: 1. Learn the syntax basics 2. Build small projects 3. Read documentation 4. Practice coding challenges 5. Study others' code 6. Join communities

@@ -1,0 +1,77 @@
+# Reading Comprehension Training Data
+# Teaches the model to understand text, extract meaning, and interpret context
+
+Q: How do I identify the main idea of a text?
+A: Look for: the topic mentioned most often, what the author emphasizes, the first and last sentences (often contain thesis), and what all paragraphs relate to.
+
+Q: How do I understand complex sentences?
+A: Break them into parts. Find the subject and verb first. Identify clauses. Look up unfamiliar words. Rephrase in simpler terms to test understanding.
+
+Q: What is context and why does it matter?
+A: Context is the surrounding information that shapes meaning. The same words can mean different things in different contexts. Always consider the situation.
+
+Q: How do I infer meaning that isn't explicitly stated?
+A: Use clues from the text, common knowledge, and logic. Ask "what can I conclude from this?" Look for implied messages between the lines.
+
+Q: How do I identify the author's tone?
+A: Look at word choice (positive/negative), sentence structure (formal/casual), and content (serious/humorous). Tone affects how to interpret the message.
+
+Q: What's the difference between fact and opinion?
+A: Facts can be verified and are objectively true. Opinions are personal views that may vary. Facts use concrete evidence; opinions use words like "best" or "should."
+
+Q: How do I understand technical documents?
+A: Read slowly. Look up unknown terms. Focus on understanding concepts before details. Take notes. Re-read difficult sections.
+
+Q: How do I identify supporting evidence?
+A: Look for examples, statistics, quotes, studies, or reasoning that backs up the main claim. Good arguments have clear evidence.
+
+Q: How do I understand analogies?
+A: Analogies compare two things to explain one using the other. Identify what's being compared and what characteristic they share.
+
+Q: How do I follow an argument's structure?
+A: Find the claim (what's being argued), the evidence (supporting points), and the conclusion (what follows). Look for logical connections.
+
+Q: How do I understand cause and effect in text?
+A: Look for signal words like "because," "therefore," "as a result," "leads to." Identify what happened and why it happened.
+
+Q: How do I comprehend instructions?
+A: Read all steps first. Note any prerequisites. Follow the order. Check your understanding before acting. Don't skip steps.
+
+Q: How do I understand text with multiple meanings?
+A: Consider the context to determine which meaning applies. Look at surrounding sentences. Think about the author's purpose.
+
+Q: How do I identify bias in text?
+A: Look for: one-sided arguments, emotional language, missing perspectives, loaded words, and claims without evidence. Consider the source.
+
+Q: How do I comprehend abstract concepts?
+A: Look for concrete examples. Relate to things you already know. Create mental images. Ask yourself to explain it simply.
+
+Q: How do I understand dialogue in text?
+A: Track who's speaking. Note tone and emotion. Consider what characters know vs what readers know. Pay attention to subtext.
+
+Q: How do I identify the purpose of a text?
+A: Ask: Is it trying to inform, persuade, entertain, or explain? Purpose affects how to interpret the content.
+
+Q: How do I understand sequences in text?
+A: Look for time words (first, then, finally), numbered steps, or chronological order. Track what happens when.
+
+Q: How do I comprehend comparative text?
+A: Identify what's being compared. Note similarities and differences. Look for comparison words (both, unlike, similarly, however).
+
+Q: How do I understand implicit information?
+A: Pay attention to what's NOT said. Consider what the author assumes readers know. Look for hints and implications.
+
+Q: How do I verify my understanding of text?
+A: Summarize in your own words. Ask questions about the content. Discuss with others. Try to explain it to someone else.
+
+Q: How do I understand text from different time periods?
+A: Learn about the historical context. Note how language has changed. Consider the values and knowledge of that era.
+
+Q: How do I comprehend specialized jargon?
+A: Look for definitions in context. Use specialized dictionaries or glossaries. Learn the field's common terms.
+
+Q: How do I understand sarcasm or irony in text?
+A: Look for: statements that contradict facts, exaggeration, context that makes literal meaning absurd. Tone markers may help.
+
+Q: How do I identify the structure of an argument?
+A: Find the thesis, look for premises (supporting statements), identify any counterarguments, and see how the conclusion follows.

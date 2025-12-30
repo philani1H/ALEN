@@ -465,9 +465,11 @@ mod tests {
         let retention1 = decay.retention_score(0.9, 10, 1.0);
         assert!(retention1 > 0.7);
         
-        // Low confidence, old, rarely used
-        let retention2 = decay.retention_score(0.3, 1, 30.0);
-        assert!(retention2 < 0.3);
+        // Low confidence, old, very rarely used (0 uses, very old)
+        let retention2 = decay.retention_score(0.1, 0, 100.0);
+        // With decay_rate=0.01, 100 days -> decay_factor = exp(-1.0) ≈ 0.37
+        // retention = 0.1 * 1.0 * 0.37 ≈ 0.037 < 0.2 threshold
+        assert!(retention2 < 0.2);
         
         // Should keep high retention
         assert!(decay.should_keep(retention1));

@@ -1,0 +1,62 @@
+# Language Skills Training Data
+# Teaches the model grammar, writing, and language comprehension
+
+Q: What are the parts of speech?
+A: Parts of speech: Noun (person/place/thing), Verb (action/state), Adjective (describes noun), Adverb (describes verb/adj), Pronoun (replaces noun), Preposition (relationship), Conjunction (connects), Interjection (emotion).
+
+Q: How do you structure a paragraph?
+A: Paragraph structure: Topic sentence (main idea), Supporting sentences (evidence, examples, explanation), Concluding sentence (wrap up, transition). Each paragraph = one main idea.
+
+Q: What is subject-verb agreement?
+A: Subject-verb agreement: Singular subjects take singular verbs, plural subjects take plural verbs. "The dog runs" (singular), "The dogs run" (plural). Watch for tricky cases with collective nouns.
+
+Q: How do you use commas correctly?
+A: Comma uses: Separate items in lists, Before coordinating conjunctions in compound sentences, After introductory elements, Around non-essential clauses, Separate adjectives of equal importance.
+
+Q: What is the difference between active and passive voice?
+A: Active voice: Subject performs action ("The cat caught the mouse"). Passive voice: Subject receives action ("The mouse was caught by the cat"). Active is usually clearer and more direct.
+
+Q: How do you avoid run-on sentences?
+A: Fix run-ons: Separate into sentences with period, Use semicolon between related clauses, Add coordinating conjunction with comma, Use subordinating conjunction to make one clause dependent.
+
+Q: What are common grammar mistakes?
+A: Common mistakes: Their/there/they're, Its/it's, Your/you're, Affect/effect, Than/then, Fewer/less, Who/whom, Subject-verb disagreement, Dangling modifiers, Comma splices.
+
+Q: How do you write clearly?
+A: Clear writing: Use simple words, Keep sentences concise, One idea per sentence, Active voice, Avoid jargon, Be specific, Organize logically, Revise and edit.
+
+Q: What is parallel structure?
+A: Parallel structure: Items in a series should have same grammatical form. Wrong: "I like swimming, to run, and bikes." Right: "I like swimming, running, and biking."
+
+Q: How do you vary sentence structure?
+A: Vary sentences by: Changing length (mix short and long), Starting differently (not always subject-first), Using different types (simple, compound, complex), Varying rhythm.
+
+Q: What is the difference between a clause and a phrase?
+A: Clause: Has subject and verb, can be independent (stands alone) or dependent. Phrase: Group of words without subject-verb pair, acts as single part of speech.
+
+Q: How do you use semicolons?
+A: Semicolon uses: Between independent clauses without conjunction ("I came; I saw; I conquered"), Between items in a list when items contain commas.
+
+Q: What are transition words?
+A: Transitions: Addition (furthermore, also), Contrast (however, but), Cause/effect (therefore, because), Time (then, meanwhile), Example (for instance), Conclusion (finally, in summary).
+
+Q: How do you write concisely?
+A: Concise writing: Eliminate redundancy, Remove unnecessary words, Combine sentences, Use strong verbs, Avoid "there is/are" openings, Cut filler words (very, really, just).
+
+Q: What is tone in writing?
+A: Tone: Writer's attitude toward subject/audience. Created through word choice, sentence structure, details included. Examples: formal, casual, serious, humorous, objective, passionate.
+
+Q: How do you paraphrase effectively?
+A: Effective paraphrasing: Read and understand original, Set aside original, Write in your own words, Check you captured meaning, Cite the source, Don't just swap synonyms.
+
+Q: What is the thesis statement?
+A: Thesis statement: Central argument or claim of an essay. Appears in introduction. Should be specific, arguable, and guide the entire paper. Each paragraph supports the thesis.
+
+Q: How do you organize an essay?
+A: Essay organization: Introduction (hook, context, thesis), Body paragraphs (each with topic sentence supporting thesis), Conclusion (restate thesis, summarize, broader implications).
+
+Q: What is coherence in writing?
+A: Coherence: Ideas flow logically and connect clearly. Achieved through: Logical organization, Transitions between sentences/paragraphs, Consistent focus, Clear pronoun references.
+
+Q: How do you proofread effectively?
+A: Effective proofreading: Read aloud, Read backwards (catches typos), Focus on one error type at a time, Use spell/grammar check but don't rely solely on it, Take breaks between writing and proofing.
