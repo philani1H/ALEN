@@ -48,6 +48,60 @@ pub struct ALENConfig {
     pub transformer_layers: usize,
     /// Transformer heads (if used)
     pub transformer_heads: usize,
+    /// Energy function weights
+    pub energy_weights: EnergyWeights,
+}
+
+/// Energy function weights for thought evaluation
+/// E(ψ) = α·C(ψ) + β·R(ψ) + γ·U(ψ) - λ·N(ψ)
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct EnergyWeights {
+    /// Constraint weight (α) - penalizes distance from initial thought
+    pub alpha: f32,
+    /// Risk weight (β) - penalizes high entropy/uncertainty
+    pub beta: f32,
+    /// Uncertainty weight (γ) - penalizes variance in thought vector
+    pub gamma: f32,
+    /// Novelty weight (λ) - rewards creative/novel solutions
+    pub lambda: f32,
+}
+
+impl Default for EnergyWeights {
+    fn default() -> Self {
+        Self {
+            alpha: 1.0,   // Constraint weight
+            beta: 0.5,    // Risk weight
+            gamma: 0.3,   // Uncertainty weight
+            lambda: 0.1,  // Novelty/creativity weight
+        }
+    }
+}
+
+impl EnergyWeights {
+    /// Conservative weights - prioritize safety and consistency
+    pub fn conservative() -> Self {
+        Self {
+            alpha: 1.5,
+            beta: 1.0,
+            gamma: 0.8,
+            lambda: 0.05,
+        }
+    }
+
+    /// Creative weights - encourage exploration and novelty
+    pub fn creative() -> Self {
+        Self {
+            alpha: 0.7,
+            beta: 0.3,
+            gamma: 0.2,
+            lambda: 0.5,
+        }
+    }
+
+    /// Balanced weights - middle ground
+    pub fn balanced() -> Self {
+        Self::default()
+    }
 }
 
 impl Default for ALENConfig {
@@ -62,6 +116,7 @@ impl Default for ALENConfig {
             use_transformer: true,
             transformer_layers: 4,
             transformer_heads: 4,
+            energy_weights: EnergyWeights::default(),
         }
     }
 }
@@ -79,6 +134,7 @@ impl ALENConfig {
             use_transformer: false,
             transformer_layers: 2,
             transformer_heads: 2,
+            energy_weights: EnergyWeights::default(),
         }
     }
 
@@ -94,6 +150,7 @@ impl ALENConfig {
             use_transformer: true,
             transformer_layers: 6,
             transformer_heads: 8,
+            energy_weights: EnergyWeights::default(),
         }
     }
 }
@@ -510,29 +567,27 @@ impl ALENNetwork {
 
     /// Compute energy function: E'(ψ) = αC(ψ) + βR(ψ) + γU(ψ) - λN(ψ)
     /// This is the complete mathematical model with novelty term
+    /// Uses configurable weights from self.config.energy_weights
     fn compute_energy(&self, psi: &Tensor, psi_0: &Tensor) -> f32 {
-        let alpha = 1.0;   // Constraint weight
-        let beta = 0.5;    // Risk weight
-        let gamma = 0.3;   // Uncertainty weight
-        let lambda = 0.1;  // Novelty/creativity weight
-        
+        let weights = &self.config.energy_weights;
+
         // C(ψ): Constraint violation (distance from initial thought)
         let constraint = self.compute_constraint(psi, psi_0);
-        
+
         // R(ψ): Risk (entropy of output distribution)
         let risk = self.compute_risk(psi);
-        
+
         // U(ψ): Uncertainty (variance in thought vector)
         let uncertainty = self.compute_uncertainty(psi);
-        
+
         // N(ψ): Novelty (distance from known patterns)
         // For now, use distance from initial state as proxy
         // In full implementation, would check against memory embeddings
         let novelty = self.compute_novelty(psi, psi_0);
-        
-        // E'(ψ) = E(ψ) - λN(ψ)
+
+        // E'(ψ) = α·C(ψ) + β·R(ψ) + γ·U(ψ) - λ·N(ψ)
         // Lower energy = better, but novelty reduces energy (encourages creativity)
-        alpha * constraint + beta * risk + gamma * uncertainty - lambda * novelty
+        weights.alpha * constraint + weights.beta * risk + weights.gamma * uncertainty - weights.lambda * novelty
     }
 
     fn compute_constraint(&self, psi: &Tensor, psi_0: &Tensor) -> f32 {

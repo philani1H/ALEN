@@ -629,6 +629,7 @@ mod tests {
             use_transformer: false,
             transformer_layers: 2,
             transformer_heads: 4,
+            energy_weights: super::super::alen_network::EnergyWeights::default(),
         };
         
         let universal_config = UniversalNetworkConfig::default();
