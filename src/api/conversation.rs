@@ -270,10 +270,28 @@ pub async fn chat(
             None,               // concept confidence (TODO: implement)
         );
 
-        // CRITICAL: Use answer from most similar episode (not generated text)
-        // The most similar episode is the first one (already sorted by similarity)
+        // IMPROVED: Select best answer with verification
+        // Consider both similarity and confidence, filter out low-quality answers
         let best_answer = if !enhanced_episodes.is_empty() {
-            enhanced_episodes[0].answer_output.clone()
+            // Filter episodes with reasonable confidence (>40%)
+            let quality_episodes: Vec<&EnhancedEpisode> = enhanced_episodes
+                .iter()
+                .filter(|ep| ep.confidence_score > 0.4 && ep.verified)
+                .collect();
+            
+            if !quality_episodes.is_empty() {
+                // Use highest confidence among similar episodes
+                let best = quality_episodes
+                    .iter()
+                    .max_by(|a, b| a.confidence_score.partial_cmp(&b.confidence_score).unwrap_or(std::cmp::Ordering::Equal))
+                    .unwrap();
+                best.answer_output.clone()
+            } else if !enhanced_episodes.is_empty() {
+                // Fallback to most similar if no high-quality matches
+                enhanced_episodes[0].answer_output.clone()
+            } else {
+                "Unable to find similar examples".to_string()
+            }
         } else {
             "Unable to find similar examples".to_string()
         };

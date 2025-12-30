@@ -1,0 +1,116 @@
+# Advanced Q&A Training Data
+# Format: input -> expected_answer
+
+# Greetings - More variations
+Hello -> Hi there! How can I help you today?
+Hi -> Hello! What can I do for you?
+Hey -> Hey! What's up?
+Good morning -> Good morning! How are you doing?
+Good afternoon -> Good afternoon! Hope you're having a great day!
+Good evening -> Good evening! How has your day been?
+Howdy -> Howdy! What can I help you with?
+Greetings -> Greetings! How may I assist you?
+
+# How are you variations
+How are you -> I'm doing well, thank you for asking! How about you?
+How are you doing -> I'm doing great! Thanks for asking. How are you?
+How's it going -> It's going well! How about you?
+What's up -> Not much, just here to help! What do you need?
+
+# Math - Basic
+What is 2+2 -> 4
+What is 2 plus 2 -> 4
+2+2 -> 4
+2 plus 2 -> 4
+What is 3+3 -> 6
+What is 5+5 -> 10
+What is 10+10 -> 20
+
+# Math - Subtraction
+What is 5-3 -> 2
+What is 10-4 -> 6
+What is 20-5 -> 15
+
+# Math - Multiplication
+What is 2*3 -> 6
+What is 3*4 -> 12
+What is 5*5 -> 25
+What is 10*10 -> 100
+
+# Math - Division
+What is 10/2 -> 5
+What is 20/4 -> 5
+What is 100/10 -> 10
+
+# Geography - Capitals
+What is the capital of France -> Paris
+What is the capital of Germany -> Berlin
+What is the capital of Italy -> Rome
+What is the capital of Spain -> Madrid
+What is the capital of UK -> London
+What is the capital of USA -> Washington D.C.
+What is the capital of Japan -> Tokyo
+What is the capital of China -> Beijing
+
+# Programming - Languages
+What is Python -> Python is a high-level programming language known for its simplicity and readability
+What is JavaScript -> JavaScript is a programming language used for web development
+What is Java -> Java is an object-oriented programming language used for building applications
+What is C++ -> C++ is a powerful programming language used for system programming and game development
+What is Rust -> Rust is a systems programming language focused on safety and performance
+
+# Programming - Concepts
+What is a variable -> A variable is a named storage location that holds a value
+What is a function -> A function is a reusable block of code that performs a specific task
+What is a loop -> A loop is a programming construct that repeats a block of code multiple times
+What is an array -> An array is a data structure that stores multiple values in a single variable
+
+# Science - Chemistry
+What is H2O -> H2O is water, a molecule made of two hydrogen atoms and one oxygen atom
+What is CO2 -> CO2 is carbon dioxide, a molecule made of one carbon atom and two oxygen atoms
+What is O2 -> O2 is oxygen, a molecule made of two oxygen atoms
+
+# Science - Physics
+What is gravity -> Gravity is the force that attracts objects toward each other
+What is light -> Light is electromagnetic radiation that is visible to the human eye
+What is energy -> Energy is the capacity to do work or produce change
+
+# General Knowledge
+What is AI -> AI is artificial intelligence - systems that can learn and solve problems
+What is machine learning -> Machine learning is a type of AI where systems learn from data
+What is a computer -> A computer is an electronic device that processes data and performs calculations
+What is the internet -> The internet is a global network of connected computers
+
+# Colors
+What color is the sky -> The sky is blue
+What color is grass -> Grass is green
+What color is the sun -> The sun is yellow
+What color is snow -> Snow is white
+
+# Animals
+What is a dog -> A dog is a domesticated mammal and common pet
+What is a cat -> A cat is a small domesticated carnivorous mammal
+What is a bird -> A bird is a warm-blooded vertebrate with feathers and wings
+
+# Time
+How many seconds in a minute -> 60 seconds
+How many minutes in an hour -> 60 minutes
+How many hours in a day -> 24 hours
+How many days in a week -> 7 days
+How many months in a year -> 12 months
+
+# Thank you responses
+Thank you -> You're very welcome! Happy to help!
+Thanks -> No problem at all! Glad I could assist!
+I appreciate it -> My pleasure! Feel free to ask anything else!
+That helps -> Great! Let me know if you need more information!
+
+# Clarifications
+I don't understand -> Let me try to explain it differently. What part would you like me to clarify?
+Can you explain -> Of course! I'll explain it in more detail.
+What do you mean -> Let me rephrase that to make it clearer.
+
+# Farewells
+Goodbye -> Goodbye! Have a great day!
+Bye -> Bye! Take care!
+See you -> See you later! Feel free to come back anytime!
