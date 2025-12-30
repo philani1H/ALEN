@@ -821,17 +821,23 @@ impl CognitiveSystem {
     }
 
     fn generate_refusal(&self, intent: &IntentState) -> String {
-        format!("I cannot answer '{}' because it's outside my verified knowledge or capabilities.",
-            self.extract_topic(&intent.original_prompt))
+        // Return structured data for decoder to generate appropriate response
+        // NOT a hardcoded response - the decoder learns refusal patterns from training
+        format!("REFUSAL:{}:{}", 
+            self.extract_topic(&intent.original_prompt),
+            "unverified")
     }
 
     fn generate_clarification(&self, intent: &IntentState) -> String {
-        format!("I need more information to answer '{}'. Could you clarify what specific aspect you're interested in?",
+        // Return structured data for decoder to generate appropriate clarification request
+        // NOT a hardcoded response - decoder learns from asking_questions.txt training data
+        format!("CLARIFY:{}",
             self.extract_topic(&intent.original_prompt))
     }
 
     fn add_caveat(&self, response: &str, confidence: f64) -> String {
-        format!("{} (Note: {:.0}% confidence, not fully verified)", response, confidence * 100.0)
+        // Return confidence marker - decoder handles uncertainty expression from learned patterns
+        format!("{}:CONFIDENCE:{:.0}", response, confidence * 100.0)
     }
 
     fn extract_topic(&self, input: &str) -> String {
@@ -865,7 +871,8 @@ mod tests {
     #[test]
     fn test_context_state() {
         let mut ctx = ContextState::new(64);
-        ctx.update("What is 2+2?", "4", 0.9, true);
+        // Test with any input/output - no hardcoded math examples
+        ctx.update("test input", "test response", 0.9, true);
         assert!(ctx.entropy < 1.0);
         assert!(!ctx.history.is_empty());
     }

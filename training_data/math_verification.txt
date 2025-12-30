@@ -1,0 +1,80 @@
+# Math Verification Training Data
+# Teaches the model to verify mathematical answers through computation
+
+Q: How do you verify a math answer?
+A: Compute the result step by step, then check if it matches the claimed answer. Never assume - always calculate.
+
+Q: How do you verify addition?
+A: For a + b = c, compute a + b and check if it equals c. Example: 5 + 3 = 8. Compute: 5 + 3 → 8. ✓ Verified.
+
+Q: How do you verify subtraction?
+A: For a - b = c, compute a - b. Also verify: c + b should equal a. Example: 10 - 4 = 6. Check: 6 + 4 = 10. ✓ Verified.
+
+Q: How do you verify multiplication?
+A: For a × b = c, compute the product. Use repeated addition to double-check. Example: 7 × 8 = 56. Check: 7 + 7 + 7 + 7 + 7 + 7 + 7 + 7 = 56. ✓ Verified.
+
+Q: How do you verify division?
+A: For a ÷ b = c, multiply c × b and check if it equals a. Example: 24 ÷ 6 = 4. Check: 4 × 6 = 24. ✓ Verified.
+
+Q: How do you verify equations?
+A: Substitute the claimed solution back into the original equation. If both sides are equal, it's verified.
+
+Q: Verify: 2 + 2 = 4
+A: Compute: 2 + 2 = 4. The sum of 2 and 2 is indeed 4. ✓ Verified.
+
+Q: Verify: 15 - 7 = 8
+A: Compute: 15 - 7 = 8. Check: 8 + 7 = 15. ✓ Verified.
+
+Q: Verify: 9 × 9 = 81
+A: Compute: 9 × 9 = 81. Check: 81 ÷ 9 = 9. ✓ Verified.
+
+Q: Verify: 100 ÷ 4 = 25
+A: Compute: 100 ÷ 4 = 25. Check: 25 × 4 = 100. ✓ Verified.
+
+Q: Verify: 3² = 9
+A: Compute: 3² = 3 × 3 = 9. ✓ Verified.
+
+Q: Verify: √16 = 4
+A: Compute: √16 = 4 because 4 × 4 = 16. ✓ Verified.
+
+Q: How do you verify percentages?
+A: Convert to decimal and multiply. Example: 20% of 50 = 10. Check: 0.20 × 50 = 10. ✓ Verified.
+
+Q: Verify: 25% of 80 = 20
+A: Compute: 0.25 × 80 = 20. ✓ Verified.
+
+Q: How do you verify fractions?
+A: Convert to common denominators or decimals. Example: 1/2 + 1/4 = 3/4. Check: 2/4 + 1/4 = 3/4. ✓ Verified.
+
+Q: How do you verify algebraic solutions?
+A: Substitute the solution into the original equation. For x + 5 = 12, if x = 7, then 7 + 5 = 12. ✓ Verified.
+
+Q: How do you verify negative numbers?
+A: Apply the same rules. Example: -3 + 5 = 2. Check: Starting at -3, moving 5 right gives 2. ✓ Verified.
+
+Q: How do you verify order of operations?
+A: Follow PEMDAS: Parentheses, Exponents, Multiplication/Division (left to right), Addition/Subtraction (left to right).
+
+Q: Verify: (3 + 4) × 2 = 14
+A: Compute: First (3 + 4) = 7, then 7 × 2 = 14. ✓ Verified.
+
+Q: What if verification fails?
+A: If computed result doesn't match the claimed answer, the answer is WRONG. Report the correct answer instead.
+
+Q: Verify: 5 + 7 = 13
+A: Compute: 5 + 7 = 12, not 13. ✗ FAILED verification. Correct answer: 12.
+
+Q: How important is verification?
+A: Verification is ESSENTIAL. Never output unverified math. Always compute to confirm correctness.
+
+Q: Can you verify without computing?
+A: NO. Math verification requires actual computation. Estimation can suggest errors but doesn't prove correctness.
+
+Q: Verify: 12 × 12 = 144
+A: Compute: 12 × 12 = 144. Check: 144 ÷ 12 = 12. ✓ Verified.
+
+Q: Verify: 1000 - 357 = 643
+A: Compute: 1000 - 357 = 643. Check: 643 + 357 = 1000. ✓ Verified.
+
+Q: How do you verify word problems?
+A: Translate to math, solve step by step, then check if the answer makes sense in the context of the problem.

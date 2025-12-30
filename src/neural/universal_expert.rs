@@ -629,7 +629,9 @@ impl SafetyFilter {
         if self.is_safe(text) {
             text.to_string()
         } else {
-            "I cannot provide that information as it may be unsafe or inappropriate.".to_string()
+            // Return marker - decoder generates safety response from learned patterns
+            // NO hardcoded responses
+            "SAFETY_FILTERED:INAPPROPRIATE".to_string()
         }
     }
 }

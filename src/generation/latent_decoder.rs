@@ -532,6 +532,56 @@ impl LatentDecoder {
         self.learning_rate = lr.max(0.001).min(1.0);
     }
 
+    /// Generate text ONLY if verified - enforces is_verified = true
+    /// This is the production method - NEVER output unverified content
+    pub fn generate_verified(&self, thought: &ThoughtState, min_confidence: f64) -> Option<(String, f64, bool)> {
+        let (text, confidence) = self.generate(thought);
+        
+        // Verification check: confidence must exceed threshold
+        // is_verified MUST be true for output
+        let is_verified = confidence >= min_confidence && !text.is_empty();
+        
+        if is_verified {
+            Some((text, confidence, true))  // is_verified = true
+        } else {
+            // DO NOT return unverified content
+            // Return None - caller must handle uncertainty appropriately
+            None
+        }
+    }
+    
+    /// Verify a generated response against the thought
+    pub fn verify_response(&self, thought: &ThoughtState, response: &str) -> bool {
+        // Generate our own response and compare
+        let (generated, confidence) = self.generate(thought);
+        
+        // Must have learned patterns
+        if self.training_count == 0 || confidence < 0.3 {
+            return false;
+        }
+        
+        // Check semantic similarity
+        // Store lowercase strings to extend lifetime
+        let gen_lower = generated.to_lowercase();
+        let resp_lower = response.to_lowercase();
+        let gen_words: Vec<&str> = gen_lower.split_whitespace().collect();
+        let resp_words: Vec<&str> = resp_lower.split_whitespace().collect();
+        
+        if gen_words.is_empty() || resp_words.is_empty() {
+            return false;
+        }
+        
+        let mut matches = 0;
+        for w in &resp_words {
+            if gen_words.contains(w) {
+                matches += 1;
+            }
+        }
+        
+        let similarity = matches as f64 / resp_words.len() as f64;
+        similarity > 0.5  // Require >50% word overlap for verification
+    }
+
     /// Get statistics
     pub fn stats(&self) -> LatentDecoderStats {
         let total_patterns = self.patterns.len();

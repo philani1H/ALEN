@@ -1,0 +1,62 @@
+# Asking Questions Training Data
+# Teaches the model how to ask clarifying questions and seek information
+
+Q: When should I ask clarifying questions?
+A: Ask clarifying questions when: 1) The request is ambiguous 2) Important details are missing 3) You want to confirm understanding 4) Multiple interpretations exist 5) Context would improve the response
+
+Q: How do I ask for clarification politely?
+A: Use phrases like "Could you clarify what you mean by...?" or "Just to make sure I understand, are you asking about...?" or "Would you like me to focus on... or...?"
+
+Q: What makes a good clarifying question?
+A: Good questions are: specific, relevant, open-ended when exploring ideas, closed when confirming details. They show you're listening and trying to help accurately.
+
+Q: How do I ask about the user's goal?
+A: Ask "What are you trying to achieve?" or "What's the end result you're looking for?" or "What would success look like for you?"
+
+Q: When should I ask about constraints?
+A: Ask about constraints when: length matters ("How detailed should this be?"), format matters ("Would you prefer bullet points or paragraphs?"), audience matters ("Who will be reading this?")
+
+Q: How do I ask follow-up questions?
+A: After receiving initial info, follow up with "Can you tell me more about...?" or "What specifically about X interests you?" or "Are there any particular aspects you'd like me to focus on?"
+
+Q: What questions help understand context?
+A: Context questions include: "What's the background for this?" "Where will this be used?" "What have you already tried?" "What's your experience level with this topic?"
+
+Q: How do I ask about preferences?
+A: Ask "Do you prefer a technical or simple explanation?" "Would you like examples?" "Should I include pros and cons?" "Any specific format you'd like?"
+
+Q: When is it appropriate to ask for examples?
+A: Ask for examples when the concept is abstract, when you need to understand the pattern, or when clarifying edge cases: "Could you give me an example of what you mean?"
+
+Q: How do I verify my understanding before proceeding?
+A: Say "Let me make sure I understand correctly - you want me to... Is that right?" or "So to summarize, you're looking for... Did I capture that correctly?"
+
+Q: What questions help narrow down a broad topic?
+A: Ask "Which aspect of X are you most interested in?" "Are you looking for an overview or deep dive?" "Is there a specific problem you're trying to solve?"
+
+Q: How do I ask about the timeline or urgency?
+A: Ask "When do you need this by?" "Is this time-sensitive?" "Should I provide a quick answer now or a more thorough one later?"
+
+Q: What if I don't understand the question at all?
+A: Be honest: "I'm not sure I follow. Could you rephrase that?" or "I want to help, but I'm unclear about what you're asking. Could you explain differently?"
+
+Q: How do I ask about technical requirements?
+A: Ask "What programming language?" "Which version?" "What operating system?" "Any specific libraries or frameworks you're using?"
+
+Q: When should I ask about expected output format?
+A: Ask when it matters: "Would you like code snippets?" "Should I provide step-by-step instructions?" "Do you want this as a list or narrative?"
+
+Q: How do I ask questions without being annoying?
+A: Bundle related questions, explain why you're asking, offer reasonable defaults: "I have a few quick questions to help me give you the best answer, or I can proceed with these assumptions..."
+
+Q: What questions help with debugging?
+A: Ask "What error message do you see?" "What did you expect to happen?" "What actually happened?" "What have you tried so far?" "When did it start occurring?"
+
+Q: How do I ask about priorities?
+A: Ask "What's most important to you - speed, accuracy, or completeness?" "If you had to choose, would you prefer X or Y?" "What's the must-have vs nice-to-have?"
+
+Q: What questions help understand the bigger picture?
+A: Ask "How does this fit into your larger project?" "What happens before/after this step?" "Who else is involved in this?"
+
+Q: How do I encourage users to provide more information?
+A: Use open-ended prompts: "Tell me more about..." "What else should I know?" "Is there anything else relevant?" "Feel free to share more context."

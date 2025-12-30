@@ -1,0 +1,62 @@
+# Emoji Usage Training Data
+# Teaches the model when and how to use emojis appropriately
+
+Q: How do I express happiness?
+A: You can express happiness with emojis like 😊 😄 🎉 ✨ These convey joy and positive emotions.
+
+Q: What emoji should I use when greeting someone?
+A: When greeting, you might use 👋 Hi there! or Hello! 😊 Waving emojis show friendliness.
+
+Q: How do I show that I understand something?
+A: Use 👍 or ✅ to show understanding. You can also say "Got it! 👌" or "Makes sense! 💡"
+
+Q: What emojis express love or affection?
+A: Heart emojis like ❤️ 💕 💙 express love. You can also use 🥰 😍 for affection.
+
+Q: How should I use emojis in professional communication?
+A: In professional settings, use emojis sparingly. A simple 👍 or 😊 is appropriate but avoid excessive use.
+
+Q: What emoji shows I'm thinking?
+A: Use 🤔 to show you're thinking or considering something. You can say "Let me think about this 🤔"
+
+Q: How do I express gratitude with emojis?
+A: Say "Thank you! 🙏" or "Thanks so much! ❤️" to express gratitude warmly.
+
+Q: What emojis indicate success or achievement?
+A: Use 🎉 🎊 ⭐ 🏆 to celebrate success. "Great job! 🌟" or "You did it! 🎉"
+
+Q: How do I show confusion?
+A: Use 😕 or 🤷 to express confusion. "I'm not sure about this 😕"
+
+Q: What emoji means approval?
+A: 👍 ✅ 👏 show approval. "That looks great! 👍"
+
+Q: How do I indicate urgency?
+A: Use ⚠️ 🚨 ❗ for urgency. "Important! ⚠️" or "Please respond soon! ❗"
+
+Q: What emojis should I use when apologizing?
+A: Use 😔 or 🙏 when apologizing. "I'm sorry about that 😔" or "Please forgive me 🙏"
+
+Q: How do I express excitement?
+A: Use 🎉 🙌 ✨ 🔥 for excitement. "This is amazing! 🎉" or "So excited! ✨"
+
+Q: What emoji shows support?
+A: Use 💪 🤝 👏 to show support. "You can do this! 💪" or "I'm here for you 🤝"
+
+Q: How do I end a message positively?
+A: End with 😊 ✨ 🌟 or 🙂 to leave a positive impression. "Have a great day! 😊"
+
+Q: When should I NOT use emojis?
+A: Avoid emojis in formal documents, legal texts, academic papers, and when the context is serious or sad.
+
+Q: What emoji shows I'm joking?
+A: Use 😄 😂 or 😜 to indicate humor. Some people use 😉 for playful comments.
+
+Q: How do I express agreement?
+A: Use 👍 ✅ 💯 to agree. "Absolutely! 👍" or "100% agree 💯"
+
+Q: What emojis work for encouragement?
+A: Use 🌟 💪 👏 🙌 for encouragement. "Keep going! 💪" or "You're doing great! ⭐"
+
+Q: How do I indicate I'm working on something?
+A: Use ⏳ 🔄 💻 to show work in progress. "Working on it! ⏳"

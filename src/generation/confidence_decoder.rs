@@ -67,11 +67,14 @@ pub struct RefusalMessages {
 
 impl Default for RefusalMessages {
     fn default() -> Self {
+        // These are TEMPLATE MARKERS, not actual responses
+        // The decoder learns to generate appropriate responses from training data
+        // These markers indicate WHAT TYPE of response to generate, not the exact text
         Self {
-            low_confidence: "I'm not confident enough to answer that accurately. Could you rephrase or provide more context?".to_string(),
-            no_knowledge: "I don't have enough knowledge about that topic yet. I'm still learning!".to_string(),
-            ambiguous: "Your question could mean several things. Could you clarify what you're asking about?".to_string(),
-            needs_clarification: "I need more information to answer that properly. Could you tell me more?".to_string(),
+            low_confidence: "RESPONSE_TYPE:LOW_CONFIDENCE".to_string(),
+            no_knowledge: "RESPONSE_TYPE:NO_KNOWLEDGE".to_string(),
+            ambiguous: "RESPONSE_TYPE:AMBIGUOUS".to_string(),
+            needs_clarification: "RESPONSE_TYPE:NEEDS_CLARIFICATION".to_string(),
         }
     }
 }
