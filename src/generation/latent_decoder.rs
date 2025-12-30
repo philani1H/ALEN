@@ -162,12 +162,12 @@ impl ConceptToTokenNetwork {
         }
 
         // Sample
-        let mut rng = rand::random::<f64>();
+        let rng_val = rand::random::<f64>();
         let mut cumulative = 0.0;
 
         for (token, prob) in scaled_probs {
             cumulative += prob;
-            if rng <= cumulative {
+            if rng_val <= cumulative {
                 return Some(token);
             }
         }

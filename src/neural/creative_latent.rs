@@ -21,6 +21,7 @@ use std::collections::HashMap;
 // PART 1: NOISE INJECTION
 // ============================================================================
 
+#[derive(Debug, Clone)]
 pub struct NoiseInjector {
     /// Noise standard deviation
     sigma: f32,
@@ -102,6 +103,7 @@ impl NoiseSchedule {
 // PART 2: TEMPERATURE SAMPLING
 // ============================================================================
 
+#[derive(Debug, Clone)]
 pub struct TemperatureSampler {
     /// Base temperature
     base_temperature: f32,
@@ -285,6 +287,7 @@ impl TemperatureSchedule {
 // PART 3: DIVERSITY PROMOTION
 // ============================================================================
 
+#[derive(Debug, Clone)]
 pub struct DiversityPromoter {
     /// Diversity weight
     diversity_weight: f32,
@@ -356,6 +359,7 @@ impl DiversityPromoter {
 // PART 4: NOVELTY SEARCH
 // ============================================================================
 
+#[derive(Debug, Clone)]
 pub struct NoveltySearch {
     /// Archive of novel behaviors
     archive: Vec<BehaviorDescriptor>,
@@ -437,6 +441,7 @@ impl NoveltySearch {
 // PART 5: CREATIVE EXPLORATION CONTROLLER
 // ============================================================================
 
+#[derive(Debug, Clone)]
 pub struct CreativeExplorationController {
     /// Noise injector
     noise_injector: NoiseInjector,

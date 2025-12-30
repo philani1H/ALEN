@@ -19,6 +19,7 @@ use std::collections::HashMap;
 // PART 1: MAML (Model-Agnostic Meta-Learning)
 // ============================================================================
 
+#[derive(Debug, Clone)]
 pub struct MAML {
     /// Inner loop learning rate (α)
     inner_lr: f32,
@@ -157,6 +158,7 @@ pub struct MetaTrainMetrics {
 // PART 2: LEARNED OPTIMIZER
 // ============================================================================
 
+#[derive(Debug, Clone)]
 pub struct LearnedOptimizer {
     /// Optimizer parameters
     optimizer_params: HashMap<String, Tensor>,
@@ -242,6 +244,7 @@ impl LearnedOptimizer {
 // PART 3: ADAPTIVE LEARNING RATE
 // ============================================================================
 
+#[derive(Debug, Clone)]
 pub struct AdaptiveLearningRate {
     /// Base learning rate
     base_lr: f32,
@@ -316,6 +319,7 @@ impl GradientStats {
 // PART 4: CURRICULUM LEARNING
 // ============================================================================
 
+#[derive(Debug, Clone)]
 pub struct CurriculumLearning {
     /// Current difficulty level
     difficulty: f32,
@@ -413,6 +417,7 @@ impl CurriculumLearning {
 // PART 5: META-LEARNING CONTROLLER
 // ============================================================================
 
+#[derive(Debug, Clone)]
 pub struct MetaLearningController {
     /// MAML optimizer
     maml: MAML,

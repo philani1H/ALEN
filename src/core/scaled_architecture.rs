@@ -175,22 +175,35 @@ impl ScaledTransformerLayer {
     
     /// Forward pass with residual connections and dropout
     pub fn forward(&self, input: &[f64], training: bool) -> Vec<f64> {
+        use nalgebra::DVector;
+        
+        // Convert input to DVector for layer norm
+        let input_vec = DVector::from_vec(input.to_vec());
+        let input_matrix = input_vec.clone_owned().reshape_generic(nalgebra::Dyn(input.len()), nalgebra::Const::<1>);
+        
         // 1. Self-attention with residual
-        let normed1 = self.layer_norm1.forward(input);
-        let attended = self.attention.forward(&normed1, &normed1, &normed1);
-        let attended = if training {
-            self.apply_dropout(&attended, self.dropout_rate)
+        let normed1 = self.layer_norm1.forward(&input_matrix);
+        let nrows = normed1.nrows();
+        let ncols = normed1.ncols();
+        let normed1_dyn = normed1.reshape_generic(nalgebra::Dyn(nrows), nalgebra::Dyn(ncols));
+        let attended = self.attention.forward(&normed1_dyn);
+        let attended_vec: Vec<f64> = attended.iter().cloned().collect();
+        let attended_vec = if training {
+            self.apply_dropout(&attended_vec, self.dropout_rate)
         } else {
-            attended
+            attended_vec
         };
         let residual1: Vec<f64> = input.iter()
-            .zip(attended.iter())
+            .zip(attended_vec.iter())
             .map(|(a, b)| a + b)
             .collect();
         
         // 2. Feed-forward with residual
-        let normed2 = self.layer_norm2.forward(&residual1);
-        let ff_out = self.feed_forward.forward(&normed2);
+        let residual1_vec = DVector::from_vec(residual1.clone());
+        let residual1_matrix = residual1_vec.reshape_generic(nalgebra::Dyn(residual1.len()), nalgebra::Const::<1>);
+        let normed2 = self.layer_norm2.forward(&residual1_matrix);
+        let normed2_vec: Vec<f64> = normed2.iter().cloned().collect();
+        let ff_out = self.feed_forward.forward(&normed2_vec);
         let ff_out = if training {
             self.apply_dropout(&ff_out, self.dropout_rate)
         } else {
@@ -377,7 +390,12 @@ impl ScaledTransformer {
         // 3. Final layer norm
         let mut normed_states = Vec::new();
         for state in &hidden_states {
-            normed_states.push(self.final_norm.forward(state));
+            use nalgebra::DVector;
+            let state_vec = DVector::from_vec(state.clone());
+            let state_matrix = state_vec.reshape_generic(nalgebra::Dyn(state.len()), nalgebra::Const::<1>);
+            let normed = self.final_norm.forward(&state_matrix);
+            let normed_vec: Vec<f64> = normed.iter().cloned().collect();
+            normed_states.push(normed_vec);
         }
         
         // 4. Project to vocabulary
