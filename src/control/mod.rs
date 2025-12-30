@@ -275,3 +275,5 @@ mod tests {
         assert_eq!(modulated.dimension, thought.dimension);
     }
 }
+pub mod gradient_personalization;
+pub use gradient_personalization::{UserEmbedding, PersonalizationManager, PersonalizationFeedback};

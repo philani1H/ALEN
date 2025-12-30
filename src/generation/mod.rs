@@ -558,3 +558,5 @@ mod tests {
         assert!((gen.config.temperature - 0.5).abs() < 1e-10);
     }
 }
+pub mod probabilistic_decoder;
+pub use probabilistic_decoder::{ProbabilisticDecoder, ProbabilisticDecoderConfig};

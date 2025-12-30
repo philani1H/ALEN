@@ -81,3 +81,5 @@ pub use neural_reasoning_engine::{
     NeuralReasoningEngine, NeuralReasoningStep, NeuralReasoningTrace,
     VerificationResult as NeuralVerificationResult, EngineStats,
 };
+pub mod variational_encoder;
+pub use variational_encoder::{VariationalEncoder, VariationalEncoding};

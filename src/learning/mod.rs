@@ -45,3 +45,5 @@ pub use self_learning::{
     PatternExtractor, CrossUserAggregator, PrivacyFilter,
     ConfidenceUpdater, KnowledgeBase, KnowledgeStats,
 };
+pub mod unified_loss;
+pub use unified_loss::{UnifiedLoss, UnifiedLossConfig, UnifiedLossComputer, UnifiedLossGradient};
