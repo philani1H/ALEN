@@ -23,6 +23,7 @@ pub struct UncertaintyAssessment {
 }
 
 /// Uncertainty handler
+#[derive(Debug, Clone)]
 pub struct UncertaintyHandler {
     /// Minimum confidence threshold for answering
     pub min_confidence: f64,

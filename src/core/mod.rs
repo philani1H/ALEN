@@ -22,6 +22,7 @@ pub mod proof_system;
 pub mod cognitive_architecture;
 pub mod self_questioning;
 pub mod proof_graph;
+pub mod scaled_architecture;
 
 // Re-export main types for convenience
 pub use state::{ThoughtState, BiasVector, Problem, ThoughtMetadata};
@@ -95,4 +96,11 @@ pub use proof_graph::{
     FormalProofGraph, FormalProofNode, FormalProofEdge, ProofPath,
     NodeId, FormalNodeType, NodeContent, FormalInferenceRule, Justification,
     PathVerification, GraphVerification, GraphMetadata,
+};
+
+// Re-export scaled architecture types
+pub use scaled_architecture::{
+    ScaledConfig, ScaledTransformer, ScaledTransformerLayer,
+    ScaledFeedForward, EmbeddingLayer, ScaledPositionalEncoding,
+    TrainingConfig, TrainingMetrics,
 };

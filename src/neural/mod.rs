@@ -22,6 +22,8 @@ mod meta_learning;
 mod advanced_integration;
 mod self_discovery;
 mod neural_reasoning_engine;
+pub mod universal_expert;
+pub mod complete_integration;
 
 pub use tensor::{Tensor, TensorShape, Device};
 pub use layers::{Linear, LayerNorm, Dropout, Embedding, Conv1D};
@@ -83,3 +85,19 @@ pub use neural_reasoning_engine::{
 };
 pub mod variational_encoder;
 pub use variational_encoder::{VariationalEncoder, VariationalEncoding};
+
+pub use complete_integration::{
+    CompleteIntegratedSystem, CompleteInput, CompleteResponse,
+    ImageEncoder, CodeEncoder, AudioEncoder,
+    AdaptiveLearningController, ConfidenceTuner, CurriculumDifficultyScaler,
+};
+
+pub use universal_expert::{
+    UniversalExpertSystem, UniversalExpertResponse,
+    MultiModalInput, UserState, EmotionVector, FramingVector,
+    ReasoningChain, ReasoningStep, VerifiedAnswer,
+    StyledExplanation, ExplanationStyle, GeneratedQuestion, QuestionType,
+    MetaEvaluation, FactVerifier, 
+    ExplanationGenerator as UniversalExplanationGenerator, QuestionGenerator,
+    MetaReasoner, CreativityModulator, SafetyFilter,
+};

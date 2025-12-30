@@ -22,6 +22,7 @@ use crate::confidence::{
     ConfidenceAwareResponder, DomainClassifier,
 };
 use crate::memory::input_embeddings::{InputEmbedder, EnhancedEpisode};
+use crate::generation::safe_first_person::SafeFirstPersonDecoder;
 
 use axum::{
     extract::{State, Json},

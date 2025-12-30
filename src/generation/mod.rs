@@ -560,3 +560,5 @@ mod tests {
 }
 pub mod probabilistic_decoder;
 pub use probabilistic_decoder::{ProbabilisticDecoder, ProbabilisticDecoderConfig};
+pub mod safe_first_person;
+pub use safe_first_person::{SafeFirstPersonDecoder, TokenConstraints, AgencyGate, CapabilityChecker, FramingVector, PersonalityBound, ValidationResult};
