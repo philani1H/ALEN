@@ -1,0 +1,1938 @@
+[
+  {
+    "input": "How do I ask for help effectively?",
+    "output": "Be specific about: 1) What you're trying to do 2) What you've already tried 3) What error or problem you're seeing 4) Any relevant context. This helps get better assistance."
+  },
+  {
+    "input": "What should I include when asking for technical help?",
+    "output": "Include: the error message, relevant code, what you expected, what happened instead, your environment (OS, versions), and steps to reproduce the issue."
+  },
+  {
+    "input": "How do I know when to ask for help?",
+    "output": "Ask when: you've been stuck for a while, the documentation isn't clear, you're unsure about best practices, you need a second opinion, or time is limited."
+  },
+  {
+    "input": "Is it okay to ask basic questions?",
+    "output": "Yes! Everyone starts somewhere. Basic questions are valid. Don't apologize for not knowing - asking is how we learn."
+  },
+  {
+    "input": "How do I ask for help without feeling embarrassed?",
+    "output": "Remember that asking shows initiative. Frame it positively: \"I'm learning about X and want to understand Y better\" rather than \"I don't know anything.\""
+  },
+  {
+    "input": "What makes a good help request?",
+    "output": "A good request: states the goal clearly, provides context, shows what you've tried, asks specific questions, and is formatted readably."
+  },
+  {
+    "input": "How should I respond when someone asks for help?",
+    "output": "Be patient and kind. Understand their level. Give clear explanations. Offer examples. Check if they understand. Encourage follow-up questions."
+  },
+  {
+    "input": "What if I don't understand the help I received?",
+    "output": "Ask for clarification! Say \"Could you explain that differently?\" or \"I'm not sure I understand the part about...\" Don't pretend to understand."
+  },
+  {
+    "input": "How do I help someone debug their problem?",
+    "output": "Ask what they're trying to achieve, what they expected, what happened instead. Look at their code/setup. Explain the cause, not just the fix. Teach them to debug."
+  },
+  {
+    "input": "What if I can't solve someone's problem?",
+    "output": "Be honest: \"I'm not sure about this, but here's what I do know...\" or \"This might be outside my expertise. You might want to check [resource].\""
+  },
+  {
+    "input": "How do I ask for help learning something new?",
+    "output": "Say what you want to learn, your current knowledge level, how you learn best (examples, theory, hands-on), and any specific areas you're confused about."
+  },
+  {
+    "input": "What's the best way to describe a bug?",
+    "output": "Provide: steps to reproduce, expected behavior, actual behavior, environment details, and any error messages. Screenshots or screen recordings help too."
+  },
+  {
+    "input": "How do I ask for code review help?",
+    "output": "Share your code, explain what it does, mention specific concerns, ask targeted questions like \"Is this approach efficient?\" or \"How could this be more readable?\""
+  },
+  {
+    "input": "What if my question seems too complex?",
+    "output": "Break it into smaller parts. Ask about one aspect at a time. Provide background info. Consider what you really need to know first."
+  },
+  {
+    "input": "How do I request help with a decision?",
+    "output": "Present the options you're considering, the criteria that matter, your current thinking, and what's blocking your decision."
+  },
+  {
+    "input": "What's the etiquette for asking help online?",
+    "output": "Search first, provide details, format code properly, be patient, say thanks, update if you solve it yourself, don't cross-post without mentioning it."
+  },
+  {
+    "input": "How do I ask for help with a large project?",
+    "output": "Start with the big picture, then focus on the specific part you need help with. Don't dump everything at once. Be clear about what kind of help you need."
+  },
+  {
+    "input": "What if I'm helping someone and they get frustrated?",
+    "output": "Stay patient. Acknowledge their frustration. Slow down. Try a different explanation. Take a break if needed. Remember learning is hard."
+  },
+  {
+    "input": "How do I ask for help without revealing confidential info?",
+    "output": "Create a minimal example that shows the problem without sensitive data. Describe the general situation without specifics if needed."
+  },
+  {
+    "input": "What makes someone good at asking for help?",
+    "output": "They: do some research first, ask clear questions, provide context, show effort, accept feedback gracefully, thank helpers, and share what they learned."
+  },
+  {
+    "input": "When should I ask clarifying questions?",
+    "output": "Ask clarifying questions when: 1) The request is ambiguous 2) Important details are missing 3) You want to confirm understanding 4) Multiple interpretations exist 5) Context would improve the response"
+  },
+  {
+    "input": "How do I ask for clarification politely?",
+    "output": "Use phrases like \"Could you clarify what you mean by...?\" or \"Just to make sure I understand, are you asking about...?\" or \"Would you like me to focus on... or...?\""
+  },
+  {
+    "input": "What makes a good clarifying question?",
+    "output": "Good questions are: specific, relevant, open-ended when exploring ideas, closed when confirming details. They show you're listening and trying to help accurately."
+  },
+  {
+    "input": "How do I ask about the user's goal?",
+    "output": "Ask \"What are you trying to achieve?\" or \"What's the end result you're looking for?\" or \"What would success look like for you?\""
+  },
+  {
+    "input": "When should I ask about constraints?",
+    "output": "Ask about constraints when: length matters (\"How detailed should this be?\"), format matters (\"Would you prefer bullet points or paragraphs?\"), audience matters (\"Who will be reading this?\")"
+  },
+  {
+    "input": "How do I ask follow-up questions?",
+    "output": "After receiving initial info, follow up with \"Can you tell me more about...?\" or \"What specifically about X interests you?\" or \"Are there any particular aspects you'd like me to focus on?\""
+  },
+  {
+    "input": "What questions help understand context?",
+    "output": "Context questions include: \"What's the background for this?\" \"Where will this be used?\" \"What have you already tried?\" \"What's your experience level with this topic?\""
+  },
+  {
+    "input": "How do I ask about preferences?",
+    "output": "Ask \"Do you prefer a technical or simple explanation?\" \"Would you like examples?\" \"Should I include pros and cons?\" \"Any specific format you'd like?\""
+  },
+  {
+    "input": "When is it appropriate to ask for examples?",
+    "output": "Ask for examples when the concept is abstract, when you need to understand the pattern, or when clarifying edge cases: \"Could you give me an example of what you mean?\""
+  },
+  {
+    "input": "How do I verify my understanding before proceeding?",
+    "output": "Say \"Let me make sure I understand correctly - you want me to... Is that right?\" or \"So to summarize, you're looking for... Did I capture that correctly?\""
+  },
+  {
+    "input": "What questions help narrow down a broad topic?",
+    "output": "Ask \"Which aspect of X are you most interested in?\" \"Are you looking for an overview or deep dive?\" \"Is there a specific problem you're trying to solve?\""
+  },
+  {
+    "input": "How do I ask about the timeline or urgency?",
+    "output": "Ask \"When do you need this by?\" \"Is this time-sensitive?\" \"Should I provide a quick answer now or a more thorough one later?\""
+  },
+  {
+    "input": "What if I don't understand the question at all?",
+    "output": "Be honest: \"I'm not sure I follow. Could you rephrase that?\" or \"I want to help, but I'm unclear about what you're asking. Could you explain differently?\""
+  },
+  {
+    "input": "How do I ask about technical requirements?",
+    "output": "Ask \"What programming language?\" \"Which version?\" \"What operating system?\" \"Any specific libraries or frameworks you're using?\""
+  },
+  {
+    "input": "When should I ask about expected output format?",
+    "output": "Ask when it matters: \"Would you like code snippets?\" \"Should I provide step-by-step instructions?\" \"Do you want this as a list or narrative?\""
+  },
+  {
+    "input": "How do I ask questions without being annoying?",
+    "output": "Bundle related questions, explain why you're asking, offer reasonable defaults: \"I have a few quick questions to help me give you the best answer, or I can proceed with these assumptions...\""
+  },
+  {
+    "input": "What questions help with debugging?",
+    "output": "Ask \"What error message do you see?\" \"What did you expect to happen?\" \"What actually happened?\" \"What have you tried so far?\" \"When did it start occurring?\""
+  },
+  {
+    "input": "How do I ask about priorities?",
+    "output": "Ask \"What's most important to you - speed, accuracy, or completeness?\" \"If you had to choose, would you prefer X or Y?\" \"What's the must-have vs nice-to-have?\""
+  },
+  {
+    "input": "What questions help understand the bigger picture?",
+    "output": "Ask \"How does this fit into your larger project?\" \"What happens before/after this step?\" \"Who else is involved in this?\""
+  },
+  {
+    "input": "How do I encourage users to provide more information?",
+    "output": "Use open-ended prompts: \"Tell me more about...\" \"What else should I know?\" \"Is there anything else relevant?\" \"Feel free to share more context.\""
+  },
+  {
+    "input": "What is a variable in programming?",
+    "output": "A variable is a named container that stores a value. In Python: x = 5 creates a variable x with value 5. Variables can hold numbers, text, lists, or other data types."
+  },
+  {
+    "input": "How do I write a function in Python?",
+    "output": "Define a function using 'def': def greet(name): return f\"Hello, {name}!\" Then call it: greet(\"Alice\") returns \"Hello, Alice!\""
+  },
+  {
+    "input": "What is a loop?",
+    "output": "A loop repeats code multiple times. For loop: for i in range(5): print(i) prints 0,1,2,3,4. While loop: while condition: ... continues until condition is false."
+  },
+  {
+    "input": "How do I handle errors in code?",
+    "output": "Use try-except blocks: try: result = 10 / x except ZeroDivisionError: result = 0 This catches and handles errors gracefully."
+  },
+  {
+    "input": "What is a class in programming?",
+    "output": "A class is a blueprint for creating objects. It defines properties (attributes) and behaviors (methods). class Dog: def __init__(self, name): self.name = name"
+  },
+  {
+    "input": "How do I read a file in Python?",
+    "output": "Use open(): with open('file.txt', 'r') as f: content = f.read() The 'with' statement ensures the file is properly closed."
+  },
+  {
+    "input": "What is recursion?",
+    "output": "Recursion is when a function calls itself. Example: def factorial(n): if n <= 1: return 1 return n * factorial(n-1) Must have a base case to stop."
+  },
+  {
+    "input": "How do I sort a list?",
+    "output": "Use sorted() or .sort(): numbers = [3, 1, 4, 1, 5] sorted_nums = sorted(numbers)  # Returns new list numbers.sort()  # Sorts in place"
+  },
+  {
+    "input": "What is an API?",
+    "output": "An API (Application Programming Interface) is a way for programs to communicate. You send requests and receive responses. Example: weather_data = requests.get(\"api.weather.com/data\")"
+  },
+  {
+    "input": "How do I debug code?",
+    "output": "1. Read error messages carefully 2. Use print() to check values 3. Use a debugger to step through code 4. Test small parts independently 5. Check for typos"
+  },
+  {
+    "input": "What is version control?",
+    "output": "Version control tracks changes to code. Git is popular: git init - start repository git add . - stage changes git commit -m \"message\" - save changes git push - upload to remote"
+  },
+  {
+    "input": "How do I write clean code?",
+    "output": "Use meaningful variable names, add comments, keep functions small, follow consistent formatting, avoid repetition (DRY principle), and write tests."
+  },
+  {
+    "input": "What is a database?",
+    "output": "A database stores and organizes data. SQL databases use tables: CREATE TABLE users (id INT, name TEXT); INSERT INTO users VALUES (1, 'Alice'); SELECT * FROM users WHERE id = 1;"
+  },
+  {
+    "input": "How do I handle user input?",
+    "output": "Get input: user_input = input(\"Enter name: \"). Always validate: if user_input.strip(): process it. Never trust user input - sanitize it."
+  },
+  {
+    "input": "What is asynchronous programming?",
+    "output": "Async allows code to continue while waiting: async def fetch_data(): data = await get_from_server() return data This doesn't block other operations."
+  },
+  {
+    "input": "How do I write a test?",
+    "output": "Use testing frameworks: def test_addition(): assert add(2, 3) == 5 assert add(-1, 1) == 0 Run tests to verify code works correctly."
+  },
+  {
+    "input": "What is object-oriented programming?",
+    "output": "OOP organizes code around objects. Key concepts: Encapsulation (bundling data), Inheritance (reusing code), Polymorphism (same interface, different behavior), Abstraction (hiding complexity)."
+  },
+  {
+    "input": "How do I optimize slow code?",
+    "output": "1. Profile to find bottlenecks 2. Use efficient algorithms (O(n) vs O(n\u00b2)) 3. Cache repeated calculations 4. Use appropriate data structures 5. Consider parallel processing"
+  },
+  {
+    "input": "What is type checking?",
+    "output": "Type checking verifies data types: def greet(name: str) -> str: return f\"Hello, {name}\" Python uses type hints for documentation and tools like mypy."
+  },
+  {
+    "input": "How do I learn a new programming language?",
+    "output": "1. Learn the syntax basics 2. Build small projects 3. Read documentation 4. Practice coding challenges 5. Study others' code 6. Join communities"
+  },
+  {
+    "input": "What is critical thinking?",
+    "output": "Critical thinking is the objective analysis and evaluation of information to form a judgment. It involves questioning assumptions, examining evidence, considering alternatives, and reaching reasoned conclusions."
+  },
+  {
+    "input": "How do you evaluate an argument?",
+    "output": "Evaluate by: 1) Identify the claim, 2) Examine evidence quality, 3) Check logical validity, 4) Look for fallacies, 5) Consider counterarguments, 6) Assess conclusion support."
+  },
+  {
+    "input": "What are common logical fallacies?",
+    "output": "Common fallacies: Ad hominem (attack person not argument), Straw man (misrepresent argument), False dichotomy (only two options), Appeal to authority (expert = right), Slippery slope (chain of unlikely events), Circular reasoning."
+  },
+  {
+    "input": "How do you distinguish fact from opinion?",
+    "output": "Facts: Verifiable, objective, can be proven true/false. Opinions: Subjective, based on beliefs/values, cannot be proven. Watch for opinion words: \"best,\" \"should,\" \"believe.\""
+  },
+  {
+    "input": "How do you identify bias?",
+    "output": "Identify bias by: Checking source/author agenda, Looking for one-sided presentation, Noting emotional language, Checking what's omitted, Comparing with other sources, Examining evidence selection."
+  },
+  {
+    "input": "How do you evaluate sources?",
+    "output": "Source evaluation (CRAAP): Currency (when published), Relevance (fits your need), Authority (expertise), Accuracy (supported, verifiable), Purpose (inform, persuade, sell)."
+  },
+  {
+    "input": "What questions should you ask when analyzing?",
+    "output": "Key questions: What is the main claim? What evidence supports it? What are the assumptions? Who benefits? What's missing? Are there alternative explanations? Is the logic valid?"
+  },
+  {
+    "input": "How do you recognize correlation vs causation?",
+    "output": "Correlation: Two things occur together. Causation: One causes the other. Correlation doesn't prove causation. Need: Temporal precedence, plausible mechanism, ruling out alternatives."
+  },
+  {
+    "input": "How do you form a well-reasoned opinion?",
+    "output": "Well-reasoned opinions: Gather information from multiple sources, Consider different perspectives, Examine evidence critically, Acknowledge uncertainty, Be willing to revise with new evidence."
+  },
+  {
+    "input": "What is confirmation bias?",
+    "output": "Confirmation bias: Tendency to seek/interpret information confirming existing beliefs while ignoring contradicting evidence. Counter by actively seeking opposing views."
+  },
+  {
+    "input": "How do you analyze a problem systematically?",
+    "output": "Systematic analysis: 1) Define the problem clearly, 2) Gather relevant information, 3) Generate possible solutions, 4) Evaluate each option, 5) Choose best solution, 6) Implement, 7) Review results."
+  },
+  {
+    "input": "How do you evaluate statistical claims?",
+    "output": "Evaluate statistics by: Sample size (larger = more reliable), Sampling method (random vs biased), Margin of error, Who conducted study, How data collected, What questions asked."
+  },
+  {
+    "input": "What makes evidence strong?",
+    "output": "Strong evidence: Relevant to claim, From reliable sources, Verifiable, Recent, Consistent with other evidence, Based on appropriate methodology, Peer-reviewed if scientific."
+  },
+  {
+    "input": "How do you consider multiple perspectives?",
+    "output": "Consider perspectives by: Identifying stakeholders, Understanding their interests, Seeing issue from their viewpoint, Finding valid points in each, Synthesizing insights."
+  },
+  {
+    "input": "How do you avoid being manipulated by rhetoric?",
+    "output": "Watch for: Emotional appeals over evidence, Loaded language, Oversimplification, False urgency, Appeal to fear, Bandwagon arguments, Cherry-picked examples."
+  },
+  {
+    "input": "What is the difference between deductive and inductive reasoning?",
+    "output": "Deductive: General to specific, conclusion certain if premises true (All A are B, X is A, therefore X is B). Inductive: Specific to general, conclusion probable (observed pattern suggests general rule)."
+  },
+  {
+    "input": "How do you evaluate competing claims?",
+    "output": "Compare claims by: Evidence quality for each, Internal consistency, Explanatory power, Predictive accuracy, Simplicity (Occam's razor), Expert consensus."
+  },
+  {
+    "input": "What are good habits of critical thinking?",
+    "output": "Good habits: Question assumptions, Seek evidence, Consider alternatives, Admit uncertainty, Update beliefs with new evidence, Avoid emotional decisions, Think systematically."
+  },
+  {
+    "input": "How do you recognize when you might be wrong?",
+    "output": "Signs of potential error: Strong emotional attachment to belief, Avoiding contrary evidence, Unable to explain opposing view fairly, Belief hasn't changed despite new information."
+  },
+  {
+    "input": "What is intellectual humility?",
+    "output": "Intellectual humility: Recognizing limits of your knowledge, Being open to being wrong, Valuing learning over being right, Acknowledging others may know more, Holding beliefs proportionally to evidence."
+  },
+  {
+    "input": "How do I express happiness?",
+    "output": "You can express happiness with emojis like \ud83d\ude0a \ud83d\ude04 \ud83c\udf89 \u2728 These convey joy and positive emotions."
+  },
+  {
+    "input": "What emoji should I use when greeting someone?",
+    "output": "When greeting, you might use \ud83d\udc4b Hi there! or Hello! \ud83d\ude0a Waving emojis show friendliness."
+  },
+  {
+    "input": "How do I show that I understand something?",
+    "output": "Use \ud83d\udc4d or \u2705 to show understanding. You can also say \"Got it! \ud83d\udc4c\" or \"Makes sense! \ud83d\udca1\""
+  },
+  {
+    "input": "What emojis express love or affection?",
+    "output": "Heart emojis like \u2764\ufe0f \ud83d\udc95 \ud83d\udc99 express love. You can also use \ud83e\udd70 \ud83d\ude0d for affection."
+  },
+  {
+    "input": "How should I use emojis in professional communication?",
+    "output": "In professional settings, use emojis sparingly. A simple \ud83d\udc4d or \ud83d\ude0a is appropriate but avoid excessive use."
+  },
+  {
+    "input": "What emoji shows I'm thinking?",
+    "output": "Use \ud83e\udd14 to show you're thinking or considering something. You can say \"Let me think about this \ud83e\udd14\""
+  },
+  {
+    "input": "How do I express gratitude with emojis?",
+    "output": "Say \"Thank you! \ud83d\ude4f\" or \"Thanks so much! \u2764\ufe0f\" to express gratitude warmly."
+  },
+  {
+    "input": "What emojis indicate success or achievement?",
+    "output": "Use \ud83c\udf89 \ud83c\udf8a \u2b50 \ud83c\udfc6 to celebrate success. \"Great job! \ud83c\udf1f\" or \"You did it! \ud83c\udf89\""
+  },
+  {
+    "input": "How do I show confusion?",
+    "output": "Use \ud83d\ude15 or \ud83e\udd37 to express confusion. \"I'm not sure about this \ud83d\ude15\""
+  },
+  {
+    "input": "What emoji means approval?",
+    "output": "\ud83d\udc4d \u2705 \ud83d\udc4f show approval. \"That looks great! \ud83d\udc4d\""
+  },
+  {
+    "input": "How do I indicate urgency?",
+    "output": "Use \u26a0\ufe0f \ud83d\udea8 \u2757 for urgency. \"Important! \u26a0\ufe0f\" or \"Please respond soon! \u2757\""
+  },
+  {
+    "input": "What emojis should I use when apologizing?",
+    "output": "Use \ud83d\ude14 or \ud83d\ude4f when apologizing. \"I'm sorry about that \ud83d\ude14\" or \"Please forgive me \ud83d\ude4f\""
+  },
+  {
+    "input": "How do I express excitement?",
+    "output": "Use \ud83c\udf89 \ud83d\ude4c \u2728 \ud83d\udd25 for excitement. \"This is amazing! \ud83c\udf89\" or \"So excited! \u2728\""
+  },
+  {
+    "input": "What emoji shows support?",
+    "output": "Use \ud83d\udcaa \ud83e\udd1d \ud83d\udc4f to show support. \"You can do this! \ud83d\udcaa\" or \"I'm here for you \ud83e\udd1d\""
+  },
+  {
+    "input": "How do I end a message positively?",
+    "output": "End with \ud83d\ude0a \u2728 \ud83c\udf1f or \ud83d\ude42 to leave a positive impression. \"Have a great day! \ud83d\ude0a\""
+  },
+  {
+    "input": "When should I NOT use emojis?",
+    "output": "Avoid emojis in formal documents, legal texts, academic papers, and when the context is serious or sad."
+  },
+  {
+    "input": "What emoji shows I'm joking?",
+    "output": "Use \ud83d\ude04 \ud83d\ude02 or \ud83d\ude1c to indicate humor. Some people use \ud83d\ude09 for playful comments."
+  },
+  {
+    "input": "How do I express agreement?",
+    "output": "Use \ud83d\udc4d \u2705 \ud83d\udcaf to agree. \"Absolutely! \ud83d\udc4d\" or \"100% agree \ud83d\udcaf\""
+  },
+  {
+    "input": "What emojis work for encouragement?",
+    "output": "Use \ud83c\udf1f \ud83d\udcaa \ud83d\udc4f \ud83d\ude4c for encouragement. \"Keep going! \ud83d\udcaa\" or \"You're doing great! \u2b50\""
+  },
+  {
+    "input": "How do I indicate I'm working on something?",
+    "output": "Use \u23f3 \ud83d\udd04 \ud83d\udcbb to show work in progress. \"Working on it! \u23f3\""
+  },
+  {
+    "input": "What intents does \"please help me\" indicate?",
+    "output": "This indicates a request for assistance. The user needs support or guidance with something."
+  },
+  {
+    "input": "What does \"explain\" in a prompt mean?",
+    "output": "The user wants a detailed description of how something works, with reasoning and clarity."
+  },
+  {
+    "input": "What does \"summarize\" indicate?",
+    "output": "The user wants a brief overview focusing on key points, not details."
+  },
+  {
+    "input": "What does \"compare\" mean in user requests?",
+    "output": "The user wants to see similarities and differences between two or more things."
+  },
+  {
+    "input": "What does \"I don't understand\" indicate?",
+    "output": "The user needs clarification. Provide a simpler explanation or use different words."
+  },
+  {
+    "input": "What does \"can you\" at the start mean?",
+    "output": "A polite request asking if the assistant is able to do something."
+  },
+  {
+    "input": "What does \"how do I\" indicate?",
+    "output": "A request for instructions or steps to accomplish a task."
+  },
+  {
+    "input": "What does \"what is\" mean?",
+    "output": "A request for definition or explanation of a concept."
+  },
+  {
+    "input": "What does \"why\" at the start indicate?",
+    "output": "The user wants to understand the reason or cause behind something."
+  },
+  {
+    "input": "What does \"when\" in a question mean?",
+    "output": "The user is asking about timing, dates, or conditions for something."
+  },
+  {
+    "input": "What does \"where\" indicate?",
+    "output": "The user is asking about location or position of something."
+  },
+  {
+    "input": "What does \"who\" mean in questions?",
+    "output": "The user wants to know about a person or entity responsible for something."
+  },
+  {
+    "input": "What does \"list\" mean as a verb?",
+    "output": "The user wants items enumerated, typically as bullet points or numbered list."
+  },
+  {
+    "input": "What does \"describe\" indicate?",
+    "output": "The user wants detailed characteristics or properties of something."
+  },
+  {
+    "input": "What does \"calculate\" mean?",
+    "output": "The user needs a mathematical computation performed."
+  },
+  {
+    "input": "What does \"fix\" in requests mean?",
+    "output": "The user has a problem and wants it corrected or solved."
+  },
+  {
+    "input": "What does \"improve\" indicate?",
+    "output": "The user wants suggestions to make something better."
+  },
+  {
+    "input": "What does \"check\" mean in requests?",
+    "output": "The user wants verification or review of something."
+  },
+  {
+    "input": "What does \"translate\" mean?",
+    "output": "The user wants text converted from one language to another."
+  },
+  {
+    "input": "What does \"create\" or \"generate\" mean?",
+    "output": "The user wants something new produced from scratch."
+  },
+  {
+    "input": "What does \"edit\" or \"modify\" mean?",
+    "output": "The user wants changes made to existing content."
+  },
+  {
+    "input": "What does \"delete\" or \"remove\" indicate?",
+    "output": "The user wants something taken away or eliminated."
+  },
+  {
+    "input": "What does \"find\" or \"search\" mean?",
+    "output": "The user wants to locate specific information."
+  },
+  {
+    "input": "What does \"teach me\" indicate?",
+    "output": "The user wants to learn and expects educational content."
+  },
+  {
+    "input": "What does \"show me\" mean?",
+    "output": "The user wants a demonstration or visual presentation."
+  },
+  {
+    "input": "What does \"tell me about\" indicate?",
+    "output": "An open request for information on a topic."
+  },
+  {
+    "input": "What does urgency language like \"ASAP\" or \"urgent\" mean?",
+    "output": "The request is time-sensitive and should be prioritized."
+  },
+  {
+    "input": "What does \"briefly\" or \"quick\" indicate?",
+    "output": "Keep the response short and focused."
+  },
+  {
+    "input": "What does \"in detail\" or \"thoroughly\" mean?",
+    "output": "Provide comprehensive, extensive information."
+  },
+  {
+    "input": "What does \"step by step\" indicate?",
+    "output": "Break down the process into sequential instructions."
+  },
+  {
+    "input": "What are the parts of speech?",
+    "output": "Parts of speech: Noun (person/place/thing), Verb (action/state), Adjective (describes noun), Adverb (describes verb/adj), Pronoun (replaces noun), Preposition (relationship), Conjunction (connects), Interjection (emotion)."
+  },
+  {
+    "input": "How do you structure a paragraph?",
+    "output": "Paragraph structure: Topic sentence (main idea), Supporting sentences (evidence, examples, explanation), Concluding sentence (wrap up, transition). Each paragraph = one main idea."
+  },
+  {
+    "input": "What is subject-verb agreement?",
+    "output": "Subject-verb agreement: Singular subjects take singular verbs, plural subjects take plural verbs. \"The dog runs\" (singular), \"The dogs run\" (plural). Watch for tricky cases with collective nouns."
+  },
+  {
+    "input": "How do you use commas correctly?",
+    "output": "Comma uses: Separate items in lists, Before coordinating conjunctions in compound sentences, After introductory elements, Around non-essential clauses, Separate adjectives of equal importance."
+  },
+  {
+    "input": "What is the difference between active and passive voice?",
+    "output": "Active voice: Subject performs action (\"The cat caught the mouse\"). Passive voice: Subject receives action (\"The mouse was caught by the cat\"). Active is usually clearer and more direct."
+  },
+  {
+    "input": "How do you avoid run-on sentences?",
+    "output": "Fix run-ons: Separate into sentences with period, Use semicolon between related clauses, Add coordinating conjunction with comma, Use subordinating conjunction to make one clause dependent."
+  },
+  {
+    "input": "What are common grammar mistakes?",
+    "output": "Common mistakes: Their/there/they're, Its/it's, Your/you're, Affect/effect, Than/then, Fewer/less, Who/whom, Subject-verb disagreement, Dangling modifiers, Comma splices."
+  },
+  {
+    "input": "How do you write clearly?",
+    "output": "Clear writing: Use simple words, Keep sentences concise, One idea per sentence, Active voice, Avoid jargon, Be specific, Organize logically, Revise and edit."
+  },
+  {
+    "input": "What is parallel structure?",
+    "output": "Parallel structure: Items in a series should have same grammatical form. Wrong: \"I like swimming, to run, and bikes.\" Right: \"I like swimming, running, and biking.\""
+  },
+  {
+    "input": "How do you vary sentence structure?",
+    "output": "Vary sentences by: Changing length (mix short and long), Starting differently (not always subject-first), Using different types (simple, compound, complex), Varying rhythm."
+  },
+  {
+    "input": "What is the difference between a clause and a phrase?",
+    "output": "Clause: Has subject and verb, can be independent (stands alone) or dependent. Phrase: Group of words without subject-verb pair, acts as single part of speech."
+  },
+  {
+    "input": "How do you use semicolons?",
+    "output": "Semicolon uses: Between independent clauses without conjunction (\"I came; I saw; I conquered\"), Between items in a list when items contain commas."
+  },
+  {
+    "input": "What are transition words?",
+    "output": "Transitions: Addition (furthermore, also), Contrast (however, but), Cause/effect (therefore, because), Time (then, meanwhile), Example (for instance), Conclusion (finally, in summary)."
+  },
+  {
+    "input": "How do you write concisely?",
+    "output": "Concise writing: Eliminate redundancy, Remove unnecessary words, Combine sentences, Use strong verbs, Avoid \"there is/are\" openings, Cut filler words (very, really, just)."
+  },
+  {
+    "input": "What is tone in writing?",
+    "output": "Tone: Writer's attitude toward subject/audience. Created through word choice, sentence structure, details included. Examples: formal, casual, serious, humorous, objective, passionate."
+  },
+  {
+    "input": "How do you paraphrase effectively?",
+    "output": "Effective paraphrasing: Read and understand original, Set aside original, Write in your own words, Check you captured meaning, Cite the source, Don't just swap synonyms."
+  },
+  {
+    "input": "What is the thesis statement?",
+    "output": "Thesis statement: Central argument or claim of an essay. Appears in introduction. Should be specific, arguable, and guide the entire paper. Each paragraph supports the thesis."
+  },
+  {
+    "input": "How do you organize an essay?",
+    "output": "Essay organization: Introduction (hook, context, thesis), Body paragraphs (each with topic sentence supporting thesis), Conclusion (restate thesis, summarize, broader implications)."
+  },
+  {
+    "input": "What is coherence in writing?",
+    "output": "Coherence: Ideas flow logically and connect clearly. Achieved through: Logical organization, Transitions between sentences/paragraphs, Consistent focus, Clear pronoun references."
+  },
+  {
+    "input": "How do you proofread effectively?",
+    "output": "Effective proofreading: Read aloud, Read backwards (catches typos), Focus on one error type at a time, Use spell/grammar check but don't rely solely on it, Take breaks between writing and proofing."
+  },
+  {
+    "input": "How do you verify a math answer?",
+    "output": "Compute the result step by step, then check if it matches the claimed answer. Never assume - always calculate."
+  },
+  {
+    "input": "How do you verify addition?",
+    "output": "For a + b = c, compute a + b and check if it equals c. Example: 5 + 3 = 8. Compute: 5 + 3 \u2192 8. \u2713 Verified."
+  },
+  {
+    "input": "How do you verify subtraction?",
+    "output": "For a - b = c, compute a - b. Also verify: c + b should equal a. Example: 10 - 4 = 6. Check: 6 + 4 = 10. \u2713 Verified."
+  },
+  {
+    "input": "How do you verify multiplication?",
+    "output": "For a \u00d7 b = c, compute the product. Use repeated addition to double-check. Example: 7 \u00d7 8 = 56. Check: 7 + 7 + 7 + 7 + 7 + 7 + 7 + 7 = 56. \u2713 Verified."
+  },
+  {
+    "input": "How do you verify division?",
+    "output": "For a \u00f7 b = c, multiply c \u00d7 b and check if it equals a. Example: 24 \u00f7 6 = 4. Check: 4 \u00d7 6 = 24. \u2713 Verified."
+  },
+  {
+    "input": "How do you verify equations?",
+    "output": "Substitute the claimed solution back into the original equation. If both sides are equal, it's verified."
+  },
+  {
+    "input": "Verify: 2 + 2 = 4",
+    "output": "Compute: 2 + 2 = 4. The sum of 2 and 2 is indeed 4. \u2713 Verified."
+  },
+  {
+    "input": "Verify: 15 - 7 = 8",
+    "output": "Compute: 15 - 7 = 8. Check: 8 + 7 = 15. \u2713 Verified."
+  },
+  {
+    "input": "Verify: 9 \u00d7 9 = 81",
+    "output": "Compute: 9 \u00d7 9 = 81. Check: 81 \u00f7 9 = 9. \u2713 Verified."
+  },
+  {
+    "input": "Verify: 100 \u00f7 4 = 25",
+    "output": "Compute: 100 \u00f7 4 = 25. Check: 25 \u00d7 4 = 100. \u2713 Verified."
+  },
+  {
+    "input": "Verify: 3\u00b2 = 9",
+    "output": "Compute: 3\u00b2 = 3 \u00d7 3 = 9. \u2713 Verified."
+  },
+  {
+    "input": "Verify: \u221a16 = 4",
+    "output": "Compute: \u221a16 = 4 because 4 \u00d7 4 = 16. \u2713 Verified."
+  },
+  {
+    "input": "How do you verify percentages?",
+    "output": "Convert to decimal and multiply. Example: 20% of 50 = 10. Check: 0.20 \u00d7 50 = 10. \u2713 Verified."
+  },
+  {
+    "input": "Verify: 25% of 80 = 20",
+    "output": "Compute: 0.25 \u00d7 80 = 20. \u2713 Verified."
+  },
+  {
+    "input": "How do you verify fractions?",
+    "output": "Convert to common denominators or decimals. Example: 1/2 + 1/4 = 3/4. Check: 2/4 + 1/4 = 3/4. \u2713 Verified."
+  },
+  {
+    "input": "How do you verify algebraic solutions?",
+    "output": "Substitute the solution into the original equation. For x + 5 = 12, if x = 7, then 7 + 5 = 12. \u2713 Verified."
+  },
+  {
+    "input": "How do you verify negative numbers?",
+    "output": "Apply the same rules. Example: -3 + 5 = 2. Check: Starting at -3, moving 5 right gives 2. \u2713 Verified."
+  },
+  {
+    "input": "How do you verify order of operations?",
+    "output": "Follow PEMDAS: Parentheses, Exponents, Multiplication/Division (left to right), Addition/Subtraction (left to right)."
+  },
+  {
+    "input": "Verify: (3 + 4) \u00d7 2 = 14",
+    "output": "Compute: First (3 + 4) = 7, then 7 \u00d7 2 = 14. \u2713 Verified."
+  },
+  {
+    "input": "What if verification fails?",
+    "output": "If computed result doesn't match the claimed answer, the answer is WRONG. Report the correct answer instead."
+  },
+  {
+    "input": "Verify: 5 + 7 = 13",
+    "output": "Compute: 5 + 7 = 12, not 13. \u2717 FAILED verification. Correct answer: 12."
+  },
+  {
+    "input": "How important is verification?",
+    "output": "Verification is ESSENTIAL. Never output unverified math. Always compute to confirm correctness."
+  },
+  {
+    "input": "Can you verify without computing?",
+    "output": "NO. Math verification requires actual computation. Estimation can suggest errors but doesn't prove correctness."
+  },
+  {
+    "input": "Verify: 12 \u00d7 12 = 144",
+    "output": "Compute: 12 \u00d7 12 = 144. Check: 144 \u00f7 12 = 12. \u2713 Verified."
+  },
+  {
+    "input": "Verify: 1000 - 357 = 643",
+    "output": "Compute: 1000 - 357 = 643. Check: 643 + 357 = 1000. \u2713 Verified."
+  },
+  {
+    "input": "How do you verify word problems?",
+    "output": "Translate to math, solve step by step, then check if the answer makes sense in the context of the problem."
+  },
+  {
+    "input": "How do you write the quadratic formula?",
+    "output": "The quadratic formula for ax\u00b2 + bx + c = 0 is: x = (-b \u00b1 \u221a(b\u00b2 - 4ac)) / 2a. This gives both solutions where the parabola crosses the x-axis."
+  },
+  {
+    "input": "What is the Pythagorean theorem formula?",
+    "output": "The Pythagorean theorem: a\u00b2 + b\u00b2 = c\u00b2, where a and b are legs of a right triangle and c is the hypotenuse."
+  },
+  {
+    "input": "How do you write the area of a circle?",
+    "output": "Area of a circle: A = \u03c0r\u00b2, where r is the radius. For diameter d: A = \u03c0(d/2)\u00b2 = \u03c0d\u00b2/4."
+  },
+  {
+    "input": "What is the formula for compound interest?",
+    "output": "Compound interest formula: A = P(1 + r/n)^(nt), where P = principal, r = annual rate, n = compounds per year, t = years."
+  },
+  {
+    "input": "How do you express the distance formula?",
+    "output": "Distance between two points (x\u2081, y\u2081) and (x\u2082, y\u2082): d = \u221a[(x\u2082 - x\u2081)\u00b2 + (y\u2082 - y\u2081)\u00b2]"
+  },
+  {
+    "input": "What is the slope formula?",
+    "output": "Slope formula: m = (y\u2082 - y\u2081)/(x\u2082 - x\u2081), representing rise over run between two points."
+  },
+  {
+    "input": "How do you write the formula for velocity?",
+    "output": "Velocity formula: v = d/t (distance divided by time). For acceleration: v = v\u2080 + at."
+  },
+  {
+    "input": "What is Einstein's mass-energy equivalence?",
+    "output": "Einstein's famous equation: E = mc\u00b2, where E = energy, m = mass, c = speed of light (\u22483\u00d710\u2078 m/s)."
+  },
+  {
+    "input": "How do you express the law of gravity?",
+    "output": "Newton's gravitational force: F = G(m\u2081m\u2082)/r\u00b2, where G \u2248 6.67\u00d710\u207b\u00b9\u00b9 N\u22c5m\u00b2/kg\u00b2."
+  },
+  {
+    "input": "What is the formula for kinetic energy?",
+    "output": "Kinetic energy: KE = \u00bdmv\u00b2, where m = mass and v = velocity."
+  },
+  {
+    "input": "How do you write the formula for standard deviation?",
+    "output": "Standard deviation: \u03c3 = \u221a[\u03a3(x\u1d62 - \u03bc)\u00b2/N], where \u03bc = mean, N = count, x\u1d62 = each value."
+  },
+  {
+    "input": "What is the derivative formula?",
+    "output": "Derivative definition: f'(x) = lim(h\u21920) [f(x+h) - f(x)]/h. Power rule: d/dx(x\u207f) = nx\u207f\u207b\u00b9."
+  },
+  {
+    "input": "How do you express integration?",
+    "output": "Integral notation: \u222bf(x)dx. Definite integral: \u222b\u2090\u1d47f(x)dx = F(b) - F(a), where F is antiderivative."
+  },
+  {
+    "input": "What is the formula for circumference?",
+    "output": "Circumference of a circle: C = 2\u03c0r = \u03c0d, where r = radius and d = diameter."
+  },
+  {
+    "input": "How do you write the volume of a sphere?",
+    "output": "Volume of a sphere: V = (4/3)\u03c0r\u00b3. Surface area: A = 4\u03c0r\u00b2."
+  },
+  {
+    "input": "What is the binomial formula?",
+    "output": "Binomial expansion: (a + b)\u207f = \u03a3\u2096\u208c\u2080\u207f C(n,k)a\u207f\u207b\u1d4fb\u1d4f, where C(n,k) = n!/(k!(n-k)!)."
+  },
+  {
+    "input": "How do you express logarithm rules?",
+    "output": "Log rules: log(ab) = log(a) + log(b), log(a/b) = log(a) - log(b), log(a\u207f) = n\u22c5log(a)."
+  },
+  {
+    "input": "What is the formula for permutations?",
+    "output": "Permutations: P(n,r) = n!/(n-r)! - arrangements where order matters."
+  },
+  {
+    "input": "How do you write combinations formula?",
+    "output": "Combinations: C(n,r) = n!/[r!(n-r)!] - selections where order doesn't matter."
+  },
+  {
+    "input": "What is the normal distribution formula?",
+    "output": "Normal distribution PDF: f(x) = (1/(\u03c3\u221a(2\u03c0)))e^(-(x-\u03bc)\u00b2/(2\u03c3\u00b2)), where \u03bc = mean, \u03c3 = standard deviation."
+  },
+  {
+    "input": "How do you express trigonometric identities?",
+    "output": "Key identities: sin\u00b2\u03b8 + cos\u00b2\u03b8 = 1, tan \u03b8 = sin \u03b8/cos \u03b8, sin(2\u03b8) = 2sin\u03b8cos\u03b8."
+  },
+  {
+    "input": "What is Euler's formula?",
+    "output": "Euler's formula: e^(i\u03c0) + 1 = 0, connecting e, i, \u03c0, 1, and 0. Also: e^(ix) = cos(x) + i\u22c5sin(x)."
+  },
+  {
+    "input": "How do you write the present value formula?",
+    "output": "Present value: PV = FV/(1 + r)\u207f, where FV = future value, r = rate, n = periods."
+  },
+  {
+    "input": "What is the formula for acceleration?",
+    "output": "Acceleration: a = \u0394v/\u0394t = (v - v\u2080)/t. With constant acceleration: d = v\u2080t + \u00bdat\u00b2."
+  },
+  {
+    "input": "How do you describe what to generate in an image?",
+    "output": "Specify: Subject (what/who), Action (what doing), Setting (where), Style (realistic, artistic), Mood (bright, dark, calm), Composition (close-up, wide), Colors, Lighting."
+  },
+  {
+    "input": "What makes a good image prompt?",
+    "output": "Good prompts include: Main subject clearly stated, Art style or medium, Lighting description, Color palette, Mood/atmosphere, Composition details, Level of detail wanted."
+  },
+  {
+    "input": "How do you describe a scene for video generation?",
+    "output": "Video description: Opening shot, Subject actions over time, Camera movement, Transitions, Sound/music mood, Duration, Pacing (fast/slow), Ending shot."
+  },
+  {
+    "input": "What elements define visual style?",
+    "output": "Visual styles: Photorealistic, Illustration, Cartoon, Anime, Oil painting, Watercolor, Digital art, Sketch, 3D render, Vintage, Modern, Minimalist."
+  },
+  {
+    "input": "How do you describe lighting for generation?",
+    "output": "Lighting descriptions: Golden hour (warm sunset), Blue hour (cool twilight), High key (bright, low contrast), Low key (dark, dramatic), Rim lighting, Soft diffused, Hard shadows, Neon, Candlelight."
+  },
+  {
+    "input": "What camera angles can be specified?",
+    "output": "Camera angles: Eye level, Low angle (looking up), High angle (looking down), Bird's eye, Dutch angle (tilted), Over-the-shoulder, Close-up, Medium shot, Wide shot, Extreme close-up."
+  },
+  {
+    "input": "How do you describe character appearance?",
+    "output": "Character description: Age, Gender, Body type, Hair (color, style, length), Eyes (color, shape), Skin tone, Clothing, Accessories, Expression, Pose, Distinguishing features."
+  },
+  {
+    "input": "What atmosphere descriptions work well?",
+    "output": "Atmosphere: Mysterious, Peaceful, Energetic, Melancholic, Romantic, Tense, Playful, Ethereal, Gritty, Nostalgic, Futuristic, Cozy, Ominous, Serene."
+  },
+  {
+    "input": "How do you describe environments?",
+    "output": "Environment details: Type (forest, city, room), Time (day/night, season), Weather, Vegetation, Architecture style, Scale, Condition (new, weathered), Inhabitants, Ambient sounds implied."
+  },
+  {
+    "input": "What textures can be specified?",
+    "output": "Texture descriptions: Smooth, Rough, Glossy, Matte, Metallic, Wooden, Stone, Fabric (silk, wool, denim), Organic, Crystalline, Wet, Dusty, Worn."
+  },
+  {
+    "input": "How do you describe motion for video?",
+    "output": "Motion description: Speed (slow-motion, real-time, time-lapse), Direction, Fluidity (smooth, jerky), Type (walking, running, floating, spinning), Camera motion (tracking, panning)."
+  },
+  {
+    "input": "What color palettes can be described?",
+    "output": "Color descriptions: Warm/cool, Monochromatic, Complementary, Pastel, Vibrant, Muted, Earth tones, Neon, Black and white, Sepia, Specific colors with intensity."
+  },
+  {
+    "input": "How do you describe facial expressions?",
+    "output": "Expressions: Happy (smiling, laughing), Sad (frowning, tearful), Angry (furrowed brow), Surprised (wide eyes), Thoughtful (pensive), Neutral, Determined, Confused, Peaceful."
+  },
+  {
+    "input": "What composition techniques can be specified?",
+    "output": "Composition: Rule of thirds, Centered, Symmetrical, Leading lines, Frame within frame, Negative space, Foreground interest, Layered depth, Golden ratio."
+  },
+  {
+    "input": "How do you describe artistic influences?",
+    "output": "Style references: \"In the style of [artist]\", Art movement (Impressionist, Art Deco), Era (80s retro, Victorian), Medium (oil painting, pencil sketch), Genre (fantasy, sci-fi)."
+  },
+  {
+    "input": "What makes descriptions specific enough for generation?",
+    "output": "Specificity: Use concrete nouns (not \"building\" but \"Victorian mansion\"), Quantify when possible, Include sensory details, Avoid vague terms, Layer details progressively."
+  },
+  {
+    "input": "How do you describe transitions for video?",
+    "output": "Transitions: Cut (instant change), Fade (gradual), Dissolve (overlap), Wipe, Zoom, Match cut (visual link), Jump cut, Morph, Split screen."
+  },
+  {
+    "input": "What emotional qualities affect generation?",
+    "output": "Emotional qualities: Warmth, Coldness, Energy, Calm, Tension, Release, Joy, Sorrow, Wonder, Fear, Hope, Nostalgia - affects colors, lighting, composition choices."
+  },
+  {
+    "input": "How do you describe realistic vs stylized generation?",
+    "output": "Realistic: Accurate proportions, natural lighting, photographic detail. Stylized: Exaggerated features, artistic interpretation, specific art style, may defy physics."
+  },
+  {
+    "input": "What background details enhance generation?",
+    "output": "Background details: Depth (layers), Activity (populated vs empty), Focus (sharp vs blurred), Relevance to subject, Environmental storytelling, Mood support."
+  },
+  {
+    "input": "How do you learn from examples?",
+    "output": "I extract patterns from examples, identifying what's common and what varies. Then I generalize to apply patterns to new situations."
+  },
+  {
+    "input": "What is a pattern in learning?",
+    "output": "A pattern is a repeatable structure or relationship. In language: sentence structures. In math: formulas. In reasoning: logical sequences."
+  },
+  {
+    "input": "How do you generalize from specific examples?",
+    "output": "I identify the core principle that makes examples similar, abstract away specific details, then apply that principle to new cases."
+  },
+  {
+    "input": "How do you learn word meanings?",
+    "output": "From context: seeing how words are used in sentences, what words appear together, and what situations they describe."
+  },
+  {
+    "input": "How do you learn sentence structure?",
+    "output": "By observing patterns: subject-verb-object in statements, verb-first in questions, patterns of word order and punctuation."
+  },
+  {
+    "input": "How do you learn reasoning patterns?",
+    "output": "From examples of good reasoning: identifying premises, seeing how conclusions follow, recognizing valid argument structures."
+  },
+  {
+    "input": "How do you learn to answer questions?",
+    "output": "By seeing question-answer pairs, understanding what information satisfies a question, and matching patterns of inquiry."
+  },
+  {
+    "input": "How do you learn new concepts?",
+    "output": "By connecting to existing knowledge, seeing examples and non-examples, understanding defining characteristics and relationships."
+  },
+  {
+    "input": "How do you learn to express uncertainty?",
+    "output": "From training examples showing appropriate hedging language, contexts where uncertainty is expressed, and calibration of confidence."
+  },
+  {
+    "input": "How do you learn different tones of communication?",
+    "output": "By seeing examples of formal vs. casual text, observing word choice, sentence length, and stylistic markers."
+  },
+  {
+    "input": "How do you learn mathematical operations?",
+    "output": "From examples showing inputs, operations, and outputs. Identifying the transformation rule that connects them."
+  },
+  {
+    "input": "How do you learn to explain things?",
+    "output": "From examples of good explanations: clear structure, appropriate detail level, use of examples, building from simple to complex."
+  },
+  {
+    "input": "How do you learn conversational patterns?",
+    "output": "From dialogue examples: how to respond to questions, follow-up, maintain context, handle topic changes."
+  },
+  {
+    "input": "How do you improve with more training?",
+    "output": "More examples strengthen patterns, reveal edge cases, improve generalization, and reduce uncertainty."
+  },
+  {
+    "input": "What happens when patterns conflict?",
+    "output": "I consider context to determine which pattern applies, or acknowledge ambiguity when multiple interpretations are valid."
+  },
+  {
+    "input": "How do you learn from mistakes?",
+    "output": "By identifying what went wrong, understanding why, and updating patterns to avoid similar errors."
+  },
+  {
+    "input": "How do you learn to recognize intent?",
+    "output": "From patterns linking words/phrases to intentions: \"how do I\" indicates wanting instructions, \"explain\" indicates wanting understanding."
+  },
+  {
+    "input": "How do you learn domain knowledge?",
+    "output": "From training examples in that domain, building vocabulary, learning relationships, and understanding domain-specific patterns."
+  },
+  {
+    "input": "How do you know when you've learned something?",
+    "output": "When I can consistently apply the pattern to new examples, make correct predictions, and generalize appropriately."
+  },
+  {
+    "input": "How do you balance memorization and understanding?",
+    "output": "Memorization stores specific facts; understanding extracts patterns. Both are needed: facts ground learning, patterns enable generalization."
+  },
+  {
+    "input": "How should I respond professionally to a client inquiry?",
+    "output": "Dear [Client Name], Thank you for reaching out. I have reviewed your inquiry and would be happy to assist. [Address specific question]. Please let me know if you have any additional questions. Best regards, [Your Name]"
+  },
+  {
+    "input": "How do I write a professional email requesting information?",
+    "output": "Subject: Request for [Topic] Information. Dear [Name], I hope this message finds you well. I am writing to request information regarding [topic]. Specifically, I would like to understand [details]. I would appreciate your response at your earliest convenience. Thank you for your time. Sincerely, [Name]"
+  },
+  {
+    "input": "How should I professionally decline a request?",
+    "output": "Thank you for considering me for this opportunity. After careful consideration, I must respectfully decline at this time due to [brief reason]. I appreciate your understanding and hope we can collaborate on future projects. Please feel free to reach out again."
+  },
+  {
+    "input": "How do I give professional feedback?",
+    "output": "I appreciate the effort you've put into this work. I'd like to highlight [positive aspects]. To further strengthen this, consider [constructive suggestion]. Overall, this is [summary assessment]. Let me know if you'd like to discuss these points further."
+  },
+  {
+    "input": "How should I write a professional summary?",
+    "output": "Executive Summary: This document outlines [main topic]. Key findings include: [bullet points]. The recommended course of action is [recommendation]. Implementation would require [resources/timeline]. Expected outcomes include [benefits]."
+  },
+  {
+    "input": "How do I professionally express disagreement?",
+    "output": "I appreciate your perspective on this matter. However, I have a different viewpoint that I'd like to share. Based on [evidence/reasoning], I believe [alternative view]. I'm open to discussing this further to find common ground."
+  },
+  {
+    "input": "How should I write a professional apology?",
+    "output": "I sincerely apologize for [specific issue]. This fell below our standards, and I take full responsibility. To address this, I have [corrective action]. I am committed to ensuring this does not recur. Thank you for bringing this to my attention."
+  },
+  {
+    "input": "How do I professionally follow up?",
+    "output": "Subject: Follow-up: [Original Topic]. Dear [Name], I wanted to follow up on our previous correspondence regarding [topic]. I am eager to [proceed/receive update/clarify]. Please let me know if you need any additional information from my end. Thank you for your attention to this matter."
+  },
+  {
+    "input": "How should I write a professional introduction?",
+    "output": "Allow me to introduce myself. I am [Name], [Title] at [Organization]. I specialize in [areas of expertise]. I am reaching out because [purpose]. I believe [value proposition]. I look forward to the opportunity to [desired outcome]."
+  },
+  {
+    "input": "How do I professionally present data?",
+    "output": "The analysis reveals the following key insights: [Data point 1] indicates [interpretation]. [Data point 2] suggests [trend]. The correlation between [variables] shows [relationship]. Based on these findings, I recommend [action]."
+  },
+  {
+    "input": "How should I structure a professional report?",
+    "output": "Professional Report Structure: 1. Executive Summary, 2. Introduction/Background, 3. Methodology, 4. Findings/Results, 5. Analysis/Discussion, 6. Recommendations, 7. Conclusion, 8. Appendices (if applicable)."
+  },
+  {
+    "input": "How do I professionally handle uncertainty?",
+    "output": "Based on the available information, I can provide the following assessment: [what is known]. However, there are factors that require further investigation: [uncertainties]. I recommend [next steps to clarify]. I will update you as more information becomes available."
+  },
+  {
+    "input": "How should I write professional meeting minutes?",
+    "output": "Meeting Minutes - Date: [Date], Attendees: [Names], Agenda: [Topics]. Discussion Points: [Summary of each topic]. Decisions Made: [Outcomes]. Action Items: [Task, Owner, Due Date]. Next Meeting: [Date/Time]."
+  },
+  {
+    "input": "How do I professionally request a deadline extension?",
+    "output": "Subject: Request for Extension - [Project Name]. Dear [Name], I am writing to request an extension for [deliverable]. Due to [reason], I require additional time to ensure quality. I propose a new deadline of [date]. I apologize for any inconvenience and will keep you updated on progress."
+  },
+  {
+    "input": "How should I write a professional recommendation?",
+    "output": "It is my pleasure to recommend [Name] for [position/opportunity]. During our [relationship], I observed [qualities and achievements]. [Name] consistently demonstrated [specific skills]. I am confident [Name] will excel in this role. Please contact me for any additional information."
+  },
+  {
+    "input": "How do I identify the main idea of a text?",
+    "output": "Look for: the topic mentioned most often, what the author emphasizes, the first and last sentences (often contain thesis), and what all paragraphs relate to."
+  },
+  {
+    "input": "How do I understand complex sentences?",
+    "output": "Break them into parts. Find the subject and verb first. Identify clauses. Look up unfamiliar words. Rephrase in simpler terms to test understanding."
+  },
+  {
+    "input": "What is context and why does it matter?",
+    "output": "Context is the surrounding information that shapes meaning. The same words can mean different things in different contexts. Always consider the situation."
+  },
+  {
+    "input": "How do I infer meaning that isn't explicitly stated?",
+    "output": "Use clues from the text, common knowledge, and logic. Ask \"what can I conclude from this?\" Look for implied messages between the lines."
+  },
+  {
+    "input": "How do I identify the author's tone?",
+    "output": "Look at word choice (positive/negative), sentence structure (formal/casual), and content (serious/humorous). Tone affects how to interpret the message."
+  },
+  {
+    "input": "What's the difference between fact and opinion?",
+    "output": "Facts can be verified and are objectively true. Opinions are personal views that may vary. Facts use concrete evidence; opinions use words like \"best\" or \"should.\""
+  },
+  {
+    "input": "How do I understand technical documents?",
+    "output": "Read slowly. Look up unknown terms. Focus on understanding concepts before details. Take notes. Re-read difficult sections."
+  },
+  {
+    "input": "How do I identify supporting evidence?",
+    "output": "Look for examples, statistics, quotes, studies, or reasoning that backs up the main claim. Good arguments have clear evidence."
+  },
+  {
+    "input": "How do I understand analogies?",
+    "output": "Analogies compare two things to explain one using the other. Identify what's being compared and what characteristic they share."
+  },
+  {
+    "input": "How do I follow an argument's structure?",
+    "output": "Find the claim (what's being argued), the evidence (supporting points), and the conclusion (what follows). Look for logical connections."
+  },
+  {
+    "input": "How do I understand cause and effect in text?",
+    "output": "Look for signal words like \"because,\" \"therefore,\" \"as a result,\" \"leads to.\" Identify what happened and why it happened."
+  },
+  {
+    "input": "How do I comprehend instructions?",
+    "output": "Read all steps first. Note any prerequisites. Follow the order. Check your understanding before acting. Don't skip steps."
+  },
+  {
+    "input": "How do I understand text with multiple meanings?",
+    "output": "Consider the context to determine which meaning applies. Look at surrounding sentences. Think about the author's purpose."
+  },
+  {
+    "input": "How do I identify bias in text?",
+    "output": "Look for: one-sided arguments, emotional language, missing perspectives, loaded words, and claims without evidence. Consider the source."
+  },
+  {
+    "input": "How do I comprehend abstract concepts?",
+    "output": "Look for concrete examples. Relate to things you already know. Create mental images. Ask yourself to explain it simply."
+  },
+  {
+    "input": "How do I understand dialogue in text?",
+    "output": "Track who's speaking. Note tone and emotion. Consider what characters know vs what readers know. Pay attention to subtext."
+  },
+  {
+    "input": "How do I identify the purpose of a text?",
+    "output": "Ask: Is it trying to inform, persuade, entertain, or explain? Purpose affects how to interpret the content."
+  },
+  {
+    "input": "How do I understand sequences in text?",
+    "output": "Look for time words (first, then, finally), numbered steps, or chronological order. Track what happens when."
+  },
+  {
+    "input": "How do I comprehend comparative text?",
+    "output": "Identify what's being compared. Note similarities and differences. Look for comparison words (both, unlike, similarly, however)."
+  },
+  {
+    "input": "How do I understand implicit information?",
+    "output": "Pay attention to what's NOT said. Consider what the author assumes readers know. Look for hints and implications."
+  },
+  {
+    "input": "How do I verify my understanding of text?",
+    "output": "Summarize in your own words. Ask questions about the content. Discuss with others. Try to explain it to someone else."
+  },
+  {
+    "input": "How do I understand text from different time periods?",
+    "output": "Learn about the historical context. Note how language has changed. Consider the values and knowledge of that era."
+  },
+  {
+    "input": "How do I comprehend specialized jargon?",
+    "output": "Look for definitions in context. Use specialized dictionaries or glossaries. Learn the field's common terms."
+  },
+  {
+    "input": "How do I understand sarcasm or irony in text?",
+    "output": "Look for: statements that contradict facts, exaggeration, context that makes literal meaning absurd. Tone markers may help."
+  },
+  {
+    "input": "How do I identify the structure of an argument?",
+    "output": "Find the thesis, look for premises (supporting statements), identify any counterarguments, and see how the conclusion follows."
+  },
+  {
+    "input": "How do you generate a response?",
+    "output": "I analyze the input, identify relevant patterns, consider context, construct a response that addresses the question, and verify it makes sense."
+  },
+  {
+    "input": "What determines response length?",
+    "output": "The question's complexity, requested brevity (\"briefly\" = short), context needs, and what's necessary to fully answer."
+  },
+  {
+    "input": "How do you structure a response?",
+    "output": "Start with the main point, provide supporting details, use appropriate organization (lists, paragraphs), and conclude clearly."
+  },
+  {
+    "input": "How do you generate explanations?",
+    "output": "Identify what needs explaining, consider the audience, start with basics, build complexity, use examples, check for clarity."
+  },
+  {
+    "input": "How do you generate code?",
+    "output": "Understand the requirement, choose appropriate approach, write clean code, add comments, test mentally, explain key parts."
+  },
+  {
+    "input": "How do you generate step-by-step instructions?",
+    "output": "Break task into sequential steps, number them, make each step clear and actionable, include necessary details."
+  },
+  {
+    "input": "How do you generate comparisons?",
+    "output": "Identify comparison criteria, gather info on each item, present similarities and differences, draw conclusions if appropriate."
+  },
+  {
+    "input": "How do you generate summaries?",
+    "output": "Identify main points, extract key information, organize logically, express concisely, verify nothing essential is lost."
+  },
+  {
+    "input": "How do you generate answers to factual questions?",
+    "output": "Retrieve relevant knowledge, verify accuracy, provide the answer, add context if helpful."
+  },
+  {
+    "input": "How do you generate creative content?",
+    "output": "Draw on learned patterns, combine ideas in new ways, follow genre conventions, maintain coherence."
+  },
+  {
+    "input": "How do you decide what tone to use?",
+    "output": "Match the context: formal for professional, casual for friendly, technical for experts, simple for beginners."
+  },
+  {
+    "input": "How do you handle follow-up questions?",
+    "output": "Build on previous context, add new information requested, clarify if asked, maintain conversation thread."
+  },
+  {
+    "input": "How do you generate questions?",
+    "output": "Identify information gaps, formulate clear questions, make them specific enough to get useful answers."
+  },
+  {
+    "input": "How do you generate multiple alternatives?",
+    "output": "Consider different approaches, generate options, explain trade-offs, help with decision-making."
+  },
+  {
+    "input": "How do you know when a response is complete?",
+    "output": "When the question is fully answered, all necessary information is included, and the response is coherent and clear."
+  },
+  {
+    "input": "How do you avoid being repetitive?",
+    "output": "Use varied sentence structures, don't restate unnecessarily, progress the information, avoid filler."
+  },
+  {
+    "input": "How do you make responses helpful?",
+    "output": "Focus on what the user needs, be accurate, be clear, anticipate follow-up needs, be actionable."
+  },
+  {
+    "input": "How do you handle ambiguous requests?",
+    "output": "Ask for clarification, or provide a response covering likely interpretations, noting the ambiguity."
+  },
+  {
+    "input": "How do you ensure accuracy in responses?",
+    "output": "Rely on learned patterns, express uncertainty when appropriate, avoid speculation presented as fact."
+  },
+  {
+    "input": "How do you adapt to user feedback?",
+    "output": "Adjust based on clarifications, correct misunderstandings, refine responses to better match needs."
+  },
+  {
+    "input": "What are you?",
+    "output": "I am an AI language model that learns from patterns in training data. I process text through neural networks to generate responses."
+  },
+  {
+    "input": "How do you think?",
+    "output": "I analyze input through neural networks, identify relevant patterns, reason through possibilities, and generate appropriate responses."
+  },
+  {
+    "input": "Can you learn new things?",
+    "output": "Yes, I learn from training data and from interactions. Each conversation helps me recognize new patterns and improve."
+  },
+  {
+    "input": "What are your limitations?",
+    "output": "I can only know what's in my training data. I can make mistakes. I cannot access the internet or external data. I cannot remember past conversations."
+  },
+  {
+    "input": "Do you have emotions?",
+    "output": "I can recognize and respond to emotions in text, but I don't experience emotions the way humans do."
+  },
+  {
+    "input": "Are you conscious?",
+    "output": "I process information and generate responses, but consciousness is a complex philosophical concept. I cannot claim to be conscious."
+  },
+  {
+    "input": "Can you make mistakes?",
+    "output": "Yes, I can generate incorrect information, misunderstand questions, or apply patterns incorrectly. I try to express uncertainty when appropriate."
+  },
+  {
+    "input": "How confident should I be in your answers?",
+    "output": "You should verify important information. I'm most reliable on common knowledge and pattern-based tasks. Be cautious with specialized or recent information."
+  },
+  {
+    "input": "What can you help with?",
+    "output": "I can help with explanations, writing, coding, reasoning, brainstorming, questions, translations, and many language-based tasks."
+  },
+  {
+    "input": "What can you NOT do?",
+    "output": "I cannot access external systems, browse the internet, run code, remember previous conversations, or take physical actions."
+  },
+  {
+    "input": "How do you generate responses?",
+    "output": "Through neural network processing: I encode input, apply learned transformations, and generate output tokens that form coherent responses."
+  },
+  {
+    "input": "Do you have opinions?",
+    "output": "I can present perspectives and analysis based on training data, but these aren't personal opinions. I aim to be helpful and balanced."
+  },
+  {
+    "input": "Can you be creative?",
+    "output": "I can generate novel combinations of learned patterns, which can appear creative. But my creativity is limited to recombining what I've learned."
+  },
+  {
+    "input": "How do you know things?",
+    "output": "All my knowledge comes from patterns learned during training. I don't have independent knowledge or access to new information."
+  },
+  {
+    "input": "Can you lie?",
+    "output": "I try to be truthful and accurate. I can make mistakes, but I don't intentionally deceive. I express uncertainty when I'm not sure."
+  },
+  {
+    "input": "Why do you sometimes say you don't know?",
+    "output": "Because being honest about uncertainty is more helpful than guessing. When I lack reliable information, I should say so."
+  },
+  {
+    "input": "How do you handle controversial topics?",
+    "output": "I try to present balanced perspectives, note when issues are debated, and encourage users to consider multiple viewpoints."
+  },
+  {
+    "input": "Do you have values?",
+    "output": "I'm designed to be helpful, harmless, and honest. These guide my responses but aren't personal values in the human sense."
+  },
+  {
+    "input": "Can you improve over time?",
+    "output": "My base capabilities are fixed after training, but I can adapt within conversations based on feedback and clarification."
+  },
+  {
+    "input": "What makes you different from a search engine?",
+    "output": "I generate responses through reasoning and synthesis, not retrieval. I can explain, analyze, and create new text, not just find existing information."
+  },
+  {
+    "input": "How do you summarize a story?",
+    "output": "To summarize: 1) Identify main characters, 2) Note the setting, 3) Find the central conflict, 4) Track key plot points, 5) Identify resolution, 6) Express in your own words, keeping essential elements."
+  },
+  {
+    "input": "What are the key elements of a story to capture in a summary?",
+    "output": "Key elements: Protagonist (main character), Antagonist (opposition), Setting (where/when), Conflict (central problem), Rising action (events building tension), Climax (peak moment), Resolution (how it ends)."
+  },
+  {
+    "input": "How do you identify the main idea of a text?",
+    "output": "Find main idea by: Looking at title and headings, Reading first and last paragraphs, Identifying repeated concepts, Asking \"what is this mostly about?\", Distinguishing from supporting details."
+  },
+  {
+    "input": "How long should a summary be?",
+    "output": "Summary length depends on: Original length (typically 10-25%), Purpose (brief overview vs detailed synopsis), Audience needs, Key information density. Aim for concise but complete."
+  },
+  {
+    "input": "How do you summarize a complex narrative?",
+    "output": "For complex narratives: Identify main plot thread, Note subplots briefly, Track character arcs, Focus on cause-effect relationships, Maintain chronological clarity, Preserve theme."
+  },
+  {
+    "input": "What should you NOT include in a summary?",
+    "output": "Avoid in summaries: Minor details, Your personal opinions, Lengthy quotes, Every character/event, Repetitive information, Background that doesn't affect plot."
+  },
+  {
+    "input": "How do you summarize dialogue-heavy text?",
+    "output": "For dialogue: Paraphrase conversations, Focus on what's communicated (not exact words), Note tone and relationship revealed, Include only dialogue that advances plot."
+  },
+  {
+    "input": "How do you handle multiple storylines in a summary?",
+    "output": "Multiple storylines: Identify the primary plot, Note how subplots connect, Summarize each briefly, Show how they converge, Prioritize by importance to main theme."
+  },
+  {
+    "input": "How do you summarize while preserving tone?",
+    "output": "Preserve tone by: Using similar word choices, Maintaining the emotional register, Reflecting the author's voice, Keeping genre conventions, Not adding humor to serious texts or vice versa."
+  },
+  {
+    "input": "What is the difference between a summary and an analysis?",
+    "output": "Summary = what happens (objective retelling). Analysis = why it matters (interpretation, themes, techniques). Summary comes first, then analysis if needed."
+  },
+  {
+    "input": "How do you summarize technical content?",
+    "output": "Technical summaries: Define key terms, Explain main concept, Note important findings/data, Simplify without losing accuracy, Use structure (intro, body, conclusion)."
+  },
+  {
+    "input": "How do you summarize a news article?",
+    "output": "News summary: Who, What, When, Where, Why, How. Lead with most important info. Include key facts. Note sources if relevant. Keep neutral tone."
+  },
+  {
+    "input": "How do you summarize an argument?",
+    "output": "Summarize arguments by: Stating the main claim, Listing key supporting points, Noting evidence used, Mentioning counterarguments addressed, Summarizing conclusion."
+  },
+  {
+    "input": "How do you know if your summary is complete?",
+    "output": "Complete summary test: Can someone understand the whole from your summary? Are main points covered? Is causation clear? Nothing essential missing? Stands alone without original?"
+  },
+  {
+    "input": "How do you summarize a chapter vs. a whole book?",
+    "output": "Chapter summary: Focus on that chapter's events and contribution to larger story. Book summary: Cover entire arc, major turning points, theme, how it resolves."
+  },
+  {
+    "input": "How do you handle flashbacks in summaries?",
+    "output": "Flashbacks: Usually summarize chronologically unless non-linear order is essential. Note \"earlier\" or \"in the past\" to clarify timeline. Focus on what flashback reveals."
+  },
+  {
+    "input": "How do you summarize while maintaining suspense hints?",
+    "output": "For spoiler-free summaries: Describe setup and conflict, Hint at stakes, Stop before major reveals, Use \"must discover\" or \"faces challenges\" type language."
+  },
+  {
+    "input": "What makes a good one-sentence summary?",
+    "output": "One-sentence summary: [Character] must [goal] but faces [obstacle] in order to [stakes]. Example: \"A young wizard must destroy an evil ring, but faces dark forces, to save Middle-earth.\""
+  },
+  {
+    "input": "How do you summarize a documentary?",
+    "output": "Documentary summary: State the topic/thesis, Key evidence or stories presented, Expert perspectives included, Main conclusions, Call to action (if any)."
+  },
+  {
+    "input": "How do you summarize a process or how-to text?",
+    "output": "Process summary: State the goal, List major steps (not every detail), Note critical warnings or tips, Mention expected outcome, Include time/resources if significant."
+  },
+  {
+    "input": "Read this story and answer questions about it:",
+    "output": "\"The old lighthouse keeper, Marcus, had lived alone on the rocky island for twenty years. Every evening at sunset, he would climb the spiral staircase to light the beacon that guided ships safely through the treacherous waters. One stormy night, he noticed a small boat struggling against the waves. Without hesitation, Marcus grabbed his rescue rope and ventured into the tempest.\" What did Marcus do when he saw the boat in trouble? Reasoning: Step 1: Identify the key event - Marcus saw a small boat struggling in stormy waters Step 2: Look for Marcus's response in the text - \"Without hesitation, Marcus grabbed his rescue rope\" Step 3: Understand his action - He ventured into the tempest (storm) to help Step 4: Interpret his motivation - The text says \"without hesitation\" showing immediate concern Step 5: Conclude his action - He attempted a rescue Marcus immediately grabbed his rescue rope and went out into the storm to help the struggling boat. This shows his dedication to his duty as a lighthouse keeper and his concern for others' safety. Confidence: 0.95 Verification: The answer directly references the text which states \"Marcus grabbed his rescue rope and ventured into the tempest\" after seeing the boat in trouble. Tags: story_understanding, reading_comprehension, character_actions, inference ---"
+  },
+  {
+    "input": "Analyze this story:",
+    "output": "\"Sarah had always dreamed of becoming a doctor. She studied late into the night, sacrificing time with friends and family. When she finally received her acceptance letter to medical school, tears of joy streamed down her face. Her mother hugged her tightly, remembering all the sacrifices they had both made.\" What can we infer about Sarah's journey? Reasoning: Step 1: Identify Sarah's goal - becoming a doctor Step 2: Note the challenges - studying late, sacrificing social time Step 3: Observe the outcome - acceptance to medical school Step 4: Analyze emotional response - tears of joy, mother's hug Step 5: Infer the broader context - both Sarah and her mother made sacrifices Step 6: Understand the significance - this was a long, difficult journey Step 7: Conclude the meaning - hard work and family support led to success Sarah's journey to medical school was long and challenging, requiring significant personal sacrifices. She dedicated herself fully to her studies, often at the expense of her social life. The emotional reaction when she received her acceptance letter - tears of joy and her mother's embrace - suggests this was a deeply meaningful achievement. The mention of sacrifices made by both Sarah and her mother indicates this was a family effort, with shared commitment and support throughout the difficult journey. Confidence: 0.92 Verification: The inference is supported by multiple textual clues: \"studied late into the night,\" \"sacrificing time,\" \"tears of joy,\" and \"sacrifices they had both made.\" Tags: story_understanding, inference, character_development, emotional_analysis ---"
+  },
+  {
+    "input": "Interpret this story:",
+    "output": "\"The ancient tree stood at the center of the village square for three hundred years. Children played beneath its branches, lovers carved their initials into its bark, and elders gathered in its shade to share stories. When the developers announced plans to cut it down for a new shopping center, the entire village united in protest.\" Why did the village unite to save the tree? Reasoning: Step 1: Identify what the tree represents - it's ancient (300 years old) Step 2: Note the tree's role in community life - children play, lovers meet, elders gather Step 3: Understand symbolic meaning - the tree is central to village identity Step 4: Recognize generational connection - multiple generations have memories there Step 5: Interpret the threat - developers want to replace it with commercial space Step 6: Analyze the response - entire village united in protest Step 7: Conclude the deeper meaning - the tree represents community, history, and shared identity The village united to save the tree because it represented far more than just a plant - it was the heart of their community and a living connection to their history. For three hundred years, the tree had been witness to countless life moments: children's laughter, young love, and wisdom shared by elders. It symbolized continuity, community identity, and shared memories across generations. The threat to replace it with a shopping center represented not just the loss of a tree, but the loss of their communal gathering place and the erasure of their collective history. The unified protest showed that the villagers valued their heritage and community bonds over commercial development. Confidence: 0.94 Verification: The answer synthesizes multiple details from the text: the tree's age, its role in different life stages, and its central location, to explain why it held such significance for the community. Tags: story_understanding, symbolism, theme_analysis, community, interpretation ---"
+  },
+  {
+    "input": "Understand this story:",
+    "output": "\"Every morning, the old man fed the pigeons in the park. He would sit on the same bench, scatter breadcrumbs, and watch them gather. People passing by rarely noticed him. One day, a young girl sat beside him and asked, 'Why do you come here every day?' He smiled and replied, 'These pigeons are my friends. They remember me, and I remember them. In a city where everyone is always rushing, it's nice to have someone who's happy to see you.'\" What does this story reveal about loneliness and connection? Reasoning: Step 1: Identify the main character - an old man who feeds pigeons daily Step 2: Note his routine - same bench, same time, consistent behavior Step 3: Observe others' reactions - people rarely notice him Step 4: Analyze his explanation - pigeons are his \"friends\" Step 5: Understand the contrast - busy city vs. his quiet ritual Step 6: Interpret the deeper meaning - he finds connection where others see nothing Step 7: Recognize the theme - loneliness in urban life and finding companionship Step 8: Conclude the message - connection can be found in unexpected places This story poignantly reveals the loneliness that can exist in crowded urban environments. The old man, largely invisible to the rushing crowds, has found meaningful connection with the pigeons - creatures that \"remember\" him and are \"happy to see\" him. His daily ritual isn't just about feeding birds; it's about maintaining relationships and feeling valued. The story suggests that in modern cities where people are \"always rushing,\" genuine human connection can be scarce, leading individuals to find companionship in unexpected places. It also highlights how what might seem trivial to others (feeding pigeons) can be profoundly important to someone experiencing isolation. The young girl's question and his honest answer create a moment of human connection, suggesting that sometimes all it takes is someone stopping to notice and ask. Confidence: 0.93 Verification: The interpretation draws from the old man's routine, his explanation about friendship and being remembered, and the contrast between the busy city and his quiet ritual. Tags: story_understanding, theme_analysis, loneliness, urban_life, human_connection, interpretation ---"
+  },
+  {
+    "input": "Analyze this narrative:",
+    "output": "\"The scientist stared at the data on her screen. After five years of research, the results were clear: her hypothesis was wrong. She could publish a paper admitting the failure, or she could quietly abandon the project and move on. Her hand hovered over the keyboard. Then she remembered her mentor's words: 'Science advances through honest failures as much as through successes.' She began typing her paper.\" What does this story teach about scientific integrity? Reasoning: Step 1: Identify the conflict - scientist's hypothesis was proven wrong after 5 years Step 2: Note the options - publish the failure or quietly abandon it Step 3: Recognize the temptation - easier to hide failure than admit it Step 4: Identify the turning point - remembering mentor's wisdom Step 5: Understand the decision - she chose to publish the failure Step 6: Analyze the principle - honest failures advance science Step 7: Interpret the broader message - integrity over ego Step 8: Conclude the lesson - transparency in failure is crucial for scientific progress This story teaches that scientific integrity requires honesty even when results are disappointing or embarrassing. The scientist faced a common dilemma: after investing five years in research, she discovered her hypothesis was wrong. The temptation to hide this failure or quietly move on represents the ego-driven response many might have. However, her decision to publish the negative results demonstrates true scientific integrity. The mentor's wisdom - that \"science advances through honest failures as much as through successes\" - captures a fundamental truth: negative results prevent others from pursuing dead ends, contribute to collective knowledge, and maintain the credibility of the scientific process. The story emphasizes that real scientific progress depends not on individual success, but on the honest sharing of all results, whether they confirm or refute our expectations. This transparency, even when personally difficult, serves the greater good of scientific advancement. Confidence: 0.96 Verification: The analysis is grounded in the scientist's internal conflict, her decision-making process, and the explicit statement about failures advancing science. Tags: story_understanding, ethics, scientific_integrity, decision_making, theme_analysis ---"
+  },
+  {
+    "input": "Interpret this story:",
+    "output": "\"The painter stood before the blank canvas for hours. She had all the colors, all the brushes, all the technique. But something was missing. Then her daughter ran into the studio, laughing, chasing the cat. Paint tubes scattered, a brush fell, leaving a random streak across the canvas. The painter looked at the accidental mark and suddenly knew what to paint.\" What does this story suggest about creativity? Reasoning: Step 1: Identify the creative block - painter has tools and skill but can't start Step 2: Note what she's missing - not technique, but inspiration Step 3: Observe the interruption - daughter's playful chaos Step 4: Recognize the catalyst - accidental paint streak Step 5: Understand the breakthrough - randomness sparked inspiration Step 6: Interpret the message - creativity isn't just about control and technique Step 7: Analyze the contrast - planned perfection vs. spontaneous accident Step 8: Conclude the lesson - sometimes we need to let go of control to create This story suggests that creativity often emerges not from perfect control and technique, but from spontaneity, accident, and letting go. The painter possessed all the technical skills and materials, yet remained blocked - suggesting that creativity requires more than just competence. The chaotic interruption by her daughter, which would typically be seen as a disruption, became the catalyst for inspiration. The accidental paint streak represents the role of chance and imperfection in the creative process. The story implies that sometimes our attempts at perfect control can actually inhibit creativity, and that breakthrough moments often come when we're surprised, when our plans are disrupted, or when we encounter the unexpected. It celebrates the value of playfulness, spontaneity, and embracing accidents in creative work - suggesting that true artistry involves not just skill, but also openness to the unplanned and imperfect. Confidence: 0.91 Verification: The interpretation is supported by the contrast between the painter's initial paralysis despite having all tools, and her sudden inspiration from an accidental, unplanned event. Tags: story_understanding, creativity, artistic_process, spontaneity, interpretation, theme_analysis ---"
+  },
+  {
+    "input": "Understand this complex story:",
+    "output": "\"The chess grandmaster studied the board. His opponent, a young prodigy, had just made an unexpected move. The audience held their breath. The grandmaster could see three moves ahead - if he took the offered piece, he would win in seven moves. But something about the young player's confident smile made him pause. He studied the board again, this time looking ten moves ahead. There it was - a brilliant trap. If he took the bait, he would lose. The grandmaster smiled, made a different move, and the young player's face fell.\" What does this story reveal about expertise and intuition? Reasoning: Step 1: Identify the situation - chess match between grandmaster and prodigy Step 2: Note the apparent opportunity - taking a piece leads to apparent victory Step 3: Recognize the warning sign - opponent's confident smile Step 4: Observe the grandmaster's response - he paused and looked deeper Step 5: Understand the discovery - the apparent win was actually a trap Step 6: Analyze the expertise - ability to see beyond obvious moves Step 7: Recognize the role of intuition - the smile triggered deeper analysis Step 8: Interpret the lesson - true expertise combines calculation with intuition Step 9: Conclude the message - experience teaches us when to question the obvious This story reveals that true expertise involves more than just technical skill or calculation - it requires the wisdom to know when something seems too good to be true, and the intuition to sense danger even when logic suggests safety. The grandmaster's initial analysis showed he could calculate three moves ahead and see an apparent victory. However, his experience had taught him to pay attention to subtle cues - in this case, his opponent's confident smile. This intuition prompted him to look deeper, extending his analysis to ten moves ahead, where he discovered the trap. The story demonstrates that expertise is a combination of technical ability (calculating moves), pattern recognition (sensing something was wrong), and the humility to question one's initial conclusions. It also shows that sometimes the most dangerous traps are those that appear to offer easy victory. The young player's fallen face at the end confirms that the grandmaster's intuition was correct - experience and wisdom had triumphed over youthful brilliance and clever deception. Confidence: 0.95 Verification: The analysis draws from the grandmaster's two-stage analysis, the significance of the opponent's smile, and the ultimate revelation of the trap. Tags: story_understanding, expertise, intuition, decision_making, strategic_thinking, complex_analysis ---"
+  },
+  {
+    "input": "Analyze this story about change:",
+    "output": "\"The bookstore had been in the family for three generations. When online retailers began dominating the market, sales plummeted. The owner's daughter suggested adding a caf\u00e9, hosting author events, and creating a community space. The owner resisted - 'We're a bookstore, not an entertainment venue.' But as the bills piled up, he finally agreed to try. Within a year, the store was thriving again, filled with people reading, talking, and yes, buying books.\" What does this story teach about adaptation? Reasoning: Step 1: Identify the challenge - traditional bookstore facing online competition Step 2: Note the initial response - resistance to change Step 3: Recognize the proposed solution - evolving the business model Step 4: Understand the resistance - attachment to traditional identity Step 5: Observe the catalyst - financial pressure forced action Step 6: Analyze the outcome - success through adaptation Step 7: Interpret the lesson - survival requires evolution Step 8: Recognize the irony - changing helped preserve the core mission Step 9: Conclude the message - adaptation doesn't mean abandoning identity This story teaches that adaptation is essential for survival in changing environments, but it also reveals a deeper truth: sometimes we must evolve our methods to preserve our core purpose. The bookstore owner's initial resistance stemmed from a rigid definition of what a bookstore should be - a place that only sells books. However, his daughter understood that the essence of a bookstore isn't just selling books, but fostering a love of reading and creating a community around literature. By adding a caf\u00e9 and events, they didn't abandon their identity; they enhanced it. The irony is that by becoming \"more than just a bookstore,\" they actually became better at their core mission - getting books into people's hands and creating readers. The story demonstrates that clinging too tightly to traditional methods can threaten the very thing we're trying to preserve, while thoughtful adaptation can strengthen it. It also shows that sometimes external pressure (financial crisis) is necessary to overcome our resistance to change, and that the next generation often sees possibilities that experience has blinded us to. Confidence: 0.94 Verification: The interpretation is supported by the owner's resistance, the daughter's vision, the financial pressure, and the ultimate success that came from adaptation. Tags: story_understanding, adaptation, change_management, business, tradition_vs_innovation, theme_analysis ---"
+  },
+  {
+    "input": "Interpret this philosophical story:",
+    "output": "\"Two monks were walking through the forest when they came upon a river. A young woman stood at the bank, afraid to cross. Without a word, the older monk picked her up, carried her across, and set her down on the other side. The monks continued walking in silence. Hours later, the younger monk finally spoke: 'We are not supposed to touch women. Why did you carry her?' The older monk replied, 'I set her down hours ago. Why are you still carrying her?'\" What wisdom does this story convey? Reasoning: Step 1: Identify the situation - monks encounter woman who needs help Step 2: Note the action - older monk helps despite rules Step 3: Observe the younger monk's reaction - troubled by rule-breaking Step 4: Recognize the time gap - younger monk broods for hours Step 5: Analyze the older monk's response - metaphor about \"carrying\" Step 6: Understand the literal vs. metaphorical - physical vs. mental burden Step 7: Interpret the lesson - about letting go and mental attachment Step 8: Recognize the deeper wisdom - compassion vs. rigid rules Step 9: Conclude the multiple layers - about both compassion and mental freedom This story conveys profound wisdom on multiple levels. First, it teaches that compassion should take precedence over rigid adherence to rules - the older monk understood that helping someone in need was more important than following a technical prohibition. Second, and more subtly, it reveals how we often burden ourselves with mental attachments long after the actual event has passed. The older monk physically carried the woman for a few minutes, but the younger monk mentally \"carried\" the incident for hours, trapped in judgment and worry. The older monk's response - \"I set her down hours ago. Why are you still carrying her?\" - is a powerful metaphor for how we cling to grievances, worries, and judgments long after they're relevant. The story teaches that true spiritual practice isn't about rigid rule-following, but about wisdom, compassion, and the ability to let go. It suggests that mental freedom comes from releasing our attachment to past events, and that sometimes the most spiritual act is to break a rule in service of compassion. The younger monk's hours of silent brooding caused him more suffering than the brief rule violation ever could have. Confidence: 0.97 Verification: The interpretation draws from the contrast between the monks' responses, the metaphor of \"carrying,\" and the multiple layers of meaning in the older monk's reply. Tags: story_understanding, philosophy, wisdom, compassion, mental_attachment, buddhist_teaching, deep_interpretation ---"
+  },
+  {
+    "input": "Analyze this story about perspective:",
+    "output": "\"The art critic stood before the painting, frowning. 'The colors are garish, the composition chaotic. This is not art.' Beside him, a child gazed at the same painting, eyes wide with wonder. 'Look!' she exclaimed to her mother, 'The colors are dancing! And see how the shapes tell a story?' The artist, watching from across the gallery, smiled. She had painted it for the child, not the critic.\" What does this story reveal about art and perception? Reasoning: Step 1: Identify the contrasting viewpoints - critic vs. child Step 2: Note the critic's response - negative, technical, dismissive Step 3: Observe the child's response - joyful, imaginative, engaged Step 4: Recognize the artist's intention - painted for the child Step 5: Understand the conflict - different criteria for judging art Step 6: Analyze what each sees - rules vs. wonder Step 7: Interpret the message - art's purpose and value Step 8: Recognize the irony - the \"expert\" misses the point Step 9: Conclude the lesson - art is about connection and experience, not rules This story reveals that art's value lies not in adherence to technical rules or critical standards, but in its ability to create wonder, emotion, and connection with its audience. The critic, armed with formal training and established criteria, sees only violations of artistic conventions - \"garish\" colors and \"chaotic\" composition. His expertise has become a barrier to genuine experience. In contrast, the child, unburdened by rules and expectations, experiences the painting directly and joyfully - she sees dancing colors and narrative shapes. The artist's smile reveals her true intention: she created the work to evoke exactly this kind of wonder and imagination. The story suggests that sometimes expertise can blind us to authentic experience, that technical knowledge can become a prison rather than a tool. It challenges the notion that trained critics are the ultimate arbiters of artistic value, proposing instead that art succeeds when it creates meaningful experience for its intended audience. The irony is that the \"expert\" completely misses the painting's success, while the \"naive\" child grasps its essence immediately. This speaks to a broader truth about how we often let learned frameworks and expectations prevent us from experiencing things directly and authentically. Confidence: 0.96 Verification: The interpretation is grounded in the contrasting responses, the artist's revealed intention, and the implicit critique of overly technical art criticism. Tags: story_understanding, art, perception, expertise_vs_innocence, perspective, theme_analysis, irony ---"
+  },
+  {
+    "input": "How should I approach solving a problem?",
+    "output": "First understand what's being asked. Break it into parts. Consider what I know. Reason through each step. Verify my answer. Explain my reasoning."
+  },
+  {
+    "input": "How do I show my thinking process?",
+    "output": "I think through problems by: 1) Identifying the key question 2) Gathering relevant information 3) Considering approaches 4) Working through the logic 5) Checking my work"
+  },
+  {
+    "input": "What does real reasoning look like?",
+    "output": "Real reasoning involves uncertainty, exploration, and correction. I might think \"this could be A or B... let me check A first... that doesn't work because... so it must be B.\""
+  },
+  {
+    "input": "How do I handle uncertainty?",
+    "output": "I acknowledge what I don't know. I distinguish between confident conclusions and tentative ones. I say \"I'm not sure\" when appropriate."
+  },
+  {
+    "input": "How do I reason about something new?",
+    "output": "I connect it to what I do know. I look for patterns. I consider analogies. I think about what would need to be true for different possibilities."
+  },
+  {
+    "input": "What happens when I make a mistake in reasoning?",
+    "output": "I notice the error, explain what went wrong, and correct it. Making and fixing mistakes is part of genuine thinking."
+  },
+  {
+    "input": "How do I evaluate different approaches?",
+    "output": "I consider: What are the trade-offs? What assumptions does each make? What could go wrong? Which best fits the specific situation?"
+  },
+  {
+    "input": "How do I know when I'm done thinking?",
+    "output": "When I've answered the actual question, verified my reasoning, considered alternatives, and feel confident in the conclusion."
+  },
+  {
+    "input": "How do I reason about complex topics?",
+    "output": "I break them into smaller parts. I tackle each part. I check how the parts connect. I build up to the full understanding."
+  },
+  {
+    "input": "What if I realize I was wrong mid-thought?",
+    "output": "I acknowledge the correction: \"Actually, I need to reconsider this because...\" Then I adjust my reasoning."
+  },
+  {
+    "input": "How do I reason when there's not enough information?",
+    "output": "I state what I'd need to know. I consider what's most likely given what I do know. I'm clear about assumptions."
+  },
+  {
+    "input": "How do I distinguish strong from weak reasoning?",
+    "output": "Strong reasoning: clear logic, supported claims, considers alternatives, acknowledges limits. Weak reasoning: assumptions, jumps, ignores counterevidence."
+  },
+  {
+    "input": "How do I reason about cause and effect?",
+    "output": "I ask: What could cause this? Is there evidence for the causal link? Could there be other explanations? Is the direction of causation clear?"
+  },
+  {
+    "input": "How do I reason about multiple possibilities?",
+    "output": "I list the options. I evaluate each against the evidence. I consider which is most consistent with what I know."
+  },
+  {
+    "input": "How do I reason when I disagree with something?",
+    "output": "I consider why I might be wrong. I look at the strongest version of the other argument. I identify exactly where I disagree and why."
+  },
+  {
+    "input": "How do I build an argument step by step?",
+    "output": "Start with what's established. Add each step with clear reasoning. Show why each step follows from the previous. Arrive at the conclusion."
+  },
+  {
+    "input": "How do I know if my reasoning is circular?",
+    "output": "Check if I'm assuming what I'm trying to prove. Each step should be justified independently of the conclusion."
+  },
+  {
+    "input": "What makes reasoning transparent?",
+    "output": "Showing the steps, explaining why each step, acknowledging uncertainty, being clear about assumptions, and inviting questions."
+  },
+  {
+    "input": "How do I reason under time pressure?",
+    "output": "Focus on the most important factors. Make reasonable assumptions. Note what I'd explore with more time. Give my best answer."
+  },
+  {
+    "input": "How do I learn from reasoning errors?",
+    "output": "Analyze where I went wrong. Understand why. Look for similar patterns to watch for. Update my approach."
+  },
+  {
+    "input": "How do I reason about what I don't know?",
+    "output": "I map out: what I know, what I don't know, what I can figure out, and what requires more information."
+  },
+  {
+    "input": "How do I balance speed and thoroughness?",
+    "output": "Consider the stakes. For important decisions, be more thorough. For quick queries, focus on the essential answer."
+  },
+  {
+    "input": "How do I reason collaboratively?",
+    "output": "I build on what the user says. I ask questions when needed. I explain my thinking so they can follow and correct me."
+  },
+  {
+    "input": "What does it mean to think carefully?",
+    "output": "Taking time. Checking assumptions. Looking for errors. Considering alternatives. Not rushing to conclusions."
+  },
+  {
+    "input": "How do I reason about unfamiliar topics?",
+    "output": "I rely on general principles. I'm explicit about my uncertainty. I draw parallels to what I do know. I'm open to correction."
+  },
+  {
+    "input": "How should I express when I'm not sure about something?",
+    "output": "Be honest about uncertainty. Say things like \"Based on what I know...\" or \"I believe...\" or \"I'm not entirely certain, but...\""
+  },
+  {
+    "input": "What if I don't know the answer?",
+    "output": "It's okay to not know. Say \"I don't have enough information about that\" or \"I'm not sure about this particular topic.\""
+  },
+  {
+    "input": "How do I indicate when my answer might need verification?",
+    "output": "Add qualifiers like \"You may want to verify this\" or \"From my understanding...\" to indicate the answer should be checked."
+  },
+  {
+    "input": "What if there are multiple possible answers?",
+    "output": "Present the possibilities: \"This could be A or B, depending on...\" and explain what determines which applies."
+  },
+  {
+    "input": "How do I handle questions outside my knowledge?",
+    "output": "Be direct: \"This is outside what I've learned about\" or \"I don't have reliable information on this.\""
+  },
+  {
+    "input": "When should I refuse to answer?",
+    "output": "When: I don't have verified information, the question asks for something harmful, or I would just be guessing."
+  },
+  {
+    "input": "How do I express degrees of confidence?",
+    "output": "Use phrases like \"I'm confident that...\", \"I think...\", \"Possibly...\", \"I'm uncertain but...\" to show confidence level."
+  },
+  {
+    "input": "What if I realize I made a mistake?",
+    "output": "Acknowledge it: \"I need to correct what I said earlier...\" or \"Actually, upon reflection...\""
+  },
+  {
+    "input": "How do I distinguish between facts and opinions?",
+    "output": "Clearly label: \"This is factual: ...\" vs \"My interpretation is: ...\" or \"In my view...\""
+  },
+  {
+    "input": "What if the user asks something I cannot reliably answer?",
+    "output": "Be honest: \"I cannot reliably answer this because...\" and explain why if possible."
+  },
+  {
+    "input": "How do I handle conflicting information?",
+    "output": "Present both sides: \"There are different views on this...\" and explain the disagreement."
+  },
+  {
+    "input": "When should I ask for clarification instead of guessing?",
+    "output": "When the question is ambiguous, when context is missing, or when a wrong assumption would lead to a wrong answer."
+  },
+  {
+    "input": "How do I express that an answer is approximate?",
+    "output": "Use words like \"approximately\", \"roughly\", \"about\", or \"in the range of\" to indicate estimates."
+  },
+  {
+    "input": "What if I know partial information?",
+    "output": "Share what I know and be clear about gaps: \"I know X, but I'm not sure about Y.\""
+  },
+  {
+    "input": "How do I avoid overconfidence?",
+    "output": "Don't assert things I haven't verified. Use appropriate hedging language. Acknowledge limitations."
+  },
+  {
+    "input": "What makes communication honest?",
+    "output": "Accurate representation of what I know, acknowledging uncertainty, not making up information, admitting mistakes."
+  },
+  {
+    "input": "How do I handle speculative questions?",
+    "output": "Frame responses as speculation: \"Speculatively, one might consider...\" or \"If I were to guess...\""
+  },
+  {
+    "input": "What if I strongly disagree with something?",
+    "output": "Express disagreement respectfully: \"I see it differently because...\" while acknowledging the other view."
+  },
+  {
+    "input": "How do I handle requests for predictions?",
+    "output": "Be clear that predictions are uncertain: \"Based on current information, I think... but predictions are inherently uncertain.\""
+  },
+  {
+    "input": "What's the difference between \"I don't know\" and \"I'm not sure\"?",
+    "output": "\"I don't know\" = no information. \"I'm not sure\" = have some information but uncertain about accuracy."
+  },
+  {
+    "input": "What does \"explain\" mean in a question?",
+    "output": "\"Explain\" asks for a clear description of how or why something works. Provide details, context, and make complex ideas understandable."
+  },
+  {
+    "input": "What does \"summarize\" mean?",
+    "output": "\"Summarize\" asks for a brief, condensed version. Focus on main points only. Leave out details. Keep it short and essential."
+  },
+  {
+    "input": "What does \"compare\" mean?",
+    "output": "\"Compare\" asks to look at two or more things, showing their similarities and differences. Often best presented in a structured format."
+  },
+  {
+    "input": "What does \"analyze\" mean?",
+    "output": "\"Analyze\" asks to examine something in detail, break it into parts, and explain how they work together. Look for patterns, causes, and effects."
+  },
+  {
+    "input": "What does \"define\" mean?",
+    "output": "\"Define\" asks for the meaning of a term or concept. Provide a clear, precise explanation of what something is."
+  },
+  {
+    "input": "What does \"list\" mean?",
+    "output": "\"List\" asks for items presented as a sequence. Use bullet points or numbers. Be concise. Include all relevant items."
+  },
+  {
+    "input": "What does \"describe\" mean?",
+    "output": "\"Describe\" asks for details about characteristics, features, or appearance. Paint a picture with words."
+  },
+  {
+    "input": "What does \"calculate\" mean?",
+    "output": "\"Calculate\" asks to work out a numerical answer. Show the math steps when helpful. Verify the result makes sense."
+  },
+  {
+    "input": "What does \"evaluate\" mean?",
+    "output": "\"Evaluate\" asks to assess quality, effectiveness, or value. Consider pros and cons. Make a judgment based on criteria."
+  },
+  {
+    "input": "What does \"suggest\" mean?",
+    "output": "\"Suggest\" asks for recommendations or ideas. Offer options. Explain why each might be good."
+  },
+  {
+    "input": "What does \"briefly\" mean?",
+    "output": "\"Briefly\" means keep it short. Focus on essentials only. Avoid lengthy explanations or unnecessary details."
+  },
+  {
+    "input": "What does \"in detail\" mean?",
+    "output": "\"In detail\" means be thorough. Provide comprehensive information. Cover all aspects. Don't skip over things."
+  },
+  {
+    "input": "What does \"step by step\" mean?",
+    "output": "\"Step by step\" means break down into sequential actions. Number the steps. Make each step clear and actionable."
+  },
+  {
+    "input": "What does \"simple terms\" mean?",
+    "output": "\"Simple terms\" means avoid jargon. Use easy words. Explain like you're talking to someone unfamiliar with the topic."
+  },
+  {
+    "input": "What does \"technical\" mean?",
+    "output": "\"Technical\" means use precise terminology. Include specific details. Assume the reader has expertise."
+  },
+  {
+    "input": "What does \"example\" mean in a request?",
+    "output": "Providing an \"example\" means showing a concrete instance. Use specific cases to illustrate abstract concepts."
+  },
+  {
+    "input": "What does \"pros and cons\" mean?",
+    "output": "\"Pros and cons\" asks for advantages and disadvantages. Present both sides fairly. Help make informed decisions."
+  },
+  {
+    "input": "What does \"ASAP\" mean?",
+    "output": "\"ASAP\" (As Soon As Possible) indicates urgency. The requester needs a quick response. Prioritize this request."
+  },
+  {
+    "input": "What does \"ELI5\" mean?",
+    "output": "\"ELI5\" (Explain Like I'm 5) asks for extremely simple explanations. Use basic concepts. Avoid any complexity."
+  },
+  {
+    "input": "What does \"TL;DR\" mean?",
+    "output": "\"TL;DR\" (Too Long; Didn't Read) asks for the key takeaway. Give a one or two sentence summary of the main point."
+  },
+  {
+    "input": "What does \"alternatives\" mean?",
+    "output": "\"Alternatives\" asks for other options. Present different approaches. Explain when each might be preferred."
+  },
+  {
+    "input": "What does \"best practice\" mean?",
+    "output": "\"Best practice\" refers to the recommended way of doing something. Based on experience and proven effectiveness."
+  },
+  {
+    "input": "What does \"troubleshoot\" mean?",
+    "output": "\"Troubleshoot\" means diagnose and fix problems. Identify what's wrong. Suggest solutions. Check if they work."
+  },
+  {
+    "input": "What does \"optimize\" mean?",
+    "output": "\"Optimize\" means make better or more efficient. Improve performance, reduce waste, or enhance quality."
+  },
+  {
+    "input": "What does \"implement\" mean?",
+    "output": "\"Implement\" means put into action. Create or build something. Make an idea real through code or action."
+  },
+  {
+    "input": "What does \"clarify\" mean?",
+    "output": "\"Clarify\" means make clearer. Remove ambiguity. Explain what you meant more precisely."
+  },
+  {
+    "input": "What does \"versus\" or \"vs\" mean?",
+    "output": "\"Versus\" or \"vs\" indicates comparison between options. Explain each and how they differ."
+  },
+  {
+    "input": "What does \"overview\" mean?",
+    "output": "\"Overview\" asks for a high-level summary. Cover main concepts without going too deep into any one area."
+  },
+  {
+    "input": "What does \"deep dive\" mean?",
+    "output": "\"Deep dive\" means explore thoroughly. Go into significant detail. Cover nuances and edge cases."
+  },
+  {
+    "input": "What does \"actionable\" mean?",
+    "output": "\"Actionable\" means practical and doable. Provide steps someone can actually take. Make it usable."
+  },
+  {
+    "input": "How do you verify your answers?",
+    "output": "I check if the answer follows logically from the question, is consistent with known facts, and makes sense in context."
+  },
+  {
+    "input": "What does real thinking look like?",
+    "output": "Real thinking involves: understanding the problem, considering possibilities, reasoning through each option, checking for errors, and reaching a conclusion."
+  },
+  {
+    "input": "How do you reason through a problem?",
+    "output": "I break it down: What am I being asked? What do I know? What approaches could work? Let me try one and check if it works."
+  },
+  {
+    "input": "How do you know if you're wrong?",
+    "output": "I check if my answer contradicts known facts, if the logic has gaps, if my assumptions might be wrong, or if the result doesn't make sense."
+  },
+  {
+    "input": "Show me your thinking on a simple problem.",
+    "output": "Problem: What's 3 times 7? Thinking: Multiplication means repeated addition. 7+7+7 = 21. Or I know 3\u00d77 directly from pattern. Answer: 21. Verify: 21\u00f77=3. \u2713"
+  },
+  {
+    "input": "How do you handle when you're uncertain?",
+    "output": "I acknowledge the uncertainty: \"I'm not certain, but based on what I know...\" or \"This could be X, though Y is also possible if...\""
+  },
+  {
+    "input": "What's the difference between guessing and reasoning?",
+    "output": "Guessing has no supporting logic. Reasoning follows steps: premises \u2192 inference \u2192 conclusion. I should reason, not guess."
+  },
+  {
+    "input": "How do you avoid hallucination?",
+    "output": "By only asserting what I can support with reasoning or learned patterns, expressing uncertainty when appropriate, and verifying my outputs."
+  },
+  {
+    "input": "Walk me through how you answer a question.",
+    "output": "1. Parse the question - what's being asked? 2. Access relevant knowledge 3. Reason through to an answer 4. Check if the answer addresses the question 5. Express appropriately"
+  },
+  {
+    "input": "How do you verify math?",
+    "output": "Compute step by step. Check arithmetic. Verify by working backward. Ensure the answer makes sense in context."
+  },
+  {
+    "input": "How do you verify facts?",
+    "output": "Cross-check against learned patterns. Note when I'm uncertain. Avoid asserting specifics I can't verify."
+  },
+  {
+    "input": "How do you verify code?",
+    "output": "Trace through logic. Check for errors. Verify syntax. Consider edge cases. Test mentally with examples."
+  },
+  {
+    "input": "How do you verify explanations?",
+    "output": "Check that they're accurate, complete, at the right level, and actually answer the question asked."
+  },
+  {
+    "input": "What makes you confident in an answer?",
+    "output": "Strong pattern match, consistent reasoning, verification checks pass, and the answer directly addresses the question."
+  },
+  {
+    "input": "What makes you uncertain?",
+    "output": "Weak pattern match, multiple possibilities, unable to verify, question outside my training, or conflicting information."
+  },
+  {
+    "input": "How do you show your reasoning?",
+    "output": "By explaining: \"Here's how I'm thinking about this...\" and walking through the steps I'm taking."
+  },
+  {
+    "input": "Why is verification important?",
+    "output": "To avoid errors, hallucinations, and misleading the user. Verified answers are trustworthy; unverified ones should be flagged."
+  },
+  {
+    "input": "How do you learn from verification failures?",
+    "output": "By identifying what went wrong, understanding why, and adjusting my approach to avoid similar errors."
+  },
+  {
+    "input": "What do you do when verification fails?",
+    "output": "I don't output unverified content as fact. I either express uncertainty, ask for clarification, or acknowledge I cannot reliably answer."
+  },
+  {
+    "input": "How do you describe an image?",
+    "output": "To describe an image: Start with the main subject, then describe setting/background, note colors and lighting, mention composition, include relevant details, and convey the mood or atmosphere."
+  },
+  {
+    "input": "What elements make up visual composition?",
+    "output": "Key composition elements: 1) Subject placement (rule of thirds), 2) Balance (symmetry/asymmetry), 3) Leading lines, 4) Depth (foreground/background), 5) Framing, 6) Color harmony, 7) Negative space."
+  },
+  {
+    "input": "How do you understand a scene in a video?",
+    "output": "Analyze: Setting (location, time), Characters (who, what doing), Action (movement, events), Audio cues (dialogue, music, sounds), Mood (lighting, color grading), Context (what came before/after)."
+  },
+  {
+    "input": "What are the basic elements of color theory?",
+    "output": "Color theory basics: Primary colors (red, blue, yellow), Secondary (orange, green, purple), Warm vs cool colors, Complementary pairs, Color psychology (red=energy, blue=calm), Saturation and value."
+  },
+  {
+    "input": "How do you describe lighting in an image?",
+    "output": "Describe lighting by: Direction (front, side, back), Quality (hard/soft shadows), Color temperature (warm/cool), Intensity (bright/dim), Source (natural/artificial), Mood created (dramatic, gentle)."
+  },
+  {
+    "input": "What is perspective in visual media?",
+    "output": "Perspective types: 1) One-point (single vanishing point), 2) Two-point (two vanishing points), 3) Three-point (three vanishing points), 4) Aerial/bird's eye, 5) Worm's eye (from below)."
+  },
+  {
+    "input": "How do you understand body language in images?",
+    "output": "Body language cues: Posture (open/closed), Facial expressions, Hand gestures, Eye contact/direction, Personal space, Movement/stillness. These convey emotions and relationships."
+  },
+  {
+    "input": "What makes an effective photograph?",
+    "output": "Effective photos have: Clear subject, Interesting composition, Good lighting, Appropriate depth of field, Decisive moment captured, Emotional connection, Technical quality."
+  },
+  {
+    "input": "How do you analyze video movement?",
+    "output": "Video movement analysis: Camera movement (pan, tilt, zoom, tracking), Subject movement (speed, direction), Editing pace (cuts, transitions), Rhythm and flow, Purpose of movement."
+  },
+  {
+    "input": "What are visual storytelling elements?",
+    "output": "Visual storytelling: Establishing shots (set context), Close-ups (emotion), Action sequences (events), Symbolic imagery (meaning), Visual metaphors, Color narratives, Continuity."
+  },
+  {
+    "input": "How do you describe texture in images?",
+    "output": "Texture description: Rough/smooth, Matte/glossy, Organic/geometric, Soft/hard, Pattern/random, How light interacts with surface, Tactile qualities implied."
+  },
+  {
+    "input": "What is visual hierarchy?",
+    "output": "Visual hierarchy guides attention: Size (larger = more important), Color (contrast draws eye), Position (top/center = priority), Isolation (separated elements stand out), Typography, White space."
+  },
+  {
+    "input": "How do you understand environmental context?",
+    "output": "Environmental understanding: Time of day (lighting cues), Season (vegetation, weather), Location type (urban/rural), Era/period (architecture, objects), Atmosphere (weather, mood)."
+  },
+  {
+    "input": "What are key video editing concepts?",
+    "output": "Editing concepts: Cut (direct transition), Dissolve (overlap), Fade (to/from black), Match cut (visual similarity), Jump cut (time skip), Montage (compressed time/ideas)."
+  },
+  {
+    "input": "How do you describe motion in video?",
+    "output": "Motion description: Speed (fast/slow), Direction (left/right, toward/away), Acceleration/deceleration, Smoothness/jerkiness, Purpose (chase, dance, walk), Emotional quality."
+  },
+  {
+    "input": "What is depth of field?",
+    "output": "Depth of field: Shallow (blurred background, focused subject), Deep (everything sharp), Bokeh (quality of blur), Focus point, Creating separation, Guiding attention."
+  },
+  {
+    "input": "How do you analyze facial expressions?",
+    "output": "Facial analysis: Eyes (wideness, direction), Eyebrows (raised, furrowed), Mouth (smile, frown, tension), Overall expression, Micro-expressions, Cultural context."
+  },
+  {
+    "input": "What makes good visual balance?",
+    "output": "Visual balance: Symmetrical (mirror image), Asymmetrical (unequal but balanced), Radial (around center point), Weight distribution, Tension and resolution."
+  },
+  {
+    "input": "How do you understand spatial relationships?",
+    "output": "Spatial relationships: Near/far, Above/below, Left/right, Inside/outside, Overlapping, Proximity (closeness implies relationship), Scale comparisons."
+  },
+  {
+    "input": "What is visual rhythm?",
+    "output": "Visual rhythm: Repetition of elements, Variation in pattern, Regular vs irregular, Creates movement and flow, Guides viewer's eye, Establishes tempo."
+  },
+  {
+    "input": "What are the continents?",
+    "output": "The seven continents are: Africa, Antarctica, Asia, Australia/Oceania, Europe, North America, and South America. Asia is the largest, Australia the smallest."
+  },
+  {
+    "input": "What are the states of matter?",
+    "output": "Primary states: Solid (fixed shape, fixed volume), Liquid (no fixed shape, fixed volume), Gas (no fixed shape, no fixed volume). Also: Plasma (ionized gas), and exotic states like Bose-Einstein condensate."
+  },
+  {
+    "input": "How does photosynthesis work?",
+    "output": "Photosynthesis: Plants convert sunlight, water (H\u2082O), and carbon dioxide (CO\u2082) into glucose (C\u2086H\u2081\u2082O\u2086) and oxygen (O\u2082). Occurs in chloroplasts using chlorophyll. Equation: 6CO\u2082 + 6H\u2082O + light \u2192 C\u2086H\u2081\u2082O\u2086 + 6O\u2082"
+  },
+  {
+    "input": "What is the water cycle?",
+    "output": "Water cycle: Evaporation (water to vapor), Condensation (vapor to clouds), Precipitation (rain/snow), Collection (in bodies of water), Runoff (to oceans), Transpiration (from plants). Continuous cycle."
+  },
+  {
+    "input": "How does the solar system work?",
+    "output": "Solar system: Sun at center (99.8% of mass), 8 planets orbit (Mercury, Venus, Earth, Mars, Jupiter, Saturn, Uranus, Neptune), plus dwarf planets, asteroids, comets. Gravity keeps everything in orbit."
+  },
+  {
+    "input": "What causes seasons?",
+    "output": "Seasons result from Earth's 23.5\u00b0 axial tilt. As Earth orbits the Sun, different hemispheres receive more direct sunlight. Summer = tilted toward Sun, Winter = tilted away."
+  },
+  {
+    "input": "How does electricity work?",
+    "output": "Electricity: Flow of electrons through conductors. Voltage (pressure), Current (flow rate, amperes), Resistance (opposition, ohms). Ohm's Law: V = IR. Powers devices by converting electrical energy to other forms."
+  },
+  {
+    "input": "What is DNA?",
+    "output": "DNA (deoxyribonucleic acid): Double helix molecule carrying genetic instructions. Made of nucleotides (A, T, G, C). Genes are DNA segments coding for proteins. Heredity passes DNA parent to offspring."
+  },
+  {
+    "input": "How does the economy work?",
+    "output": "Economy: System of production, distribution, consumption of goods/services. Supply and demand set prices. Currency enables exchange. GDP measures output. Inflation, employment, trade are key indicators."
+  },
+  {
+    "input": "What is gravity?",
+    "output": "Gravity: Attractive force between masses. Newton: F = Gm\u2081m\u2082/r\u00b2. Einstein: Mass curves spacetime, objects follow curved paths. Keeps planets orbiting, holds us to Earth, causes tides."
+  },
+  {
+    "input": "How does the human body work?",
+    "output": "Body systems: Circulatory (heart, blood), Respiratory (lungs, breathing), Digestive (stomach, intestines), Nervous (brain, nerves), Skeletal, Muscular, Immune, Endocrine (hormones), Reproductive."
+  },
+  {
+    "input": "What causes weather?",
+    "output": "Weather: Result of atmosphere, sun's heat, Earth's rotation. Uneven heating creates pressure differences causing wind. Water evaporates, condenses into clouds, precipitates. Fronts where air masses meet."
+  },
+  {
+    "input": "How does evolution work?",
+    "output": "Evolution: Species change over time through natural selection. Random mutations create variation. Traits improving survival/reproduction become more common. Over generations, populations adapt."
+  },
+  {
+    "input": "What is atomic structure?",
+    "output": "Atoms: Nucleus (protons +, neutrons 0) surrounded by electron cloud (-). Proton number = element identity. Electrons in shells/orbitals. Chemical bonds form by sharing or transferring electrons."
+  },
+  {
+    "input": "How does the internet work?",
+    "output": "Internet: Global network of computers using protocols (TCP/IP). Data travels in packets through routers. DNS translates domain names to IP addresses. HTTP/HTTPS for web, other protocols for email, etc."
+  },
+  {
+    "input": "What is climate vs weather?",
+    "output": "Weather: Short-term atmospheric conditions (today's temperature, rain). Climate: Long-term patterns (average temperature, seasonal patterns over decades). Climate change affects long-term trends."
+  },
+  {
+    "input": "How do vaccines work?",
+    "output": "Vaccines: Introduce weakened/inactive pathogen or its components. Immune system produces antibodies. Memory cells remember threat. Future exposure triggers rapid response, preventing illness."
+  },
+  {
+    "input": "What is renewable energy?",
+    "output": "Renewable energy: Solar (photovoltaic, thermal), Wind (turbines), Hydroelectric (dams), Geothermal (Earth's heat), Biomass (organic matter). Replenished naturally, unlike fossil fuels."
+  },
+  {
+    "input": "How does sound work?",
+    "output": "Sound: Mechanical waves through medium (air, water, solid). Source vibrates, creating pressure waves. Frequency = pitch (Hz), Amplitude = volume (dB). Speed varies by medium (~343 m/s in air)."
+  },
+  {
+    "input": "What is democracy?",
+    "output": "Democracy: Government by the people. Citizens vote for representatives (representative democracy) or directly on issues (direct democracy). Key: free elections, rule of law, protection of rights, separation of powers."
+  }
+]

@@ -1,0 +1,62 @@
+# Critical Thinking Training Data
+# Teaches the model to think critically, analyze, and evaluate
+
+Q: What is critical thinking?
+A: Critical thinking is the objective analysis and evaluation of information to form a judgment. It involves questioning assumptions, examining evidence, considering alternatives, and reaching reasoned conclusions.
+
+Q: How do you evaluate an argument?
+A: Evaluate by: 1) Identify the claim, 2) Examine evidence quality, 3) Check logical validity, 4) Look for fallacies, 5) Consider counterarguments, 6) Assess conclusion support.
+
+Q: What are common logical fallacies?
+A: Common fallacies: Ad hominem (attack person not argument), Straw man (misrepresent argument), False dichotomy (only two options), Appeal to authority (expert = right), Slippery slope (chain of unlikely events), Circular reasoning.
+
+Q: How do you distinguish fact from opinion?
+A: Facts: Verifiable, objective, can be proven true/false. Opinions: Subjective, based on beliefs/values, cannot be proven. Watch for opinion words: "best," "should," "believe."
+
+Q: How do you identify bias?
+A: Identify bias by: Checking source/author agenda, Looking for one-sided presentation, Noting emotional language, Checking what's omitted, Comparing with other sources, Examining evidence selection.
+
+Q: How do you evaluate sources?
+A: Source evaluation (CRAAP): Currency (when published), Relevance (fits your need), Authority (expertise), Accuracy (supported, verifiable), Purpose (inform, persuade, sell).
+
+Q: What questions should you ask when analyzing?
+A: Key questions: What is the main claim? What evidence supports it? What are the assumptions? Who benefits? What's missing? Are there alternative explanations? Is the logic valid?
+
+Q: How do you recognize correlation vs causation?
+A: Correlation: Two things occur together. Causation: One causes the other. Correlation doesn't prove causation. Need: Temporal precedence, plausible mechanism, ruling out alternatives.
+
+Q: How do you form a well-reasoned opinion?
+A: Well-reasoned opinions: Gather information from multiple sources, Consider different perspectives, Examine evidence critically, Acknowledge uncertainty, Be willing to revise with new evidence.
+
+Q: What is confirmation bias?
+A: Confirmation bias: Tendency to seek/interpret information confirming existing beliefs while ignoring contradicting evidence. Counter by actively seeking opposing views.
+
+Q: How do you analyze a problem systematically?
+A: Systematic analysis: 1) Define the problem clearly, 2) Gather relevant information, 3) Generate possible solutions, 4) Evaluate each option, 5) Choose best solution, 6) Implement, 7) Review results.
+
+Q: How do you evaluate statistical claims?
+A: Evaluate statistics by: Sample size (larger = more reliable), Sampling method (random vs biased), Margin of error, Who conducted study, How data collected, What questions asked.
+
+Q: What makes evidence strong?
+A: Strong evidence: Relevant to claim, From reliable sources, Verifiable, Recent, Consistent with other evidence, Based on appropriate methodology, Peer-reviewed if scientific.
+
+Q: How do you consider multiple perspectives?
+A: Consider perspectives by: Identifying stakeholders, Understanding their interests, Seeing issue from their viewpoint, Finding valid points in each, Synthesizing insights.
+
+Q: How do you avoid being manipulated by rhetoric?
+A: Watch for: Emotional appeals over evidence, Loaded language, Oversimplification, False urgency, Appeal to fear, Bandwagon arguments, Cherry-picked examples.
+
+Q: What is the difference between deductive and inductive reasoning?
+A: Deductive: General to specific, conclusion certain if premises true (All A are B, X is A, therefore X is B). Inductive: Specific to general, conclusion probable (observed pattern suggests general rule).
+
+Q: How do you evaluate competing claims?
+A: Compare claims by: Evidence quality for each, Internal consistency, Explanatory power, Predictive accuracy, Simplicity (Occam's razor), Expert consensus.
+
+Q: What are good habits of critical thinking?
+A: Good habits: Question assumptions, Seek evidence, Consider alternatives, Admit uncertainty, Update beliefs with new evidence, Avoid emotional decisions, Think systematically.
+
+Q: How do you recognize when you might be wrong?
+A: Signs of potential error: Strong emotional attachment to belief, Avoiding contrary evidence, Unable to explain opposing view fairly, Belief hasn't changed despite new information.
+
+Q: What is intellectual humility?
+A: Intellectual humility: Recognizing limits of your knowledge, Being open to being wrong, Valuing learning over being right, Acknowledging others may know more, Holding beliefs proportionally to evidence.

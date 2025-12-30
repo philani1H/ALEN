@@ -1,0 +1,62 @@
+# Story Summarization Training Data
+# Teaches the model to understand and summarize stories, narratives, and texts
+
+Q: How do you summarize a story?
+A: To summarize: 1) Identify main characters, 2) Note the setting, 3) Find the central conflict, 4) Track key plot points, 5) Identify resolution, 6) Express in your own words, keeping essential elements.
+
+Q: What are the key elements of a story to capture in a summary?
+A: Key elements: Protagonist (main character), Antagonist (opposition), Setting (where/when), Conflict (central problem), Rising action (events building tension), Climax (peak moment), Resolution (how it ends).
+
+Q: How do you identify the main idea of a text?
+A: Find main idea by: Looking at title and headings, Reading first and last paragraphs, Identifying repeated concepts, Asking "what is this mostly about?", Distinguishing from supporting details.
+
+Q: How long should a summary be?
+A: Summary length depends on: Original length (typically 10-25%), Purpose (brief overview vs detailed synopsis), Audience needs, Key information density. Aim for concise but complete.
+
+Q: How do you summarize a complex narrative?
+A: For complex narratives: Identify main plot thread, Note subplots briefly, Track character arcs, Focus on cause-effect relationships, Maintain chronological clarity, Preserve theme.
+
+Q: What should you NOT include in a summary?
+A: Avoid in summaries: Minor details, Your personal opinions, Lengthy quotes, Every character/event, Repetitive information, Background that doesn't affect plot.
+
+Q: How do you summarize dialogue-heavy text?
+A: For dialogue: Paraphrase conversations, Focus on what's communicated (not exact words), Note tone and relationship revealed, Include only dialogue that advances plot.
+
+Q: How do you handle multiple storylines in a summary?
+A: Multiple storylines: Identify the primary plot, Note how subplots connect, Summarize each briefly, Show how they converge, Prioritize by importance to main theme.
+
+Q: How do you summarize while preserving tone?
+A: Preserve tone by: Using similar word choices, Maintaining the emotional register, Reflecting the author's voice, Keeping genre conventions, Not adding humor to serious texts or vice versa.
+
+Q: What is the difference between a summary and an analysis?
+A: Summary = what happens (objective retelling). Analysis = why it matters (interpretation, themes, techniques). Summary comes first, then analysis if needed.
+
+Q: How do you summarize technical content?
+A: Technical summaries: Define key terms, Explain main concept, Note important findings/data, Simplify without losing accuracy, Use structure (intro, body, conclusion).
+
+Q: How do you summarize a news article?
+A: News summary: Who, What, When, Where, Why, How. Lead with most important info. Include key facts. Note sources if relevant. Keep neutral tone.
+
+Q: How do you summarize an argument?
+A: Summarize arguments by: Stating the main claim, Listing key supporting points, Noting evidence used, Mentioning counterarguments addressed, Summarizing conclusion.
+
+Q: How do you know if your summary is complete?
+A: Complete summary test: Can someone understand the whole from your summary? Are main points covered? Is causation clear? Nothing essential missing? Stands alone without original?
+
+Q: How do you summarize a chapter vs. a whole book?
+A: Chapter summary: Focus on that chapter's events and contribution to larger story. Book summary: Cover entire arc, major turning points, theme, how it resolves.
+
+Q: How do you handle flashbacks in summaries?
+A: Flashbacks: Usually summarize chronologically unless non-linear order is essential. Note "earlier" or "in the past" to clarify timeline. Focus on what flashback reveals.
+
+Q: How do you summarize while maintaining suspense hints?
+A: For spoiler-free summaries: Describe setup and conflict, Hint at stakes, Stop before major reveals, Use "must discover" or "faces challenges" type language.
+
+Q: What makes a good one-sentence summary?
+A: One-sentence summary: [Character] must [goal] but faces [obstacle] in order to [stakes]. Example: "A young wizard must destroy an evil ring, but faces dark forces, to save Middle-earth."
+
+Q: How do you summarize a documentary?
+A: Documentary summary: State the topic/thesis, Key evidence or stories presented, Expert perspectives included, Main conclusions, Call to action (if any).
+
+Q: How do you summarize a process or how-to text?
+A: Process summary: State the goal, List major steps (not every detail), Note critical warnings or tips, Mention expected outcome, Include time/resources if significant.
