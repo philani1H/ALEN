@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>ALEN Simple Chat</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            background: #f0f0f0;
+        }
+        #chat {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            min-height: 400px;
+            max-height: 600px;
+            overflow-y: auto;
+        }
+        .message {
+            margin: 10px 0;
+            padding: 10px;
+            border-radius: 5px;
+        }
+        .user {
+            background: #e3f2fd;
+            text-align: right;
+        }
+        .assistant {
+            background: #f5f5f5;
+        }
+        #input-area {
+            display: flex;
+            gap: 10px;
+        }
+        #message {
+            flex: 1;
+            padding: 10px;
+            border: 2px solid #ddd;
+            border-radius: 5px;
+        }
+        button {
+            padding: 10px 20px;
+            background: #2196F3;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background: #1976D2;
+        }
+        .feedback {
+            margin-top: 5px;
+        }
+        .feedback button {
+            padding: 5px 10px;
+            font-size: 12px;
+            margin-right: 5px;
+        }
+        .train-input {
+            margin-top: 10px;
+            display: none;
+        }
+        .train-input textarea {
+            width: 100%;
+            padding: 5px;
+            margin: 5px 0;
+        }
+        .status {
+            padding: 10px;
+            background: #fff3cd;
+            border-radius: 5px;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h1>🤖 ALEN Simple Chat</h1>
+    
+    <div class="status" id="status">
+        Connecting to API...
+    </div>
+    
+    <div id="chat"></div>
+    
+    <div id="input-area">
+        <input type="text" id="message" placeholder="Type your message..." onkeypress="if(event.key==='Enter') sendMessage()">
+        <button onclick="sendMessage()">Send</button>
+        <button onclick="clearChat()">Clear</button>
+    </div>
+
+    <script>
+        const API_URL = window.location.origin;
+        let conversationId = null;
+        
+        // Check API status
+        fetch(API_URL + '/health')
+            .then(r => r.json())
+            .then(data => {
+                document.getElementById('status').innerHTML = 
+                    '✅ Connected to ALEN | API: ' + API_URL;
+                document.getElementById('status').style.background = '#d4edda';
+            })
+            .catch(err => {
+                document.getElementById('status').innerHTML = 
+                    '❌ Cannot connect to API: ' + API_URL + ' | Error: ' + err.message;
+                document.getElementById('status').style.background = '#f8d7da';
+            });
+        
+        function addMessage(role, text, data) {
+            const chat = document.getElementById('chat');
+            const msg = document.createElement('div');
+            msg.className = 'message ' + role;
+            
+            let html = '<strong>' + (role === 'user' ? 'You' : 'ALEN') + ':</strong><br>' + text;
+            
+            if (role === 'assistant' && data) {
+                html += '<br><small>Confidence: ' + (data.confidence * 100).toFixed(1) + '%</small>';
+                
+                // Add feedback buttons
+                const msgId = 'msg-' + Date.now();
+                html += '<div class="feedback">';
+                html += '<button onclick="giveFeedback(\'' + msgId + '\', true, \'' + 
+                        data.userMsg.replace(/'/g, "\\'") + '\', \'' + 
+                        text.replace(/'/g, "\\'") + '\')">👍</button>';
+                html += '<button onclick="giveFeedback(\'' + msgId + '\', false, \'' + 
+                        data.userMsg.replace(/'/g, "\\'") + '\', \'' + 
+                        text.replace(/'/g, "\\'") + '\')">👎</button>';
+                html += '</div>';
+                html += '<div class="train-input" id="' + msgId + '">';
+                html += '<textarea placeholder="What should I have said?"></textarea>';
+                html += '<button onclick="trainFromFeedback(\'' + msgId + '\', \'' + 
+                        data.userMsg.replace(/'/g, "\\'") + '\')">Train</button>';
+                html += '</div>';
+            }
+            
+            msg.innerHTML = html;
+            chat.appendChild(msg);
+            chat.scrollTop = chat.scrollHeight;
+        }
+        
+        async function sendMessage() {
+            const input = document.getElementById('message');
+            const message = input.value.trim();
+            if (!message) return;
+            
+            addMessage('user', message);
+            input.value = '';
+            
+            try {
+                const response = await fetch(API_URL + '/chat', {
+                    method: 'POST',
+                    headers: {'Content-Type': 'application/json'},
+                    body: JSON.stringify({
+                        message: message,
+                        conversation_id: conversationId,
+                        include_context: 5
+                    })
+                });
+                
+                const data = await response.json();
+                conversationId = data.conversation_id;
+                
+                const text = data.message || '(empty response - needs training)';
+                addMessage('assistant', text, {
+                    confidence: data.confidence || 0,
+                    userMsg: message
+                });
+                
+            } catch (err) {
+                addMessage('assistant', 'Error: ' + err.message);
+            }
+        }
+        
+        function giveFeedback(msgId, positive, userMsg, alenMsg) {
+            if (positive) {
+                // Train on positive feedback
+                fetch(API_URL + '/train', {
+                    method: 'POST',
+                    headers: {'Content-Type': 'application/json'},
+                    body: JSON.stringify({
+                        input: userMsg,
+                        expected_answer: alenMsg,
+                        constraints: [],
+                        context: ['positive_feedback']
+                    })
+                }).then(() => {
+                    alert('✅ Positive feedback recorded! Pattern reinforced.');
+                });
+            } else {
+                // Show training input
+                document.getElementById(msgId).style.display = 'block';
+            }
+        }
+        
+        function trainFromFeedback(msgId, userMsg) {
+            const textarea = document.querySelector('#' + msgId + ' textarea');
+            const correctAnswer = textarea.value.trim();
+            
+            if (!correctAnswer) {
+                alert('Please enter what I should have said');
+                return;
+            }
+            
+            fetch(API_URL + '/train', {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify({
+                    input: userMsg,
+                    expected_answer: correctAnswer,
+                    constraints: [],
+                    context: ['user_correction']
+                })
+            })
+            .then(r => r.json())
+            .then(data => {
+                if (data.success) {
+                    alert('✅ Training successful! I learned from your correction.');
+                    document.getElementById(msgId).style.display = 'none';
+                } else {
+                    alert('⚠️ Training attempted but may need simpler examples');
+                }
+            })
+            .catch(err => {
+                alert('❌ Training failed: ' + err.message);
+            });
+        }
+        
+        function clearChat() {
+            document.getElementById('chat').innerHTML = '';
+            conversationId = null;
+        }
+    </script>
+</body>
+</html>

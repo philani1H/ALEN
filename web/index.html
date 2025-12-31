@@ -900,7 +900,10 @@ capital of Germany -> Berlin</textarea>
 
     <script>
         // Configuration
-        const API_URL = 'http://localhost:3000';
+        // Auto-detect API URL - use same origin or localhost
+        const API_URL = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1'
+            ? 'http://localhost:3000'
+            : window.location.origin;
         let conversationId = null;
 
         // Utility functions
@@ -1167,9 +1170,18 @@ capital of Germany -> Berlin</textarea>
                 };
                 if (body) options.body = JSON.stringify(body);
 
+                console.log('API Call:', API_URL + endpoint, method, body); // Debug
                 const response = await fetch(API_URL + endpoint, options);
-                return await response.json();
+                
+                if (!response.ok) {
+                    throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+                }
+                
+                const data = await response.json();
+                console.log('API Response:', data); // Debug
+                return data;
             } catch (error) {
+                console.error('API Error:', error); // Debug
                 return {success: false, error: error.message};
             }
         }
@@ -1274,11 +1286,29 @@ capital of Germany -> Berlin</textarea>
                 conversation_id: conversationId
             });
 
+            console.log('Chat API response:', result); // Debug log
+
             if (result.conversation_id) {
                 conversationId = result.conversation_id;
             }
 
             hideLoading('chat-loading');
+
+            // Handle API errors
+            if (result.error) {
+                const errorMsg = document.createElement('div');
+                errorMsg.className = 'chat-message assistant';
+                errorMsg.innerHTML = `
+                    <div class="role">🤖 ALEN</div>
+                    <div class="content">
+                        <p style="color: red;">Error: ${result.error}</p>
+                        <p>Please make sure the ALEN server is running.</p>
+                    </div>
+                `;
+                chatResult.appendChild(errorMsg);
+                chatResult.scrollTop = chatResult.scrollHeight;
+                return;
+            }
             
             // Show ALEN's response with reasoning
             const alenMsg = document.createElement('div');
@@ -1305,7 +1335,12 @@ capital of Germany -> Berlin</textarea>
             
             // Show the actual response in separate box
             responseHTML += '<div class="response-content">';
-            responseHTML += renderMarkdownWithLatex(result.message || result.response || result.text || 'No response');
+            const responseText = result.message || result.response || result.text || '';
+            if (responseText.trim() === '') {
+                responseHTML += '<p style="color: #888; font-style: italic;">The system generated an empty response. This usually means it needs more training on this topic. Try training it with similar examples first.</p>';
+            } else {
+                responseHTML += renderMarkdownWithLatex(responseText);
+            }
             responseHTML += '</div>';
             responseHTML += '</div>';
             
@@ -1332,8 +1367,12 @@ capital of Germany -> Berlin</textarea>
                     <button class="feedback-btn negative" onclick="giveFeedback('${msgId}', 'negative', '${message.replace(/'/g, "\\'")}', '${(result.message || '').replace(/'/g, "\\'")}')">👎 Not Helpful</button>
                 </div>
                 <div id="${msgId}-feedback" class="feedback-input">
-                    <textarea id="${msgId}-text" placeholder="How can I improve? (optional)"></textarea>
-                    <button onclick="submitFeedback('${msgId}', '${message.replace(/'/g, "\\'")}', '${(result.message || '').replace(/'/g, "\\'")}')">Submit Feedback</button>
+                    <p style="margin: 10px 0; font-size: 0.9em; color: #666;">
+                        💡 <strong>Help me learn!</strong> What should I have said instead? 
+                        Your answer will be used to train me.
+                    </p>
+                    <textarea id="${msgId}-text" placeholder="Type the correct answer here (e.g., 'I am ALEN, an AI learning system')"></textarea>
+                    <button onclick="submitFeedback('${msgId}', '${message.replace(/'/g, "\\'")}', '${(result.message || '').replace(/'/g, "\\'")}')">Train Me With This Answer</button>
                 </div>
             `;
             
@@ -1430,12 +1469,31 @@ capital of Germany -> Berlin</textarea>
                 msgElement.appendChild(thankYou);
             }
             
-            // If negative feedback with text, train on it
-            if (feedbackType === 'negative' && feedbackText) {
+            // If negative feedback with improvement text, train on it
+            if (feedbackType === 'negative' && feedbackText.trim() !== '') {
+                console.log('Training from negative feedback...');
+                const trainResult = await apiCall('/train', 'POST', {
+                    input: userMsg,
+                    expected_answer: feedbackText,
+                    constraints: [],
+                    context: ['user_feedback', 'improvement']
+                });
+                
+                if (trainResult.success) {
+                    thankYou.textContent += ' The system has been trained with your suggestion!';
+                } else {
+                    thankYou.textContent += ' (Training attempted but may need simpler examples)';
+                }
+            }
+            
+            // For positive feedback, reinforce the current response
+            if (feedbackType === 'positive' && alenResponse.trim() !== '') {
+                console.log('Reinforcing positive response...');
                 await apiCall('/train', 'POST', {
                     input: userMsg,
-                    expected_output: feedbackText,
-                    context: ['user feedback', 'improvement']
+                    expected_answer: alenResponse,
+                    constraints: [],
+                    context: ['user_feedback', 'positive_reinforcement']
                 });
             }
         }

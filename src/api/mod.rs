@@ -249,6 +249,13 @@ impl ReasoningEngine {
                 if let Some(ref answer) = problem.target_answer {
                     let mut decoder = self.latent_decoder.lock().unwrap();
                     decoder.learn(thought, answer);
+                    
+                    // Save decoder every 10 training examples
+                    let stats = decoder.stats();
+                    if stats.training_count % 10 == 0 {
+                        let decoder_path = std::path::Path::new("/home/vscode/.local/share/alen/databases/latent_decoder.bin");
+                        let _ = decoder.save(decoder_path);
+                    }
                 }
             }
         }

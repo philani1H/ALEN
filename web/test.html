@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ALEN API Test</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+            background: #f5f5f5;
+        }
+        .test-section {
+            background: white;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        button {
+            background: #667eea;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 5px;
+        }
+        button:hover {
+            background: #5568d3;
+        }
+        .result {
+            background: #f9f9f9;
+            padding: 15px;
+            margin-top: 10px;
+            border-left: 4px solid #667eea;
+            white-space: pre-wrap;
+            font-family: monospace;
+            font-size: 12px;
+        }
+        .success {
+            border-left-color: #4caf50;
+        }
+        .error {
+            border-left-color: #f44336;
+        }
+        input, textarea {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        h2 {
+            color: #667eea;
+        }
+    </style>
+</head>
+<body>
+    <h1>🧪 ALEN API Test Page</h1>
+    
+    <div class="test-section">
+        <h2>API Configuration</h2>
+        <p><strong>API URL:</strong> <span id="api-url"></span></p>
+        <button onclick="testHealth()">Test Health Endpoint</button>
+        <div id="health-result" class="result" style="display:none;"></div>
+    </div>
+
+    <div class="test-section">
+        <h2>Chat Test</h2>
+        <input type="text" id="chat-message" placeholder="Enter your message" value="Hello, what is your name?">
+        <button onclick="testChat()">Send Chat Message</button>
+        <div id="chat-result" class="result" style="display:none;"></div>
+    </div>
+
+    <div class="test-section">
+        <h2>Training Test</h2>
+        <input type="text" id="train-input" placeholder="Question" value="What is AI?">
+        <input type="text" id="train-answer" placeholder="Answer" value="AI is artificial intelligence">
+        <button onclick="testTrain()">Train</button>
+        <div id="train-result" class="result" style="display:none;"></div>
+    </div>
+
+    <div class="test-section">
+        <h2>System Stats</h2>
+        <button onclick="testStats()">Get Stats</button>
+        <div id="stats-result" class="result" style="display:none;"></div>
+    </div>
+
+    <script>
+        // Auto-detect API URL
+        const API_URL = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1'
+            ? 'http://localhost:3000'
+            : window.location.origin;
+        
+        document.getElementById('api-url').textContent = API_URL;
+
+        async function apiCall(endpoint, method = 'GET', body = null) {
+            try {
+                const options = {
+                    method,
+                    headers: {'Content-Type': 'application/json'}
+                };
+                if (body) options.body = JSON.stringify(body);
+
+                console.log('Calling:', API_URL + endpoint);
+                const response = await fetch(API_URL + endpoint, options);
+                
+                if (!response.ok) {
+                    throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+                }
+                
+                return await response.json();
+            } catch (error) {
+                console.error('Error:', error);
+                throw error;
+            }
+        }
+
+        function showResult(elementId, data, isError = false) {
+            const el = document.getElementById(elementId);
+            el.style.display = 'block';
+            el.className = 'result ' + (isError ? 'error' : 'success');
+            el.textContent = JSON.stringify(data, null, 2);
+        }
+
+        async function testHealth() {
+            try {
+                const result = await apiCall('/health');
+                showResult('health-result', result);
+            } catch (error) {
+                showResult('health-result', {error: error.message}, true);
+            }
+        }
+
+        async function testChat() {
+            try {
+                const message = document.getElementById('chat-message').value;
+                const result = await apiCall('/chat', 'POST', {
+                    message: message,
+                    include_context: 5
+                });
+                showResult('chat-result', result);
+            } catch (error) {
+                showResult('chat-result', {error: error.message}, true);
+            }
+        }
+
+        async function testTrain() {
+            try {
+                const input = document.getElementById('train-input').value;
+                const answer = document.getElementById('train-answer').value;
+                const result = await apiCall('/train', 'POST', {
+                    input: input,
+                    expected_answer: answer,
+                    constraints: [],
+                    context: []
+                });
+                showResult('train-result', result);
+            } catch (error) {
+                showResult('train-result', {error: error.message}, true);
+            }
+        }
+
+        async function testStats() {
+            try {
+                const result = await apiCall('/stats');
+                showResult('stats-result', result);
+            } catch (error) {
+                showResult('stats-result', {error: error.message}, true);
+            }
+        }
+
+        // Auto-test health on load
+        window.onload = () => {
+            testHealth();
+        };
+    </script>
+</body>
+</html>

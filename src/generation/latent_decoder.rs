@@ -247,7 +247,7 @@ impl ConceptToTokenNetwork {
             let vocab_size = self.vocabulary.len().max(1);
             for (token, prob) in token_probs.iter_mut() {
                 let bigram_p = self.bigram_model.probability(prev, token, vocab_size);
-                *prob = *prob * 0.6 + bigram_p * 0.4;  // Blend neural + bigram
+                *prob = *prob * 0.3 + bigram_p * 0.7;  // Stronger bigram for coherence
             }
         }
 
@@ -342,8 +342,8 @@ impl LatentDecoder {
             token_network: ConceptToTokenNetwork::new(),
             dimension,
             learning_rate: 0.1,  // HIGHER learning rate
-            temperature: 0.7,
-            max_tokens: 100,
+            temperature: 0.7,  // Balanced for coherence and variety
+            max_tokens: 15,  // Shorter responses
             activation_threshold: 0.3,  // Lower threshold
             training_count: 0,
         }
@@ -471,8 +471,11 @@ impl LatentDecoder {
                 
                 generated_tokens.push(token);
 
-                // Stop conditions
-                if generated_tokens.len() > 10 && confidence < 0.05 {
+                // Stop conditions - stop early for better quality
+                if generated_tokens.len() >= 5 && confidence < 0.1 {
+                    break;
+                }
+                if generated_tokens.len() >= 10 {
                     break;
                 }
             } else {

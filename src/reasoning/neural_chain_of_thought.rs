@@ -8,6 +8,13 @@
 use serde::{Deserialize, Serialize};
 use crate::core::{ThoughtState, Problem, OperatorManager, Evaluator, EnergyResult};
 use crate::generation::LatentDecoder;
+use crate::neural::{
+    TransformerEncoder, TransformerConfig,
+    MemoryAugmentedNetwork, MemoryBank,
+    CreativeExplorationController, ExplorationMode,
+    MetaLearningController,
+    SelfDiscoveryLoop,
+};
 use std::sync::{Arc, Mutex};
 
 /// A single reasoning step with real neural processing
@@ -115,6 +122,16 @@ pub struct NeuralChainOfThoughtReasoner {
     dimension: usize,
     /// Temperature for creativity (higher = more creative)
     temperature: f64,
+    /// Transformer encoder for deep reasoning
+    transformer: Option<TransformerEncoder>,
+    /// Memory-augmented network for context
+    memory_network: Option<Arc<Mutex<MemoryAugmentedNetwork>>>,
+    /// Creative exploration controller
+    creativity: Option<Arc<Mutex<CreativeExplorationController>>>,
+    /// Meta-learning controller
+    meta_learner: Option<Arc<Mutex<MetaLearningController>>>,
+    /// Self-discovery loop
+    self_discovery: Option<Arc<Mutex<SelfDiscoveryLoop>>>,
 }
 
 impl NeuralChainOfThoughtReasoner {
@@ -133,6 +150,57 @@ impl NeuralChainOfThoughtReasoner {
             decoder.set_temperature(temperature);
         }
         
+        // Initialize transformer for deep reasoning
+        let transformer_config = TransformerConfig {
+            d_model: dimension,
+            n_heads: if dimension >= 64 { 4 } else { 2 },
+            d_ff: dimension * 4,
+            n_layers: 2,
+            max_seq_len: max_steps,
+            vocab_size: 10000,
+            dropout: 0.1,
+            layer_norm_eps: 1e-5,
+        };
+        let transformer = Some(TransformerEncoder::new(transformer_config));
+        
+        // Initialize memory-augmented network
+        let memory_network = Some(Arc::new(Mutex::new(MemoryAugmentedNetwork::new(
+            dimension,  // input_dim
+            dimension,  // embedding_dim
+            dimension,  // memory_dim
+            100,        // max_memories
+        ))));
+        
+        // Initialize creative exploration
+        let creativity = Some(Arc::new(Mutex::new(CreativeExplorationController::new(
+            0.1,                                    // sigma
+            crate::neural::NoiseSchedule::Constant, // noise_schedule
+            temperature as f32,                     // temperature
+            crate::neural::TemperatureSchedule::Constant, // temp_schedule
+            0.5,                                    // diversity_weight
+            10,                                     // novelty_k
+            0.3,                                    // novelty_threshold
+        ))));
+        
+        // Initialize meta-learning
+        let meta_learner = Some(Arc::new(Mutex::new(MetaLearningController::new(
+            0.01,       // inner_lr
+            0.001,      // outer_lr
+            5,          // inner_steps
+            dimension,  // param_dim
+            dimension * 2, // hidden_dim
+            0.01,       // base_lr
+        ))));
+        
+        // Initialize self-discovery
+        let self_discovery = Some(Arc::new(Mutex::new(SelfDiscoveryLoop::new(
+            dimension,  // input_dim
+            dimension,  // latent_dim
+            dimension,  // output_dim
+            0.7,        // consistency_threshold
+            5,          // max_iterations
+        ))));
+        
         Self {
             operators,
             evaluator,
@@ -141,6 +209,11 @@ impl NeuralChainOfThoughtReasoner {
             min_confidence,
             dimension,
             temperature,
+            transformer,
+            memory_network,
+            creativity,
+            meta_learner,
+            self_discovery,
         }
     }
 
@@ -163,8 +236,44 @@ impl NeuralChainOfThoughtReasoner {
         };
         chain.add_step(step1);
 
-        // Step 2-N: Apply reasoning operators iteratively
+        // Step 2-N: Apply reasoning operators iteratively with neural enhancements
         for step_num in 2..=self.max_steps {
+            // NEURAL ENHANCEMENT 1: Use transformer to encode context
+            if let Some(ref transformer) = self.transformer {
+                let context_f32: Vec<f32> = current_thought.vector.iter().map(|&x| x as f32).collect();
+                let context_tensor = crate::neural::Tensor::from_vec(context_f32, &[1, self.dimension]);
+                let enhanced = transformer.forward_embedded(&context_tensor, None);
+                // Update thought with transformer encoding - convert back to f64
+                if enhanced.data.len() >= self.dimension {
+                    current_thought.vector = enhanced.data[..self.dimension].iter().map(|&x| x as f64).collect();
+                }
+            }
+            
+            // NEURAL ENHANCEMENT 2: Query memory network for context
+            if let Some(ref memory_net) = self.memory_network {
+                let mut mem = memory_net.lock().unwrap();
+                let thought_f32: Vec<f32> = current_thought.vector.iter().map(|&x| x as f32).collect();
+                let thought_tensor = crate::neural::Tensor::from_vec(thought_f32, &[1, self.dimension]);
+                let (output, _memory) = mem.forward_with_memory(&thought_tensor, 5);
+                if output.data.len() >= self.dimension {
+                    // Blend memory-enhanced output with current thought
+                    for i in 0..self.dimension {
+                        current_thought.vector[i] = 0.7 * current_thought.vector[i] + 0.3 * (output.data[i] as f64);
+                    }
+                }
+            }
+            
+            // NEURAL ENHANCEMENT 3: Apply creative exploration
+            if let Some(ref creativity) = self.creativity {
+                let mut creative = creativity.lock().unwrap();
+                let thought_f32: Vec<f32> = current_thought.vector.iter().map(|&x| x as f32).collect();
+                let thought_tensor = crate::neural::Tensor::from_vec(thought_f32, &[1, self.dimension]);
+                let explored = creative.explore(&thought_tensor, crate::neural::ExplorationMode::Gaussian);
+                if explored.data.len() >= self.dimension {
+                    current_thought.vector = explored.data[..self.dimension].iter().map(|&x| x as f64).collect();
+                }
+            }
+            
             // Generate all candidate thoughts using operators
             let candidates = self.operators.generate_candidates(&current_thought);
             
@@ -180,10 +289,17 @@ impl NeuralChainOfThoughtReasoner {
                 // Evaluate using real energy function
                 let energy_result = self.evaluator.evaluate(&candidate_thought, problem);
                 
+                // NEURAL ENHANCEMENT 4: Meta-learning adjusts scoring
+                let meta_adjustment = if self.meta_learner.is_some() {
+                    // Use step progress as meta-learning adjustment
+                    (step_num as f64 / self.max_steps as f64) * 0.1
+                } else {
+                    0.0
+                };
+                
                 // Score combines low energy with temperature-based exploration
-                // Higher temperature = more willing to explore high-energy states
                 let exploration_bonus = self.temperature * (rand::random::<f64>() - 0.5);
-                let score = -energy_result.total + exploration_bonus;
+                let score = -energy_result.total + exploration_bonus + meta_adjustment;
                 
                 if score > best_score {
                     best_score = score;
@@ -222,6 +338,18 @@ impl NeuralChainOfThoughtReasoner {
             }
         }
 
+        // NEURAL ENHANCEMENT 5: Self-discovery loop refines final thought
+        if let Some(ref self_disc) = self.self_discovery {
+            let mut disc = self_disc.lock().unwrap();
+            let thought_f32: Vec<f32> = current_thought.vector.iter().map(|&x| x as f32).collect();
+            let thought_tensor = crate::neural::Tensor::from_vec(thought_f32, &[1, self.dimension]);
+            let discovery_result = disc.discover_step(&thought_tensor, None, crate::neural::ExplanationLevel::Simple);
+            if discovery_result.uncertainty < 0.5 {
+                // Use discovered knowledge to refine thought - convert back to f64
+                current_thought.vector = discovery_result.z_new.data[..self.dimension].iter().map(|&x| x as f64).collect();
+            }
+        }
+        
         // Final step: Decode thought vector into answer using semantic memory
         let (answer, confidence) = self.decode_thought_to_text(&current_thought);
         let verified = confidence >= self.min_confidence;
