@@ -148,3 +148,4 @@ async fn test_conversation_context_building() {
     assert!(context.contains("Message 2"));
     assert!(!context.contains("Message 1")); // Should not include first message
 }
+

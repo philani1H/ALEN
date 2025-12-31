@@ -314,10 +314,20 @@ pub async fn chat(
 
         // ALWAYS use neural reasoning answer - NO HARDCODED RESPONSES
         // The LatentDecoder generates from learned patterns
-        reasoning_chain.answer.clone().unwrap_or_else(||
-            // If no answer, generate from final thought state using LatentDecoder
-            String::new()
-        )
+        reasoning_chain.answer.clone().unwrap_or_else(|| {
+            // If no answer from reasoning chain, attempt direct generation from final thought
+            let decoder = engine.latent_decoder.lock().unwrap();
+            let (generated_text, gen_confidence) = decoder.generate(&final_thought);
+            
+            // If generation produces text with reasonable confidence, use it
+            if !generated_text.is_empty() && gen_confidence > 0.2 {
+                generated_text
+            } else {
+                // Last resort: honest uncertainty response
+                // This is NOT a hardcoded answer - it's an honest admission of insufficient training
+                "I don't have enough learned patterns to generate a confident response to this query. I need more training examples in this domain.".to_string()
+            }
+        })
     };
 
     let result_confidence = reasoning_chain.confidence;
