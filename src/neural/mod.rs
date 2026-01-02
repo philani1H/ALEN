@@ -29,6 +29,7 @@ pub mod universal_expert;
 pub mod complete_integration;
 pub mod advanced_control;
 pub mod failure_reasoning;
+// pub mod master_integration;  // TODO: Fix API mismatches - work in progress
 
 pub use tensor::{Tensor, TensorShape, Device};
 pub use layers::{Linear, LayerNorm, Dropout, Embedding, Conv1D};
@@ -56,6 +57,7 @@ pub use trainer::{
 pub use alen_network::{
     ALENNetwork, ALENConfig, ThoughtEncoder, NeuralReasoningOperator,
     ThoughtDecoder, ThoughtVerifier, ALENForwardResult, CandidateEvaluation,
+    EnergyWeights,
 };
 pub use integration::{
     VerifiedTrainingResult, NeuralInferenceResult,
@@ -110,7 +112,12 @@ pub use universal_expert::{
     MultiModalInput, UserState, EmotionVector, FramingVector,
     ReasoningChain, ReasoningStep, VerifiedAnswer,
     StyledExplanation, ExplanationStyle, GeneratedQuestion, QuestionType,
-    MetaEvaluation, FactVerifier, 
+    MetaEvaluation, FactVerifier,
     ExplanationGenerator as UniversalExplanationGenerator, QuestionGenerator,
     MetaReasoner, CreativityModulator, SafetyFilter,
 };
+
+// pub use master_integration::{
+//     MasterNeuralSystem, MasterSystemConfig, MasterSystemResponse,
+//     MasterSystemStats, TrainingMetrics as MasterTrainingMetrics,
+// };
