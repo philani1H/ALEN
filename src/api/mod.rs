@@ -203,7 +203,7 @@ impl ReasoningEngine {
             match crate::generation::LatentDecoder::load(&decoder_path) {
                 Ok(decoder) => {
                     let stats = decoder.stats();
-                    eprintln!("✓ Loaded LatentDecoder: {} patterns, {} vocab", stats.active_patterns, stats.vocabulary_size);
+                    eprintln!("✓ Loaded LatentController: {} patterns, training count: {}", stats.active_patterns, stats.training_count);
                     StdArc::new(StdMutex::new(decoder))
                 }
                 Err(e) => {

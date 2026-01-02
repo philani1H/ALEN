@@ -39,7 +39,8 @@ pub use factual_decoder::{
     VerificationResult, GenerationMode,
 };
 pub use explanation_decoder::{
-    ExplanationDecoder, ExplanationAudience, ExplanationResponse, StyleVector,
+    ExplanationDecoder, ExplanationAudience, ExplanationResponse,
+    StyleVector as ExplanationStyleVector,
 };
 pub use reasoning_engine::{
     ReasoningEngine, LatentResult, LatentVerification,
@@ -56,7 +57,14 @@ pub use bpe_tokenizer::{
     BPETokenizer, BPETrainer, BPEWithEmbeddings, BPESpecialTokens, MergeRule,
 };
 pub use semantic_decoder::SemanticDecoder;
-pub use latent_decoder::{LatentDecoder, LatentDecoderStats};
+pub use latent_decoder::{
+    LatentDecoder,
+    LatentController, LatentControllerStats,
+    ControlVariables, ControlAction, IntentClass, StyleVector,
+    MemoryState, ActionThresholds,
+};
+// Backward compatibility alias
+pub use latent_decoder::LatentControllerStats as LatentDecoderStats;
 pub use confidence_decoder::{
     ConfidenceDecoder, DecoderOutput, RefusalReason, UncertaintyBreakdown,
     CalibrationParams, CalibrationMetrics, CalibrationBin,

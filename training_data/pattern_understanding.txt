@@ -1,0 +1,62 @@
+# Pattern Understanding and Generalization Training Data
+# Format: Q: question | A: answer
+
+Q: What comes next in the sequence: 2, 4, 8, 16, ?
+A: The next number is 32. This is a geometric sequence where each term is multiplied by 2.
+
+Q: Complete the pattern: A, C, E, G, ?
+A: The next letter is I. This pattern skips every other letter in the alphabet.
+
+Q: If all roses are flowers, and all flowers need water, what can we conclude about roses?
+A: We can conclude that all roses need water. This follows from the transitive property of logical implication.
+
+Q: What is the relationship between squares and rectangles?
+A: All squares are rectangles, but not all rectangles are squares. A square is a special case of a rectangle where all sides are equal.
+
+Q: If 3 apples cost $6, how much do 7 apples cost?
+A: First find the price per apple: $6/3 = $2 per apple. Then 7 apples cost 7 × $2 = $14.
+
+Q: What pattern do you see in: 1, 1, 2, 3, 5, 8, 13, ?
+A: This is the Fibonacci sequence where each number is the sum of the previous two. The next number is 5 + 8 = 13, then 8 + 13 = 21.
+
+Q: If it takes 5 machines 5 minutes to make 5 widgets, how long does it take 100 machines to make 100 widgets?
+A: It still takes 5 minutes. Each machine makes 1 widget in 5 minutes, so 100 machines make 100 widgets in 5 minutes.
+
+Q: What do these words have in common: cat, hat, bat, mat?
+A: They all end with "at" and are three-letter words with the same rhyme pattern.
+
+Q: If some A are B, and all B are C, what can we say about A and C?
+A: We can conclude that some A are C. We cannot say all A are C because we only know that some A are B.
+
+Q: What is the missing number: 3, 6, ?, 12, 15
+A: The missing number is 9. This is an arithmetic sequence with a common difference of 3.
+
+Q: If north is up, what direction is right?
+A: East. On a standard map, north is up, south is down, east is right, and west is left.
+
+Q: What is the opposite of hot?
+A: Cold. Hot and cold are antonyms representing opposite extremes of temperature.
+
+Q: If you flip the number 6, what do you get?
+A: Depending on how you flip it: horizontal flip gives 9, vertical flip also looks like an upside-down 6 which is 9.
+
+Q: What category do these belong to: oak, pine, maple, birch?
+A: These are all types of trees. Oak and maple are deciduous, while pine is coniferous, and birch is deciduous.
+
+Q: If today is Wednesday, what day was it 3 days ago?
+A: Sunday. Counting backwards: Tuesday, Monday, Sunday.
+
+Q: What is common between 2, 4, 6, 8, 10?
+A: They are all even numbers - divisible by 2.
+
+Q: If A > B and B > C, what is the relationship between A and C?
+A: A > C. This follows from the transitive property of inequality.
+
+Q: What comes next: red, orange, yellow, green, blue, ?
+A: Indigo or violet. This follows the order of colors in the rainbow (ROYGBIV).
+
+Q: If all birds can fly (hypothetically), and penguins are birds, can penguins fly?
+A: Based on the hypothetical premise, yes. However, in reality, penguins cannot fly, showing the importance of accurate premises.
+
+Q: What is the relationship between multiplication and division?
+A: They are inverse operations. Division undoes multiplication, and multiplication undoes division.

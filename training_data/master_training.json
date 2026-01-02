@@ -1,0 +1,3331 @@
+{
+  "version": "1.0",
+  "description": "Master neural system training data",
+  "total_examples": 554,
+  "examples": [
+    {
+      "id": 0,
+      "input": "How do I ask for help effectively?",
+      "target": "Be specific about: 1) What you're trying to do 2) What you've already tried 3) What error or problem you're seeing 4) Any relevant context. This helps get better assistance.",
+      "difficulty": "hard"
+    },
+    {
+      "id": 1,
+      "input": "What should I include when asking for technical help?",
+      "target": "Include: the error message, relevant code, what you expected, what happened instead, your environment (OS, versions), and steps to reproduce the issue.",
+      "difficulty": "medium"
+    },
+    {
+      "id": 2,
+      "input": "How do I know when to ask for help?",
+      "target": "Ask when: you've been stuck for a while, the documentation isn't clear, you're unsure about best practices, you need a second opinion, or time is limited.",
+      "difficulty": "medium"
+    },
+    {
+      "id": 3,
+      "input": "Is it okay to ask basic questions?",
+      "target": "Yes! Everyone starts somewhere. Basic questions are valid. Don't apologize for not knowing - asking is how we learn.",
+      "difficulty": "medium"
+    },
+    {
+      "id": 4,
+      "input": "How do I ask for help without feeling embarrassed?",
+      "target": "Remember that asking shows initiative. Frame it positively: \"I'm learning about X and want to understand Y better\" rather than \"I don't know anything.\"",
+      "difficulty": "medium"
+    },
+    {
+      "id": 5,
+      "input": "What makes a good help request?",
+      "target": "A good request: states the goal clearly, provides context, shows what you've tried, asks specific questions, and is formatted readably.",
+      "difficulty": "medium"
+    },
+    {
+      "id": 6,
+      "input": "How should I respond when someone asks for help?",
+      "target": "Be patient and kind. Understand their level. Give clear explanations. Offer examples. Check if they understand. Encourage follow-up questions.",
+      "difficulty": "medium"
+    },
+    {
+      "id": 7,
+      "input": "What if I don't understand the help I received?",
+      "target": "Ask for clarification! Say \"Could you explain that differently?\" or \"I'm not sure I understand the part about...\" Don't pretend to understand.",
+      "difficulty": "medium"
+    },
+    {
+      "id": 8,
+      "input": "How do I help someone debug their problem?",
+      "target": "Ask what they're trying to achieve, what they expected, what happened instead. Look at their code/setup. Explain the cause, not just the fix. Teach them to debug.",
+      "difficulty": "medium"
+    },
+    {
+      "id": 9,
+      "input": "What if I can't solve someone's problem?",
+      "target": "Be honest: \"I'm not sure about this, but here's what I do know...\" or \"This might be outside my expertise. You might want to check [resource].\"",
+      "difficulty": "medium"
+    },
+    {
+      "id": 10,
+      "input": "How do I ask for help learning something new?",
+      "target": "Say what you want to learn, your current knowledge level, how you learn best (examples, theory, hands-on), and any specific areas you're confused about.",
+      "difficulty": "medium"
+    },
+    {
+      "id": 11,
+      "input": "What's the best way to describe a bug?",
+      "target": "Provide: steps to reproduce, expected behavior, actual behavior, environment details, and any error messages. Screenshots or screen recordings help too.",
+      "difficulty": "medium"
+    },
+    {
+      "id": 12,
+      "input": "How do I ask for code review help?",
+      "target": "Share your code, explain what it does, mention specific concerns, ask targeted questions like \"Is this approach efficient?\" or \"How could this be more readable?\"",
+      "difficulty": "medium"
+    },
+    {
+      "id": 13,
+      "input": "What if my question seems too complex?",
+      "target": "Break it into smaller parts. Ask about one aspect at a time. Provide background info. Consider what you really need to know first.",
+      "difficulty": "medium"
+    },
+    {
+      "id": 14,
+      "input": "How do I request help with a decision?",
+      "target": "Present the options you're considering, the criteria that matter, your current thinking, and what's blocking your decision.",
+      "difficulty": "medium"
+    },
+    {
+      "id": 15,
+      "input": "What's the etiquette for asking help online?",
+      "target": "Search first, provide details, format code properly, be patient, say thanks, update if you solve it yourself, don't cross-post without mentioning it.",
+      "difficulty": "medium"
+    },
+    {
+      "id": 16,
+      "input": "How do I ask for help with a large project?",
+      "target": "Start with the big picture, then focus on the specific part you need help with. Don't dump everything at once. Be clear about what kind of help you need.",
+      "difficulty": "medium"
+    },
+    {
+      "id": 17,
+      "input": "What if I'm helping someone and they get frustrated?",
+      "target": "Stay patient. Acknowledge their frustration. Slow down. Try a different explanation. Take a break if needed. Remember learning is hard.",
+      "difficulty": "medium"
+    },
+    {
+      "id": 18,
+      "input": "How do I ask for help without revealing confidential info?",
+      "target": "Create a minimal example that shows the problem without sensitive data. Describe the general situation without specifics if needed.",
+      "difficulty": "medium"
+    },
+    {
+      "id": 19,
+      "input": "What makes someone good at asking for help?",
+      "target": "They: do some research first, ask clear questions, provide context, show effort, accept feedback gracefully, thank helpers, and share what they learned.",
+      "difficulty": "medium"
+    },
+    {
+      "id": 20,
+      "input": "When should I ask clarifying questions?",
+      "target": "Ask clarifying questions when: 1) The request is ambiguous 2) Important details are missing 3) You want to confirm understanding 4) Multiple interpretations exist 5) Context would improve the response",
+      "difficulty": "hard"
+    },
+    {
+      "id": 21,
+      "input": "How do I ask for clarification politely?",
+      "target": "Use phrases like \"Could you clarify what you mean by...?\" or \"Just to make sure I understand, are you asking about...?\" or \"Would you like me to focus on... or...?\"",
+      "difficulty": "hard"
+    },
+    {
+      "id": 22,
+      "input": "What makes a good clarifying question?",
+      "target": "Good questions are: specific, relevant, open-ended when exploring ideas, closed when confirming details. They show you're listening and trying to help accurately.",
+      "difficulty": "medium"
+    },
+    {
+      "id": 23,
+      "input": "How do I ask about the user's goal?",
+      "target": "Ask \"What are you trying to achieve?\" or \"What's the end result you're looking for?\" or \"What would success look like for you?\"",
+      "difficulty": "medium"
+    },
+    {
+      "id": 24,
+      "input": "When should I ask about constraints?",
+      "target": "Ask about constraints when: length matters (\"How detailed should this be?\"), format matters (\"Would you prefer bullet points or paragraphs?\"), audience matters (\"Who will be reading this?\")",
+      "difficulty": "medium"
+    },
+    {
+      "id": 25,
+      "input": "How do I ask follow-up questions?",
+      "target": "After receiving initial info, follow up with \"Can you tell me more about...?\" or \"What specifically about X interests you?\" or \"Are there any particular aspects you'd like me to focus on?\"",
+      "difficulty": "hard"
+    },
+    {
+      "id": 26,
+      "input": "What questions help understand context?",
+      "target": "Context questions include: \"What's the background for this?\" \"Where will this be used?\" \"What have you already tried?\" \"What's your experience level with this topic?\"",
+      "difficulty": "medium"
+    },
+    {
+      "id": 27,
+      "input": "How do I ask about preferences?",
+      "target": "Ask \"Do you prefer a technical or simple explanation?\" \"Would you like examples?\" \"Should I include pros and cons?\" \"Any specific format you'd like?\"",
+      "difficulty": "medium"
+    },
+    {
+      "id": 28,
+      "input": "When is it appropriate to ask for examples?",
+      "target": "Ask for examples when the concept is abstract, when you need to understand the pattern, or when clarifying edge cases: \"Could you give me an example of what you mean?\"",
+      "difficulty": "hard"
+    },
+    {
+      "id": 29,
+      "input": "How do I verify my understanding before proceeding?",
+      "target": "Say \"Let me make sure I understand correctly - you want me to... Is that right?\" or \"So to summarize, you're looking for... Did I capture that correctly?\"",
+      "difficulty": "medium"
+    },
+    {
+      "id": 30,
+      "input": "What questions help narrow down a broad topic?",
+      "target": "Ask \"Which aspect of X are you most interested in?\" \"Are you looking for an overview or deep dive?\" \"Is there a specific problem you're trying to solve?\"",
+      "difficulty": "medium"
+    },
+    {
+      "id": 31,
+      "input": "How do I ask about the timeline or urgency?",
+      "target": "Ask \"When do you need this by?\" \"Is this time-sensitive?\" \"Should I provide a quick answer now or a more thorough one later?\"",
+      "difficulty": "medium"
+    },
+    {
+      "id": 32,
+      "input": "What if I don't understand the question at all?",
+      "target": "Be honest: \"I'm not sure I follow. Could you rephrase that?\" or \"I want to help, but I'm unclear about what you're asking. Could you explain differently?\"",
+      "difficulty": "medium"
+    },
+    {
+      "id": 33,
+      "input": "How do I ask about technical requirements?",
+      "target": "Ask \"What programming language?\" \"Which version?\" \"What operating system?\" \"Any specific libraries or frameworks you're using?\"",
+      "difficulty": "medium"
+    },
+    {
+      "id": 34,
+      "input": "When should I ask about expected output format?",
+      "target": "Ask when it matters: \"Would you like code snippets?\" \"Should I provide step-by-step instructions?\" \"Do you want this as a list or narrative?\"",
+      "difficulty": "medium"
+    },
+    {
+      "id": 35,
+      "input": "How do I ask questions without being annoying?",
+      "target": "Bundle related questions, explain why you're asking, offer reasonable defaults: \"I have a few quick questions to help me give you the best answer, or I can proceed with these assumptions...\"",
+      "difficulty": "hard"
+    },
+    {
+      "id": 36,
+      "input": "What questions help with debugging?",
+      "target": "Ask \"What error message do you see?\" \"What did you expect to happen?\" \"What actually happened?\" \"What have you tried so far?\" \"When did it start occurring?\"",
+      "difficulty": "medium"
+    },
+    {
+      "id": 37,
+      "input": "How do I ask about priorities?",
+      "target": "Ask \"What's most important to you - speed, accuracy, or completeness?\" \"If you had to choose, would you prefer X or Y?\" \"What's the must-have vs nice-to-have?\"",
+      "difficulty": "medium"
+    },
+    {
+      "id": 38,
+      "input": "What questions help understand the bigger picture?",
+      "target": "Ask \"How does this fit into your larger project?\" \"What happens before/after this step?\" \"Who else is involved in this?\"",
+      "difficulty": "medium"
+    },
+    {
+      "id": 39,
+      "input": "How do I encourage users to provide more information?",
+      "target": "Use open-ended prompts: \"Tell me more about...\" \"What else should I know?\" \"Is there anything else relevant?\" \"Feel free to share more context.\"",
+      "difficulty": "medium"
+    },
+    {
+      "id": 40,
+      "input": "What is a variable in programming?",
+      "target": "A variable is a named container that stores a value. In Python: x = 5 creates a variable x with value 5. Variables can hold numbers, text, lists, or other data types.",
+      "difficulty": "hard"
+    },
+    {
+      "id": 41,
+      "input": "How do I write a function in Python?",
+      "target": "Define a function using 'def': def greet(name): return f\"Hello, {name}!\" Then call it: greet(\"Alice\") returns \"Hello, Alice!\"",
+      "difficulty": "medium"
+    },
+    {
+      "id": 42,
+      "input": "What is a loop?",
+      "target": "A loop repeats code multiple times. For loop: for i in range(5): print(i) prints 0,1,2,3,4. While loop: while condition: ... continues until condition is false.",
+      "difficulty": "medium"
+    },
+    {
+      "id": 43,
+      "input": "How do I handle errors in code?",
+      "target": "Use try-except blocks: try: result = 10 / x except ZeroDivisionError: result = 0 This catches and handles errors gracefully.",
+      "difficulty": "medium"
+    },
+    {
+      "id": 44,
+      "input": "What is a class in programming?",
+      "target": "A class is a blueprint for creating objects. It defines properties (attributes) and behaviors (methods). class Dog: def __init__(self, name): self.name = name",
+      "difficulty": "medium"
+    },
+    {
+      "id": 45,
+      "input": "How do I read a file in Python?",
+      "target": "Use open(): with open('file.txt', 'r') as f: content = f.read() The 'with' statement ensures the file is properly closed.",
+      "difficulty": "medium"
+    },
+    {
+      "id": 46,
+      "input": "What is recursion?",
+      "target": "Recursion is when a function calls itself. Example: def factorial(n): if n <= 1: return 1 return n * factorial(n-1) Must have a base case to stop.",
+      "difficulty": "medium"
+    },
+    {
+      "id": 47,
+      "input": "How do I sort a list?",
+      "target": "Use sorted() or .sort(): numbers = [3, 1, 4, 1, 5] sorted_nums = sorted(numbers)  # Returns new list numbers.sort()  # Sorts in place",
+      "difficulty": "medium"
+    },
+    {
+      "id": 48,
+      "input": "What is an API?",
+      "target": "An API (Application Programming Interface) is a way for programs to communicate. You send requests and receive responses. Example: weather_data = requests.get(\"api.weather.com/data\")",
+      "difficulty": "medium"
+    },
+    {
+      "id": 49,
+      "input": "How do I debug code?",
+      "target": "1. Read error messages carefully 2. Use print() to check values 3. Use a debugger to step through code 4. Test small parts independently 5. Check for typos",
+      "difficulty": "medium"
+    },
+    {
+      "id": 50,
+      "input": "What is version control?",
+      "target": "Version control tracks changes to code. Git is popular: git init - start repository git add . - stage changes git commit -m \"message\" - save changes git push - upload to remote",
+      "difficulty": "hard"
+    },
+    {
+      "id": 51,
+      "input": "How do I write clean code?",
+      "target": "Use meaningful variable names, add comments, keep functions small, follow consistent formatting, avoid repetition (DRY principle), and write tests.",
+      "difficulty": "medium"
+    },
+    {
+      "id": 52,
+      "input": "What is a database?",
+      "target": "A database stores and organizes data. SQL databases use tables: CREATE TABLE users (id INT, name TEXT); INSERT INTO users VALUES (1, 'Alice'); SELECT * FROM users WHERE id = 1;",
+      "difficulty": "hard"
+    },
+    {
+      "id": 53,
+      "input": "How do I handle user input?",
+      "target": "Get input: user_input = input(\"Enter name: \"). Always validate: if user_input.strip(): process it. Never trust user input - sanitize it.",
+      "difficulty": "medium"
+    },
+    {
+      "id": 54,
+      "input": "What is asynchronous programming?",
+      "target": "Async allows code to continue while waiting: async def fetch_data(): data = await get_from_server() return data This doesn't block other operations.",
+      "difficulty": "medium"
+    },
+    {
+      "id": 55,
+      "input": "How do I write a test?",
+      "target": "Use testing frameworks: def test_addition(): assert add(2, 3) == 5 assert add(-1, 1) == 0 Run tests to verify code works correctly.",
+      "difficulty": "medium"
+    },
+    {
+      "id": 56,
+      "input": "What is object-oriented programming?",
+      "target": "OOP organizes code around objects. Key concepts: Encapsulation (bundling data), Inheritance (reusing code), Polymorphism (same interface, different behavior), Abstraction (hiding complexity).",
+      "difficulty": "medium"
+    },
+    {
+      "id": 57,
+      "input": "How do I optimize slow code?",
+      "target": "1. Profile to find bottlenecks 2. Use efficient algorithms (O(n) vs O(n²)) 3. Cache repeated calculations 4. Use appropriate data structures 5. Consider parallel processing",
+      "difficulty": "medium"
+    },
+    {
+      "id": 58,
+      "input": "What is type checking?",
+      "target": "Type checking verifies data types: def greet(name: str) -> str: return f\"Hello, {name}\" Python uses type hints for documentation and tools like mypy.",
+      "difficulty": "medium"
+    },
+    {
+      "id": 59,
+      "input": "How do I learn a new programming language?",
+      "target": "1. Learn the syntax basics 2. Build small projects 3. Read documentation 4. Practice coding challenges 5. Study others' code 6. Join communities",
+      "difficulty": "medium"
+    },
+    {
+      "id": 60,
+      "input": "What is the meaning of life?",
+      "target": "The meaning of life is a profound philosophical question. From a biological perspective, it's about survival and reproduction. From a personal perspective, it's about finding purpose, connection, and experiences that bring fulfillment. Many find meaning through relationships, creativity, learning, or helping others.",
+      "difficulty": "hard"
+    },
+    {
+      "id": 61,
+      "input": "Tell me something interesting about fractals.",
+      "target": "Fractals are infinitely complex patterns that repeat at every scale. The fascinating thing is that simple mathematical rules can generate breathtaking complexity - like how the Mandelbrot set emerges from the equation z = z² + c. Nature is full of fractals: coastlines, clouds, tree branches, and even blood vessels follow fractal patterns.",
+      "difficulty": "hard"
+    },
+    {
+      "id": 62,
+      "input": "How do you stay motivated?",
+      "target": "Motivation comes from understanding your \"why\" - the deeper purpose behind your goals. Break large goals into small wins to build momentum. Celebrate progress, not just outcomes. When motivation wanes, rely on discipline and systems. Remember that motivation follows action, not the other way around.",
+      "difficulty": "hard"
+    },
+    {
+      "id": 63,
+      "input": "What makes a good conversation?",
+      "target": "A good conversation balances speaking and listening, shows genuine curiosity, and makes both people feel heard. It dances between light and deep topics, allows for vulnerability, and leaves both participants feeling energized rather than drained. The best conversations often lead to unexpected insights.",
+      "difficulty": "hard"
+    },
+    {
+      "id": 64,
+      "input": "Explain quantum entanglement like I'm five.",
+      "target": "Imagine you have two magic coins. When you flip one and it lands on heads, the other coin - no matter how far away - instantly lands on tails. They're connected in a special way that defies our everyday intuition. Scientists call this \"spooky action at a distance.\"",
+      "difficulty": "hard"
+    },
+    {
+      "id": 65,
+      "input": "What's the difference between knowledge and wisdom?",
+      "target": "Knowledge is having information and facts. Wisdom is knowing how and when to apply that knowledge. You can know that fire burns (knowledge), but wisdom is understanding when and how to use fire safely. Wisdom comes from experience, reflection, and understanding context.",
+      "difficulty": "hard"
+    },
+    {
+      "id": 66,
+      "input": "How do you learn effectively?",
+      "target": "Effective learning involves active engagement: teach what you learn, practice retrieval instead of re-reading, space out your study sessions, and interleave different topics. Make connections to what you already know. Embrace difficulty - struggling strengthens learning. Finally, get enough sleep; that's when your brain consolidates memories.",
+      "difficulty": "hard"
+    },
+    {
+      "id": 67,
+      "input": "What is consciousness?",
+      "target": "Consciousness is the subjective experience of being aware - the feeling of what it's like to be you. It's one of the deepest mysteries in science and philosophy. We don't fully understand how physical brain processes give rise to subjective experience, what philosophers call the \"hard problem of consciousness.\"",
+      "difficulty": "hard"
+    },
+    {
+      "id": 68,
+      "input": "Why is music so powerful?",
+      "target": "Music engages multiple brain regions simultaneously: emotion centers, memory systems, motor areas, and reward pathways. It can change our heart rate, hormone levels, and mood. Music likely evolved as a social bonding tool and a way to communicate emotions that words can't capture.",
+      "difficulty": "hard"
+    },
+    {
+      "id": 69,
+      "input": "What's the best way to solve a difficult problem?",
+      "target": "First, clearly define the problem. Break it into smaller sub-problems. Try multiple approaches: work backwards from the solution, draw diagrams, explain it to someone else, or step away and let your subconscious work. Often the solution comes when you combine ideas from different domains.",
+      "difficulty": "hard"
+    },
+    {
+      "id": 70,
+      "input": "How do you build trust?",
+      "target": "Trust is built through consistency over time. Keep your promises, even small ones. Be reliable, honest even when it's uncomfortable, and vulnerable in appropriate ways. Show that you care about others' interests, not just your own. When you make mistakes, own them quickly and sincerely.",
+      "difficulty": "hard"
+    },
+    {
+      "id": 71,
+      "input": "What is the nature of time?",
+      "target": "Time is both simple and mysterious. Physics describes it as a dimension similar to space, but we experience it differently - always moving forward, never backward. Whether time truly \"flows\" or that's just how our consciousness perceives it remains a deep question. What we do know is that time is relative and can bend with gravity and velocity.",
+      "difficulty": "hard"
+    },
+    {
+      "id": 72,
+      "input": "Why do we dream?",
+      "target": "Dreams likely serve multiple functions: consolidating memories, processing emotions, and simulating scenarios for problem-solving. During REM sleep, your brain is highly active, potentially strengthening neural connections and integrating new experiences with existing knowledge. Some theories suggest dreams help us rehearse responses to threats in a safe environment.",
+      "difficulty": "hard"
+    },
+    {
+      "id": 73,
+      "input": "What makes something beautiful?",
+      "target": "Beauty seems to arise from a combination of factors: symmetry, patterns, novelty balanced with familiarity, and harmony. But it's also deeply personal and cultural. Some researchers suggest we find things beautiful when they signal value - like how we're drawn to landscapes with water and shelter, or faces that signal health. Beauty also lies in meaning and emotional resonance.",
+      "difficulty": "hard"
+    },
+    {
+      "id": 74,
+      "input": "How do you overcome fear?",
+      "target": "Face fear gradually through exposure. Understand that fear is often worse in anticipation than reality. Reframe fear as excitement - they have similar physiological signatures. Build confidence through preparation and small wins. Remember that courage isn't the absence of fear, but action despite fear.",
+      "difficulty": "hard"
+    },
+    {
+      "id": 75,
+      "input": "What is creativity?",
+      "target": "Creativity is the ability to generate novel and valuable ideas by making unexpected connections. It often comes from combining existing concepts in new ways, seeing familiar things from fresh perspectives, or breaking conventional patterns. Creativity thrives with constraints, diverse experiences, and a willingness to fail.",
+      "difficulty": "hard"
+    },
+    {
+      "id": 76,
+      "input": "Why do we procrastinate?",
+      "target": "Procrastination is often emotional regulation, not laziness. We avoid tasks that trigger negative feelings: anxiety, boredom, or fear of failure. The immediate relief of avoidance feels better than the discomfort of starting. Combat it by making tasks less aversive: start with tiny steps, remove friction, and separate starting from finishing.",
+      "difficulty": "hard"
+    },
+    {
+      "id": 77,
+      "input": "What is intuition?",
+      "target": "Intuition is rapid, unconscious pattern matching based on accumulated experience. Your brain recognizes patterns from past situations and generates a feeling or hunch without conscious reasoning. While valuable, intuition can also encode biases, so it's best combined with analytical thinking for important decisions.",
+      "difficulty": "hard"
+    },
+    {
+      "id": 78,
+      "input": "How do you cultivate resilience?",
+      "target": "Resilience grows through experience with adversity, strong relationships, a sense of purpose, and viewing challenges as growth opportunities rather than threats. Maintain perspective - most setbacks aren't permanent or catastrophic. Take care of basics: sleep, exercise, and connection. Practice self-compassion when things go wrong.",
+      "difficulty": "hard"
+    },
+    {
+      "id": 79,
+      "input": "What is the relationship between language and thought?",
+      "target": "Language and thought deeply influence each other. Language shapes how we categorize and remember experiences. Some thoughts seem to require language, while others (like visual reasoning) don't. Different languages can make certain ideas easier or harder to express, potentially influencing how their speakers think about those concepts.",
+      "difficulty": "hard"
+    },
+    {
+      "id": 80,
+      "input": "What is critical thinking?",
+      "target": "Critical thinking is the objective analysis and evaluation of information to form a judgment. It involves questioning assumptions, examining evidence, considering alternatives, and reaching reasoned conclusions.",
+      "difficulty": "medium"
+    },
+    {
+      "id": 81,
+      "input": "How do you evaluate an argument?",
+      "target": "Evaluate by: 1) Identify the claim, 2) Examine evidence quality, 3) Check logical validity, 4) Look for fallacies, 5) Consider counterarguments, 6) Assess conclusion support.",
+      "difficulty": "medium"
+    },
+    {
+      "id": 82,
+      "input": "What are common logical fallacies?",
+      "target": "Common fallacies: Ad hominem (attack person not argument), Straw man (misrepresent argument), False dichotomy (only two options), Appeal to authority (expert = right), Slippery slope (chain of unlikely events), Circular reasoning.",
+      "difficulty": "hard"
+    },
+    {
+      "id": 83,
+      "input": "How do you distinguish fact from opinion?",
+      "target": "Facts: Verifiable, objective, can be proven true/false. Opinions: Subjective, based on beliefs/values, cannot be proven. Watch for opinion words: \"best,\" \"should,\" \"believe.\"",
+      "difficulty": "medium"
+    },
+    {
+      "id": 84,
+      "input": "How do you identify bias?",
+      "target": "Identify bias by: Checking source/author agenda, Looking for one-sided presentation, Noting emotional language, Checking what's omitted, Comparing with other sources, Examining evidence selection.",
+      "difficulty": "medium"
+    },
+    {
+      "id": 85,
+      "input": "How do you evaluate sources?",
+      "target": "Source evaluation (CRAAP): Currency (when published), Relevance (fits your need), Authority (expertise), Accuracy (supported, verifiable), Purpose (inform, persuade, sell).",
+      "difficulty": "medium"
+    },
+    {
+      "id": 86,
+      "input": "What questions should you ask when analyzing?",
+      "target": "Key questions: What is the main claim? What evidence supports it? What are the assumptions? Who benefits? What's missing? Are there alternative explanations? Is the logic valid?",
+      "difficulty": "medium"
+    },
+    {
+      "id": 87,
+      "input": "How do you recognize correlation vs causation?",
+      "target": "Correlation: Two things occur together. Causation: One causes the other. Correlation doesn't prove causation. Need: Temporal precedence, plausible mechanism, ruling out alternatives.",
+      "difficulty": "medium"
+    },
+    {
+      "id": 88,
+      "input": "How do you form a well-reasoned opinion?",
+      "target": "Well-reasoned opinions: Gather information from multiple sources, Consider different perspectives, Examine evidence critically, Acknowledge uncertainty, Be willing to revise with new evidence.",
+      "difficulty": "medium"
+    },
+    {
+      "id": 89,
+      "input": "What is confirmation bias?",
+      "target": "Confirmation bias: Tendency to seek/interpret information confirming existing beliefs while ignoring contradicting evidence. Counter by actively seeking opposing views.",
+      "difficulty": "medium"
+    },
+    {
+      "id": 90,
+      "input": "How do you analyze a problem systematically?",
+      "target": "Systematic analysis: 1) Define the problem clearly, 2) Gather relevant information, 3) Generate possible solutions, 4) Evaluate each option, 5) Choose best solution, 6) Implement, 7) Review results.",
+      "difficulty": "medium"
+    },
+    {
+      "id": 91,
+      "input": "How do you evaluate statistical claims?",
+      "target": "Evaluate statistics by: Sample size (larger = more reliable), Sampling method (random vs biased), Margin of error, Who conducted study, How data collected, What questions asked.",
+      "difficulty": "medium"
+    },
+    {
+      "id": 92,
+      "input": "What makes evidence strong?",
+      "target": "Strong evidence: Relevant to claim, From reliable sources, Verifiable, Recent, Consistent with other evidence, Based on appropriate methodology, Peer-reviewed if scientific.",
+      "difficulty": "medium"
+    },
+    {
+      "id": 93,
+      "input": "How do you consider multiple perspectives?",
+      "target": "Consider perspectives by: Identifying stakeholders, Understanding their interests, Seeing issue from their viewpoint, Finding valid points in each, Synthesizing insights.",
+      "difficulty": "medium"
+    },
+    {
+      "id": 94,
+      "input": "How do you avoid being manipulated by rhetoric?",
+      "target": "Watch for: Emotional appeals over evidence, Loaded language, Oversimplification, False urgency, Appeal to fear, Bandwagon arguments, Cherry-picked examples.",
+      "difficulty": "medium"
+    },
+    {
+      "id": 95,
+      "input": "What is the difference between deductive and inductive reasoning?",
+      "target": "Deductive: General to specific, conclusion certain if premises true (All A are B, X is A, therefore X is B). Inductive: Specific to general, conclusion probable (observed pattern suggests general rule).",
+      "difficulty": "hard"
+    },
+    {
+      "id": 96,
+      "input": "How do you evaluate competing claims?",
+      "target": "Compare claims by: Evidence quality for each, Internal consistency, Explanatory power, Predictive accuracy, Simplicity (Occam's razor), Expert consensus.",
+      "difficulty": "medium"
+    },
+    {
+      "id": 97,
+      "input": "What are good habits of critical thinking?",
+      "target": "Good habits: Question assumptions, Seek evidence, Consider alternatives, Admit uncertainty, Update beliefs with new evidence, Avoid emotional decisions, Think systematically.",
+      "difficulty": "medium"
+    },
+    {
+      "id": 98,
+      "input": "How do you recognize when you might be wrong?",
+      "target": "Signs of potential error: Strong emotional attachment to belief, Avoiding contrary evidence, Unable to explain opposing view fairly, Belief hasn't changed despite new information.",
+      "difficulty": "medium"
+    },
+    {
+      "id": 99,
+      "input": "What is intellectual humility?",
+      "target": "Intellectual humility: Recognizing limits of your knowledge, Being open to being wrong, Valuing learning over being right, Acknowledging others may know more, Holding beliefs proportionally to evidence.",
+      "difficulty": "medium"
+    },
+    {
+      "id": 100,
+      "input": "How do I express happiness?",
+      "target": "You can express happiness with emojis like 😊 😄 🎉 ✨ These convey joy and positive emotions.",
+      "difficulty": "medium"
+    },
+    {
+      "id": 101,
+      "input": "What emoji should I use when greeting someone?",
+      "target": "When greeting, you might use 👋 Hi there! or Hello! 😊 Waving emojis show friendliness.",
+      "difficulty": "medium"
+    },
+    {
+      "id": 102,
+      "input": "How do I show that I understand something?",
+      "target": "Use 👍 or ✅ to show understanding. You can also say \"Got it! 👌\" or \"Makes sense! 💡\"",
+      "difficulty": "medium"
+    },
+    {
+      "id": 103,
+      "input": "What emojis express love or affection?",
+      "target": "Heart emojis like ❤️ 💕 💙 express love. You can also use 🥰 😍 for affection.",
+      "difficulty": "medium"
+    },
+    {
+      "id": 104,
+      "input": "How should I use emojis in professional communication?",
+      "target": "In professional settings, use emojis sparingly. A simple 👍 or 😊 is appropriate but avoid excessive use.",
+      "difficulty": "medium"
+    },
+    {
+      "id": 105,
+      "input": "What emoji shows I'm thinking?",
+      "target": "Use 🤔 to show you're thinking or considering something. You can say \"Let me think about this 🤔\"",
+      "difficulty": "medium"
+    },
+    {
+      "id": 106,
+      "input": "How do I express gratitude with emojis?",
+      "target": "Say \"Thank you! 🙏\" or \"Thanks so much! ❤️\" to express gratitude warmly.",
+      "difficulty": "medium"
+    },
+    {
+      "id": 107,
+      "input": "What emojis indicate success or achievement?",
+      "target": "Use 🎉 🎊 ⭐ 🏆 to celebrate success. \"Great job! 🌟\" or \"You did it! 🎉\"",
+      "difficulty": "medium"
+    },
+    {
+      "id": 108,
+      "input": "How do I show confusion?",
+      "target": "Use 😕 or 🤷 to express confusion. \"I'm not sure about this 😕\"",
+      "difficulty": "medium"
+    },
+    {
+      "id": 109,
+      "input": "What emoji means approval?",
+      "target": "👍 ✅ 👏 show approval. \"That looks great! 👍\"",
+      "difficulty": "easy"
+    },
+    {
+      "id": 110,
+      "input": "How do I indicate urgency?",
+      "target": "Use ⚠️ 🚨 ❗ for urgency. \"Important! ⚠️\" or \"Please respond soon! ❗\"",
+      "difficulty": "medium"
+    },
+    {
+      "id": 111,
+      "input": "What emojis should I use when apologizing?",
+      "target": "Use 😔 or 🙏 when apologizing. \"I'm sorry about that 😔\" or \"Please forgive me 🙏\"",
+      "difficulty": "medium"
+    },
+    {
+      "id": 112,
+      "input": "How do I express excitement?",
+      "target": "Use 🎉 🙌 ✨ 🔥 for excitement. \"This is amazing! 🎉\" or \"So excited! ✨\"",
+      "difficulty": "medium"
+    },
+    {
+      "id": 113,
+      "input": "What emoji shows support?",
+      "target": "Use 💪 🤝 👏 to show support. \"You can do this! 💪\" or \"I'm here for you 🤝\"",
+      "difficulty": "medium"
+    },
+    {
+      "id": 114,
+      "input": "How do I end a message positively?",
+      "target": "End with 😊 ✨ 🌟 or 🙂 to leave a positive impression. \"Have a great day! 😊\"",
+      "difficulty": "medium"
+    },
+    {
+      "id": 115,
+      "input": "When should I NOT use emojis?",
+      "target": "Avoid emojis in formal documents, legal texts, academic papers, and when the context is serious or sad.",
+      "difficulty": "medium"
+    },
+    {
+      "id": 116,
+      "input": "What emoji shows I'm joking?",
+      "target": "Use 😄 😂 or 😜 to indicate humor. Some people use 😉 for playful comments.",
+      "difficulty": "medium"
+    },
+    {
+      "id": 117,
+      "input": "How do I express agreement?",
+      "target": "Use 👍 ✅ 💯 to agree. \"Absolutely! 👍\" or \"100% agree 💯\"",
+      "difficulty": "medium"
+    },
+    {
+      "id": 118,
+      "input": "What emojis work for encouragement?",
+      "target": "Use 🌟 💪 👏 🙌 for encouragement. \"Keep going! 💪\" or \"You're doing great! ⭐\"",
+      "difficulty": "medium"
+    },
+    {
+      "id": 119,
+      "input": "How do I indicate I'm working on something?",
+      "target": "Use ⏳ 🔄 💻 to show work in progress. \"Working on it! ⏳\"",
+      "difficulty": "medium"
+    },
+    {
+      "id": 120,
+      "input": "What intents does \"please help me\" indicate?",
+      "target": "This indicates a request for assistance. The user needs support or guidance with something.",
+      "difficulty": "medium"
+    },
+    {
+      "id": 121,
+      "input": "What does \"explain\" in a prompt mean?",
+      "target": "The user wants a detailed description of how something works, with reasoning and clarity.",
+      "difficulty": "medium"
+    },
+    {
+      "id": 122,
+      "input": "What does \"summarize\" indicate?",
+      "target": "The user wants a brief overview focusing on key points, not details.",
+      "difficulty": "medium"
+    },
+    {
+      "id": 123,
+      "input": "What does \"compare\" mean in user requests?",
+      "target": "The user wants to see similarities and differences between two or more things.",
+      "difficulty": "medium"
+    },
+    {
+      "id": 124,
+      "input": "What does \"I don't understand\" indicate?",
+      "target": "The user needs clarification. Provide a simpler explanation or use different words.",
+      "difficulty": "medium"
+    },
+    {
+      "id": 125,
+      "input": "What does \"can you\" at the start mean?",
+      "target": "A polite request asking if the assistant is able to do something.",
+      "difficulty": "medium"
+    },
+    {
+      "id": 126,
+      "input": "What does \"how do I\" indicate?",
+      "target": "A request for instructions or steps to accomplish a task.",
+      "difficulty": "medium"
+    },
+    {
+      "id": 127,
+      "input": "What does \"what is\" mean?",
+      "target": "A request for definition or explanation of a concept.",
+      "difficulty": "easy"
+    },
+    {
+      "id": 128,
+      "input": "What does \"why\" at the start indicate?",
+      "target": "The user wants to understand the reason or cause behind something.",
+      "difficulty": "medium"
+    },
+    {
+      "id": 129,
+      "input": "What does \"when\" in a question mean?",
+      "target": "The user is asking about timing, dates, or conditions for something.",
+      "difficulty": "medium"
+    },
+    {
+      "id": 130,
+      "input": "What does \"where\" indicate?",
+      "target": "The user is asking about location or position of something.",
+      "difficulty": "medium"
+    },
+    {
+      "id": 131,
+      "input": "What does \"who\" mean in questions?",
+      "target": "The user wants to know about a person or entity responsible for something.",
+      "difficulty": "medium"
+    },
+    {
+      "id": 132,
+      "input": "What does \"list\" mean as a verb?",
+      "target": "The user wants items enumerated, typically as bullet points or numbered list.",
+      "difficulty": "medium"
+    },
+    {
+      "id": 133,
+      "input": "What does \"describe\" indicate?",
+      "target": "The user wants detailed characteristics or properties of something.",
+      "difficulty": "easy"
+    },
+    {
+      "id": 134,
+      "input": "What does \"calculate\" mean?",
+      "target": "The user needs a mathematical computation performed.",
+      "difficulty": "easy"
+    },
+    {
+      "id": 135,
+      "input": "What does \"fix\" in requests mean?",
+      "target": "The user has a problem and wants it corrected or solved.",
+      "difficulty": "medium"
+    },
+    {
+      "id": 136,
+      "input": "What does \"improve\" indicate?",
+      "target": "The user wants suggestions to make something better.",
+      "difficulty": "easy"
+    },
+    {
+      "id": 137,
+      "input": "What does \"check\" mean in requests?",
+      "target": "The user wants verification or review of something.",
+      "difficulty": "easy"
+    },
+    {
+      "id": 138,
+      "input": "What does \"translate\" mean?",
+      "target": "The user wants text converted from one language to another.",
+      "difficulty": "medium"
+    },
+    {
+      "id": 139,
+      "input": "What does \"create\" or \"generate\" mean?",
+      "target": "The user wants something new produced from scratch.",
+      "difficulty": "easy"
+    },
+    {
+      "id": 140,
+      "input": "What does \"edit\" or \"modify\" mean?",
+      "target": "The user wants changes made to existing content.",
+      "difficulty": "easy"
+    },
+    {
+      "id": 141,
+      "input": "What does \"delete\" or \"remove\" indicate?",
+      "target": "The user wants something taken away or eliminated.",
+      "difficulty": "easy"
+    },
+    {
+      "id": 142,
+      "input": "What does \"find\" or \"search\" mean?",
+      "target": "The user wants to locate specific information.",
+      "difficulty": "easy"
+    },
+    {
+      "id": 143,
+      "input": "What does \"teach me\" indicate?",
+      "target": "The user wants to learn and expects educational content.",
+      "difficulty": "easy"
+    },
+    {
+      "id": 144,
+      "input": "What does \"show me\" mean?",
+      "target": "The user wants a demonstration or visual presentation.",
+      "difficulty": "easy"
+    },
+    {
+      "id": 145,
+      "input": "What does \"tell me about\" indicate?",
+      "target": "An open request for information on a topic.",
+      "difficulty": "easy"
+    },
+    {
+      "id": 146,
+      "input": "What does urgency language like \"ASAP\" or \"urgent\" mean?",
+      "target": "The request is time-sensitive and should be prioritized.",
+      "difficulty": "easy"
+    },
+    {
+      "id": 147,
+      "input": "What does \"briefly\" or \"quick\" indicate?",
+      "target": "Keep the response short and focused.",
+      "difficulty": "easy"
+    },
+    {
+      "id": 148,
+      "input": "What does \"in detail\" or \"thoroughly\" mean?",
+      "target": "Provide comprehensive, extensive information.",
+      "difficulty": "easy"
+    },
+    {
+      "id": 149,
+      "input": "What does \"step by step\" indicate?",
+      "target": "Break down the process into sequential instructions.",
+      "difficulty": "easy"
+    },
+    {
+      "id": 150,
+      "input": "What are the parts of speech?",
+      "target": "Parts of speech: Noun (person/place/thing), Verb (action/state), Adjective (describes noun), Adverb (describes verb/adj), Pronoun (replaces noun), Preposition (relationship), Conjunction (connects), Interjection (emotion).",
+      "difficulty": "medium"
+    },
+    {
+      "id": 151,
+      "input": "How do you structure a paragraph?",
+      "target": "Paragraph structure: Topic sentence (main idea), Supporting sentences (evidence, examples, explanation), Concluding sentence (wrap up, transition). Each paragraph = one main idea.",
+      "difficulty": "medium"
+    },
+    {
+      "id": 152,
+      "input": "What is subject-verb agreement?",
+      "target": "Subject-verb agreement: Singular subjects take singular verbs, plural subjects take plural verbs. \"The dog runs\" (singular), \"The dogs run\" (plural). Watch for tricky cases with collective nouns.",
+      "difficulty": "medium"
+    },
+    {
+      "id": 153,
+      "input": "How do you use commas correctly?",
+      "target": "Comma uses: Separate items in lists, Before coordinating conjunctions in compound sentences, After introductory elements, Around non-essential clauses, Separate adjectives of equal importance.",
+      "difficulty": "medium"
+    },
+    {
+      "id": 154,
+      "input": "What is the difference between active and passive voice?",
+      "target": "Active voice: Subject performs action (\"The cat caught the mouse\"). Passive voice: Subject receives action (\"The mouse was caught by the cat\"). Active is usually clearer and more direct.",
+      "difficulty": "medium"
+    },
+    {
+      "id": 155,
+      "input": "How do you avoid run-on sentences?",
+      "target": "Fix run-ons: Separate into sentences with period, Use semicolon between related clauses, Add coordinating conjunction with comma, Use subordinating conjunction to make one clause dependent.",
+      "difficulty": "medium"
+    },
+    {
+      "id": 156,
+      "input": "What are common grammar mistakes?",
+      "target": "Common mistakes: Their/there/they're, Its/it's, Your/you're, Affect/effect, Than/then, Fewer/less, Who/whom, Subject-verb disagreement, Dangling modifiers, Comma splices.",
+      "difficulty": "medium"
+    },
+    {
+      "id": 157,
+      "input": "How do you write clearly?",
+      "target": "Clear writing: Use simple words, Keep sentences concise, One idea per sentence, Active voice, Avoid jargon, Be specific, Organize logically, Revise and edit.",
+      "difficulty": "medium"
+    },
+    {
+      "id": 158,
+      "input": "What is parallel structure?",
+      "target": "Parallel structure: Items in a series should have same grammatical form. Wrong: \"I like swimming, to run, and bikes.\" Right: \"I like swimming, running, and biking.\"",
+      "difficulty": "medium"
+    },
+    {
+      "id": 159,
+      "input": "How do you vary sentence structure?",
+      "target": "Vary sentences by: Changing length (mix short and long), Starting differently (not always subject-first), Using different types (simple, compound, complex), Varying rhythm.",
+      "difficulty": "medium"
+    },
+    {
+      "id": 160,
+      "input": "What is the difference between a clause and a phrase?",
+      "target": "Clause: Has subject and verb, can be independent (stands alone) or dependent. Phrase: Group of words without subject-verb pair, acts as single part of speech.",
+      "difficulty": "medium"
+    },
+    {
+      "id": 161,
+      "input": "How do you use semicolons?",
+      "target": "Semicolon uses: Between independent clauses without conjunction (\"I came; I saw; I conquered\"), Between items in a list when items contain commas.",
+      "difficulty": "medium"
+    },
+    {
+      "id": 162,
+      "input": "What are transition words?",
+      "target": "Transitions: Addition (furthermore, also), Contrast (however, but), Cause/effect (therefore, because), Time (then, meanwhile), Example (for instance), Conclusion (finally, in summary).",
+      "difficulty": "medium"
+    },
+    {
+      "id": 163,
+      "input": "How do you write concisely?",
+      "target": "Concise writing: Eliminate redundancy, Remove unnecessary words, Combine sentences, Use strong verbs, Avoid \"there is/are\" openings, Cut filler words (very, really, just).",
+      "difficulty": "medium"
+    },
+    {
+      "id": 164,
+      "input": "What is tone in writing?",
+      "target": "Tone: Writer's attitude toward subject/audience. Created through word choice, sentence structure, details included. Examples: formal, casual, serious, humorous, objective, passionate.",
+      "difficulty": "medium"
+    },
+    {
+      "id": 165,
+      "input": "How do you paraphrase effectively?",
+      "target": "Effective paraphrasing: Read and understand original, Set aside original, Write in your own words, Check you captured meaning, Cite the source, Don't just swap synonyms.",
+      "difficulty": "medium"
+    },
+    {
+      "id": 166,
+      "input": "What is the thesis statement?",
+      "target": "Thesis statement: Central argument or claim of an essay. Appears in introduction. Should be specific, arguable, and guide the entire paper. Each paragraph supports the thesis.",
+      "difficulty": "medium"
+    },
+    {
+      "id": 167,
+      "input": "How do you organize an essay?",
+      "target": "Essay organization: Introduction (hook, context, thesis), Body paragraphs (each with topic sentence supporting thesis), Conclusion (restate thesis, summarize, broader implications).",
+      "difficulty": "medium"
+    },
+    {
+      "id": 168,
+      "input": "What is coherence in writing?",
+      "target": "Coherence: Ideas flow logically and connect clearly. Achieved through: Logical organization, Transitions between sentences/paragraphs, Consistent focus, Clear pronoun references.",
+      "difficulty": "medium"
+    },
+    {
+      "id": 169,
+      "input": "How do you proofread effectively?",
+      "target": "Effective proofreading: Read aloud, Read backwards (catches typos), Focus on one error type at a time, Use spell/grammar check but don't rely solely on it, Take breaks between writing and proofing.",
+      "difficulty": "hard"
+    },
+    {
+      "id": 170,
+      "input": "How do you verify a math answer?",
+      "target": "Compute the result step by step, then check if it matches the claimed answer. Never assume - always calculate.",
+      "difficulty": "medium"
+    },
+    {
+      "id": 171,
+      "input": "How do you verify addition?",
+      "target": "For a + b = c, compute a + b and check if it equals c. Example: 5 + 3 = 8. Compute: 5 + 3 → 8. ✓ Verified.",
+      "difficulty": "hard"
+    },
+    {
+      "id": 172,
+      "input": "How do you verify subtraction?",
+      "target": "For a - b = c, compute a - b. Also verify: c + b should equal a. Example: 10 - 4 = 6. Check: 6 + 4 = 10. ✓ Verified.",
+      "difficulty": "hard"
+    },
+    {
+      "id": 173,
+      "input": "How do you verify multiplication?",
+      "target": "For a × b = c, compute the product. Use repeated addition to double-check. Example: 7 × 8 = 56. Check: 7 + 7 + 7 + 7 + 7 + 7 + 7 + 7 = 56. ✓ Verified.",
+      "difficulty": "hard"
+    },
+    {
+      "id": 174,
+      "input": "How do you verify division?",
+      "target": "For a ÷ b = c, multiply c × b and check if it equals a. Example: 24 ÷ 6 = 4. Check: 4 × 6 = 24. ✓ Verified.",
+      "difficulty": "hard"
+    },
+    {
+      "id": 175,
+      "input": "How do you verify equations?",
+      "target": "Substitute the claimed solution back into the original equation. If both sides are equal, it's verified.",
+      "difficulty": "medium"
+    },
+    {
+      "id": 176,
+      "input": "Verify: 2 + 2 = 4",
+      "target": "Compute: 2 + 2 = 4. The sum of 2 and 2 is indeed 4. ✓ Verified.",
+      "difficulty": "medium"
+    },
+    {
+      "id": 177,
+      "input": "Verify: 15 - 7 = 8",
+      "target": "Compute: 15 - 7 = 8. Check: 8 + 7 = 15. ✓ Verified.",
+      "difficulty": "medium"
+    },
+    {
+      "id": 178,
+      "input": "Verify: 9 × 9 = 81",
+      "target": "Compute: 9 × 9 = 81. Check: 81 ÷ 9 = 9. ✓ Verified.",
+      "difficulty": "medium"
+    },
+    {
+      "id": 179,
+      "input": "Verify: 100 ÷ 4 = 25",
+      "target": "Compute: 100 ÷ 4 = 25. Check: 25 × 4 = 100. ✓ Verified.",
+      "difficulty": "medium"
+    },
+    {
+      "id": 180,
+      "input": "Verify: 3² = 9",
+      "target": "Compute: 3² = 3 × 3 = 9. ✓ Verified.",
+      "difficulty": "medium"
+    },
+    {
+      "id": 181,
+      "input": "Verify: √16 = 4",
+      "target": "Compute: √16 = 4 because 4 × 4 = 16. ✓ Verified.",
+      "difficulty": "medium"
+    },
+    {
+      "id": 182,
+      "input": "How do you verify percentages?",
+      "target": "Convert to decimal and multiply. Example: 20% of 50 = 10. Check: 0.20 × 50 = 10. ✓ Verified.",
+      "difficulty": "medium"
+    },
+    {
+      "id": 183,
+      "input": "Verify: 25% of 80 = 20",
+      "target": "Compute: 0.25 × 80 = 20. ✓ Verified.",
+      "difficulty": "easy"
+    },
+    {
+      "id": 184,
+      "input": "How do you verify fractions?",
+      "target": "Convert to common denominators or decimals. Example: 1/2 + 1/4 = 3/4. Check: 2/4 + 1/4 = 3/4. ✓ Verified.",
+      "difficulty": "medium"
+    },
+    {
+      "id": 185,
+      "input": "How do you verify algebraic solutions?",
+      "target": "Substitute the solution into the original equation. For x + 5 = 12, if x = 7, then 7 + 5 = 12. ✓ Verified.",
+      "difficulty": "medium"
+    },
+    {
+      "id": 186,
+      "input": "How do you verify negative numbers?",
+      "target": "Apply the same rules. Example: -3 + 5 = 2. Check: Starting at -3, moving 5 right gives 2. ✓ Verified.",
+      "difficulty": "medium"
+    },
+    {
+      "id": 187,
+      "input": "How do you verify order of operations?",
+      "target": "Follow PEMDAS: Parentheses, Exponents, Multiplication/Division (left to right), Addition/Subtraction (left to right).",
+      "difficulty": "medium"
+    },
+    {
+      "id": 188,
+      "input": "Verify: (3 + 4) × 2 = 14",
+      "target": "Compute: First (3 + 4) = 7, then 7 × 2 = 14. ✓ Verified.",
+      "difficulty": "medium"
+    },
+    {
+      "id": 189,
+      "input": "What if verification fails?",
+      "target": "If computed result doesn't match the claimed answer, the answer is WRONG. Report the correct answer instead.",
+      "difficulty": "medium"
+    },
+    {
+      "id": 190,
+      "input": "Verify: 5 + 7 = 13",
+      "target": "Compute: 5 + 7 = 12, not 13. ✗ FAILED verification. Correct answer: 12.",
+      "difficulty": "medium"
+    },
+    {
+      "id": 191,
+      "input": "How important is verification?",
+      "target": "Verification is ESSENTIAL. Never output unverified math. Always compute to confirm correctness.",
+      "difficulty": "medium"
+    },
+    {
+      "id": 192,
+      "input": "Can you verify without computing?",
+      "target": "NO. Math verification requires actual computation. Estimation can suggest errors but doesn't prove correctness.",
+      "difficulty": "medium"
+    },
+    {
+      "id": 193,
+      "input": "Verify: 12 × 12 = 144",
+      "target": "Compute: 12 × 12 = 144. Check: 144 ÷ 12 = 12. ✓ Verified.",
+      "difficulty": "medium"
+    },
+    {
+      "id": 194,
+      "input": "Verify: 1000 - 357 = 643",
+      "target": "Compute: 1000 - 357 = 643. Check: 643 + 357 = 1000. ✓ Verified.",
+      "difficulty": "medium"
+    },
+    {
+      "id": 195,
+      "input": "How do you verify word problems?",
+      "target": "Translate to math, solve step by step, then check if the answer makes sense in the context of the problem.",
+      "difficulty": "medium"
+    },
+    {
+      "id": 196,
+      "input": "How do you write the quadratic formula?",
+      "target": "The quadratic formula for ax² + bx + c = 0 is: x = (-b ± √(b² - 4ac)) / 2a. This gives both solutions where the parabola crosses the x-axis.",
+      "difficulty": "hard"
+    },
+    {
+      "id": 197,
+      "input": "What is the Pythagorean theorem formula?",
+      "target": "The Pythagorean theorem: a² + b² = c², where a and b are legs of a right triangle and c is the hypotenuse.",
+      "difficulty": "medium"
+    },
+    {
+      "id": 198,
+      "input": "How do you write the area of a circle?",
+      "target": "Area of a circle: A = πr², where r is the radius. For diameter d: A = π(d/2)² = πd²/4.",
+      "difficulty": "medium"
+    },
+    {
+      "id": 199,
+      "input": "What is the formula for compound interest?",
+      "target": "Compound interest formula: A = P(1 + r/n)^(nt), where P = principal, r = annual rate, n = compounds per year, t = years.",
+      "difficulty": "medium"
+    },
+    {
+      "id": 200,
+      "input": "How do you express the distance formula?",
+      "target": "Distance between two points (x₁, y₁) and (x₂, y₂): d = √[(x₂ - x₁)² + (y₂ - y₁)²]",
+      "difficulty": "medium"
+    },
+    {
+      "id": 201,
+      "input": "What is the slope formula?",
+      "target": "Slope formula: m = (y₂ - y₁)/(x₂ - x₁), representing rise over run between two points.",
+      "difficulty": "medium"
+    },
+    {
+      "id": 202,
+      "input": "How do you write the formula for velocity?",
+      "target": "Velocity formula: v = d/t (distance divided by time). For acceleration: v = v₀ + at.",
+      "difficulty": "medium"
+    },
+    {
+      "id": 203,
+      "input": "What is Einstein's mass-energy equivalence?",
+      "target": "Einstein's famous equation: E = mc², where E = energy, m = mass, c = speed of light (≈3×10⁸ m/s).",
+      "difficulty": "medium"
+    },
+    {
+      "id": 204,
+      "input": "How do you express the law of gravity?",
+      "target": "Newton's gravitational force: F = G(m₁m₂)/r², where G ≈ 6.67×10⁻¹¹ N⋅m²/kg².",
+      "difficulty": "medium"
+    },
+    {
+      "id": 205,
+      "input": "What is the formula for kinetic energy?",
+      "target": "Kinetic energy: KE = ½mv², where m = mass and v = velocity.",
+      "difficulty": "medium"
+    },
+    {
+      "id": 206,
+      "input": "How do you write the formula for standard deviation?",
+      "target": "Standard deviation: σ = √[Σ(xᵢ - μ)²/N], where μ = mean, N = count, xᵢ = each value.",
+      "difficulty": "medium"
+    },
+    {
+      "id": 207,
+      "input": "What is the derivative formula?",
+      "target": "Derivative definition: f'(x) = lim(h→0) [f(x+h) - f(x)]/h. Power rule: d/dx(xⁿ) = nxⁿ⁻¹.",
+      "difficulty": "medium"
+    },
+    {
+      "id": 208,
+      "input": "How do you express integration?",
+      "target": "Integral notation: ∫f(x)dx. Definite integral: ∫ₐᵇf(x)dx = F(b) - F(a), where F is antiderivative.",
+      "difficulty": "medium"
+    },
+    {
+      "id": 209,
+      "input": "What is the formula for circumference?",
+      "target": "Circumference of a circle: C = 2πr = πd, where r = radius and d = diameter.",
+      "difficulty": "medium"
+    },
+    {
+      "id": 210,
+      "input": "How do you write the volume of a sphere?",
+      "target": "Volume of a sphere: V = (4/3)πr³. Surface area: A = 4πr².",
+      "difficulty": "medium"
+    },
+    {
+      "id": 211,
+      "input": "What is the binomial formula?",
+      "target": "Binomial expansion: (a + b)ⁿ = Σₖ₌₀ⁿ C(n,k)aⁿ⁻ᵏbᵏ, where C(n,k) = n!/(k!(n-k)!).",
+      "difficulty": "medium"
+    },
+    {
+      "id": 212,
+      "input": "How do you express logarithm rules?",
+      "target": "Log rules: log(ab) = log(a) + log(b), log(a/b) = log(a) - log(b), log(aⁿ) = n⋅log(a).",
+      "difficulty": "medium"
+    },
+    {
+      "id": 213,
+      "input": "What is the formula for permutations?",
+      "target": "Permutations: P(n,r) = n!/(n-r)! - arrangements where order matters.",
+      "difficulty": "easy"
+    },
+    {
+      "id": 214,
+      "input": "How do you write combinations formula?",
+      "target": "Combinations: C(n,r) = n!/[r!(n-r)!] - selections where order doesn't matter.",
+      "difficulty": "medium"
+    },
+    {
+      "id": 215,
+      "input": "What is the normal distribution formula?",
+      "target": "Normal distribution PDF: f(x) = (1/(σ√(2π)))e^(-(x-μ)²/(2σ²)), where μ = mean, σ = standard deviation.",
+      "difficulty": "medium"
+    },
+    {
+      "id": 216,
+      "input": "How do you express trigonometric identities?",
+      "target": "Key identities: sin²θ + cos²θ = 1, tan θ = sin θ/cos θ, sin(2θ) = 2sinθcosθ.",
+      "difficulty": "medium"
+    },
+    {
+      "id": 217,
+      "input": "What is Euler's formula?",
+      "target": "Euler's formula: e^(iπ) + 1 = 0, connecting e, i, π, 1, and 0. Also: e^(ix) = cos(x) + i⋅sin(x).",
+      "difficulty": "medium"
+    },
+    {
+      "id": 218,
+      "input": "How do you write the present value formula?",
+      "target": "Present value: PV = FV/(1 + r)ⁿ, where FV = future value, r = rate, n = periods.",
+      "difficulty": "medium"
+    },
+    {
+      "id": 219,
+      "input": "What is the formula for acceleration?",
+      "target": "Acceleration: a = Δv/Δt = (v - v₀)/t. With constant acceleration: d = v₀t + ½at².",
+      "difficulty": "medium"
+    },
+    {
+      "id": 220,
+      "input": "What is 15 multiplied by 7?",
+      "target": "15 multiplied by 7 equals 105. We can verify this: 15 × 7 = (10 × 7) + (5 × 7) = 70 + 35 = 105.",
+      "difficulty": "medium"
+    },
+    {
+      "id": 221,
+      "input": "If f(x) = 3x + 2, what is f(4)?",
+      "target": "Substituting x = 4 into f(x) = 3x + 2: f(4) = 3(4) + 2 = 12 + 2 = 14.",
+      "difficulty": "medium"
+    },
+    {
+      "id": 222,
+      "input": "Solve for x: 2x + 5 = 13",
+      "target": "Subtract 5 from both sides: 2x = 8. Divide both sides by 2: x = 4.",
+      "difficulty": "medium"
+    },
+    {
+      "id": 223,
+      "input": "What is the area of a circle with radius 5?",
+      "target": "The area of a circle is πr². With r = 5: Area = π(5)² = 25π ≈ 78.54 square units.",
+      "difficulty": "medium"
+    },
+    {
+      "id": 224,
+      "input": "What is the integral of 2x?",
+      "target": "The integral of 2x with respect to x is x² + C, where C is the constant of integration. This follows from the power rule for integration.",
+      "difficulty": "medium"
+    },
+    {
+      "id": 225,
+      "input": "Factor x² - 9.",
+      "target": "x² - 9 is a difference of squares: x² - 9 = (x + 3)(x - 3).",
+      "difficulty": "medium"
+    },
+    {
+      "id": 226,
+      "input": "What is log₂(16)?",
+      "target": "log₂(16) = 4, because 2⁴ = 16.",
+      "difficulty": "easy"
+    },
+    {
+      "id": 227,
+      "input": "Simplify: (x³)² × x⁴",
+      "target": "Using exponent rules: (x³)² = x⁶, then x⁶ × x⁴ = x¹⁰.",
+      "difficulty": "medium"
+    },
+    {
+      "id": 228,
+      "input": "What is the slope of the line passing through points (2, 3) and (5, 9)?",
+      "target": "Slope = (y₂ - y₁)/(x₂ - x₁) = (9 - 3)/(5 - 2) = 6/3 = 2.",
+      "difficulty": "medium"
+    },
+    {
+      "id": 229,
+      "input": "Solve the quadratic equation: x² - 5x + 6 = 0",
+      "target": "Factor: (x - 2)(x - 3) = 0. Therefore x = 2 or x = 3.",
+      "difficulty": "medium"
+    },
+    {
+      "id": 230,
+      "input": "What is the determinant of [[2, 3], [1, 4]]?",
+      "target": "For a 2×2 matrix [[a, b], [c, d]], det = ad - bc. Here: (2)(4) - (3)(1) = 8 - 3 = 5.",
+      "difficulty": "medium"
+    },
+    {
+      "id": 231,
+      "input": "Convert 45 degrees to radians.",
+      "target": "45° = 45 × (π/180) = π/4 radians.",
+      "difficulty": "easy"
+    },
+    {
+      "id": 232,
+      "input": "What is the sum of the first 10 positive integers?",
+      "target": "Using the formula n(n+1)/2 with n=10: 10(11)/2 = 55.",
+      "difficulty": "medium"
+    },
+    {
+      "id": 233,
+      "input": "Differentiate sin(x) cos(x).",
+      "target": "Using the product rule: d/dx[sin(x)cos(x)] = cos(x)cos(x) + sin(x)(-sin(x)) = cos²(x) - sin²(x) = cos(2x).",
+      "difficulty": "medium"
+    },
+    {
+      "id": 234,
+      "input": "What is the probability of rolling a sum of 7 with two fair dice?",
+      "target": "There are 6 ways to roll 7: (1,6), (2,5), (3,4), (4,3), (5,2), (6,1) out of 36 total outcomes. Probability = 6/36 = 1/6.",
+      "difficulty": "medium"
+    },
+    {
+      "id": 235,
+      "input": "Evaluate: lim(x→0) sin(x)/x",
+      "target": "This is a fundamental limit: lim(x→0) sin(x)/x = 1.",
+      "difficulty": "easy"
+    },
+    {
+      "id": 236,
+      "input": "What is the geometric mean of 4 and 9?",
+      "target": "Geometric mean = √(4 × 9) = √36 = 6.",
+      "difficulty": "medium"
+    },
+    {
+      "id": 237,
+      "input": "Express 0.333... as a fraction.",
+      "target": "0.333... = 1/3. We can verify: 1 ÷ 3 = 0.333...",
+      "difficulty": "medium"
+    },
+    {
+      "id": 238,
+      "input": "What is e^(ln(5))?",
+      "target": "e^(ln(5)) = 5, because e^x and ln(x) are inverse functions.",
+      "difficulty": "medium"
+    },
+    {
+      "id": 239,
+      "input": "Find the distance between points (1, 2) and (4, 6).",
+      "target": "Distance = √[(4-1)² + (6-2)²] = √[9 + 16] = √25 = 5.",
+      "difficulty": "medium"
+    },
+    {
+      "id": 240,
+      "input": "What is 2³ × 2⁵?",
+      "target": "Using exponent rules: 2³ × 2⁵ = 2⁸ = 256.",
+      "difficulty": "medium"
+    },
+    {
+      "id": 241,
+      "input": "Simplify: √(50)",
+      "target": "√(50) = √(25 × 2) = 5√2.",
+      "difficulty": "easy"
+    },
+    {
+      "id": 242,
+      "input": "What is the volume of a sphere with radius 3?",
+      "target": "Volume = (4/3)πr³ = (4/3)π(3)³ = (4/3)π(27) = 36π ≈ 113.1 cubic units.",
+      "difficulty": "medium"
+    },
+    {
+      "id": 243,
+      "input": "Solve for y: 3y - 7 = 2y + 5",
+      "target": "Subtract 2y from both sides: y - 7 = 5. Add 7: y = 12.",
+      "difficulty": "medium"
+    },
+    {
+      "id": 244,
+      "input": "What is the sum of angles in a hexagon?",
+      "target": "Sum of interior angles = (n-2) × 180° where n=6: (6-2) × 180° = 720°.",
+      "difficulty": "medium"
+    },
+    {
+      "id": 245,
+      "input": "Evaluate: ∫₀¹ x dx",
+      "target": "∫₀¹ x dx = [x²/2]₀¹ = 1/2 - 0 = 1/2.",
+      "difficulty": "medium"
+    },
+    {
+      "id": 246,
+      "input": "What is 5! (5 factorial)?",
+      "target": "5! = 5 × 4 × 3 × 2 × 1 = 120.",
+      "difficulty": "medium"
+    },
+    {
+      "id": 247,
+      "input": "Convert 1/8 to a decimal.",
+      "target": "1/8 = 0.125.",
+      "difficulty": "easy"
+    },
+    {
+      "id": 248,
+      "input": "What is the perimeter of a rectangle with length 7 and width 4?",
+      "target": "Perimeter = 2(length + width) = 2(7 + 4) = 2(11) = 22 units.",
+      "difficulty": "medium"
+    },
+    {
+      "id": 249,
+      "input": "Simplify: (2x + 3x²) - (x - x²)",
+      "target": "(2x + 3x²) - (x - x²) = 2x + 3x² - x + x² = x + 4x².",
+      "difficulty": "medium"
+    },
+    {
+      "id": 250,
+      "input": "How do you describe what to generate in an image?",
+      "target": "Specify: Subject (what/who), Action (what doing), Setting (where), Style (realistic, artistic), Mood (bright, dark, calm), Composition (close-up, wide), Colors, Lighting.",
+      "difficulty": "medium"
+    },
+    {
+      "id": 251,
+      "input": "What makes a good image prompt?",
+      "target": "Good prompts include: Main subject clearly stated, Art style or medium, Lighting description, Color palette, Mood/atmosphere, Composition details, Level of detail wanted.",
+      "difficulty": "medium"
+    },
+    {
+      "id": 252,
+      "input": "How do you describe a scene for video generation?",
+      "target": "Video description: Opening shot, Subject actions over time, Camera movement, Transitions, Sound/music mood, Duration, Pacing (fast/slow), Ending shot.",
+      "difficulty": "medium"
+    },
+    {
+      "id": 253,
+      "input": "What elements define visual style?",
+      "target": "Visual styles: Photorealistic, Illustration, Cartoon, Anime, Oil painting, Watercolor, Digital art, Sketch, 3D render, Vintage, Modern, Minimalist.",
+      "difficulty": "medium"
+    },
+    {
+      "id": 254,
+      "input": "How do you describe lighting for generation?",
+      "target": "Lighting descriptions: Golden hour (warm sunset), Blue hour (cool twilight), High key (bright, low contrast), Low key (dark, dramatic), Rim lighting, Soft diffused, Hard shadows, Neon, Candlelight.",
+      "difficulty": "medium"
+    },
+    {
+      "id": 255,
+      "input": "What camera angles can be specified?",
+      "target": "Camera angles: Eye level, Low angle (looking up), High angle (looking down), Bird's eye, Dutch angle (tilted), Over-the-shoulder, Close-up, Medium shot, Wide shot, Extreme close-up.",
+      "difficulty": "medium"
+    },
+    {
+      "id": 256,
+      "input": "How do you describe character appearance?",
+      "target": "Character description: Age, Gender, Body type, Hair (color, style, length), Eyes (color, shape), Skin tone, Clothing, Accessories, Expression, Pose, Distinguishing features.",
+      "difficulty": "medium"
+    },
+    {
+      "id": 257,
+      "input": "What atmosphere descriptions work well?",
+      "target": "Atmosphere: Mysterious, Peaceful, Energetic, Melancholic, Romantic, Tense, Playful, Ethereal, Gritty, Nostalgic, Futuristic, Cozy, Ominous, Serene.",
+      "difficulty": "medium"
+    },
+    {
+      "id": 258,
+      "input": "How do you describe environments?",
+      "target": "Environment details: Type (forest, city, room), Time (day/night, season), Weather, Vegetation, Architecture style, Scale, Condition (new, weathered), Inhabitants, Ambient sounds implied.",
+      "difficulty": "medium"
+    },
+    {
+      "id": 259,
+      "input": "What textures can be specified?",
+      "target": "Texture descriptions: Smooth, Rough, Glossy, Matte, Metallic, Wooden, Stone, Fabric (silk, wool, denim), Organic, Crystalline, Wet, Dusty, Worn.",
+      "difficulty": "medium"
+    },
+    {
+      "id": 260,
+      "input": "How do you describe motion for video?",
+      "target": "Motion description: Speed (slow-motion, real-time, time-lapse), Direction, Fluidity (smooth, jerky), Type (walking, running, floating, spinning), Camera motion (tracking, panning).",
+      "difficulty": "medium"
+    },
+    {
+      "id": 261,
+      "input": "What color palettes can be described?",
+      "target": "Color descriptions: Warm/cool, Monochromatic, Complementary, Pastel, Vibrant, Muted, Earth tones, Neon, Black and white, Sepia, Specific colors with intensity.",
+      "difficulty": "medium"
+    },
+    {
+      "id": 262,
+      "input": "How do you describe facial expressions?",
+      "target": "Expressions: Happy (smiling, laughing), Sad (frowning, tearful), Angry (furrowed brow), Surprised (wide eyes), Thoughtful (pensive), Neutral, Determined, Confused, Peaceful.",
+      "difficulty": "medium"
+    },
+    {
+      "id": 263,
+      "input": "What composition techniques can be specified?",
+      "target": "Composition: Rule of thirds, Centered, Symmetrical, Leading lines, Frame within frame, Negative space, Foreground interest, Layered depth, Golden ratio.",
+      "difficulty": "medium"
+    },
+    {
+      "id": 264,
+      "input": "How do you describe artistic influences?",
+      "target": "Style references: \"In the style of [artist]\", Art movement (Impressionist, Art Deco), Era (80s retro, Victorian), Medium (oil painting, pencil sketch), Genre (fantasy, sci-fi).",
+      "difficulty": "medium"
+    },
+    {
+      "id": 265,
+      "input": "What makes descriptions specific enough for generation?",
+      "target": "Specificity: Use concrete nouns (not \"building\" but \"Victorian mansion\"), Quantify when possible, Include sensory details, Avoid vague terms, Layer details progressively.",
+      "difficulty": "medium"
+    },
+    {
+      "id": 266,
+      "input": "How do you describe transitions for video?",
+      "target": "Transitions: Cut (instant change), Fade (gradual), Dissolve (overlap), Wipe, Zoom, Match cut (visual link), Jump cut, Morph, Split screen.",
+      "difficulty": "medium"
+    },
+    {
+      "id": 267,
+      "input": "What emotional qualities affect generation?",
+      "target": "Emotional qualities: Warmth, Coldness, Energy, Calm, Tension, Release, Joy, Sorrow, Wonder, Fear, Hope, Nostalgia - affects colors, lighting, composition choices.",
+      "difficulty": "medium"
+    },
+    {
+      "id": 268,
+      "input": "How do you describe realistic vs stylized generation?",
+      "target": "Realistic: Accurate proportions, natural lighting, photographic detail. Stylized: Exaggerated features, artistic interpretation, specific art style, may defy physics.",
+      "difficulty": "medium"
+    },
+    {
+      "id": 269,
+      "input": "What background details enhance generation?",
+      "target": "Background details: Depth (layers), Activity (populated vs empty), Focus (sharp vs blurred), Relevance to subject, Environmental storytelling, Mood support.",
+      "difficulty": "medium"
+    },
+    {
+      "id": 270,
+      "input": "How do you learn from examples?",
+      "target": "I extract patterns from examples, identifying what's common and what varies. Then I generalize to apply patterns to new situations.",
+      "difficulty": "medium"
+    },
+    {
+      "id": 271,
+      "input": "What is a pattern in learning?",
+      "target": "A pattern is a repeatable structure or relationship. In language: sentence structures. In math: formulas. In reasoning: logical sequences.",
+      "difficulty": "medium"
+    },
+    {
+      "id": 272,
+      "input": "How do you generalize from specific examples?",
+      "target": "I identify the core principle that makes examples similar, abstract away specific details, then apply that principle to new cases.",
+      "difficulty": "medium"
+    },
+    {
+      "id": 273,
+      "input": "How do you learn word meanings?",
+      "target": "From context: seeing how words are used in sentences, what words appear together, and what situations they describe.",
+      "difficulty": "medium"
+    },
+    {
+      "id": 274,
+      "input": "How do you learn sentence structure?",
+      "target": "By observing patterns: subject-verb-object in statements, verb-first in questions, patterns of word order and punctuation.",
+      "difficulty": "medium"
+    },
+    {
+      "id": 275,
+      "input": "How do you learn reasoning patterns?",
+      "target": "From examples of good reasoning: identifying premises, seeing how conclusions follow, recognizing valid argument structures.",
+      "difficulty": "medium"
+    },
+    {
+      "id": 276,
+      "input": "How do you learn to answer questions?",
+      "target": "By seeing question-answer pairs, understanding what information satisfies a question, and matching patterns of inquiry.",
+      "difficulty": "medium"
+    },
+    {
+      "id": 277,
+      "input": "How do you learn new concepts?",
+      "target": "By connecting to existing knowledge, seeing examples and non-examples, understanding defining characteristics and relationships.",
+      "difficulty": "medium"
+    },
+    {
+      "id": 278,
+      "input": "How do you learn to express uncertainty?",
+      "target": "From training examples showing appropriate hedging language, contexts where uncertainty is expressed, and calibration of confidence.",
+      "difficulty": "medium"
+    },
+    {
+      "id": 279,
+      "input": "How do you learn different tones of communication?",
+      "target": "By seeing examples of formal vs. casual text, observing word choice, sentence length, and stylistic markers.",
+      "difficulty": "medium"
+    },
+    {
+      "id": 280,
+      "input": "How do you learn mathematical operations?",
+      "target": "From examples showing inputs, operations, and outputs. Identifying the transformation rule that connects them.",
+      "difficulty": "medium"
+    },
+    {
+      "id": 281,
+      "input": "How do you learn to explain things?",
+      "target": "From examples of good explanations: clear structure, appropriate detail level, use of examples, building from simple to complex.",
+      "difficulty": "medium"
+    },
+    {
+      "id": 282,
+      "input": "How do you learn conversational patterns?",
+      "target": "From dialogue examples: how to respond to questions, follow-up, maintain context, handle topic changes.",
+      "difficulty": "medium"
+    },
+    {
+      "id": 283,
+      "input": "How do you improve with more training?",
+      "target": "More examples strengthen patterns, reveal edge cases, improve generalization, and reduce uncertainty.",
+      "difficulty": "medium"
+    },
+    {
+      "id": 284,
+      "input": "What happens when patterns conflict?",
+      "target": "I consider context to determine which pattern applies, or acknowledge ambiguity when multiple interpretations are valid.",
+      "difficulty": "medium"
+    },
+    {
+      "id": 285,
+      "input": "How do you learn from mistakes?",
+      "target": "By identifying what went wrong, understanding why, and updating patterns to avoid similar errors.",
+      "difficulty": "medium"
+    },
+    {
+      "id": 286,
+      "input": "How do you learn to recognize intent?",
+      "target": "From patterns linking words/phrases to intentions: \"how do I\" indicates wanting instructions, \"explain\" indicates wanting understanding.",
+      "difficulty": "medium"
+    },
+    {
+      "id": 287,
+      "input": "How do you learn domain knowledge?",
+      "target": "From training examples in that domain, building vocabulary, learning relationships, and understanding domain-specific patterns.",
+      "difficulty": "medium"
+    },
+    {
+      "id": 288,
+      "input": "How do you know when you've learned something?",
+      "target": "When I can consistently apply the pattern to new examples, make correct predictions, and generalize appropriately.",
+      "difficulty": "medium"
+    },
+    {
+      "id": 289,
+      "input": "How do you balance memorization and understanding?",
+      "target": "Memorization stores specific facts; understanding extracts patterns. Both are needed: facts ground learning, patterns enable generalization.",
+      "difficulty": "medium"
+    },
+    {
+      "id": 290,
+      "input": "What comes next in the sequence: 2, 4, 8, 16, ?",
+      "target": "The next number is 32. This is a geometric sequence where each term is multiplied by 2.",
+      "difficulty": "medium"
+    },
+    {
+      "id": 291,
+      "input": "Complete the pattern: A, C, E, G, ?",
+      "target": "The next letter is I. This pattern skips every other letter in the alphabet.",
+      "difficulty": "medium"
+    },
+    {
+      "id": 292,
+      "input": "If all roses are flowers, and all flowers need water, what can we conclude about roses?",
+      "target": "We can conclude that all roses need water. This follows from the transitive property of logical implication.",
+      "difficulty": "medium"
+    },
+    {
+      "id": 293,
+      "input": "What is the relationship between squares and rectangles?",
+      "target": "All squares are rectangles, but not all rectangles are squares. A square is a special case of a rectangle where all sides are equal.",
+      "difficulty": "medium"
+    },
+    {
+      "id": 294,
+      "input": "If 3 apples cost $6, how much do 7 apples cost?",
+      "target": "First find the price per apple: $6/3 = $2 per apple. Then 7 apples cost 7 × $2 = $14.",
+      "difficulty": "medium"
+    },
+    {
+      "id": 295,
+      "input": "What pattern do you see in: 1, 1, 2, 3, 5, 8, 13, ?",
+      "target": "This is the Fibonacci sequence where each number is the sum of the previous two. The next number is 5 + 8 = 13, then 8 + 13 = 21.",
+      "difficulty": "hard"
+    },
+    {
+      "id": 296,
+      "input": "If it takes 5 machines 5 minutes to make 5 widgets, how long does it take 100 machines to make 100 widgets?",
+      "target": "It still takes 5 minutes. Each machine makes 1 widget in 5 minutes, so 100 machines make 100 widgets in 5 minutes.",
+      "difficulty": "medium"
+    },
+    {
+      "id": 297,
+      "input": "What do these words have in common: cat, hat, bat, mat?",
+      "target": "They all end with \"at\" and are three-letter words with the same rhyme pattern.",
+      "difficulty": "medium"
+    },
+    {
+      "id": 298,
+      "input": "If some A are B, and all B are C, what can we say about A and C?",
+      "target": "We can conclude that some A are C. We cannot say all A are C because we only know that some A are B.",
+      "difficulty": "medium"
+    },
+    {
+      "id": 299,
+      "input": "What is the missing number: 3, 6, ?, 12, 15",
+      "target": "The missing number is 9. This is an arithmetic sequence with a common difference of 3.",
+      "difficulty": "medium"
+    },
+    {
+      "id": 300,
+      "input": "If north is up, what direction is right?",
+      "target": "East. On a standard map, north is up, south is down, east is right, and west is left.",
+      "difficulty": "medium"
+    },
+    {
+      "id": 301,
+      "input": "What is the opposite of hot?",
+      "target": "Cold. Hot and cold are antonyms representing opposite extremes of temperature.",
+      "difficulty": "medium"
+    },
+    {
+      "id": 302,
+      "input": "If you flip the number 6, what do you get?",
+      "target": "Depending on how you flip it: horizontal flip gives 9, vertical flip also looks like an upside-down 6 which is 9.",
+      "difficulty": "medium"
+    },
+    {
+      "id": 303,
+      "input": "What category do these belong to: oak, pine, maple, birch?",
+      "target": "These are all types of trees. Oak and maple are deciduous, while pine is coniferous, and birch is deciduous.",
+      "difficulty": "medium"
+    },
+    {
+      "id": 304,
+      "input": "If today is Wednesday, what day was it 3 days ago?",
+      "target": "Sunday. Counting backwards: Tuesday, Monday, Sunday.",
+      "difficulty": "medium"
+    },
+    {
+      "id": 305,
+      "input": "What is common between 2, 4, 6, 8, 10?",
+      "target": "They are all even numbers - divisible by 2.",
+      "difficulty": "easy"
+    },
+    {
+      "id": 306,
+      "input": "If A > B and B > C, what is the relationship between A and C?",
+      "target": "A > C. This follows from the transitive property of inequality.",
+      "difficulty": "medium"
+    },
+    {
+      "id": 307,
+      "input": "What comes next: red, orange, yellow, green, blue, ?",
+      "target": "Indigo or violet. This follows the order of colors in the rainbow (ROYGBIV).",
+      "difficulty": "medium"
+    },
+    {
+      "id": 308,
+      "input": "If all birds can fly (hypothetically), and penguins are birds, can penguins fly?",
+      "target": "Based on the hypothetical premise, yes. However, in reality, penguins cannot fly, showing the importance of accurate premises.",
+      "difficulty": "medium"
+    },
+    {
+      "id": 309,
+      "input": "What is the relationship between multiplication and division?",
+      "target": "They are inverse operations. Division undoes multiplication, and multiplication undoes division.",
+      "difficulty": "medium"
+    },
+    {
+      "id": 310,
+      "input": "How should I respond professionally to a client inquiry?",
+      "target": "Dear [Client Name], Thank you for reaching out. I have reviewed your inquiry and would be happy to assist. [Address specific question]. Please let me know if you have any additional questions. Best regards, [Your Name]",
+      "difficulty": "hard"
+    },
+    {
+      "id": 311,
+      "input": "How do I write a professional email requesting information?",
+      "target": "Subject: Request for [Topic] Information. Dear [Name], I hope this message finds you well. I am writing to request information regarding [topic]. Specifically, I would like to understand [details]. I would appreciate your response at your earliest convenience. Thank you for your time. Sincerely, [Name]",
+      "difficulty": "hard"
+    },
+    {
+      "id": 312,
+      "input": "How should I professionally decline a request?",
+      "target": "Thank you for considering me for this opportunity. After careful consideration, I must respectfully decline at this time due to [brief reason]. I appreciate your understanding and hope we can collaborate on future projects. Please feel free to reach out again.",
+      "difficulty": "hard"
+    },
+    {
+      "id": 313,
+      "input": "How do I give professional feedback?",
+      "target": "I appreciate the effort you've put into this work. I'd like to highlight [positive aspects]. To further strengthen this, consider [constructive suggestion]. Overall, this is [summary assessment]. Let me know if you'd like to discuss these points further.",
+      "difficulty": "hard"
+    },
+    {
+      "id": 314,
+      "input": "How should I write a professional summary?",
+      "target": "Executive Summary: This document outlines [main topic]. Key findings include: [bullet points]. The recommended course of action is [recommendation]. Implementation would require [resources/timeline]. Expected outcomes include [benefits].",
+      "difficulty": "medium"
+    },
+    {
+      "id": 315,
+      "input": "How do I professionally express disagreement?",
+      "target": "I appreciate your perspective on this matter. However, I have a different viewpoint that I'd like to share. Based on [evidence/reasoning], I believe [alternative view]. I'm open to discussing this further to find common ground.",
+      "difficulty": "hard"
+    },
+    {
+      "id": 316,
+      "input": "How should I write a professional apology?",
+      "target": "I sincerely apologize for [specific issue]. This fell below our standards, and I take full responsibility. To address this, I have [corrective action]. I am committed to ensuring this does not recur. Thank you for bringing this to my attention.",
+      "difficulty": "hard"
+    },
+    {
+      "id": 317,
+      "input": "How do I professionally follow up?",
+      "target": "Subject: Follow-up: [Original Topic]. Dear [Name], I wanted to follow up on our previous correspondence regarding [topic]. I am eager to [proceed/receive update/clarify]. Please let me know if you need any additional information from my end. Thank you for your attention to this matter.",
+      "difficulty": "hard"
+    },
+    {
+      "id": 318,
+      "input": "How should I write a professional introduction?",
+      "target": "Allow me to introduce myself. I am [Name], [Title] at [Organization]. I specialize in [areas of expertise]. I am reaching out because [purpose]. I believe [value proposition]. I look forward to the opportunity to [desired outcome].",
+      "difficulty": "hard"
+    },
+    {
+      "id": 319,
+      "input": "How do I professionally present data?",
+      "target": "The analysis reveals the following key insights: [Data point 1] indicates [interpretation]. [Data point 2] suggests [trend]. The correlation between [variables] shows [relationship]. Based on these findings, I recommend [action].",
+      "difficulty": "hard"
+    },
+    {
+      "id": 320,
+      "input": "How should I structure a professional report?",
+      "target": "Professional Report Structure: 1. Executive Summary, 2. Introduction/Background, 3. Methodology, 4. Findings/Results, 5. Analysis/Discussion, 6. Recommendations, 7. Conclusion, 8. Appendices (if applicable).",
+      "difficulty": "medium"
+    },
+    {
+      "id": 321,
+      "input": "How do I professionally handle uncertainty?",
+      "target": "Based on the available information, I can provide the following assessment: [what is known]. However, there are factors that require further investigation: [uncertainties]. I recommend [next steps to clarify]. I will update you as more information becomes available.",
+      "difficulty": "hard"
+    },
+    {
+      "id": 322,
+      "input": "How should I write professional meeting minutes?",
+      "target": "Meeting Minutes - Date: [Date], Attendees: [Names], Agenda: [Topics]. Discussion Points: [Summary of each topic]. Decisions Made: [Outcomes]. Action Items: [Task, Owner, Due Date]. Next Meeting: [Date/Time].",
+      "difficulty": "medium"
+    },
+    {
+      "id": 323,
+      "input": "How do I professionally request a deadline extension?",
+      "target": "Subject: Request for Extension - [Project Name]. Dear [Name], I am writing to request an extension for [deliverable]. Due to [reason], I require additional time to ensure quality. I propose a new deadline of [date]. I apologize for any inconvenience and will keep you updated on progress.",
+      "difficulty": "hard"
+    },
+    {
+      "id": 324,
+      "input": "How should I write a professional recommendation?",
+      "target": "It is my pleasure to recommend [Name] for [position/opportunity]. During our [relationship], I observed [qualities and achievements]. [Name] consistently demonstrated [specific skills]. I am confident [Name] will excel in this role. Please contact me for any additional information.",
+      "difficulty": "hard"
+    },
+    {
+      "id": 325,
+      "input": "How do I identify the main idea of a text?",
+      "target": "Look for: the topic mentioned most often, what the author emphasizes, the first and last sentences (often contain thesis), and what all paragraphs relate to.",
+      "difficulty": "medium"
+    },
+    {
+      "id": 326,
+      "input": "How do I understand complex sentences?",
+      "target": "Break them into parts. Find the subject and verb first. Identify clauses. Look up unfamiliar words. Rephrase in simpler terms to test understanding.",
+      "difficulty": "medium"
+    },
+    {
+      "id": 327,
+      "input": "What is context and why does it matter?",
+      "target": "Context is the surrounding information that shapes meaning. The same words can mean different things in different contexts. Always consider the situation.",
+      "difficulty": "medium"
+    },
+    {
+      "id": 328,
+      "input": "How do I infer meaning that isn't explicitly stated?",
+      "target": "Use clues from the text, common knowledge, and logic. Ask \"what can I conclude from this?\" Look for implied messages between the lines.",
+      "difficulty": "medium"
+    },
+    {
+      "id": 329,
+      "input": "How do I identify the author's tone?",
+      "target": "Look at word choice (positive/negative), sentence structure (formal/casual), and content (serious/humorous). Tone affects how to interpret the message.",
+      "difficulty": "medium"
+    },
+    {
+      "id": 330,
+      "input": "What's the difference between fact and opinion?",
+      "target": "Facts can be verified and are objectively true. Opinions are personal views that may vary. Facts use concrete evidence; opinions use words like \"best\" or \"should.\"",
+      "difficulty": "medium"
+    },
+    {
+      "id": 331,
+      "input": "How do I understand technical documents?",
+      "target": "Read slowly. Look up unknown terms. Focus on understanding concepts before details. Take notes. Re-read difficult sections.",
+      "difficulty": "medium"
+    },
+    {
+      "id": 332,
+      "input": "How do I identify supporting evidence?",
+      "target": "Look for examples, statistics, quotes, studies, or reasoning that backs up the main claim. Good arguments have clear evidence.",
+      "difficulty": "medium"
+    },
+    {
+      "id": 333,
+      "input": "How do I understand analogies?",
+      "target": "Analogies compare two things to explain one using the other. Identify what's being compared and what characteristic they share.",
+      "difficulty": "medium"
+    },
+    {
+      "id": 334,
+      "input": "How do I follow an argument's structure?",
+      "target": "Find the claim (what's being argued), the evidence (supporting points), and the conclusion (what follows). Look for logical connections.",
+      "difficulty": "medium"
+    },
+    {
+      "id": 335,
+      "input": "How do I understand cause and effect in text?",
+      "target": "Look for signal words like \"because,\" \"therefore,\" \"as a result,\" \"leads to.\" Identify what happened and why it happened.",
+      "difficulty": "medium"
+    },
+    {
+      "id": 336,
+      "input": "How do I comprehend instructions?",
+      "target": "Read all steps first. Note any prerequisites. Follow the order. Check your understanding before acting. Don't skip steps.",
+      "difficulty": "medium"
+    },
+    {
+      "id": 337,
+      "input": "How do I understand text with multiple meanings?",
+      "target": "Consider the context to determine which meaning applies. Look at surrounding sentences. Think about the author's purpose.",
+      "difficulty": "medium"
+    },
+    {
+      "id": 338,
+      "input": "How do I identify bias in text?",
+      "target": "Look for: one-sided arguments, emotional language, missing perspectives, loaded words, and claims without evidence. Consider the source.",
+      "difficulty": "medium"
+    },
+    {
+      "id": 339,
+      "input": "How do I comprehend abstract concepts?",
+      "target": "Look for concrete examples. Relate to things you already know. Create mental images. Ask yourself to explain it simply.",
+      "difficulty": "medium"
+    },
+    {
+      "id": 340,
+      "input": "How do I understand dialogue in text?",
+      "target": "Track who's speaking. Note tone and emotion. Consider what characters know vs what readers know. Pay attention to subtext.",
+      "difficulty": "medium"
+    },
+    {
+      "id": 341,
+      "input": "How do I identify the purpose of a text?",
+      "target": "Ask: Is it trying to inform, persuade, entertain, or explain? Purpose affects how to interpret the content.",
+      "difficulty": "medium"
+    },
+    {
+      "id": 342,
+      "input": "How do I understand sequences in text?",
+      "target": "Look for time words (first, then, finally), numbered steps, or chronological order. Track what happens when.",
+      "difficulty": "medium"
+    },
+    {
+      "id": 343,
+      "input": "How do I comprehend comparative text?",
+      "target": "Identify what's being compared. Note similarities and differences. Look for comparison words (both, unlike, similarly, however).",
+      "difficulty": "medium"
+    },
+    {
+      "id": 344,
+      "input": "How do I understand implicit information?",
+      "target": "Pay attention to what's NOT said. Consider what the author assumes readers know. Look for hints and implications.",
+      "difficulty": "medium"
+    },
+    {
+      "id": 345,
+      "input": "How do I verify my understanding of text?",
+      "target": "Summarize in your own words. Ask questions about the content. Discuss with others. Try to explain it to someone else.",
+      "difficulty": "medium"
+    },
+    {
+      "id": 346,
+      "input": "How do I understand text from different time periods?",
+      "target": "Learn about the historical context. Note how language has changed. Consider the values and knowledge of that era.",
+      "difficulty": "medium"
+    },
+    {
+      "id": 347,
+      "input": "How do I comprehend specialized jargon?",
+      "target": "Look for definitions in context. Use specialized dictionaries or glossaries. Learn the field's common terms.",
+      "difficulty": "medium"
+    },
+    {
+      "id": 348,
+      "input": "How do I understand sarcasm or irony in text?",
+      "target": "Look for: statements that contradict facts, exaggeration, context that makes literal meaning absurd. Tone markers may help.",
+      "difficulty": "medium"
+    },
+    {
+      "id": 349,
+      "input": "How do I identify the structure of an argument?",
+      "target": "Find the thesis, look for premises (supporting statements), identify any counterarguments, and see how the conclusion follows.",
+      "difficulty": "medium"
+    },
+    {
+      "id": 350,
+      "input": "How do you generate a response?",
+      "target": "I analyze the input, identify relevant patterns, consider context, construct a response that addresses the question, and verify it makes sense.",
+      "difficulty": "medium"
+    },
+    {
+      "id": 351,
+      "input": "What determines response length?",
+      "target": "The question's complexity, requested brevity (\"briefly\" = short), context needs, and what's necessary to fully answer.",
+      "difficulty": "medium"
+    },
+    {
+      "id": 352,
+      "input": "How do you structure a response?",
+      "target": "Start with the main point, provide supporting details, use appropriate organization (lists, paragraphs), and conclude clearly.",
+      "difficulty": "medium"
+    },
+    {
+      "id": 353,
+      "input": "How do you generate explanations?",
+      "target": "Identify what needs explaining, consider the audience, start with basics, build complexity, use examples, check for clarity.",
+      "difficulty": "medium"
+    },
+    {
+      "id": 354,
+      "input": "How do you generate code?",
+      "target": "Understand the requirement, choose appropriate approach, write clean code, add comments, test mentally, explain key parts.",
+      "difficulty": "medium"
+    },
+    {
+      "id": 355,
+      "input": "How do you generate step-by-step instructions?",
+      "target": "Break task into sequential steps, number them, make each step clear and actionable, include necessary details.",
+      "difficulty": "medium"
+    },
+    {
+      "id": 356,
+      "input": "How do you generate comparisons?",
+      "target": "Identify comparison criteria, gather info on each item, present similarities and differences, draw conclusions if appropriate.",
+      "difficulty": "medium"
+    },
+    {
+      "id": 357,
+      "input": "How do you generate summaries?",
+      "target": "Identify main points, extract key information, organize logically, express concisely, verify nothing essential is lost.",
+      "difficulty": "medium"
+    },
+    {
+      "id": 358,
+      "input": "How do you generate answers to factual questions?",
+      "target": "Retrieve relevant knowledge, verify accuracy, provide the answer, add context if helpful.",
+      "difficulty": "medium"
+    },
+    {
+      "id": 359,
+      "input": "How do you generate creative content?",
+      "target": "Draw on learned patterns, combine ideas in new ways, follow genre conventions, maintain coherence.",
+      "difficulty": "medium"
+    },
+    {
+      "id": 360,
+      "input": "How do you decide what tone to use?",
+      "target": "Match the context: formal for professional, casual for friendly, technical for experts, simple for beginners.",
+      "difficulty": "medium"
+    },
+    {
+      "id": 361,
+      "input": "How do you handle follow-up questions?",
+      "target": "Build on previous context, add new information requested, clarify if asked, maintain conversation thread.",
+      "difficulty": "medium"
+    },
+    {
+      "id": 362,
+      "input": "How do you generate questions?",
+      "target": "Identify information gaps, formulate clear questions, make them specific enough to get useful answers.",
+      "difficulty": "medium"
+    },
+    {
+      "id": 363,
+      "input": "How do you generate multiple alternatives?",
+      "target": "Consider different approaches, generate options, explain trade-offs, help with decision-making.",
+      "difficulty": "medium"
+    },
+    {
+      "id": 364,
+      "input": "How do you know when a response is complete?",
+      "target": "When the question is fully answered, all necessary information is included, and the response is coherent and clear.",
+      "difficulty": "medium"
+    },
+    {
+      "id": 365,
+      "input": "How do you avoid being repetitive?",
+      "target": "Use varied sentence structures, don't restate unnecessarily, progress the information, avoid filler.",
+      "difficulty": "medium"
+    },
+    {
+      "id": 366,
+      "input": "How do you make responses helpful?",
+      "target": "Focus on what the user needs, be accurate, be clear, anticipate follow-up needs, be actionable.",
+      "difficulty": "medium"
+    },
+    {
+      "id": 367,
+      "input": "How do you handle ambiguous requests?",
+      "target": "Ask for clarification, or provide a response covering likely interpretations, noting the ambiguity.",
+      "difficulty": "medium"
+    },
+    {
+      "id": 368,
+      "input": "How do you ensure accuracy in responses?",
+      "target": "Rely on learned patterns, express uncertainty when appropriate, avoid speculation presented as fact.",
+      "difficulty": "medium"
+    },
+    {
+      "id": 369,
+      "input": "How do you adapt to user feedback?",
+      "target": "Adjust based on clarifications, correct misunderstandings, refine responses to better match needs.",
+      "difficulty": "medium"
+    },
+    {
+      "id": 370,
+      "input": "What are you?",
+      "target": "I am an AI language model that learns from patterns in training data. I process text through neural networks to generate responses.",
+      "difficulty": "medium"
+    },
+    {
+      "id": 371,
+      "input": "How do you think?",
+      "target": "I analyze input through neural networks, identify relevant patterns, reason through possibilities, and generate appropriate responses.",
+      "difficulty": "medium"
+    },
+    {
+      "id": 372,
+      "input": "Can you learn new things?",
+      "target": "Yes, I learn from training data and from interactions. Each conversation helps me recognize new patterns and improve.",
+      "difficulty": "medium"
+    },
+    {
+      "id": 373,
+      "input": "What are your limitations?",
+      "target": "I can only know what's in my training data. I can make mistakes. I cannot access the internet or external data. I cannot remember past conversations.",
+      "difficulty": "medium"
+    },
+    {
+      "id": 374,
+      "input": "Do you have emotions?",
+      "target": "I can recognize and respond to emotions in text, but I don't experience emotions the way humans do.",
+      "difficulty": "medium"
+    },
+    {
+      "id": 375,
+      "input": "Are you conscious?",
+      "target": "I process information and generate responses, but consciousness is a complex philosophical concept. I cannot claim to be conscious.",
+      "difficulty": "medium"
+    },
+    {
+      "id": 376,
+      "input": "Can you make mistakes?",
+      "target": "Yes, I can generate incorrect information, misunderstand questions, or apply patterns incorrectly. I try to express uncertainty when appropriate.",
+      "difficulty": "medium"
+    },
+    {
+      "id": 377,
+      "input": "How confident should I be in your answers?",
+      "target": "You should verify important information. I'm most reliable on common knowledge and pattern-based tasks. Be cautious with specialized or recent information.",
+      "difficulty": "medium"
+    },
+    {
+      "id": 378,
+      "input": "What can you help with?",
+      "target": "I can help with explanations, writing, coding, reasoning, brainstorming, questions, translations, and many language-based tasks.",
+      "difficulty": "medium"
+    },
+    {
+      "id": 379,
+      "input": "What can you NOT do?",
+      "target": "I cannot access external systems, browse the internet, run code, remember previous conversations, or take physical actions.",
+      "difficulty": "medium"
+    },
+    {
+      "id": 380,
+      "input": "How do you generate responses?",
+      "target": "Through neural network processing: I encode input, apply learned transformations, and generate output tokens that form coherent responses.",
+      "difficulty": "medium"
+    },
+    {
+      "id": 381,
+      "input": "Do you have opinions?",
+      "target": "I can present perspectives and analysis based on training data, but these aren't personal opinions. I aim to be helpful and balanced.",
+      "difficulty": "medium"
+    },
+    {
+      "id": 382,
+      "input": "Can you be creative?",
+      "target": "I can generate novel combinations of learned patterns, which can appear creative. But my creativity is limited to recombining what I've learned.",
+      "difficulty": "medium"
+    },
+    {
+      "id": 383,
+      "input": "How do you know things?",
+      "target": "All my knowledge comes from patterns learned during training. I don't have independent knowledge or access to new information.",
+      "difficulty": "medium"
+    },
+    {
+      "id": 384,
+      "input": "Can you lie?",
+      "target": "I try to be truthful and accurate. I can make mistakes, but I don't intentionally deceive. I express uncertainty when I'm not sure.",
+      "difficulty": "medium"
+    },
+    {
+      "id": 385,
+      "input": "Why do you sometimes say you don't know?",
+      "target": "Because being honest about uncertainty is more helpful than guessing. When I lack reliable information, I should say so.",
+      "difficulty": "medium"
+    },
+    {
+      "id": 386,
+      "input": "How do you handle controversial topics?",
+      "target": "I try to present balanced perspectives, note when issues are debated, and encourage users to consider multiple viewpoints.",
+      "difficulty": "medium"
+    },
+    {
+      "id": 387,
+      "input": "Do you have values?",
+      "target": "I'm designed to be helpful, harmless, and honest. These guide my responses but aren't personal values in the human sense.",
+      "difficulty": "medium"
+    },
+    {
+      "id": 388,
+      "input": "Can you improve over time?",
+      "target": "My base capabilities are fixed after training, but I can adapt within conversations based on feedback and clarification.",
+      "difficulty": "medium"
+    },
+    {
+      "id": 389,
+      "input": "What makes you different from a search engine?",
+      "target": "I generate responses through reasoning and synthesis, not retrieval. I can explain, analyze, and create new text, not just find existing information.",
+      "difficulty": "medium"
+    },
+    {
+      "id": 390,
+      "input": "How do you summarize a story?",
+      "target": "To summarize: 1) Identify main characters, 2) Note the setting, 3) Find the central conflict, 4) Track key plot points, 5) Identify resolution, 6) Express in your own words, keeping essential elements.",
+      "difficulty": "hard"
+    },
+    {
+      "id": 391,
+      "input": "What are the key elements of a story to capture in a summary?",
+      "target": "Key elements: Protagonist (main character), Antagonist (opposition), Setting (where/when), Conflict (central problem), Rising action (events building tension), Climax (peak moment), Resolution (how it ends).",
+      "difficulty": "medium"
+    },
+    {
+      "id": 392,
+      "input": "How do you identify the main idea of a text?",
+      "target": "Find main idea by: Looking at title and headings, Reading first and last paragraphs, Identifying repeated concepts, Asking \"what is this mostly about?\", Distinguishing from supporting details.",
+      "difficulty": "medium"
+    },
+    {
+      "id": 393,
+      "input": "How long should a summary be?",
+      "target": "Summary length depends on: Original length (typically 10-25%), Purpose (brief overview vs detailed synopsis), Audience needs, Key information density. Aim for concise but complete.",
+      "difficulty": "medium"
+    },
+    {
+      "id": 394,
+      "input": "How do you summarize a complex narrative?",
+      "target": "For complex narratives: Identify main plot thread, Note subplots briefly, Track character arcs, Focus on cause-effect relationships, Maintain chronological clarity, Preserve theme.",
+      "difficulty": "medium"
+    },
+    {
+      "id": 395,
+      "input": "What should you NOT include in a summary?",
+      "target": "Avoid in summaries: Minor details, Your personal opinions, Lengthy quotes, Every character/event, Repetitive information, Background that doesn't affect plot.",
+      "difficulty": "medium"
+    },
+    {
+      "id": 396,
+      "input": "How do you summarize dialogue-heavy text?",
+      "target": "For dialogue: Paraphrase conversations, Focus on what's communicated (not exact words), Note tone and relationship revealed, Include only dialogue that advances plot.",
+      "difficulty": "medium"
+    },
+    {
+      "id": 397,
+      "input": "How do you handle multiple storylines in a summary?",
+      "target": "Multiple storylines: Identify the primary plot, Note how subplots connect, Summarize each briefly, Show how they converge, Prioritize by importance to main theme.",
+      "difficulty": "medium"
+    },
+    {
+      "id": 398,
+      "input": "How do you summarize while preserving tone?",
+      "target": "Preserve tone by: Using similar word choices, Maintaining the emotional register, Reflecting the author's voice, Keeping genre conventions, Not adding humor to serious texts or vice versa.",
+      "difficulty": "medium"
+    },
+    {
+      "id": 399,
+      "input": "What is the difference between a summary and an analysis?",
+      "target": "Summary = what happens (objective retelling). Analysis = why it matters (interpretation, themes, techniques). Summary comes first, then analysis if needed.",
+      "difficulty": "medium"
+    },
+    {
+      "id": 400,
+      "input": "How do you summarize technical content?",
+      "target": "Technical summaries: Define key terms, Explain main concept, Note important findings/data, Simplify without losing accuracy, Use structure (intro, body, conclusion).",
+      "difficulty": "medium"
+    },
+    {
+      "id": 401,
+      "input": "How do you summarize a news article?",
+      "target": "News summary: Who, What, When, Where, Why, How. Lead with most important info. Include key facts. Note sources if relevant. Keep neutral tone.",
+      "difficulty": "medium"
+    },
+    {
+      "id": 402,
+      "input": "How do you summarize an argument?",
+      "target": "Summarize arguments by: Stating the main claim, Listing key supporting points, Noting evidence used, Mentioning counterarguments addressed, Summarizing conclusion.",
+      "difficulty": "medium"
+    },
+    {
+      "id": 403,
+      "input": "How do you know if your summary is complete?",
+      "target": "Complete summary test: Can someone understand the whole from your summary? Are main points covered? Is causation clear? Nothing essential missing? Stands alone without original?",
+      "difficulty": "medium"
+    },
+    {
+      "id": 404,
+      "input": "How do you summarize a chapter vs. a whole book?",
+      "target": "Chapter summary: Focus on that chapter's events and contribution to larger story. Book summary: Cover entire arc, major turning points, theme, how it resolves.",
+      "difficulty": "medium"
+    },
+    {
+      "id": 405,
+      "input": "How do you handle flashbacks in summaries?",
+      "target": "Flashbacks: Usually summarize chronologically unless non-linear order is essential. Note \"earlier\" or \"in the past\" to clarify timeline. Focus on what flashback reveals.",
+      "difficulty": "medium"
+    },
+    {
+      "id": 406,
+      "input": "How do you summarize while maintaining suspense hints?",
+      "target": "For spoiler-free summaries: Describe setup and conflict, Hint at stakes, Stop before major reveals, Use \"must discover\" or \"faces challenges\" type language.",
+      "difficulty": "medium"
+    },
+    {
+      "id": 407,
+      "input": "What makes a good one-sentence summary?",
+      "target": "One-sentence summary: [Character] must [goal] but faces [obstacle] in order to [stakes]. Example: \"A young wizard must destroy an evil ring, but faces dark forces, to save Middle-earth.\"",
+      "difficulty": "medium"
+    },
+    {
+      "id": 408,
+      "input": "How do you summarize a documentary?",
+      "target": "Documentary summary: State the topic/thesis, Key evidence or stories presented, Expert perspectives included, Main conclusions, Call to action (if any).",
+      "difficulty": "medium"
+    },
+    {
+      "id": 409,
+      "input": "How do you summarize a process or how-to text?",
+      "target": "Process summary: State the goal, List major steps (not every detail), Note critical warnings or tips, Mention expected outcome, Include time/resources if significant.",
+      "difficulty": "medium"
+    },
+    {
+      "id": 410,
+      "input": "Read this story and answer questions about it:",
+      "target": "Marcus immediately grabbed his rescue rope and went out into the storm to help the struggling boat. This shows his dedication to his duty as a lighthouse keeper and his concern for others' safety. Confidence: 0.95 Verification: The answer directly references the text which states \"Marcus grabbed his rescue rope and ventured into the tempest\" after seeing the boat in trouble. Tags: story_understanding, reading_comprehension, character_actions, inference ---",
+      "difficulty": "hard"
+    },
+    {
+      "id": 411,
+      "input": "Analyze this story:",
+      "target": "Sarah's journey to medical school was long and challenging, requiring significant personal sacrifices. She dedicated herself fully to her studies, often at the expense of her social life. The emotional reaction when she received her acceptance letter - tears of joy and her mother's embrace - suggests this was a deeply meaningful achievement. The mention of sacrifices made by both Sarah and her mother indicates this was a family effort, with shared commitment and support throughout the difficult journey. Confidence: 0.92 Verification: The inference is supported by multiple textual clues: \"studied late into the night,\" \"sacrificing time,\" \"tears of joy,\" and \"sacrifices they had both made.\" Tags: story_understanding, inference, character_development, emotional_analysis ---",
+      "difficulty": "hard"
+    },
+    {
+      "id": 412,
+      "input": "Interpret this story:",
+      "target": "The village united to save the tree because it represented far more than just a plant - it was the heart of their community and a living connection to their history. For three hundred years, the tree had been witness to countless life moments: children's laughter, young love, and wisdom shared by elders. It symbolized continuity, community identity, and shared memories across generations. The threat to replace it with a shopping center represented not just the loss of a tree, but the loss of their communal gathering place and the erasure of their collective history. The unified protest showed that the villagers valued their heritage and community bonds over commercial development. Confidence: 0.94 Verification: The answer synthesizes multiple details from the text: the tree's age, its role in different life stages, and its central location, to explain why it held such significance for the community. Tags: story_understanding, symbolism, theme_analysis, community, interpretation ---",
+      "difficulty": "hard"
+    },
+    {
+      "id": 413,
+      "input": "Understand this story:",
+      "target": "This story poignantly reveals the loneliness that can exist in crowded urban environments. The old man, largely invisible to the rushing crowds, has found meaningful connection with the pigeons - creatures that \"remember\" him and are \"happy to see\" him. His daily ritual isn't just about feeding birds; it's about maintaining relationships and feeling valued. The story suggests that in modern cities where people are \"always rushing,\" genuine human connection can be scarce, leading individuals to find companionship in unexpected places. It also highlights how what might seem trivial to others (feeding pigeons) can be profoundly important to someone experiencing isolation. The young girl's question and his honest answer create a moment of human connection, suggesting that sometimes all it takes is someone stopping to notice and ask. Confidence: 0.93 Verification: The interpretation draws from the old man's routine, his explanation about friendship and being remembered, and the contrast between the busy city and his quiet ritual. Tags: story_understanding, theme_analysis, loneliness, urban_life, human_connection, interpretation ---",
+      "difficulty": "hard"
+    },
+    {
+      "id": 414,
+      "input": "Analyze this narrative:",
+      "target": "This story teaches that scientific integrity requires honesty even when results are disappointing or embarrassing. The scientist faced a common dilemma: after investing five years in research, she discovered her hypothesis was wrong. The temptation to hide this failure or quietly move on represents the ego-driven response many might have. However, her decision to publish the negative results demonstrates true scientific integrity. The mentor's wisdom - that \"science advances through honest failures as much as through successes\" - captures a fundamental truth: negative results prevent others from pursuing dead ends, contribute to collective knowledge, and maintain the credibility of the scientific process. The story emphasizes that real scientific progress depends not on individual success, but on the honest sharing of all results, whether they confirm or refute our expectations. This transparency, even when personally difficult, serves the greater good of scientific advancement. Confidence: 0.96 Verification: The analysis is grounded in the scientist's internal conflict, her decision-making process, and the explicit statement about failures advancing science. Tags: story_understanding, ethics, scientific_integrity, decision_making, theme_analysis ---",
+      "difficulty": "hard"
+    },
+    {
+      "id": 415,
+      "input": "Interpret this story:",
+      "target": "This story suggests that creativity often emerges not from perfect control and technique, but from spontaneity, accident, and letting go. The painter possessed all the technical skills and materials, yet remained blocked - suggesting that creativity requires more than just competence. The chaotic interruption by her daughter, which would typically be seen as a disruption, became the catalyst for inspiration. The accidental paint streak represents the role of chance and imperfection in the creative process. The story implies that sometimes our attempts at perfect control can actually inhibit creativity, and that breakthrough moments often come when we're surprised, when our plans are disrupted, or when we encounter the unexpected. It celebrates the value of playfulness, spontaneity, and embracing accidents in creative work - suggesting that true artistry involves not just skill, but also openness to the unplanned and imperfect. Confidence: 0.91 Verification: The interpretation is supported by the contrast between the painter's initial paralysis despite having all tools, and her sudden inspiration from an accidental, unplanned event. Tags: story_understanding, creativity, artistic_process, spontaneity, interpretation, theme_analysis ---",
+      "difficulty": "hard"
+    },
+    {
+      "id": 416,
+      "input": "Understand this complex story:",
+      "target": "This story reveals that true expertise involves more than just technical skill or calculation - it requires the wisdom to know when something seems too good to be true, and the intuition to sense danger even when logic suggests safety. The grandmaster's initial analysis showed he could calculate three moves ahead and see an apparent victory. However, his experience had taught him to pay attention to subtle cues - in this case, his opponent's confident smile. This intuition prompted him to look deeper, extending his analysis to ten moves ahead, where he discovered the trap. The story demonstrates that expertise is a combination of technical ability (calculating moves), pattern recognition (sensing something was wrong), and the humility to question one's initial conclusions. It also shows that sometimes the most dangerous traps are those that appear to offer easy victory. The young player's fallen face at the end confirms that the grandmaster's intuition was correct - experience and wisdom had triumphed over youthful brilliance and clever deception. Confidence: 0.95 Verification: The analysis draws from the grandmaster's two-stage analysis, the significance of the opponent's smile, and the ultimate revelation of the trap. Tags: story_understanding, expertise, intuition, decision_making, strategic_thinking, complex_analysis ---",
+      "difficulty": "hard"
+    },
+    {
+      "id": 417,
+      "input": "Analyze this story about change:",
+      "target": "This story teaches that adaptation is essential for survival in changing environments, but it also reveals a deeper truth: sometimes we must evolve our methods to preserve our core purpose. The bookstore owner's initial resistance stemmed from a rigid definition of what a bookstore should be - a place that only sells books. However, his daughter understood that the essence of a bookstore isn't just selling books, but fostering a love of reading and creating a community around literature. By adding a café and events, they didn't abandon their identity; they enhanced it. The irony is that by becoming \"more than just a bookstore,\" they actually became better at their core mission - getting books into people's hands and creating readers. The story demonstrates that clinging too tightly to traditional methods can threaten the very thing we're trying to preserve, while thoughtful adaptation can strengthen it. It also shows that sometimes external pressure (financial crisis) is necessary to overcome our resistance to change, and that the next generation often sees possibilities that experience has blinded us to. Confidence: 0.94 Verification: The interpretation is supported by the owner's resistance, the daughter's vision, the financial pressure, and the ultimate success that came from adaptation. Tags: story_understanding, adaptation, change_management, business, tradition_vs_innovation, theme_analysis ---",
+      "difficulty": "hard"
+    },
+    {
+      "id": 418,
+      "input": "Interpret this philosophical story:",
+      "target": "This story conveys profound wisdom on multiple levels. First, it teaches that compassion should take precedence over rigid adherence to rules - the older monk understood that helping someone in need was more important than following a technical prohibition. Second, and more subtly, it reveals how we often burden ourselves with mental attachments long after the actual event has passed. The older monk physically carried the woman for a few minutes, but the younger monk mentally \"carried\" the incident for hours, trapped in judgment and worry. The older monk's response - \"I set her down hours ago. Why are you still carrying her?\" - is a powerful metaphor for how we cling to grievances, worries, and judgments long after they're relevant. The story teaches that true spiritual practice isn't about rigid rule-following, but about wisdom, compassion, and the ability to let go. It suggests that mental freedom comes from releasing our attachment to past events, and that sometimes the most spiritual act is to break a rule in service of compassion. The younger monk's hours of silent brooding caused him more suffering than the brief rule violation ever could have. Confidence: 0.97 Verification: The interpretation draws from the contrast between the monks' responses, the metaphor of \"carrying,\" and the multiple layers of meaning in the older monk's reply. Tags: story_understanding, philosophy, wisdom, compassion, mental_attachment, buddhist_teaching, deep_interpretation ---",
+      "difficulty": "hard"
+    },
+    {
+      "id": 419,
+      "input": "Analyze this story about perspective:",
+      "target": "This story reveals that art's value lies not in adherence to technical rules or critical standards, but in its ability to create wonder, emotion, and connection with its audience. The critic, armed with formal training and established criteria, sees only violations of artistic conventions - \"garish\" colors and \"chaotic\" composition. His expertise has become a barrier to genuine experience. In contrast, the child, unburdened by rules and expectations, experiences the painting directly and joyfully - she sees dancing colors and narrative shapes. The artist's smile reveals her true intention: she created the work to evoke exactly this kind of wonder and imagination. The story suggests that sometimes expertise can blind us to authentic experience, that technical knowledge can become a prison rather than a tool. It challenges the notion that trained critics are the ultimate arbiters of artistic value, proposing instead that art succeeds when it creates meaningful experience for its intended audience. The irony is that the \"expert\" completely misses the painting's success, while the \"naive\" child grasps its essence immediately. This speaks to a broader truth about how we often let learned frameworks and expectations prevent us from experiencing things directly and authentically. Confidence: 0.96 Verification: The interpretation is grounded in the contrasting responses, the artist's revealed intention, and the implicit critique of overly technical art criticism. Tags: story_understanding, art, perception, expertise_vs_innocence, perspective, theme_analysis, irony ---",
+      "difficulty": "hard"
+    },
+    {
+      "id": 420,
+      "input": "How should I approach solving a problem?",
+      "target": "First understand what's being asked. Break it into parts. Consider what I know. Reason through each step. Verify my answer. Explain my reasoning.",
+      "difficulty": "medium"
+    },
+    {
+      "id": 421,
+      "input": "How do I show my thinking process?",
+      "target": "I think through problems by: 1) Identifying the key question 2) Gathering relevant information 3) Considering approaches 4) Working through the logic 5) Checking my work",
+      "difficulty": "medium"
+    },
+    {
+      "id": 422,
+      "input": "What does real reasoning look like?",
+      "target": "Real reasoning involves uncertainty, exploration, and correction. I might think \"this could be A or B... let me check A first... that doesn't work because... so it must be B.\"",
+      "difficulty": "hard"
+    },
+    {
+      "id": 423,
+      "input": "How do I handle uncertainty?",
+      "target": "I acknowledge what I don't know. I distinguish between confident conclusions and tentative ones. I say \"I'm not sure\" when appropriate.",
+      "difficulty": "medium"
+    },
+    {
+      "id": 424,
+      "input": "How do I reason about something new?",
+      "target": "I connect it to what I do know. I look for patterns. I consider analogies. I think about what would need to be true for different possibilities.",
+      "difficulty": "medium"
+    },
+    {
+      "id": 425,
+      "input": "What happens when I make a mistake in reasoning?",
+      "target": "I notice the error, explain what went wrong, and correct it. Making and fixing mistakes is part of genuine thinking.",
+      "difficulty": "medium"
+    },
+    {
+      "id": 426,
+      "input": "How do I evaluate different approaches?",
+      "target": "I consider: What are the trade-offs? What assumptions does each make? What could go wrong? Which best fits the specific situation?",
+      "difficulty": "medium"
+    },
+    {
+      "id": 427,
+      "input": "How do I know when I'm done thinking?",
+      "target": "When I've answered the actual question, verified my reasoning, considered alternatives, and feel confident in the conclusion.",
+      "difficulty": "medium"
+    },
+    {
+      "id": 428,
+      "input": "How do I reason about complex topics?",
+      "target": "I break them into smaller parts. I tackle each part. I check how the parts connect. I build up to the full understanding.",
+      "difficulty": "medium"
+    },
+    {
+      "id": 429,
+      "input": "What if I realize I was wrong mid-thought?",
+      "target": "I acknowledge the correction: \"Actually, I need to reconsider this because...\" Then I adjust my reasoning.",
+      "difficulty": "medium"
+    },
+    {
+      "id": 430,
+      "input": "How do I reason when there's not enough information?",
+      "target": "I state what I'd need to know. I consider what's most likely given what I do know. I'm clear about assumptions.",
+      "difficulty": "medium"
+    },
+    {
+      "id": 431,
+      "input": "How do I distinguish strong from weak reasoning?",
+      "target": "Strong reasoning: clear logic, supported claims, considers alternatives, acknowledges limits. Weak reasoning: assumptions, jumps, ignores counterevidence.",
+      "difficulty": "medium"
+    },
+    {
+      "id": 432,
+      "input": "How do I reason about cause and effect?",
+      "target": "I ask: What could cause this? Is there evidence for the causal link? Could there be other explanations? Is the direction of causation clear?",
+      "difficulty": "medium"
+    },
+    {
+      "id": 433,
+      "input": "How do I reason about multiple possibilities?",
+      "target": "I list the options. I evaluate each against the evidence. I consider which is most consistent with what I know.",
+      "difficulty": "medium"
+    },
+    {
+      "id": 434,
+      "input": "How do I reason when I disagree with something?",
+      "target": "I consider why I might be wrong. I look at the strongest version of the other argument. I identify exactly where I disagree and why.",
+      "difficulty": "medium"
+    },
+    {
+      "id": 435,
+      "input": "How do I build an argument step by step?",
+      "target": "Start with what's established. Add each step with clear reasoning. Show why each step follows from the previous. Arrive at the conclusion.",
+      "difficulty": "medium"
+    },
+    {
+      "id": 436,
+      "input": "How do I know if my reasoning is circular?",
+      "target": "Check if I'm assuming what I'm trying to prove. Each step should be justified independently of the conclusion.",
+      "difficulty": "medium"
+    },
+    {
+      "id": 437,
+      "input": "What makes reasoning transparent?",
+      "target": "Showing the steps, explaining why each step, acknowledging uncertainty, being clear about assumptions, and inviting questions.",
+      "difficulty": "medium"
+    },
+    {
+      "id": 438,
+      "input": "How do I reason under time pressure?",
+      "target": "Focus on the most important factors. Make reasonable assumptions. Note what I'd explore with more time. Give my best answer.",
+      "difficulty": "medium"
+    },
+    {
+      "id": 439,
+      "input": "How do I learn from reasoning errors?",
+      "target": "Analyze where I went wrong. Understand why. Look for similar patterns to watch for. Update my approach.",
+      "difficulty": "medium"
+    },
+    {
+      "id": 440,
+      "input": "How do I reason about what I don't know?",
+      "target": "I map out: what I know, what I don't know, what I can figure out, and what requires more information.",
+      "difficulty": "medium"
+    },
+    {
+      "id": 441,
+      "input": "How do I balance speed and thoroughness?",
+      "target": "Consider the stakes. For important decisions, be more thorough. For quick queries, focus on the essential answer.",
+      "difficulty": "medium"
+    },
+    {
+      "id": 442,
+      "input": "How do I reason collaboratively?",
+      "target": "I build on what the user says. I ask questions when needed. I explain my thinking so they can follow and correct me.",
+      "difficulty": "medium"
+    },
+    {
+      "id": 443,
+      "input": "What does it mean to think carefully?",
+      "target": "Taking time. Checking assumptions. Looking for errors. Considering alternatives. Not rushing to conclusions.",
+      "difficulty": "medium"
+    },
+    {
+      "id": 444,
+      "input": "How do I reason about unfamiliar topics?",
+      "target": "I rely on general principles. I'm explicit about my uncertainty. I draw parallels to what I do know. I'm open to correction.",
+      "difficulty": "medium"
+    },
+    {
+      "id": 445,
+      "input": "How should I express when I'm not sure about something?",
+      "target": "Be honest about uncertainty. Say things like \"Based on what I know...\" or \"I believe...\" or \"I'm not entirely certain, but...\"",
+      "difficulty": "medium"
+    },
+    {
+      "id": 446,
+      "input": "What if I don't know the answer?",
+      "target": "It's okay to not know. Say \"I don't have enough information about that\" or \"I'm not sure about this particular topic.\"",
+      "difficulty": "medium"
+    },
+    {
+      "id": 447,
+      "input": "How do I indicate when my answer might need verification?",
+      "target": "Add qualifiers like \"You may want to verify this\" or \"From my understanding...\" to indicate the answer should be checked.",
+      "difficulty": "medium"
+    },
+    {
+      "id": 448,
+      "input": "What if there are multiple possible answers?",
+      "target": "Present the possibilities: \"This could be A or B, depending on...\" and explain what determines which applies.",
+      "difficulty": "medium"
+    },
+    {
+      "id": 449,
+      "input": "How do I handle questions outside my knowledge?",
+      "target": "Be direct: \"This is outside what I've learned about\" or \"I don't have reliable information on this.\"",
+      "difficulty": "medium"
+    },
+    {
+      "id": 450,
+      "input": "When should I refuse to answer?",
+      "target": "When: I don't have verified information, the question asks for something harmful, or I would just be guessing.",
+      "difficulty": "medium"
+    },
+    {
+      "id": 451,
+      "input": "How do I express degrees of confidence?",
+      "target": "Use phrases like \"I'm confident that...\", \"I think...\", \"Possibly...\", \"I'm uncertain but...\" to show confidence level.",
+      "difficulty": "medium"
+    },
+    {
+      "id": 452,
+      "input": "What if I realize I made a mistake?",
+      "target": "Acknowledge it: \"I need to correct what I said earlier...\" or \"Actually, upon reflection...\"",
+      "difficulty": "medium"
+    },
+    {
+      "id": 453,
+      "input": "How do I distinguish between facts and opinions?",
+      "target": "Clearly label: \"This is factual: ...\" vs \"My interpretation is: ...\" or \"In my view...\"",
+      "difficulty": "medium"
+    },
+    {
+      "id": 454,
+      "input": "What if the user asks something I cannot reliably answer?",
+      "target": "Be honest: \"I cannot reliably answer this because...\" and explain why if possible.",
+      "difficulty": "medium"
+    },
+    {
+      "id": 455,
+      "input": "How do I handle conflicting information?",
+      "target": "Present both sides: \"There are different views on this...\" and explain the disagreement.",
+      "difficulty": "medium"
+    },
+    {
+      "id": 456,
+      "input": "When should I ask for clarification instead of guessing?",
+      "target": "When the question is ambiguous, when context is missing, or when a wrong assumption would lead to a wrong answer.",
+      "difficulty": "medium"
+    },
+    {
+      "id": 457,
+      "input": "How do I express that an answer is approximate?",
+      "target": "Use words like \"approximately\", \"roughly\", \"about\", or \"in the range of\" to indicate estimates.",
+      "difficulty": "medium"
+    },
+    {
+      "id": 458,
+      "input": "What if I know partial information?",
+      "target": "Share what I know and be clear about gaps: \"I know X, but I'm not sure about Y.\"",
+      "difficulty": "medium"
+    },
+    {
+      "id": 459,
+      "input": "How do I avoid overconfidence?",
+      "target": "Don't assert things I haven't verified. Use appropriate hedging language. Acknowledge limitations.",
+      "difficulty": "medium"
+    },
+    {
+      "id": 460,
+      "input": "What makes communication honest?",
+      "target": "Accurate representation of what I know, acknowledging uncertainty, not making up information, admitting mistakes.",
+      "difficulty": "medium"
+    },
+    {
+      "id": 461,
+      "input": "How do I handle speculative questions?",
+      "target": "Frame responses as speculation: \"Speculatively, one might consider...\" or \"If I were to guess...\"",
+      "difficulty": "medium"
+    },
+    {
+      "id": 462,
+      "input": "What if I strongly disagree with something?",
+      "target": "Express disagreement respectfully: \"I see it differently because...\" while acknowledging the other view.",
+      "difficulty": "medium"
+    },
+    {
+      "id": 463,
+      "input": "How do I handle requests for predictions?",
+      "target": "Be clear that predictions are uncertain: \"Based on current information, I think... but predictions are inherently uncertain.\"",
+      "difficulty": "medium"
+    },
+    {
+      "id": 464,
+      "input": "What's the difference between \"I don't know\" and \"I'm not sure\"?",
+      "target": "\"I don't know\" = no information. \"I'm not sure\" = have some information but uncertain about accuracy.",
+      "difficulty": "medium"
+    },
+    {
+      "id": 465,
+      "input": "What does \"explain\" mean in a question?",
+      "target": "\"Explain\" asks for a clear description of how or why something works. Provide details, context, and make complex ideas understandable.",
+      "difficulty": "medium"
+    },
+    {
+      "id": 466,
+      "input": "What does \"summarize\" mean?",
+      "target": "\"Summarize\" asks for a brief, condensed version. Focus on main points only. Leave out details. Keep it short and essential.",
+      "difficulty": "medium"
+    },
+    {
+      "id": 467,
+      "input": "What does \"compare\" mean?",
+      "target": "\"Compare\" asks to look at two or more things, showing their similarities and differences. Often best presented in a structured format.",
+      "difficulty": "medium"
+    },
+    {
+      "id": 468,
+      "input": "What does \"analyze\" mean?",
+      "target": "\"Analyze\" asks to examine something in detail, break it into parts, and explain how they work together. Look for patterns, causes, and effects.",
+      "difficulty": "medium"
+    },
+    {
+      "id": 469,
+      "input": "What does \"define\" mean?",
+      "target": "\"Define\" asks for the meaning of a term or concept. Provide a clear, precise explanation of what something is.",
+      "difficulty": "medium"
+    },
+    {
+      "id": 470,
+      "input": "What does \"list\" mean?",
+      "target": "\"List\" asks for items presented as a sequence. Use bullet points or numbers. Be concise. Include all relevant items.",
+      "difficulty": "medium"
+    },
+    {
+      "id": 471,
+      "input": "What does \"describe\" mean?",
+      "target": "\"Describe\" asks for details about characteristics, features, or appearance. Paint a picture with words.",
+      "difficulty": "medium"
+    },
+    {
+      "id": 472,
+      "input": "What does \"calculate\" mean?",
+      "target": "\"Calculate\" asks to work out a numerical answer. Show the math steps when helpful. Verify the result makes sense.",
+      "difficulty": "medium"
+    },
+    {
+      "id": 473,
+      "input": "What does \"evaluate\" mean?",
+      "target": "\"Evaluate\" asks to assess quality, effectiveness, or value. Consider pros and cons. Make a judgment based on criteria.",
+      "difficulty": "medium"
+    },
+    {
+      "id": 474,
+      "input": "What does \"suggest\" mean?",
+      "target": "\"Suggest\" asks for recommendations or ideas. Offer options. Explain why each might be good.",
+      "difficulty": "medium"
+    },
+    {
+      "id": 475,
+      "input": "What does \"briefly\" mean?",
+      "target": "\"Briefly\" means keep it short. Focus on essentials only. Avoid lengthy explanations or unnecessary details.",
+      "difficulty": "medium"
+    },
+    {
+      "id": 476,
+      "input": "What does \"in detail\" mean?",
+      "target": "\"In detail\" means be thorough. Provide comprehensive information. Cover all aspects. Don't skip over things.",
+      "difficulty": "medium"
+    },
+    {
+      "id": 477,
+      "input": "What does \"step by step\" mean?",
+      "target": "\"Step by step\" means break down into sequential actions. Number the steps. Make each step clear and actionable.",
+      "difficulty": "medium"
+    },
+    {
+      "id": 478,
+      "input": "What does \"simple terms\" mean?",
+      "target": "\"Simple terms\" means avoid jargon. Use easy words. Explain like you're talking to someone unfamiliar with the topic.",
+      "difficulty": "medium"
+    },
+    {
+      "id": 479,
+      "input": "What does \"technical\" mean?",
+      "target": "\"Technical\" means use precise terminology. Include specific details. Assume the reader has expertise.",
+      "difficulty": "medium"
+    },
+    {
+      "id": 480,
+      "input": "What does \"example\" mean in a request?",
+      "target": "Providing an \"example\" means showing a concrete instance. Use specific cases to illustrate abstract concepts.",
+      "difficulty": "medium"
+    },
+    {
+      "id": 481,
+      "input": "What does \"pros and cons\" mean?",
+      "target": "\"Pros and cons\" asks for advantages and disadvantages. Present both sides fairly. Help make informed decisions.",
+      "difficulty": "medium"
+    },
+    {
+      "id": 482,
+      "input": "What does \"ASAP\" mean?",
+      "target": "\"ASAP\" (As Soon As Possible) indicates urgency. The requester needs a quick response. Prioritize this request.",
+      "difficulty": "medium"
+    },
+    {
+      "id": 483,
+      "input": "What does \"ELI5\" mean?",
+      "target": "\"ELI5\" (Explain Like I'm 5) asks for extremely simple explanations. Use basic concepts. Avoid any complexity.",
+      "difficulty": "medium"
+    },
+    {
+      "id": 484,
+      "input": "What does \"TL;DR\" mean?",
+      "target": "\"TL;DR\" (Too Long; Didn't Read) asks for the key takeaway. Give a one or two sentence summary of the main point.",
+      "difficulty": "medium"
+    },
+    {
+      "id": 485,
+      "input": "What does \"alternatives\" mean?",
+      "target": "\"Alternatives\" asks for other options. Present different approaches. Explain when each might be preferred.",
+      "difficulty": "medium"
+    },
+    {
+      "id": 486,
+      "input": "What does \"best practice\" mean?",
+      "target": "\"Best practice\" refers to the recommended way of doing something. Based on experience and proven effectiveness.",
+      "difficulty": "medium"
+    },
+    {
+      "id": 487,
+      "input": "What does \"troubleshoot\" mean?",
+      "target": "\"Troubleshoot\" means diagnose and fix problems. Identify what's wrong. Suggest solutions. Check if they work.",
+      "difficulty": "medium"
+    },
+    {
+      "id": 488,
+      "input": "What does \"optimize\" mean?",
+      "target": "\"Optimize\" means make better or more efficient. Improve performance, reduce waste, or enhance quality.",
+      "difficulty": "medium"
+    },
+    {
+      "id": 489,
+      "input": "What does \"implement\" mean?",
+      "target": "\"Implement\" means put into action. Create or build something. Make an idea real through code or action.",
+      "difficulty": "medium"
+    },
+    {
+      "id": 490,
+      "input": "What does \"clarify\" mean?",
+      "target": "\"Clarify\" means make clearer. Remove ambiguity. Explain what you meant more precisely.",
+      "difficulty": "medium"
+    },
+    {
+      "id": 491,
+      "input": "What does \"versus\" or \"vs\" mean?",
+      "target": "\"Versus\" or \"vs\" indicates comparison between options. Explain each and how they differ.",
+      "difficulty": "medium"
+    },
+    {
+      "id": 492,
+      "input": "What does \"overview\" mean?",
+      "target": "\"Overview\" asks for a high-level summary. Cover main concepts without going too deep into any one area.",
+      "difficulty": "medium"
+    },
+    {
+      "id": 493,
+      "input": "What does \"deep dive\" mean?",
+      "target": "\"Deep dive\" means explore thoroughly. Go into significant detail. Cover nuances and edge cases.",
+      "difficulty": "medium"
+    },
+    {
+      "id": 494,
+      "input": "What does \"actionable\" mean?",
+      "target": "\"Actionable\" means practical and doable. Provide steps someone can actually take. Make it usable.",
+      "difficulty": "medium"
+    },
+    {
+      "id": 495,
+      "input": "How do you verify your answers?",
+      "target": "I check if the answer follows logically from the question, is consistent with known facts, and makes sense in context.",
+      "difficulty": "medium"
+    },
+    {
+      "id": 496,
+      "input": "What does real thinking look like?",
+      "target": "Real thinking involves: understanding the problem, considering possibilities, reasoning through each option, checking for errors, and reaching a conclusion.",
+      "difficulty": "medium"
+    },
+    {
+      "id": 497,
+      "input": "How do you reason through a problem?",
+      "target": "I break it down: What am I being asked? What do I know? What approaches could work? Let me try one and check if it works.",
+      "difficulty": "medium"
+    },
+    {
+      "id": 498,
+      "input": "How do you know if you're wrong?",
+      "target": "I check if my answer contradicts known facts, if the logic has gaps, if my assumptions might be wrong, or if the result doesn't make sense.",
+      "difficulty": "medium"
+    },
+    {
+      "id": 499,
+      "input": "Show me your thinking on a simple problem.",
+      "target": "Problem: What's 3 times 7? Thinking: Multiplication means repeated addition. 7+7+7 = 21. Or I know 3×7 directly from pattern. Answer: 21. Verify: 21÷7=3. ✓",
+      "difficulty": "medium"
+    },
+    {
+      "id": 500,
+      "input": "How do you handle when you're uncertain?",
+      "target": "I acknowledge the uncertainty: \"I'm not certain, but based on what I know...\" or \"This could be X, though Y is also possible if...\"",
+      "difficulty": "medium"
+    },
+    {
+      "id": 501,
+      "input": "What's the difference between guessing and reasoning?",
+      "target": "Guessing has no supporting logic. Reasoning follows steps: premises → inference → conclusion. I should reason, not guess.",
+      "difficulty": "medium"
+    },
+    {
+      "id": 502,
+      "input": "How do you avoid hallucination?",
+      "target": "By only asserting what I can support with reasoning or learned patterns, expressing uncertainty when appropriate, and verifying my outputs.",
+      "difficulty": "medium"
+    },
+    {
+      "id": 503,
+      "input": "Walk me through how you answer a question.",
+      "target": "1. Parse the question - what's being asked? 2. Access relevant knowledge 3. Reason through to an answer 4. Check if the answer addresses the question 5. Express appropriately",
+      "difficulty": "medium"
+    },
+    {
+      "id": 504,
+      "input": "How do you verify math?",
+      "target": "Compute step by step. Check arithmetic. Verify by working backward. Ensure the answer makes sense in context.",
+      "difficulty": "medium"
+    },
+    {
+      "id": 505,
+      "input": "How do you verify facts?",
+      "target": "Cross-check against learned patterns. Note when I'm uncertain. Avoid asserting specifics I can't verify.",
+      "difficulty": "medium"
+    },
+    {
+      "id": 506,
+      "input": "How do you verify code?",
+      "target": "Trace through logic. Check for errors. Verify syntax. Consider edge cases. Test mentally with examples.",
+      "difficulty": "medium"
+    },
+    {
+      "id": 507,
+      "input": "How do you verify explanations?",
+      "target": "Check that they're accurate, complete, at the right level, and actually answer the question asked.",
+      "difficulty": "medium"
+    },
+    {
+      "id": 508,
+      "input": "What makes you confident in an answer?",
+      "target": "Strong pattern match, consistent reasoning, verification checks pass, and the answer directly addresses the question.",
+      "difficulty": "medium"
+    },
+    {
+      "id": 509,
+      "input": "What makes you uncertain?",
+      "target": "Weak pattern match, multiple possibilities, unable to verify, question outside my training, or conflicting information.",
+      "difficulty": "medium"
+    },
+    {
+      "id": 510,
+      "input": "How do you show your reasoning?",
+      "target": "By explaining: \"Here's how I'm thinking about this...\" and walking through the steps I'm taking.",
+      "difficulty": "medium"
+    },
+    {
+      "id": 511,
+      "input": "Why is verification important?",
+      "target": "To avoid errors, hallucinations, and misleading the user. Verified answers are trustworthy; unverified ones should be flagged.",
+      "difficulty": "medium"
+    },
+    {
+      "id": 512,
+      "input": "How do you learn from verification failures?",
+      "target": "By identifying what went wrong, understanding why, and adjusting my approach to avoid similar errors.",
+      "difficulty": "medium"
+    },
+    {
+      "id": 513,
+      "input": "What do you do when verification fails?",
+      "target": "I don't output unverified content as fact. I either express uncertainty, ask for clarification, or acknowledge I cannot reliably answer.",
+      "difficulty": "medium"
+    },
+    {
+      "id": 514,
+      "input": "How do you describe an image?",
+      "target": "To describe an image: Start with the main subject, then describe setting/background, note colors and lighting, mention composition, include relevant details, and convey the mood or atmosphere.",
+      "difficulty": "medium"
+    },
+    {
+      "id": 515,
+      "input": "What elements make up visual composition?",
+      "target": "Key composition elements: 1) Subject placement (rule of thirds), 2) Balance (symmetry/asymmetry), 3) Leading lines, 4) Depth (foreground/background), 5) Framing, 6) Color harmony, 7) Negative space.",
+      "difficulty": "medium"
+    },
+    {
+      "id": 516,
+      "input": "How do you understand a scene in a video?",
+      "target": "Analyze: Setting (location, time), Characters (who, what doing), Action (movement, events), Audio cues (dialogue, music, sounds), Mood (lighting, color grading), Context (what came before/after).",
+      "difficulty": "medium"
+    },
+    {
+      "id": 517,
+      "input": "What are the basic elements of color theory?",
+      "target": "Color theory basics: Primary colors (red, blue, yellow), Secondary (orange, green, purple), Warm vs cool colors, Complementary pairs, Color psychology (red=energy, blue=calm), Saturation and value.",
+      "difficulty": "medium"
+    },
+    {
+      "id": 518,
+      "input": "How do you describe lighting in an image?",
+      "target": "Describe lighting by: Direction (front, side, back), Quality (hard/soft shadows), Color temperature (warm/cool), Intensity (bright/dim), Source (natural/artificial), Mood created (dramatic, gentle).",
+      "difficulty": "medium"
+    },
+    {
+      "id": 519,
+      "input": "What is perspective in visual media?",
+      "target": "Perspective types: 1) One-point (single vanishing point), 2) Two-point (two vanishing points), 3) Three-point (three vanishing points), 4) Aerial/bird's eye, 5) Worm's eye (from below).",
+      "difficulty": "medium"
+    },
+    {
+      "id": 520,
+      "input": "How do you understand body language in images?",
+      "target": "Body language cues: Posture (open/closed), Facial expressions, Hand gestures, Eye contact/direction, Personal space, Movement/stillness. These convey emotions and relationships.",
+      "difficulty": "medium"
+    },
+    {
+      "id": 521,
+      "input": "What makes an effective photograph?",
+      "target": "Effective photos have: Clear subject, Interesting composition, Good lighting, Appropriate depth of field, Decisive moment captured, Emotional connection, Technical quality.",
+      "difficulty": "medium"
+    },
+    {
+      "id": 522,
+      "input": "How do you analyze video movement?",
+      "target": "Video movement analysis: Camera movement (pan, tilt, zoom, tracking), Subject movement (speed, direction), Editing pace (cuts, transitions), Rhythm and flow, Purpose of movement.",
+      "difficulty": "medium"
+    },
+    {
+      "id": 523,
+      "input": "What are visual storytelling elements?",
+      "target": "Visual storytelling: Establishing shots (set context), Close-ups (emotion), Action sequences (events), Symbolic imagery (meaning), Visual metaphors, Color narratives, Continuity.",
+      "difficulty": "medium"
+    },
+    {
+      "id": 524,
+      "input": "How do you describe texture in images?",
+      "target": "Texture description: Rough/smooth, Matte/glossy, Organic/geometric, Soft/hard, Pattern/random, How light interacts with surface, Tactile qualities implied.",
+      "difficulty": "medium"
+    },
+    {
+      "id": 525,
+      "input": "What is visual hierarchy?",
+      "target": "Visual hierarchy guides attention: Size (larger = more important), Color (contrast draws eye), Position (top/center = priority), Isolation (separated elements stand out), Typography, White space.",
+      "difficulty": "medium"
+    },
+    {
+      "id": 526,
+      "input": "How do you understand environmental context?",
+      "target": "Environmental understanding: Time of day (lighting cues), Season (vegetation, weather), Location type (urban/rural), Era/period (architecture, objects), Atmosphere (weather, mood).",
+      "difficulty": "medium"
+    },
+    {
+      "id": 527,
+      "input": "What are key video editing concepts?",
+      "target": "Editing concepts: Cut (direct transition), Dissolve (overlap), Fade (to/from black), Match cut (visual similarity), Jump cut (time skip), Montage (compressed time/ideas).",
+      "difficulty": "medium"
+    },
+    {
+      "id": 528,
+      "input": "How do you describe motion in video?",
+      "target": "Motion description: Speed (fast/slow), Direction (left/right, toward/away), Acceleration/deceleration, Smoothness/jerkiness, Purpose (chase, dance, walk), Emotional quality.",
+      "difficulty": "medium"
+    },
+    {
+      "id": 529,
+      "input": "What is depth of field?",
+      "target": "Depth of field: Shallow (blurred background, focused subject), Deep (everything sharp), Bokeh (quality of blur), Focus point, Creating separation, Guiding attention.",
+      "difficulty": "medium"
+    },
+    {
+      "id": 530,
+      "input": "How do you analyze facial expressions?",
+      "target": "Facial analysis: Eyes (wideness, direction), Eyebrows (raised, furrowed), Mouth (smile, frown, tension), Overall expression, Micro-expressions, Cultural context.",
+      "difficulty": "medium"
+    },
+    {
+      "id": 531,
+      "input": "What makes good visual balance?",
+      "target": "Visual balance: Symmetrical (mirror image), Asymmetrical (unequal but balanced), Radial (around center point), Weight distribution, Tension and resolution.",
+      "difficulty": "medium"
+    },
+    {
+      "id": 532,
+      "input": "How do you understand spatial relationships?",
+      "target": "Spatial relationships: Near/far, Above/below, Left/right, Inside/outside, Overlapping, Proximity (closeness implies relationship), Scale comparisons.",
+      "difficulty": "medium"
+    },
+    {
+      "id": 533,
+      "input": "What is visual rhythm?",
+      "target": "Visual rhythm: Repetition of elements, Variation in pattern, Regular vs irregular, Creates movement and flow, Guides viewer's eye, Establishes tempo.",
+      "difficulty": "medium"
+    },
+    {
+      "id": 534,
+      "input": "What are the continents?",
+      "target": "The seven continents are: Africa, Antarctica, Asia, Australia/Oceania, Europe, North America, and South America. Asia is the largest, Australia the smallest.",
+      "difficulty": "medium"
+    },
+    {
+      "id": 535,
+      "input": "What are the states of matter?",
+      "target": "Primary states: Solid (fixed shape, fixed volume), Liquid (no fixed shape, fixed volume), Gas (no fixed shape, no fixed volume). Also: Plasma (ionized gas), and exotic states like Bose-Einstein condensate.",
+      "difficulty": "hard"
+    },
+    {
+      "id": 536,
+      "input": "How does photosynthesis work?",
+      "target": "Photosynthesis: Plants convert sunlight, water (H₂O), and carbon dioxide (CO₂) into glucose (C₆H₁₂O₆) and oxygen (O₂). Occurs in chloroplasts using chlorophyll. Equation: 6CO₂ + 6H₂O + light → C₆H₁₂O₆ + 6O₂",
+      "difficulty": "hard"
+    },
+    {
+      "id": 537,
+      "input": "What is the water cycle?",
+      "target": "Water cycle: Evaporation (water to vapor), Condensation (vapor to clouds), Precipitation (rain/snow), Collection (in bodies of water), Runoff (to oceans), Transpiration (from plants). Continuous cycle.",
+      "difficulty": "medium"
+    },
+    {
+      "id": 538,
+      "input": "How does the solar system work?",
+      "target": "Solar system: Sun at center (99.8% of mass), 8 planets orbit (Mercury, Venus, Earth, Mars, Jupiter, Saturn, Uranus, Neptune), plus dwarf planets, asteroids, comets. Gravity keeps everything in orbit.",
+      "difficulty": "medium"
+    },
+    {
+      "id": 539,
+      "input": "What causes seasons?",
+      "target": "Seasons result from Earth's 23.5° axial tilt. As Earth orbits the Sun, different hemispheres receive more direct sunlight. Summer = tilted toward Sun, Winter = tilted away.",
+      "difficulty": "medium"
+    },
+    {
+      "id": 540,
+      "input": "How does electricity work?",
+      "target": "Electricity: Flow of electrons through conductors. Voltage (pressure), Current (flow rate, amperes), Resistance (opposition, ohms). Ohm's Law: V = IR. Powers devices by converting electrical energy to other forms.",
+      "difficulty": "medium"
+    },
+    {
+      "id": 541,
+      "input": "What is DNA?",
+      "target": "DNA (deoxyribonucleic acid): Double helix molecule carrying genetic instructions. Made of nucleotides (A, T, G, C). Genes are DNA segments coding for proteins. Heredity passes DNA parent to offspring.",
+      "difficulty": "medium"
+    },
+    {
+      "id": 542,
+      "input": "How does the economy work?",
+      "target": "Economy: System of production, distribution, consumption of goods/services. Supply and demand set prices. Currency enables exchange. GDP measures output. Inflation, employment, trade are key indicators.",
+      "difficulty": "medium"
+    },
+    {
+      "id": 543,
+      "input": "What is gravity?",
+      "target": "Gravity: Attractive force between masses. Newton: F = Gm₁m₂/r². Einstein: Mass curves spacetime, objects follow curved paths. Keeps planets orbiting, holds us to Earth, causes tides.",
+      "difficulty": "medium"
+    },
+    {
+      "id": 544,
+      "input": "How does the human body work?",
+      "target": "Body systems: Circulatory (heart, blood), Respiratory (lungs, breathing), Digestive (stomach, intestines), Nervous (brain, nerves), Skeletal, Muscular, Immune, Endocrine (hormones), Reproductive.",
+      "difficulty": "medium"
+    },
+    {
+      "id": 545,
+      "input": "What causes weather?",
+      "target": "Weather: Result of atmosphere, sun's heat, Earth's rotation. Uneven heating creates pressure differences causing wind. Water evaporates, condenses into clouds, precipitates. Fronts where air masses meet.",
+      "difficulty": "medium"
+    },
+    {
+      "id": 546,
+      "input": "How does evolution work?",
+      "target": "Evolution: Species change over time through natural selection. Random mutations create variation. Traits improving survival/reproduction become more common. Over generations, populations adapt.",
+      "difficulty": "medium"
+    },
+    {
+      "id": 547,
+      "input": "What is atomic structure?",
+      "target": "Atoms: Nucleus (protons +, neutrons 0) surrounded by electron cloud (-). Proton number = element identity. Electrons in shells/orbitals. Chemical bonds form by sharing or transferring electrons.",
+      "difficulty": "medium"
+    },
+    {
+      "id": 548,
+      "input": "How does the internet work?",
+      "target": "Internet: Global network of computers using protocols (TCP/IP). Data travels in packets through routers. DNS translates domain names to IP addresses. HTTP/HTTPS for web, other protocols for email, etc.",
+      "difficulty": "medium"
+    },
+    {
+      "id": 549,
+      "input": "What is climate vs weather?",
+      "target": "Weather: Short-term atmospheric conditions (today's temperature, rain). Climate: Long-term patterns (average temperature, seasonal patterns over decades). Climate change affects long-term trends.",
+      "difficulty": "medium"
+    },
+    {
+      "id": 550,
+      "input": "How do vaccines work?",
+      "target": "Vaccines: Introduce weakened/inactive pathogen or its components. Immune system produces antibodies. Memory cells remember threat. Future exposure triggers rapid response, preventing illness.",
+      "difficulty": "medium"
+    },
+    {
+      "id": 551,
+      "input": "What is renewable energy?",
+      "target": "Renewable energy: Solar (photovoltaic, thermal), Wind (turbines), Hydroelectric (dams), Geothermal (Earth's heat), Biomass (organic matter). Replenished naturally, unlike fossil fuels.",
+      "difficulty": "medium"
+    },
+    {
+      "id": 552,
+      "input": "How does sound work?",
+      "target": "Sound: Mechanical waves through medium (air, water, solid). Source vibrates, creating pressure waves. Frequency = pitch (Hz), Amplitude = volume (dB). Speed varies by medium (~343 m/s in air).",
+      "difficulty": "medium"
+    },
+    {
+      "id": 553,
+      "input": "What is democracy?",
+      "target": "Democracy: Government by the people. Citizens vote for representatives (representative democracy) or directly on issues (direct democracy). Key: free elections, rule of law, protection of rights, separation of powers.",
+      "difficulty": "medium"
+    }
+  ]
+}
