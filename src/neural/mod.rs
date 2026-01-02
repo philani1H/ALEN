@@ -29,7 +29,7 @@ pub mod universal_expert;
 pub mod complete_integration;
 pub mod advanced_control;
 pub mod failure_reasoning;
-// pub mod master_integration;  // TODO: Fix API mismatches - work in progress
+pub mod master_integration;
 
 pub use tensor::{Tensor, TensorShape, Device};
 pub use layers::{Linear, LayerNorm, Dropout, Embedding, Conv1D};
@@ -117,7 +117,7 @@ pub use universal_expert::{
     MetaReasoner, CreativityModulator, SafetyFilter,
 };
 
-// pub use master_integration::{
-//     MasterNeuralSystem, MasterSystemConfig, MasterSystemResponse,
-//     MasterSystemStats, TrainingMetrics as MasterTrainingMetrics,
-// };
+pub use master_integration::{
+    MasterNeuralSystem, MasterSystemConfig, MasterSystemResponse,
+    MasterSystemStats, TrainingMetrics as MasterTrainingMetrics,
+};
