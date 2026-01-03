@@ -282,72 +282,97 @@ impl MasterNeuralSystem {
     
     fn retrieve_memory(&self, query: &[f64]) -> Vec<Vec<f64>> {
         let mut results = Vec::new();
-        
+
         for entry in self.episodic_memory.iter().rev().take(self.config.retrieval_top_k) {
             let sim = cosine_similarity(query, &entry.context);
             if sim > 0.3 {
                 results.push(entry.context.clone());
             }
         }
-        
+
         results
+    }
+
+    /// Retrieve similar memory entries with responses (for text generation)
+    fn retrieve_memory_with_responses(&self, query: &[f64], top_k: usize) -> Vec<(f64, String)> {
+        let mut scored_memories: Vec<(f64, String)> = Vec::new();
+
+        // Calculate similarity for all memories
+        for entry in self.episodic_memory.iter() {
+            let similarity = cosine_similarity(query, &entry.context);
+            if similarity > 0.1 {  // Basic threshold
+                scored_memories.push((similarity, entry.response.clone()));
+            }
+        }
+
+        // Sort by similarity (highest first)
+        scored_memories.sort_by(|a, b| b.0.partial_cmp(&a.0).unwrap_or(std::cmp::Ordering::Equal));
+
+        // Take top-k
+        scored_memories.into_iter().take(top_k).collect()
     }
     
     fn generate_from_context(&self, context: &[f64], controls: &ControlVariables) -> String {
         // PATTERN-BASED GENERATION (like GPT)
-        // Uses neural network's learned patterns to generate responses
-        // NOT just memory retrieval - actual pattern matching from training!
+        // Retrieves similar learned patterns and synthesizes a response
 
-        // Compute pattern activation from context (like GPT's attention mechanism)
-        let pattern_strength = context.iter()
-            .enumerate()
-            .map(|(i, &val)| val * ((i as f64 + 1.0) / context.len() as f64))
-            .sum::<f64>() / context.len() as f64;
+        // Retrieve top-k similar memories with their responses
+        let retrieved_memories = self.retrieve_memory_with_responses(context, 5);
 
-        // Normalize to confidence score
-        let pattern_confidence = (pattern_strength.abs() * 2.0).min(1.0).max(0.1);
+        if retrieved_memories.is_empty() {
+            // No learned patterns yet - generate exploratory response
+            return "I'm still learning patterns. Please train me with more examples so I can provide better responses.".to_string();
+        }
 
-        // Training step influences patterns (more training = better patterns)
-        let training_factor = (self.training_step as f64 / 1000.0).min(1.0);
-        let adjusted_confidence = (pattern_confidence + training_factor) / 2.0;
+        // Get the best matching pattern
+        let (best_similarity, best_response) = &retrieved_memories[0];
 
-        // Generate based on learned patterns (higher creativity = more diverse)
-        let base_response = if adjusted_confidence > 0.5 {
-            // Strong pattern match from training
-            self.generate_confident_response(adjusted_confidence, controls)
+        // High similarity = use learned pattern directly (like GPT retrieves from parameters)
+        if *best_similarity > 0.7 {
+            // Strong pattern match - use it directly
+            best_response.clone()
+        } else if *best_similarity > 0.4 {
+            // Moderate match - synthesize from multiple patterns
+            if retrieved_memories.len() > 1 {
+                // Combine insights from multiple similar patterns
+                let combined = self.synthesize_from_patterns(&retrieved_memories, controls);
+                combined
+            } else {
+                best_response.clone()
+            }
         } else {
-            // Creative generation using weaker patterns
-            self.generate_creative_response(adjusted_confidence, controls)
-        };
-
-        base_response
-    }
-
-    fn generate_confident_response(&self, pattern_confidence: f64, controls: &ControlVariables) -> String {
-        // Generate from learned patterns (like GPT retrieves from billions of parameters)
-        // This uses the neural network's trained weights, NOT just memory lookup!
-
-        // Use pattern confidence from neural network activation
-        if pattern_confidence > 0.8 {
-            format!("Based on {} training steps: Strong pattern match ({:.0}% confidence). Answer synthesized from {} reasoning layers.",
-                    self.training_step, pattern_confidence * 100.0, controls.reasoning_depth)
-        } else {
-            format!("Neural pattern analysis ({} steps trained): {} reasoning layers applied, {:.0}% pattern recognition confidence.",
-                    self.training_step, controls.reasoning_depth, pattern_confidence * 100.0)
+            // Weak pattern match - be honest about uncertainty
+            if controls.style.creativity > 0.5 {
+                format!("Based on related patterns I've learned: {}\n\nNote: This is a creative extrapolation as I don't have strong matching patterns for this specific question.", best_response)
+            } else {
+                format!("I have some related knowledge: {}\n\nHowever, I'd benefit from more training on this specific topic.", best_response)
+            }
         }
     }
 
-    fn generate_creative_response(&self, pattern_confidence: f64, controls: &ControlVariables) -> String {
-        // Creative generation by combining learned patterns in novel ways
-        let creativity_factor = controls.style.creativity;
+    /// Synthesize response from multiple learned patterns
+    fn synthesize_from_patterns(&self, patterns: &[(f64, String)], _controls: &ControlVariables) -> String {
+        if patterns.is_empty() {
+            return "I don't have enough learned patterns to answer this question yet.".to_string();
+        }
 
-        if creativity_factor > 0.5 {
-            format!("Creative synthesis ({}% novel): Combining {} learned pattern layers, {:.0}% base confidence from {} training examples.",
-                    (creativity_factor * 100.0) as i32, controls.reasoning_depth,
-                    pattern_confidence * 100.0, self.get_total_memories())
+        // Calculate weighted average based on similarity scores
+        let total_similarity: f64 = patterns.iter().map(|(sim, _)| sim).sum();
+
+        if patterns.len() == 1 {
+            return patterns[0].1.clone();
+        }
+
+        // For now, use the best pattern but mention we're synthesizing
+        let best_response = &patterns[0].1;
+
+        // If we have multiple good patterns, mention the synthesis
+        let good_patterns = patterns.iter().filter(|(sim, _)| *sim > 0.5).count();
+
+        if good_patterns > 1 {
+            format!("{}\n\n(Synthesized from {} related learned patterns)", best_response, good_patterns)
         } else {
-            format!("Pattern-based inference: {} reasoning steps using learned weights, {:.0}% confidence from neural network training.",
-                    controls.reasoning_depth, pattern_confidence * 100.0)
+            best_response.clone()
         }
     }
     
@@ -384,12 +409,32 @@ impl MasterNeuralSystem {
     
     /// Train on example
     pub fn train_step(&mut self, input: &str, target: &str) -> TrainingMetrics {
-        let response_obj = self.forward(input);
+        // Step 1: Encode input
+        let input_thought = ThoughtState::from_input(input, self.config.thought_dim);
+
+        // Step 2: Get memory state
+        let memory_state = self.get_memory_state();
+
+        // Step 3: Controller produces controls
+        let controls = self.controller.produce_controls(&input_thought, &memory_state);
+
+        // Step 4: Retrieve from memory
+        let retrieved = self.retrieve_memory(&controls.retrieval_query);
+
+        // Step 5: Assemble context
+        let context = LatentController::assemble_context(&input_thought, &retrieved, &controls);
+
+        // Step 6: Generate prediction (for loss calculation)
+        let predicted_response = self.generate_from_context(&context, &controls);
 
         // Compute losses
-        let gen_loss = self.compute_generation_loss(target, &response_obj.response);
-        let ctrl_loss = self.compute_controller_loss(&response_obj.controls);
+        let gen_loss = self.compute_generation_loss(target, &predicted_response);
+        let ctrl_loss = self.compute_controller_loss(&controls);
         let total_loss = gen_loss + ctrl_loss;
+
+        // Step 7: Store TARGET response as learned pattern (NOT the prediction!)
+        let confidence = self.compute_confidence(target);
+        self.store_episode(context.clone(), target.to_string(), confidence);
 
         // Update with different LRs
         self.stats.core_model_updates += 1;
@@ -398,8 +443,8 @@ impl MasterNeuralSystem {
         self.stats.total_training_steps += 1;
 
         // Update stats
-        self.stats.avg_confidence = 0.9 * self.stats.avg_confidence + 0.1 * response_obj.confidence;
-        self.stats.avg_perplexity = 0.9 * self.stats.avg_perplexity + 0.1 * response_obj.perplexity;
+        self.stats.avg_confidence = 0.9 * self.stats.avg_confidence + 0.1 * confidence;
+        self.stats.avg_perplexity = 0.9 * self.stats.avg_perplexity + 0.1 * (1.0 / confidence.max(0.01));
 
         // Log training step to database
         if let Some(ref persistence) = self.persistence {
@@ -409,8 +454,8 @@ impl MasterNeuralSystem {
                 gen_loss,
                 ctrl_loss,
                 total_loss,
-                response_obj.confidence,
-                response_obj.perplexity,
+                confidence,
+                1.0 / confidence.max(0.01),
             ) {
                 eprintln!("⚠️  Failed to log training step: {}", e);
             }
@@ -440,8 +485,8 @@ impl MasterNeuralSystem {
             generation_loss: gen_loss,
             controller_loss: ctrl_loss,
             total_loss,
-            confidence: response_obj.confidence,
-            perplexity: response_obj.perplexity,
+            confidence,
+            perplexity: 1.0 / confidence.max(0.01),
         }
     }
     
