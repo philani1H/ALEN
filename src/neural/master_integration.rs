@@ -220,10 +220,33 @@ impl MasterNeuralSystem {
             }
         };
 
+        // Load recent memories from database
+        let episodic_memory = if let Some(ref persistence) = persistence {
+            match persistence.load_recent_memories(config.memory_capacity) {
+                Ok(db_memories) => {
+                    let loaded_count = db_memories.len();
+                    eprintln!("✅ Loaded {} memories from database", loaded_count);
+                    db_memories.into_iter()
+                        .map(|(context, response, confidence)| MemoryEntry {
+                            context,
+                            response,
+                            confidence,
+                        })
+                        .collect()
+                }
+                Err(e) => {
+                    eprintln!("⚠️  Failed to load memories from database: {}", e);
+                    Vec::new()
+                }
+            }
+        } else {
+            Vec::new()
+        };
+
         Self {
             config,
             controller,
-            episodic_memory: Vec::new(),
+            episodic_memory,
             alen_network,
             training_step: stats.total_training_steps,
             stats,

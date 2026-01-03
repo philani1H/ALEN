@@ -240,6 +240,32 @@ impl NeuralPersistence {
         Ok(self.conn.last_insert_rowid())
     }
 
+    /// Load recent N memories from database (for initialization)
+    pub fn load_recent_memories(&self, limit: usize) -> Result<Vec<(Vec<f64>, String, f64)>> {
+        let mut stmt = self.conn.prepare(
+            "SELECT context_vector, response, confidence
+             FROM episodic_memory
+             ORDER BY created_at DESC
+             LIMIT ?"
+        )?;
+
+        let entries = stmt.query_map([limit as i64], |row| {
+            let vector_bytes: Vec<u8> = row.get(0)?;
+            let response: String = row.get(1)?;
+            let confidence: f64 = row.get(2)?;
+            Ok((vector_bytes, response, confidence))
+        })?;
+
+        let mut memories = Vec::new();
+        for entry_result in entries {
+            let (vector_bytes, response, confidence) = entry_result?;
+            let context_vector: Vec<f64> = bincode::deserialize(&vector_bytes)?;
+            memories.push((context_vector, response, confidence));
+        }
+
+        Ok(memories)
+    }
+
     /// Retrieve top-k similar memories using cosine similarity
     pub fn retrieve_memories(
         &self,
