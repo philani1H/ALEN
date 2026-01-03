@@ -30,6 +30,7 @@ pub mod complete_integration;
 pub mod advanced_control;
 pub mod failure_reasoning;
 pub mod master_integration;
+pub mod persistence;
 
 pub use tensor::{Tensor, TensorShape, Device};
 pub use layers::{Linear, LayerNorm, Dropout, Embedding, Conv1D};
@@ -120,4 +121,9 @@ pub use universal_expert::{
 pub use master_integration::{
     MasterNeuralSystem, MasterSystemConfig, MasterSystemResponse,
     MasterSystemStats, TrainingMetrics as MasterTrainingMetrics,
+};
+
+pub use persistence::{
+    NeuralPersistence, MemoryEntry as PersistentMemoryEntry,
+    TrainingCheckpoint, TrainingStats as PersistenceStats,
 };

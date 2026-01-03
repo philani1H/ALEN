@@ -1,0 +1,26 @@
+{
+  "examples": [
+    {
+      "input": "What is machine learning?",
+      "target": "Machine learning is a method where computers learn patterns from data without being explicitly programmed. It uses statistical techniques to identify patterns and make predictions."
+    },
+    {
+      "input": "Explain photosynthesis",
+      "target": "Photosynthesis is how plants convert sunlight into energy. Using chlorophyll, plants absorb light and convert CO2 and water into glucose and oxygen. This process powers plant growth and produces oxygen for Earth."
+    },
+    {
+      "input": "What causes the seasons?",
+      "target": "Seasons occur because Earth's axis is tilted 23.5 degrees. As Earth orbits the sun, different hemispheres receive varying amounts of sunlight, creating summer, fall, winter, and spring."
+    },
+    {
+      "input": "How does the internet work?",
+      "target": "The internet connects computers worldwide through networks. Data travels in packets using protocols like TCP/IP. Routers direct traffic, and servers host websites that browsers can access."
+    },
+    {
+      "input": "What is consciousness?",
+      "target": "Consciousness is awareness of oneself and surroundings. It involves perception, thoughts, and subjective experiences. Scientists study it through neuroscience, but its exact nature remains debated."
+    }
+  ],
+  "save_checkpoint": true,
+  "checkpoint_name": "comprehensive_patterns_test"
+}
