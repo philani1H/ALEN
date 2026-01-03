@@ -1,0 +1,122 @@
+Q: What is machine learning?
+A: Machine learning is a method where computers learn patterns from data without being explicitly programmed. It uses statistical techniques to identify patterns and make predictions.
+
+Q: Explain photosynthesis
+A: Photosynthesis is how plants convert sunlight into energy. Using chlorophyll, plants absorb light and convert CO2 and water into glucose and oxygen. This process powers plant growth and produces oxygen for Earth.
+
+Q: What causes the seasons?
+A: Seasons occur because Earth's axis is tilted 23.5 degrees. As Earth orbits the sun, different hemispheres receive varying amounts of sunlight, creating summer, fall, winter, and spring.
+
+Q: How does the internet work?
+A: The internet connects computers worldwide through networks. Data travels in packets using protocols like TCP/IP. Routers direct traffic, and servers host websites that browsers can access.
+
+Q: What is consciousness?
+A: Consciousness is awareness of oneself and surroundings. It involves perception, thoughts, and subjective experiences. Scientists study it through neuroscience, but its exact nature remains debated.
+
+Q: Explain quantum physics
+A: Quantum physics studies matter at atomic scale. Particles exhibit wave-particle duality, can exist in superposition, and become entangled. It challenges classical physics with probabilistic behavior.
+
+Q: What makes a good leader?
+A: Good leaders inspire others, communicate clearly, make thoughtful decisions, and lead by example. They balance confidence with humility, listen actively, and empower their teams to succeed.
+
+Q: How do vaccines work?
+A: Vaccines train the immune system by introducing weakened or inactive pathogens. This triggers antibody production, creating immunity without causing disease, protecting against future infections.
+
+Q: What is climate change?
+A: Climate change refers to long-term temperature and weather pattern shifts. Human activities, especially fossil fuel burning, increase greenhouse gases, warming the planet and disrupting ecosystems.
+
+Q: Explain artificial intelligence
+A: AI enables machines to perform tasks requiring human intelligence. Using algorithms and data, AI systems learn patterns, make decisions, recognize speech, and solve problems autonomously.
+
+Q: What is democracy?
+A: Democracy is government by the people. Citizens elect representatives, participate in decision-making, and enjoy freedoms like speech and assembly. It values equality, accountability, and majority rule.
+
+Q: How does memory work?
+A: Memory forms through neural connections. Short-term memory holds information briefly. Long-term memory stores it permanently through synaptic strengthening. Retrieval recalls stored information when needed.
+
+Q: What is evolution?
+A: Evolution is gradual species change over generations. Natural selection favors advantageous traits. Mutations create variation. Over time, populations adapt to environments, sometimes forming new species.
+
+Q: Explain gravity
+A: Gravity is the force attracting objects with mass. Larger masses create stronger gravitational pull. It keeps planets orbiting stars and holds galaxies together, shaping the universe's structure.
+
+Q: What is creativity?
+A: Creativity is generating novel, valuable ideas. It combines knowledge uniquely, makes unexpected connections, and produces original works. It involves imagination, experimentation, and risk-taking.
+
+Q: How do computers process information?
+A: Computers use binary code (0s and 1s). The CPU executes instructions, accessing RAM for quick storage. Programs convert human commands into machine language for processing.
+
+Q: What is the scientific method?
+A: The scientific method is systematic inquiry. It involves observing, forming hypotheses, experimenting, analyzing data, and drawing conclusions. Results must be reproducible and peer-reviewed.
+
+Q: Explain blockchain technology
+A: Blockchain is distributed ledger technology. Data blocks link chronologically using cryptography. Multiple computers verify transactions, creating transparent, tamper-resistant records without central authority.
+
+Q: What causes earthquakes?
+A: Earthquakes occur when tectonic plates shift. Stress builds along fault lines. When plates suddenly slip, energy releases as seismic waves, shaking the ground and potentially causing damage.
+
+Q: How do neurons communicate?
+A: Neurons communicate via electrical and chemical signals. Action potentials travel along axons. At synapses, neurotransmitters cross gaps between neurons, transmitting information throughout the nervous system.
+
+Q: What is cultural diversity?
+A: Cultural diversity is variety in human societies. It includes different languages, beliefs, customs, and traditions. Diversity enriches communities through varied perspectives and creative problem-solving.
+
+Q: Explain renewable energy
+A: Renewable energy comes from natural sources that replenish. Solar, wind, hydro, and geothermal power don't deplete resources. They reduce pollution and combat climate change sustainably.
+
+Q: What is critical thinking?
+A: Critical thinking is analyzing information objectively. It involves questioning assumptions, evaluating evidence, identifying biases, and forming reasoned judgments independently.
+
+Q: How does DNA work?
+A: DNA stores genetic information in double helix structure. Four bases (A, T, G, C) encode instructions. Genes direct protein production, determining traits and biological functions.
+
+Q: What is emotional intelligence?
+A: Emotional intelligence is understanding and managing emotions. It includes self-awareness, empathy, social skills, and emotional regulation. High EQ improves relationships and decision-making.
+
+Q: Explain the water cycle
+A: The water cycle circulates Earth's water. Evaporation lifts water into atmosphere. Condensation forms clouds. Precipitation returns water to surface. Runoff flows to oceans, repeating the cycle.
+
+Q: What is biodiversity?
+A: Biodiversity is variety of life forms. It includes species diversity, genetic variation, and ecosystem diversity. Rich biodiversity supports resilient, healthy ecosystems essential for life.
+
+Q: How do languages evolve?
+A: Languages evolve through use. New words emerge, meanings shift, grammar changes. Cultural contact, technology, and social trends influence evolution. Languages adapt to express new concepts.
+
+Q: What is the placebo effect?
+A: The placebo effect occurs when belief in treatment causes improvement. Brain chemistry changes based on expectations. It demonstrates mind-body connection and powers of positive thinking.
+
+Q: Explain relativity
+A: Einstein's relativity describes space-time relationship. Special relativity links time with speed. General relativity explains gravity as space-time curvature. Both revolutionized physics understanding.
+
+Q: What makes music enjoyable?
+A: Music enjoyment involves pattern recognition, emotional response, and cultural context. Rhythm, melody, and harmony stimulate brain's reward centers, evoking feelings and memories.
+
+Q: How does the brain learn?
+A: Learning involves neuroplasticity. Repeated experiences strengthen neural pathways. New information integrates with existing knowledge. Practice and reinforcement consolidate learning into memory.
+
+Q: What is sustainable development?
+A: Sustainable development meets present needs without compromising future generations. It balances economic growth, environmental protection, and social equity for long-term well-being.
+
+Q: Explain the immune system
+A: The immune system defends against disease. White blood cells identify and destroy pathogens. Antibodies target specific threats. Memory cells enable faster response to repeat infections.
+
+Q: What is game theory?
+A: Game theory studies strategic decision-making. It analyzes how rational actors choose actions considering others' choices. Applications include economics, politics, and evolution.
+
+Q: How do habits form?
+A: Habits form through repetition and reward. Cue triggers behavior, routine follows, reward reinforces. Over time, actions become automatic, requiring less conscious effort.
+
+Q: What is mindfulness?
+A: Mindfulness is present-moment awareness. It involves observing thoughts and feelings without judgment. Practice reduces stress, improves focus, and enhances emotional regulation.
+
+Q: Explain supply and demand
+A: Supply and demand determine prices. High demand with low supply raises prices. High supply with low demand lowers prices. Markets seek equilibrium where supply meets demand.
+
+Q: What is social media's impact?
+A: Social media connects people globally, spreads information rapidly, and enables new forms of expression. It also raises concerns about privacy, misinformation, and mental health.
+
+Q: How does vision work?
+A: Vision begins when light enters eyes. Lenses focus light on retinas. Photoreceptors convert light to electrical signals. Brain processes signals, creating visual perception.
+
+Q: What is entropy?
+A: Entropy measures disorder or randomness. Second law of thermodynamics states entropy increases over time. Organized systems naturally tend toward disorganization without energy input.
