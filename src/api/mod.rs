@@ -17,6 +17,7 @@ pub mod media_training;
 pub mod emotions;
 pub mod export;
 pub mod user_modeling;
+pub mod master_training;
 
 pub use conversation::ConversationManager;
 pub use user_modeling::{UserModelingManager, UserState, UserArchetype, ResponseDepth};
@@ -2036,6 +2037,12 @@ pub fn create_router(state: Arc<AppState>) -> Router {
         .route("/train", post(train))
         .route("/train/batch", post(batch_train))
         .route("/train/comprehensive", post(comprehensive_train))
+
+        // Master Neural System endpoints
+        .route("/master/upload", post(master_training::upload_document))
+        .route("/master/train", post(master_training::train_master))
+        .route("/master/chat", post(master_training::chat_master))
+        .route("/master/stats", get(master_training::get_master_stats))
 
         // Knowledge learning
         .route("/learn", post(learn_knowledge))
