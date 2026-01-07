@@ -267,7 +267,8 @@ pub async fn chat(
     let mut neural_reasoner = NeuralChainOfThoughtReasoner::new(
         engine.operators.clone(),
         engine.evaluator.clone(),
-        engine.latent_decoder.clone(),  // PASS SHARED DECODER
+        engine.latent_decoder.clone(),  // Controller/director
+        engine.neural_decoder.clone(),  // Actual text generator
         dim,
         10,  // max reasoning steps
         0.5, // min confidence
@@ -275,6 +276,9 @@ pub async fn chat(
     );
     
     let reasoning_chain = neural_reasoner.reason(&problem);
+    
+    eprintln!("🔍 Reasoning chain answer: {:?}", reasoning_chain.answer);
+    eprintln!("🔍 Reasoning steps: {}", reasoning_chain.steps.len());
 
     // RESPONSE FROM NEURAL REASONING (NO RETRIEVAL)
     let response_text = {
@@ -313,14 +317,15 @@ pub async fn chat(
         );
 
         // ALWAYS use neural reasoning answer - NO HARDCODED RESPONSES
-        // The LatentDecoder generates from learned patterns
+        // The NeuralDecoder generates from learned patterns
         reasoning_chain.answer.clone().unwrap_or_else(|| {
             // If no answer from reasoning chain, attempt direct generation from final thought
-            let decoder = engine.latent_decoder.lock().unwrap();
-            let (generated_text, gen_confidence) = decoder.generate(&final_thought);
+            // Use NeuralDecoder (the actual text generator), not LatentDecoder (controller)
+            let neural = engine.neural_decoder.lock().unwrap();
+            let (generated_text, gen_confidence) = neural.generate(&final_thought);
             
             // If generation produces text with reasonable confidence, use it
-            if !generated_text.is_empty() && gen_confidence > 0.2 {
+            if !generated_text.is_empty() && gen_confidence > 0.01 {
                 generated_text
             } else {
                 // Last resort: honest uncertainty response

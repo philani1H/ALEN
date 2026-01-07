@@ -112,8 +112,10 @@ pub struct NeuralChainOfThoughtReasoner {
     operators: OperatorManager,
     /// Evaluator for thought quality
     evaluator: Evaluator,
-    /// Latent decoder for text generation (NO RETRIEVAL) - SHARED/PERSISTENT
+    /// Latent decoder (controller/director) - SHARED/PERSISTENT
     latent_decoder: Arc<Mutex<LatentDecoder>>,
+    /// Neural decoder (actual text generator) - SHARED/PERSISTENT
+    neural_decoder: Arc<Mutex<crate::generation::NeuralDecoder>>,
     /// Maximum reasoning steps
     max_steps: usize,
     /// Minimum confidence threshold
@@ -139,6 +141,7 @@ impl NeuralChainOfThoughtReasoner {
         operators: OperatorManager,
         evaluator: Evaluator,
         latent_decoder: Arc<Mutex<LatentDecoder>>,
+        neural_decoder: Arc<Mutex<crate::generation::NeuralDecoder>>,
         dimension: usize,
         max_steps: usize,
         min_confidence: f64,
@@ -205,6 +208,7 @@ impl NeuralChainOfThoughtReasoner {
             operators,
             evaluator,
             latent_decoder,
+            neural_decoder,
             max_steps,
             min_confidence,
             dimension,
@@ -385,9 +389,9 @@ impl NeuralChainOfThoughtReasoner {
     /// Implements: Y = Decoder_φ(z) where z = latent reasoning context
     fn decode_thought_to_text(&self, thought: &ThoughtState) -> (String, f64) {
         // PURE GENERATION from latent space - NO RETRIEVAL
-        // The decoder generates text from learned patterns in thought space
-        let decoder = self.latent_decoder.lock().unwrap();
-        decoder.generate(thought)
+        // The neural decoder generates text from learned patterns in thought space
+        let neural = self.neural_decoder.lock().unwrap();
+        neural.generate(thought)
     }
     
     /// Learn from thought-text pair (stores patterns, NOT answers)
