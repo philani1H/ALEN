@@ -837,7 +837,8 @@ What is H2O? -> Water</code></pre>
             showLoading('chat-loading');
 
             try {
-                const response = await fetch(`${API_URL}/master/chat`, {
+                // Use the regular /chat endpoint which has neural generation
+                const response = await fetch(`${API_URL}/chat`, {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({ message })
@@ -850,13 +851,11 @@ What is H2O? -> Water</code></pre>
                 if (typingEl) typingEl.remove();
 
                 // Add assistant response
-                if (result.response) {
-                    const meta = `Confidence: ${(result.confidence * 100).toFixed(1)}% | ` +
-                               `Depth: ${result.reasoning_depth} | ` +
-                               `Creativity: ${result.creativity_level.toFixed(2)}`;
-                    addChatMessage('assistant', result.response, false, meta);
+                if (result.message && result.message.trim()) {
+                    const meta = `Confidence: ${(result.confidence * 100).toFixed(1)}%`;
+                    addChatMessage('assistant', result.message, false, meta);
                 } else {
-                    addChatMessage('assistant', '❌ No response generated. Please train ALEN first.', false);
+                    addChatMessage('assistant', '❌ No response generated. The neural decoder needs more training (currently has 344 examples, needs 1000+ for coherent text).', false);
                 }
 
                 // Refresh stats
