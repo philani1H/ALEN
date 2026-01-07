@@ -472,6 +472,8 @@ pub struct InferResponse {
     pub candidates_considered: usize,
     pub is_synthesis: bool,
     pub thought_vector: Vec<f64>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub follow_up_question: Option<String>,
 }
 
 #[derive(Debug, Deserialize)]
@@ -627,6 +629,13 @@ pub async fn infer(
     }
 
     let result = engine.infer(&problem);
+    
+    // Generate follow-up question based on confidence and complexity
+    let follow_up_question = if result.confidence > 0.7 && req.input.len() > 20 {
+        Some(generate_follow_up_question(&req.input, result.confidence))
+    } else {
+        None
+    };
 
     Json(InferResponse {
         confidence: result.confidence,
@@ -636,7 +645,31 @@ pub async fn infer(
         candidates_considered: result.candidates_considered,
         is_synthesis: result.is_synthesis,
         thought_vector: result.thought.vector,
+        follow_up_question,
     })
+}
+
+/// Generate a follow-up question based on the input
+fn generate_follow_up_question(input: &str, confidence: f64) -> String {
+    // Analyze input to determine question type
+    let input_lower = input.to_lowercase();
+    
+    if input_lower.contains("what") || input_lower.contains("explain") {
+        // For explanatory questions, ask for application
+        format!("Can you think of a real-world situation where you might apply this concept?")
+    } else if input_lower.contains("how") {
+        // For process questions, ask for deeper understanding
+        format!("Would you like me to explain any specific part of this process in more detail?")
+    } else if input_lower.contains("why") {
+        // For reasoning questions, ask for extension
+        format!("Does this explanation make sense? Would you like to explore related concepts?")
+    } else if confidence > 0.85 {
+        // High confidence - ask for extension
+        format!("Now that you understand this, what related topics would you like to explore?")
+    } else {
+        // Default - ask for clarification
+        format!("Is there anything about this you'd like me to clarify or expand on?")
+    }
 }
 
 /// Add a semantic fact
