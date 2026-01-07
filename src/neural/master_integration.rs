@@ -345,8 +345,8 @@ impl MasterNeuralSystem {
         if retrieved_memories.is_empty() {
             // No learned patterns yet - encode state for neural generation
             // Neural network should learn to express uncertainty appropriately
-            return format!("[STATE:untrained|CONTEXT:{}|CREATIVITY:{:.2}]", 
-                context, controls.style.creativity);
+            return format!("[STATE:untrained|CONTEXT:unknown|CREATIVITY:{:.2}]", 
+                controls.style.creativity);
         }
 
         // Get the best matching pattern
