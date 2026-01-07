@@ -130,6 +130,8 @@ pub struct ReasoningEngine {
     pub self_learning: crate::learning::SelfLearningSystem,
     /// Latent decoder - PERSISTENT pattern-based text generation
     pub latent_decoder: StdArc<StdMutex<crate::generation::LatentDecoder>>,
+    /// Neural decoder - Actual text generator (learns patterns)
+    pub neural_decoder: StdArc<StdMutex<crate::generation::NeuralDecoder>>,
     /// Configuration
     pub config: EngineConfig,
 }
@@ -156,6 +158,7 @@ impl ReasoningEngine {
         let active_learning = crate::learning::ActiveLearningSystem::new();
         let self_learning = crate::learning::SelfLearningSystem::new();
         let latent_decoder = StdArc::new(StdMutex::new(crate::generation::LatentDecoder::new(config.dimension, 100)));
+        let neural_decoder = StdArc::new(StdMutex::new(crate::generation::NeuralDecoder::new(config.dimension, 512)));
 
         Ok(Self {
             operators,
@@ -170,6 +173,7 @@ impl ReasoningEngine {
             active_learning,
             self_learning,
             latent_decoder,
+            neural_decoder,
             config,
         })
     }
@@ -216,6 +220,26 @@ impl ReasoningEngine {
             eprintln!("Creating new LatentDecoder (no saved decoder found)");
             StdArc::new(StdMutex::new(crate::generation::LatentDecoder::new(config.dimension, 100)))
         };
+        
+        // Load or create NeuralDecoder (the actual text generator)
+        let neural_decoder_path = storage.base_dir.join("neural_decoder.bin");
+        let neural_decoder = if neural_decoder_path.exists() {
+            match crate::generation::NeuralDecoder::load(&neural_decoder_path) {
+                Ok(decoder) => {
+                    let stats = decoder.stats();
+                    eprintln!("✓ Loaded NeuralDecoder: {} examples trained, vocab size: {}", 
+                        stats.examples_seen, stats.vocabulary_size);
+                    StdArc::new(StdMutex::new(decoder))
+                }
+                Err(e) => {
+                    eprintln!("⚠ Failed to load NeuralDecoder: {}, creating new", e);
+                    StdArc::new(StdMutex::new(crate::generation::NeuralDecoder::new(config.dimension, 512)))
+                }
+            }
+        } else {
+            eprintln!("Creating new NeuralDecoder");
+            StdArc::new(StdMutex::new(crate::generation::NeuralDecoder::new(config.dimension, 512)))
+        };
 
         Ok(Self {
             operators,
@@ -230,6 +254,7 @@ impl ReasoningEngine {
             active_learning,
             self_learning,
             latent_decoder,
+            neural_decoder,
             config,
         })
     }
@@ -256,6 +281,20 @@ impl ReasoningEngine {
                     if stats.training_count % 10 == 0 {
                         let decoder_path = std::path::Path::new("/home/vscode/.local/share/alen/databases/latent_decoder.bin");
                         let _ = decoder.save(decoder_path);
+                    }
+                }
+                
+                // Also save neural decoder periodically
+                {
+                    let neural = self.neural_decoder.lock().unwrap();
+                    let stats = neural.stats();
+                    if stats.examples_seen % 10 == 0 {
+                        let neural_path = std::path::Path::new("/home/vscode/.local/share/alen/databases/neural_decoder.bin");
+                        if let Err(e) = neural.save(neural_path) {
+                            eprintln!("⚠ Failed to save NeuralDecoder: {}", e);
+                        } else {
+                            eprintln!("✓ Saved NeuralDecoder ({} examples trained)", stats.examples_seen);
+                        }
                     }
                 }
             }
@@ -570,11 +609,18 @@ pub async fn train(
 
     let result = engine.train(&problem);
     
-    // Train the decoder to generate text from thought vectors
+    // Train BOTH decoders:
+    // 1. LatentDecoder (controller/director) - learns control patterns
+    // 2. NeuralDecoder (text generator) - learns to generate text from thought vectors
     if result.success {
         if let Some(best_candidate) = &result.best_candidate {
-            let mut decoder = engine.latent_decoder.lock().unwrap();
-            decoder.learn(best_candidate, &req.expected_answer);
+            // Train latent decoder (controller)
+            let mut latent = engine.latent_decoder.lock().unwrap();
+            latent.learn(best_candidate, &req.expected_answer);
+            
+            // Train neural decoder (actual text generator)
+            let mut neural = engine.neural_decoder.lock().unwrap();
+            neural.learn(best_candidate, &req.expected_answer);
         }
     }
 
@@ -640,27 +686,19 @@ pub async fn infer(
 
     let result = engine.infer(&problem);
     
-    // Generate the actual answer from the thought vector
-    // Try to find similar episode in memory and use its answer
+    // Generate the actual answer from the thought vector using NeuralDecoder
+    // This is PATTERN-BASED GENERATION, not retrieval
     let decoded_answer = {
-        let episodes = engine.episodic_memory.get_top_episodes(20).unwrap_or_default();
-        let mut best_match: Option<String> = None;
-        let mut best_similarity = 0.0;
+        let neural = engine.neural_decoder.lock().unwrap();
+        let (generated_text, generation_confidence) = neural.generate(&result.thought);
         
-        for episode in episodes.iter().filter(|e| e.verified) {
-            // Calculate similarity between thought vectors (dot product)
-            let similarity: f64 = result.thought.vector.iter()
-                .zip(episode.thought_vector.iter())
-                .map(|(a, b)| a * b)
-                .sum();
-            
-            if similarity > best_similarity {
-                best_similarity = similarity;
-                best_match = Some(episode.answer_output.clone());
-            }
+        // If neural decoder hasn't learned enough yet, return empty
+        // (it will return empty string if examples_seen == 0)
+        if !generated_text.is_empty() {
+            eprintln!("✓ Generated text (confidence: {:.2}): {}", generation_confidence, generated_text);
         }
         
-        best_match.unwrap_or_else(|| String::new())
+        generated_text
     };
     
     // Generate follow-up question using neural network with REAL answer
