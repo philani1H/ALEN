@@ -312,20 +312,25 @@ pub async fn chat(
             &enhanced_episodes,
         );
 
-        // ALWAYS use neural reasoning answer - NO HARDCODED RESPONSES
-        // The LatentDecoder generates from learned patterns
+        // Generate response from reasoning chain
         reasoning_chain.answer.clone().unwrap_or_else(|| {
-            // If no answer from reasoning chain, attempt direct generation from final thought
-            let decoder = engine.latent_decoder.lock().unwrap();
-            let (generated_text, gen_confidence) = decoder.generate(&final_thought);
-            
-            // If generation produces text with reasonable confidence, use it
-            if !generated_text.is_empty() && gen_confidence > 0.2 {
-                generated_text
+            // If no direct answer, synthesize from reasoning steps
+            if !reasoning_chain.steps.is_empty() {
+                // Use the reasoning steps to create a response
+                let step_descriptions: Vec<String> = reasoning_chain.steps.iter()
+                    .map(|step| step.description.clone())
+                    .collect();
+                
+                // Join the reasoning into a coherent response
+                if step_descriptions.len() == 1 {
+                    step_descriptions[0].clone()
+                } else {
+                    // Create a natural response from the steps
+                    step_descriptions.join(" ")
+                }
             } else {
-                // Last resort: honest uncertainty response
-                // This is NOT a hardcoded answer - it's an honest admission of insufficient training
-                "I don't have enough learned patterns to generate a confident response to this query. I need more training examples in this domain.".to_string()
+                // Honest response about needing training
+                format!("I'm processing your message with {:.1}% confidence. I need more training examples to respond more effectively.", reasoning_chain.confidence * 100.0)
             }
         })
     };
