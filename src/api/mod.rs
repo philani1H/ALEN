@@ -630,10 +630,15 @@ pub async fn infer(
 
     let result = engine.infer(&problem);
     
-    // Generate follow-up question using neural patterns
-    // The question is generated from the thought vector, not hard-coded
+    // Generate the actual answer from the thought vector
+    let decoded_answer = {
+        let decoder = engine.latent_decoder.lock().unwrap();
+        decoder.generate(&result.thought).0
+    };
+    
+    // Generate follow-up question using neural network with REAL answer
     let follow_up_question = if result.confidence > 0.7 && req.input.len() > 20 {
-        Some(generate_neural_question(&req.input, &result.thought.vector, result.confidence))
+        Some(generate_neural_question(&req.input, &decoded_answer, &result.thought.vector, result.confidence))
     } else {
         None
     };
@@ -651,7 +656,7 @@ pub async fn infer(
 }
 
 /// Generate a follow-up question using neural network (fully learned)
-fn generate_neural_question(input: &str, thought_vector: &[f64], confidence: f64) -> String {
+fn generate_neural_question(input: &str, answer: &str, thought_vector: &[f64], confidence: f64) -> String {
     use crate::neural::{QuestionGenerator, QuestionType, EmotionVector, UserState, StyledExplanation, ExplanationStyle, MultiModalExplanation};
     
     // Create question generator
@@ -686,19 +691,18 @@ fn generate_neural_question(input: &str, thought_vector: &[f64], confidence: f64
     
     // Create explanation structure
     let explanation = StyledExplanation {
-        text: String::new(),
+        text: answer.to_string(),
         style: ExplanationStyle::Simple,
         difficulty: complexity,
         multi_modal: MultiModalExplanation {
-            text: String::new(),
+            text: answer.to_string(),
             diagram: None,
             code: None,
             animation: None,
         },
     };
     
-    // Generate question using neural network
-    let answer = ""; // In full system, this would be the decoded answer
+    // Generate question using neural network with REAL answer
     generator.generate(input, answer, &explanation, &user_state, &emotion, complexity)
         .map(|q| q.question)
         .unwrap_or_else(|| "What would you like to know more about?".to_string())
