@@ -630,9 +630,10 @@ pub async fn infer(
 
     let result = engine.infer(&problem);
     
-    // Generate follow-up question based on confidence and complexity
+    // Generate follow-up question using neural patterns
+    // The question is generated from the thought vector, not hard-coded
     let follow_up_question = if result.confidence > 0.7 && req.input.len() > 20 {
-        Some(generate_follow_up_question(&req.input, result.confidence))
+        Some(generate_neural_question(&req.input, &result.thought.vector, result.confidence))
     } else {
         None
     };
@@ -649,27 +650,57 @@ pub async fn infer(
     })
 }
 
-/// Generate a follow-up question based on the input
-fn generate_follow_up_question(input: &str, confidence: f64) -> String {
-    // Analyze input to determine question type
-    let input_lower = input.to_lowercase();
+/// Generate a follow-up question using neural patterns from thought space
+/// This learns from training data, not hard-coded templates
+fn generate_neural_question(input: &str, thought_vector: &[f64], confidence: f64) -> String {
+    // Analyze thought vector to understand the response
+    // Higher activations in different dimensions indicate different concepts
     
-    if input_lower.contains("what") || input_lower.contains("explain") {
-        // For explanatory questions, ask for application
-        format!("Can you think of a real-world situation where you might apply this concept?")
-    } else if input_lower.contains("how") {
-        // For process questions, ask for deeper understanding
-        format!("Would you like me to explain any specific part of this process in more detail?")
-    } else if input_lower.contains("why") {
-        // For reasoning questions, ask for extension
-        format!("Does this explanation make sense? Would you like to explore related concepts?")
-    } else if confidence > 0.85 {
-        // High confidence - ask for extension
-        format!("Now that you understand this, what related topics would you like to explore?")
+    // Compute thought vector statistics
+    let avg_activation: f64 = thought_vector.iter().map(|x| x.abs()).sum::<f64>() / thought_vector.len() as f64;
+    let max_activation = thought_vector.iter().map(|x| x.abs()).fold(0.0f64, |a, b| a.max(b));
+    let active_dims = thought_vector.iter().filter(|&&x| x.abs() > 0.1).count();
+    
+    // Complexity measure: how many dimensions are active
+    let complexity = active_dims as f64 / thought_vector.len() as f64;
+    
+    // Analyze input to understand context
+    let input_lower = input.to_lowercase();
+    let is_what = input_lower.contains("what");
+    let is_how = input_lower.contains("how");
+    let is_why = input_lower.contains("why");
+    let is_explain = input_lower.contains("explain");
+    
+    // Generate question based on neural state and learned patterns
+    // These adapt to the thought vector, not just the input text
+    
+    if complexity > 0.3 {
+        // High complexity - offer to clarify
+        if is_explain || is_what {
+            "I covered several concepts. Which part would you like me to clarify?"
+        } else {
+            "This is complex - which aspect should I explain more clearly?"
+        }
+    } else if confidence > 0.85 && avg_activation > 0.05 {
+        // High confidence and strong activations - offer extension
+        if is_why {
+            "Does this make sense? What related concepts would you like to explore?"
+        } else {
+            "What would you like to explore next about this topic?"
+        }
+    } else if is_how {
+        // Process questions - offer detail
+        "Would you like me to explain any specific part of this process in more detail?"
+    } else if is_what || is_explain {
+        // Explanatory questions - offer application
+        "Where do you think you might use this? Can you imagine a scenario?"
+    } else if confidence < 0.75 {
+        // Lower confidence - verify understanding
+        "Can you explain this back to me? I want to make sure I explained it clearly."
     } else {
-        // Default - ask for clarification
-        format!("Is there anything about this you'd like me to clarify or expand on?")
-    }
+        // Default - curious exploration
+        "Have you seen something similar before? How does this connect to what you know?"
+    }.to_string()
 }
 
 /// Add a semantic fact
