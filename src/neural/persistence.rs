@@ -311,7 +311,7 @@ impl NeuralPersistence {
         }
 
         // Sort by similarity descending
-        scored_entries.sort_by(|a, b| b.0.partial_cmp(&a.0).unwrap());
+        scored_entries.sort_by(|a, b| b.0.partial_cmp(&a.0).unwrap_or(std::cmp::Ordering::Equal));
 
         // Return top-k
         Ok(scored_entries.into_iter()

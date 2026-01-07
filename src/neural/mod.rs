@@ -112,7 +112,7 @@ pub use universal_expert::{
     UniversalExpertSystem, UniversalExpertResponse,
     MultiModalInput, UserState, EmotionVector, FramingVector,
     ReasoningChain, ReasoningStep, VerifiedAnswer,
-    StyledExplanation, ExplanationStyle, GeneratedQuestion, QuestionType,
+    StyledExplanation, ExplanationStyle, MultiModalExplanation, GeneratedQuestion, QuestionType,
     MetaEvaluation, FactVerifier,
     ExplanationGenerator as UniversalExplanationGenerator, QuestionGenerator,
     MetaReasoner, CreativityModulator, SafetyFilter,

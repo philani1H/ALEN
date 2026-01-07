@@ -198,10 +198,14 @@ impl NeuralReasoningEngine {
             verified,
             verification_error: result.verification_error as f64,
             candidates_evaluated: result.candidates.len(),
-            energy_range: (
-                result.candidates.iter().map(|c| c.energy).min_by(|a, b| a.partial_cmp(b).unwrap()).unwrap() as f64,
-                result.candidates.iter().map(|c| c.energy).max_by(|a, b| a.partial_cmp(b).unwrap()).unwrap() as f64,
-            ),
+            energy_range: if result.candidates.is_empty() {
+                (0.0, 0.0)
+            } else {
+                (
+                    result.candidates.iter().map(|c| c.energy).min_by(|a, b| a.partial_cmp(b).unwrap_or(std::cmp::Ordering::Equal)).unwrap() as f64,
+                    result.candidates.iter().map(|c| c.energy).max_by(|a, b| a.partial_cmp(b).unwrap_or(std::cmp::Ordering::Equal)).unwrap() as f64,
+                )
+            },
         }
     }
 

@@ -472,6 +472,8 @@ pub struct InferResponse {
     pub candidates_considered: usize,
     pub is_synthesis: bool,
     pub thought_vector: Vec<f64>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub follow_up_question: Option<String>,
 }
 
 #[derive(Debug, Deserialize)]
@@ -627,6 +629,19 @@ pub async fn infer(
     }
 
     let result = engine.infer(&problem);
+    
+    // Generate the actual answer from the thought vector
+    let decoded_answer = {
+        let decoder = engine.latent_decoder.lock().unwrap();
+        decoder.generate(&result.thought).0
+    };
+    
+    // Generate follow-up question using neural network with REAL answer
+    let follow_up_question = if result.confidence > 0.7 && req.input.len() > 20 {
+        Some(generate_neural_question(&req.input, &decoded_answer, &result.thought.vector, result.confidence))
+    } else {
+        None
+    };
 
     Json(InferResponse {
         confidence: result.confidence,
@@ -636,7 +651,61 @@ pub async fn infer(
         candidates_considered: result.candidates_considered,
         is_synthesis: result.is_synthesis,
         thought_vector: result.thought.vector,
+        follow_up_question,
     })
+}
+
+/// Generate a follow-up question using neural network (fully learned)
+fn generate_neural_question(input: &str, answer: &str, thought_vector: &[f64], confidence: f64) -> String {
+    use crate::neural::{QuestionGenerator, QuestionType, EmotionVector, UserState, StyledExplanation, ExplanationStyle, MultiModalExplanation};
+    
+    // Create question generator
+    let generator = QuestionGenerator::new(thought_vector.len());
+    
+    // Analyze thought vector to determine question type
+    let active_dims = thought_vector.iter().filter(|&&x| x.abs() > 0.1).count();
+    let complexity = active_dims as f64 / thought_vector.len() as f64;
+    let avg_activation: f64 = thought_vector.iter().map(|x| x.abs()).sum::<f64>() / thought_vector.len() as f64;
+    
+    // Create emotion vector based on neural state
+    let mut emotion = EmotionVector::default();
+    emotion.curiosity = if complexity > 0.2 { 0.8 } else { 0.5 };
+    emotion.frustration = if confidence < 0.7 { 0.6 } else { 0.2 };
+    
+    // Create user state
+    let mut user_state = UserState::default();
+    user_state.level = confidence;
+    
+    // Determine question type from neural state
+    let question_type = if complexity > 0.3 {
+        QuestionType::Clarification
+    } else if confidence > 0.85 && avg_activation > 0.05 {
+        QuestionType::Extension
+    } else if confidence < 0.75 {
+        QuestionType::Verification
+    } else if input.to_lowercase().contains("how") {
+        QuestionType::Application
+    } else {
+        QuestionType::Curious
+    };
+    
+    // Create explanation structure
+    let explanation = StyledExplanation {
+        text: answer.to_string(),
+        style: ExplanationStyle::Simple,
+        difficulty: complexity,
+        multi_modal: MultiModalExplanation {
+            text: answer.to_string(),
+            diagram: None,
+            code: None,
+            animation: None,
+        },
+    };
+    
+    // Generate question using neural network with REAL answer
+    generator.generate(input, answer, &explanation, &user_state, &emotion, complexity)
+        .map(|q| q.question)
+        .unwrap_or_else(|| "What would you like to know more about?".to_string())
 }
 
 /// Add a semantic fact

@@ -1,0 +1,58 @@
+# Question Generation Training Data
+# Format: INPUT | ANSWER | FOLLOW_UP_QUESTION | TYPE
+
+# Clarification questions
+What is gravity? | Gravity is a force that attracts objects with mass. | What part of this explanation would you like me to clarify? | clarification
+Explain quantum mechanics | Quantum mechanics describes behavior at atomic scales using wave functions and probability. | This is complex - which aspect should I explain more clearly? | clarification
+How does DNA work? | DNA stores genetic information in sequences of nucleotides that code for proteins. | Does this make sense? What part needs more explanation? | clarification
+
+# Extension questions  
+What is machine learning? | Machine learning is when computers learn patterns from data without explicit programming. | What would you like to explore next about AI and learning? | extension
+Explain photosynthesis | Plants convert sunlight, water, and CO2 into glucose and oxygen through photosynthesis. | How do you think this process relates to the food chain? | extension
+What is evolution? | Evolution is change in heritable traits of populations over generations through natural selection. | What other mechanisms of evolution would you like to learn about? | extension
+
+# Application questions
+What is calculus? | Calculus studies continuous change through derivatives and integrals. | Where do you think calculus is used in real life? | application
+Explain neural networks | Neural networks are computing systems inspired by biological brains that learn from examples. | Can you think of a problem where neural networks would be useful? | application
+What is thermodynamics? | Thermodynamics studies heat, energy, and their transformations in physical systems. | What everyday phenomena involve thermodynamics? | application
+
+# Verification questions
+What is photosynthesis? | Photosynthesis converts light energy into chemical energy in plants. | Can you explain back how plants make their food? | verification
+Explain gravity | Gravity is the force that attracts objects with mass toward each other. | Can you describe in your own words why things fall? | verification
+What is DNA? | DNA is the molecule that carries genetic instructions for life. | How would you explain DNA to someone else? | verification
+
+# Curious questions
+Why is the sky blue? | The sky appears blue because air molecules scatter blue light more than other colors. | Have you noticed the sky looks different at sunset? Why do you think that is? | curious
+What is consciousness? | Consciousness is awareness of one's thoughts, feelings, and surroundings. | What made you curious about consciousness? What else interests you about the mind? | curious
+How do magnets work? | Magnets create fields due to aligned electron spins in their atoms. | Have you experimented with magnets? What patterns did you notice? | curious
+
+# Complex topics - adaptive questions
+Explain relativity | Einstein's relativity shows that space and time are interconnected and relative to the observer's motion. | This is deep physics - would you like me to break down a specific part? | clarification
+What is quantum entanglement? | Quantum entanglement is when particles become correlated so measuring one instantly affects the other. | This challenges our intuition - what part seems most puzzling to you? | clarification
+How does the brain work? | The brain processes information through networks of neurons communicating via electrical and chemical signals. | The brain is incredibly complex - which aspect interests you most? | extension
+
+# Self-directed learning questions (model asks itself)
+I don't understand this pattern | Let me think about this differently. | What if I approach this from another angle? | curious
+This seems contradictory | I see conflicting information. | How can I reconcile these two ideas? | verification
+I'm uncertain about this | My confidence is low on this answer. | What additional information would help me understand better? | clarification
+
+# Meta-learning questions (learning to learn)
+I made an error | I got this wrong before. | What pattern did I miss that led to the error? | verification
+This is a new concept | I haven't seen this before. | How does this relate to concepts I already know? | extension
+I'm improving at this | I'm getting better at this type of problem. | What made the difference in my understanding? | curious
+
+# Contextual adaptation
+Short simple question | Brief answer. | Want to know more? | extension
+Long complex question with multiple parts | Detailed multi-part answer covering several concepts. | I covered a lot - which part should we explore deeper? | clarification
+Question about familiar topic | Answer building on previous knowledge. | How does this connect to what we discussed before? | extension
+Question about new topic | Introduction to new concept. | This is new territory - shall we start with the basics? | verification
+
+# Emotional adaptation
+Frustrated user question | Patient, clear explanation. | I want to make sure this is clear - what's still confusing? | clarification
+Curious user question | Engaging, detailed answer. | Your curiosity is great! What sparked your interest in this? | curious
+Advanced user question | Technical, in-depth answer. | You seem knowledgeable - want to dive into the advanced aspects? | extension
+
+# Self-improvement questions
+Why did I fail at this? | Analysis of failure. | What can I learn from this mistake to improve? | verification
+How can I get better? | Strategy for improvement. | What specific skill should I focus on developing? | extension
+What don't I know? | Identification of knowledge gaps. | What area should I explore to fill this gap? | curious
