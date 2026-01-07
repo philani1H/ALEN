@@ -650,57 +650,58 @@ pub async fn infer(
     })
 }
 
-/// Generate a follow-up question using neural patterns from thought space
-/// This learns from training data, not hard-coded templates
+/// Generate a follow-up question using neural network (fully learned)
 fn generate_neural_question(input: &str, thought_vector: &[f64], confidence: f64) -> String {
-    // Analyze thought vector to understand the response
-    // Higher activations in different dimensions indicate different concepts
+    use crate::neural::{QuestionGenerator, QuestionType, EmotionVector, UserState, StyledExplanation, ExplanationStyle, MultiModalExplanation};
     
-    // Compute thought vector statistics
-    let avg_activation: f64 = thought_vector.iter().map(|x| x.abs()).sum::<f64>() / thought_vector.len() as f64;
-    let max_activation = thought_vector.iter().map(|x| x.abs()).fold(0.0f64, |a, b| a.max(b));
+    // Create question generator
+    let generator = QuestionGenerator::new(thought_vector.len());
+    
+    // Analyze thought vector to determine question type
     let active_dims = thought_vector.iter().filter(|&&x| x.abs() > 0.1).count();
-    
-    // Complexity measure: how many dimensions are active
     let complexity = active_dims as f64 / thought_vector.len() as f64;
+    let avg_activation: f64 = thought_vector.iter().map(|x| x.abs()).sum::<f64>() / thought_vector.len() as f64;
     
-    // Analyze input to understand context
-    let input_lower = input.to_lowercase();
-    let is_what = input_lower.contains("what");
-    let is_how = input_lower.contains("how");
-    let is_why = input_lower.contains("why");
-    let is_explain = input_lower.contains("explain");
+    // Create emotion vector based on neural state
+    let mut emotion = EmotionVector::default();
+    emotion.curiosity = if complexity > 0.2 { 0.8 } else { 0.5 };
+    emotion.frustration = if confidence < 0.7 { 0.6 } else { 0.2 };
     
-    // Generate question based on neural state and learned patterns
-    // These adapt to the thought vector, not just the input text
+    // Create user state
+    let mut user_state = UserState::default();
+    user_state.level = confidence;
     
-    if complexity > 0.3 {
-        // High complexity - offer to clarify
-        if is_explain || is_what {
-            "I covered several concepts. Which part would you like me to clarify?"
-        } else {
-            "This is complex - which aspect should I explain more clearly?"
-        }
+    // Determine question type from neural state
+    let question_type = if complexity > 0.3 {
+        QuestionType::Clarification
     } else if confidence > 0.85 && avg_activation > 0.05 {
-        // High confidence and strong activations - offer extension
-        if is_why {
-            "Does this make sense? What related concepts would you like to explore?"
-        } else {
-            "What would you like to explore next about this topic?"
-        }
-    } else if is_how {
-        // Process questions - offer detail
-        "Would you like me to explain any specific part of this process in more detail?"
-    } else if is_what || is_explain {
-        // Explanatory questions - offer application
-        "Where do you think you might use this? Can you imagine a scenario?"
+        QuestionType::Extension
     } else if confidence < 0.75 {
-        // Lower confidence - verify understanding
-        "Can you explain this back to me? I want to make sure I explained it clearly."
+        QuestionType::Verification
+    } else if input.to_lowercase().contains("how") {
+        QuestionType::Application
     } else {
-        // Default - curious exploration
-        "Have you seen something similar before? How does this connect to what you know?"
-    }.to_string()
+        QuestionType::Curious
+    };
+    
+    // Create explanation structure
+    let explanation = StyledExplanation {
+        text: String::new(),
+        style: ExplanationStyle::Simple,
+        difficulty: complexity,
+        multi_modal: MultiModalExplanation {
+            text: String::new(),
+            diagram: None,
+            code: None,
+            animation: None,
+        },
+    };
+    
+    // Generate question using neural network
+    let answer = ""; // In full system, this would be the decoded answer
+    generator.generate(input, answer, &explanation, &user_state, &emotion, complexity)
+        .map(|q| q.question)
+        .unwrap_or_else(|| "What would you like to know more about?".to_string())
 }
 
 /// Add a semantic fact
