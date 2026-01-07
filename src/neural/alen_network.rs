@@ -540,9 +540,9 @@ impl ALENNetwork {
         let best_idx = evaluated
             .iter()
             .enumerate()
-            .min_by(|(_, a), (_, b)| a.energy.partial_cmp(&b.energy).unwrap())
+            .min_by(|(_, a), (_, b)| a.energy.partial_cmp(&b.energy).unwrap_or(std::cmp::Ordering::Equal))
             .map(|(idx, _)| idx)
-            .unwrap();
+            .unwrap_or(0);
         
         let selected_operator = evaluated[best_idx].operator_id;
         let psi_star = evaluated[best_idx].thought.clone();

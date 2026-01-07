@@ -420,6 +420,11 @@ impl MathProblemSolver {
     /// Extract reasoning steps from explanation embedding
     fn extract_reasoning_steps(&self, embedding: &Tensor) -> Vec<String> {
         let data = embedding.to_vec();
+        
+        if data.len() < 4 {
+            return vec!["Insufficient data for reasoning steps".to_string()];
+        }
+        
         let chunk_size = data.len() / 4; // Divide into 4 reasoning phases
 
         let mut steps = Vec::new();
@@ -427,6 +432,10 @@ impl MathProblemSolver {
             let start = i * chunk_size;
             let end = ((i + 1) * chunk_size).min(data.len());
             let chunk = &data[start..end];
+            
+            if chunk.is_empty() {
+                continue;
+            }
 
             // Analyze activation in this phase
             let avg_activation: f32 = chunk.iter().sum::<f32>() / chunk.len() as f32;
@@ -520,6 +529,10 @@ impl MathProblemSolver {
     fn decode_solution(&self, embedding: &Tensor) -> String {
         // Decode solution from embedding using multi-level analysis
         let data = embedding.to_vec();
+        
+        if data.is_empty() {
+            return "Empty embedding".to_string();
+        }
 
         // Level 1: Global statistics
         let magnitude: f32 = data.iter().map(|x| x * x).sum::<f32>().sqrt();
@@ -538,15 +551,23 @@ impl MathProblemSolver {
         let pattern_complexity = (high_activation_count as f32 / data.len() as f32) * 10.0;
 
         // Level 4: Semantic region analysis (divide embedding into logical sections)
-        let section_size = data.len() / 8;
-        let active_sections: Vec<usize> = (0..8)
-            .filter(|&i| {
-                let start = i * section_size;
-                let end = ((i + 1) * section_size).min(data.len());
-                let section_mean: f32 = data[start..end].iter().sum::<f32>() / (end - start) as f32;
-                section_mean.abs() > 0.2
-            })
-            .collect();
+        let active_sections: Vec<usize> = if data.len() >= 8 {
+            let section_size = data.len() / 8;
+            (0..8)
+                .filter(|&i| {
+                    let start = i * section_size;
+                    let end = ((i + 1) * section_size).min(data.len());
+                    if end > start {
+                        let section_mean: f32 = data[start..end].iter().sum::<f32>() / (end - start) as f32;
+                        section_mean.abs() > 0.2
+                    } else {
+                        false
+                    }
+                })
+                .collect()
+        } else {
+            Vec::new()
+        };
 
         // Generate human-readable solution based on learned representation
         if magnitude > 2.0 {
@@ -579,6 +600,10 @@ impl MathProblemSolver {
     fn decode_explanation(&self, embedding: &Tensor) -> String {
         // Decode explanation from embedding
         let data = embedding.to_vec();
+        
+        if data.is_empty() {
+            return "No explanation available".to_string();
+        }
 
         // Analyze explanation embedding structure
         let complexity: f32 = data.iter().map(|x| (x - data.iter().sum::<f32>() / data.len() as f32).powi(2)).sum::<f32>() / data.len() as f32;
@@ -749,6 +774,10 @@ impl CodeGenerationSystem {
     fn decode_explanation(&self, embedding: &Tensor) -> String {
         // Decode code explanation from embedding
         let data = embedding.to_vec();
+        
+        if data.is_empty() {
+            return "No explanation available".to_string();
+        }
 
         let mean: f32 = data.iter().sum::<f32>() / data.len() as f32;
         let std_dev: f32 = (data.iter().map(|x| (x - mean).powi(2)).sum::<f32>() / data.len() as f32).sqrt();

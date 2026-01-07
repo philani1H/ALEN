@@ -51,6 +51,10 @@ impl ImageEncoder {
     pub fn extract_patches(&self, image: &[u8], width: usize, height: usize) -> Vec<Vec<f64>> {
         let mut patches = Vec::new();
         
+        if width < self.patch_size || height < self.patch_size {
+            return patches;
+        }
+        
         let patches_x = width / self.patch_size;
         let patches_y = height / self.patch_size;
         
@@ -166,6 +170,10 @@ impl AudioEncoder {
     /// Extract audio features (MFCC-like)
     pub fn extract_features(&self, audio: &[u8]) -> Vec<f64> {
         let mut features = vec![0.0; 13];  // 13 MFCC coefficients
+        
+        if audio.len() < 13 {
+            return features;
+        }
         
         // Simple feature extraction (placeholder for real MFCC)
         let window_size = audio.len() / 13;

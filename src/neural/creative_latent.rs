@@ -167,7 +167,7 @@ impl TemperatureSampler {
                 .collect();
             
             // Sort by logit (descending)
-            scaled_logits.sort_by(|a, b| b.1.partial_cmp(&a.1).unwrap());
+            scaled_logits.sort_by(|a, b| b.1.partial_cmp(&a.1).unwrap_or(std::cmp::Ordering::Equal));
             
             // Take top-k
             let top_k = scaled_logits.iter().take(k).collect::<Vec<_>>();
@@ -203,7 +203,7 @@ impl TemperatureSampler {
                 .collect();
             
             // Sort by logit (descending)
-            scaled_logits.sort_by(|a, b| b.1.partial_cmp(&a.1).unwrap());
+            scaled_logits.sort_by(|a, b| b.1.partial_cmp(&a.1).unwrap_or(std::cmp::Ordering::Equal));
             
             // Compute probabilities
             let logits_only: Vec<f32> = scaled_logits.iter().map(|(_, l)| *l).collect();
@@ -400,7 +400,7 @@ impl NoveltySearch {
             .collect();
         
         // Sort distances
-        distances.sort_by(|a, b| a.partial_cmp(b).unwrap());
+        distances.sort_by(|a, b| a.partial_cmp(b).unwrap_or(std::cmp::Ordering::Equal));
         
         // Average of k-nearest
         let k = self.k_nearest.min(distances.len());
