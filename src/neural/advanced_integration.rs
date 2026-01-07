@@ -422,7 +422,8 @@ impl MathProblemSolver {
         let data = embedding.to_vec();
         
         if data.len() < 4 {
-            return vec!["Insufficient data for reasoning steps".to_string()];
+            // Neural network should learn to handle insufficient data
+            return vec![format!("[REASONING:insufficient_data|SIZE:{}]", data.len())];
         }
         
         let chunk_size = data.len() / 4; // Divide into 4 reasoning phases
@@ -602,7 +603,8 @@ impl MathProblemSolver {
         let data = embedding.to_vec();
         
         if data.is_empty() {
-            return "No explanation available".to_string();
+            // Neural network should learn to handle empty embeddings
+            return "[EXPLANATION:empty_embedding]".to_string();
         }
 
         // Analyze explanation embedding structure
@@ -776,7 +778,8 @@ impl CodeGenerationSystem {
         let data = embedding.to_vec();
         
         if data.is_empty() {
-            return "No explanation available".to_string();
+            // Neural network should learn to handle empty embeddings
+            return "[CODE_EXPLANATION:empty_embedding]".to_string();
         }
 
         let mean: f32 = data.iter().sum::<f32>() / data.len() as f32;
@@ -786,7 +789,7 @@ impl CodeGenerationSystem {
         let activated_count = data.iter().filter(|&&x| x.abs() > 0.3).count();
 
         format!(
-            "Code explanation generated from neural embedding: {} semantic regions activated, complexity metric: {:.3}",
+            "[CODE_EXPLANATION:regions:{}|complexity:{:.3}]",
             activated_count,
             std_dev
         )

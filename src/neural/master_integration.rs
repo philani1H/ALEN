@@ -343,8 +343,10 @@ impl MasterNeuralSystem {
         let retrieved_memories = self.retrieve_memory_with_responses(context, 5);
 
         if retrieved_memories.is_empty() {
-            // No learned patterns yet - generate exploratory response
-            return "I'm still learning patterns. Please train me with more examples so I can provide better responses.".to_string();
+            // No learned patterns yet - encode state for neural generation
+            // Neural network should learn to express uncertainty appropriately
+            return format!("[STATE:untrained|CONTEXT:{}|CREATIVITY:{:.2}]", 
+                context, controls.style.creativity);
         }
 
         // Get the best matching pattern
@@ -374,9 +376,11 @@ impl MasterNeuralSystem {
     }
 
     /// Synthesize response from multiple learned patterns
-    fn synthesize_from_patterns(&self, patterns: &[(f64, String)], _controls: &ControlVariables) -> String {
+    fn synthesize_from_patterns(&self, patterns: &[(f64, String)], controls: &ControlVariables) -> String {
         if patterns.is_empty() {
-            return "I don't have enough learned patterns to answer this question yet.".to_string();
+            // Neural network should learn to express insufficient training
+            return format!("[STATE:insufficient_patterns|CREATIVITY:{:.2}]", 
+                controls.style.creativity);
         }
 
         // Calculate weighted average based on similarity scores

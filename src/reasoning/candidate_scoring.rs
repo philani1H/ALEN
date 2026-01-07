@@ -246,18 +246,28 @@ impl CandidateScorer {
     }
 
     /// Generate follow-up question Q' ~ P_θ(Q' | X, A, u, e)
+    /// Neural network should learn to generate appropriate follow-ups
     pub fn generate_followup_question(
         &self,
         candidate: &ScoredCandidate,
         user: &UserEmbedding,
     ) -> Option<String> {
-        // Only generate if confidence is medium (not too low, not too high)
+        // Encode the context for neural generation
+        // The neural network should learn to generate appropriate follow-up questions
+        // based on confidence, memory guidance, and user preferences
+        
         if candidate.confidence < 0.4 {
-            Some("Could you provide more details or rephrase your question?".to_string())
+            // Low confidence - need clarification
+            Some(format!("[FOLLOWUP:clarification|CONFIDENCE:{:.2}|USER_VERBOSITY:{:.2}]", 
+                candidate.confidence, user.verbosity))
         } else if candidate.confidence < 0.7 && user.verbosity > 0.5 {
-            Some("Would you like me to explain this in more detail?".to_string())
+            // Medium confidence with verbose user - offer elaboration
+            Some(format!("[FOLLOWUP:elaboration|CONFIDENCE:{:.2}|USER_VERBOSITY:{:.2}]", 
+                candidate.confidence, user.verbosity))
         } else if candidate.memory_guidance < 0.3 && user.creativity > 0.6 {
-            Some("This is a novel question for me. Would you like to explore related topics?".to_string())
+            // Novel pattern with creative user - suggest exploration
+            Some(format!("[FOLLOWUP:exploration|MEMORY:{:.2}|USER_CREATIVITY:{:.2}]", 
+                candidate.memory_guidance, user.creativity))
         } else {
             None
         }
