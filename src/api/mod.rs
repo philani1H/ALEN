@@ -473,6 +473,8 @@ pub struct InferResponse {
     pub is_synthesis: bool,
     pub thought_vector: Vec<f64>,
     #[serde(skip_serializing_if = "Option::is_none")]
+    pub answer: Option<String>,
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub follow_up_question: Option<String>,
 }
 
@@ -567,6 +569,14 @@ pub async fn train(
     }
 
     let result = engine.train(&problem);
+    
+    // Train the decoder to generate text from thought vectors
+    if result.success {
+        if let Some(best_candidate) = &result.best_candidate {
+            let mut decoder = engine.latent_decoder.lock().unwrap();
+            decoder.learn(best_candidate, &req.expected_answer);
+        }
+    }
 
     Json(TrainResponse {
         success: result.success,
@@ -631,9 +641,26 @@ pub async fn infer(
     let result = engine.infer(&problem);
     
     // Generate the actual answer from the thought vector
+    // Try to find similar episode in memory and use its answer
     let decoded_answer = {
-        let decoder = engine.latent_decoder.lock().unwrap();
-        decoder.generate(&result.thought).0
+        let episodes = engine.episodic_memory.get_top_episodes(20).unwrap_or_default();
+        let mut best_match: Option<String> = None;
+        let mut best_similarity = 0.0;
+        
+        for episode in episodes.iter().filter(|e| e.verified) {
+            // Calculate similarity between thought vectors (dot product)
+            let similarity: f64 = result.thought.vector.iter()
+                .zip(episode.thought_vector.iter())
+                .map(|(a, b)| a * b)
+                .sum();
+            
+            if similarity > best_similarity {
+                best_similarity = similarity;
+                best_match = Some(episode.answer_output.clone());
+            }
+        }
+        
+        best_match.unwrap_or_else(|| String::new())
     };
     
     // Generate follow-up question using neural network with REAL answer
@@ -651,6 +678,7 @@ pub async fn infer(
         candidates_considered: result.candidates_considered,
         is_synthesis: result.is_synthesis,
         thought_vector: result.thought.vector,
+        answer: if !decoded_answer.is_empty() { Some(decoded_answer) } else { None },
         follow_up_question,
     })
 }
