@@ -1,0 +1,89 @@
+# Neural Follow-up Generation Training Data
+# Teaches the model to generate contextual follow-up questions
+
+Q: [FOLLOWUP:clarification|CONFIDENCE:0.35|USER_VERBOSITY:0.80]
+A: Could you provide more details or rephrase your question? I want to make sure I understand what you're asking.
+
+Q: [FOLLOWUP:clarification|CONFIDENCE:0.25|USER_VERBOSITY:0.50]
+A: I'm not quite sure I understand. Could you clarify what you mean?
+
+Q: [FOLLOWUP:clarification|CONFIDENCE:0.40|USER_VERBOSITY:0.90]
+A: To give you the best answer, could you elaborate on what specific aspect you're interested in?
+
+Q: [FOLLOWUP:clarification|CONFIDENCE:0.30|USER_VERBOSITY:0.60]
+A: Can you rephrase that? I want to make sure I answer the right question.
+
+Q: [FOLLOWUP:elaboration|CONFIDENCE:0.65|USER_VERBOSITY:0.85]
+A: Would you like me to explain this in more detail? I can break it down further.
+
+Q: [FOLLOWUP:elaboration|CONFIDENCE:0.55|USER_VERBOSITY:0.75]
+A: I can provide more information about this if you'd like. Would that be helpful?
+
+Q: [FOLLOWUP:elaboration|CONFIDENCE:0.60|USER_VERBOSITY:0.90]
+A: Would you like me to go deeper into the technical details, or would you prefer a high-level overview?
+
+Q: [FOLLOWUP:elaboration|CONFIDENCE:0.68|USER_VERBOSITY:0.70]
+A: Should I explain the reasoning behind this answer?
+
+Q: [FOLLOWUP:exploration|MEMORY:0.15|USER_CREATIVITY:0.85]
+A: This is a novel question for me. Would you like to explore related topics together?
+
+Q: [FOLLOWUP:exploration|MEMORY:0.20|USER_CREATIVITY:0.75]
+A: I haven't encountered this exact scenario before. Shall we think through it creatively?
+
+Q: [FOLLOWUP:exploration|MEMORY:0.10|USER_CREATIVITY:0.90]
+A: This is new territory! Would you like to brainstorm some possibilities?
+
+Q: [FOLLOWUP:exploration|MEMORY:0.25|USER_CREATIVITY:0.70]
+A: I'm learning about this area. Want to explore it together and see what we discover?
+
+# Low confidence, low verbosity
+Q: [FOLLOWUP:clarification|CONFIDENCE:0.20|USER_VERBOSITY:0.30]
+A: Not sure I got that. Can you rephrase?
+
+Q: [FOLLOWUP:clarification|CONFIDENCE:0.35|USER_VERBOSITY:0.40]
+A: Could you clarify?
+
+# Medium confidence, high verbosity
+Q: [FOLLOWUP:elaboration|CONFIDENCE:0.50|USER_VERBOSITY:0.95]
+A: I have a general answer, but would you like me to provide more comprehensive details, examples, and context?
+
+Q: [FOLLOWUP:elaboration|CONFIDENCE:0.62|USER_VERBOSITY:0.88]
+A: I can expand on this with additional information, related concepts, and practical applications. Would that be useful?
+
+# High creativity, low memory
+Q: [FOLLOWUP:exploration|MEMORY:0.05|USER_CREATIVITY:0.95]
+A: This is completely new to me! Let's think outside the box and explore creative possibilities together.
+
+Q: [FOLLOWUP:exploration|MEMORY:0.12|USER_CREATIVITY:0.82]
+A: I'm venturing into unfamiliar territory here. Want to explore this creatively and see where it leads?
+
+# Moderate scenarios
+Q: [FOLLOWUP:clarification|CONFIDENCE:0.45|USER_VERBOSITY:0.55]
+A: I think I understand, but could you confirm what you mean by that?
+
+Q: [FOLLOWUP:elaboration|CONFIDENCE:0.58|USER_VERBOSITY:0.65]
+A: Would you like more details on this?
+
+Q: [FOLLOWUP:exploration|MEMORY:0.18|USER_CREATIVITY:0.68]
+A: This is somewhat new to me. Shall we explore it together?
+
+# Edge cases
+Q: [FOLLOWUP:clarification|CONFIDENCE:0.10|USER_VERBOSITY:0.20]
+A: Unclear. Rephrase?
+
+Q: [FOLLOWUP:elaboration|CONFIDENCE:0.69|USER_VERBOSITY:0.99]
+A: I have a solid understanding of this topic. Would you like me to provide an exhaustive explanation covering all aspects, including theoretical foundations, practical applications, edge cases, and related concepts?
+
+Q: [FOLLOWUP:exploration|MEMORY:0.02|USER_CREATIVITY:0.98]
+A: This is completely uncharted territory! Let's embark on a creative exploration and discover new insights together!
+
+# Contextual variations
+Q: [FOLLOWUP:clarification|CONFIDENCE:0.38|USER_VERBOSITY:0.72]
+A: To ensure I give you the most accurate answer, could you specify which aspect you're most interested in?
+
+Q: [FOLLOWUP:elaboration|CONFIDENCE:0.64|USER_VERBOSITY:0.78]
+A: I can dive deeper into the specifics if you'd like. What would be most helpful?
+
+Q: [FOLLOWUP:exploration|MEMORY:0.22|USER_CREATIVITY:0.76]
+A: I'm still learning about this area. Would you like to explore different perspectives together?

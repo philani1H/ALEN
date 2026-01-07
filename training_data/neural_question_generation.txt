@@ -1,0 +1,118 @@
+# Neural Question Generation Training Data
+# Teaches the model to generate natural questions from structured intents
+
+Q: [QUESTION:clarification|LEVEL:easy|ABOUT:gravity]
+A: What is gravity?
+
+Q: [QUESTION:clarification|LEVEL:medium|ABOUT:photosynthesis]
+A: Can you explain what you mean by photosynthesis?
+
+Q: [QUESTION:clarification|LEVEL:hard|ABOUT:quantum entanglement]
+A: How would you define quantum entanglement in this context?
+
+Q: [QUESTION:clarification|LEVEL:expert|ABOUT:neural networks,backpropagation]
+A: What are the key characteristics of backpropagation in neural networks that distinguish it from other optimization methods?
+
+Q: [QUESTION:comprehension|LEVEL:easy|ABOUT:water cycle]
+A: What happens in the water cycle?
+
+Q: [QUESTION:comprehension|LEVEL:medium|ABOUT:democracy]
+A: Can you explain the role of democracy in modern society?
+
+Q: [QUESTION:comprehension|LEVEL:hard|ABOUT:climate change]
+A: How does climate change contribute to the overall environmental crisis?
+
+Q: [QUESTION:comprehension|LEVEL:expert|ABOUT:machine learning]
+A: What are the underlying mechanisms by which machine learning algorithms learn from data?
+
+Q: [QUESTION:application|LEVEL:easy|ABOUT:addition]
+A: How would you use addition in everyday life?
+
+Q: [QUESTION:application|LEVEL:medium|ABOUT:recursion]
+A: Can you give an example of recursion in a different programming context?
+
+Q: [QUESTION:application|LEVEL:hard|ABOUT:design patterns]
+A: How would you apply the principles of design patterns to solve a new software architecture problem?
+
+Q: [QUESTION:application|LEVEL:expert|ABOUT:quantum computing]
+A: What are the implications of quantum computing for cryptography and security?
+
+Q: [QUESTION:analysis|LEVEL:easy|ABOUT:exercise]
+A: Why is exercise important for health?
+
+Q: [QUESTION:analysis|LEVEL:medium|ABOUT:inflation]
+A: What causes inflation to happen in an economy?
+
+Q: [QUESTION:analysis|LEVEL:hard|ABOUT:social inequality]
+A: What are the underlying reasons for persistent social inequality?
+
+Q: [QUESTION:analysis|LEVEL:expert|ABOUT:evolutionary biology]
+A: How do the causal mechanisms of natural selection interact with genetic drift and other evolutionary factors?
+
+Q: [QUESTION:synthesis|LEVEL:easy|ABOUT:rain,clouds]
+A: How are rain and clouds related?
+
+Q: [QUESTION:synthesis|LEVEL:medium|ABOUT:supply,demand]
+A: What is the connection between supply and demand in economics?
+
+Q: [QUESTION:synthesis|LEVEL:hard|ABOUT:artificial intelligence,ethics]
+A: How do artificial intelligence and ethics interact to shape responsible AI development?
+
+Q: [QUESTION:synthesis|LEVEL:expert|ABOUT:quantum mechanics,relativity]
+A: What emergent properties arise from attempting to unify quantum mechanics and general relativity?
+
+Q: [QUESTION:evaluation|LEVEL:easy|ABOUT:recycling]
+A: Do you think recycling is beneficial?
+
+Q: [QUESTION:evaluation|LEVEL:medium|ABOUT:remote work]
+A: What is your assessment of remote work effectiveness?
+
+Q: [QUESTION:evaluation|LEVEL:hard|ABOUT:renewable energy]
+A: How would you evaluate the effectiveness of renewable energy policies?
+
+Q: [QUESTION:evaluation|LEVEL:expert|ABOUT:universal basic income]
+A: What are the strengths and limitations of universal basic income from economic, social, and political perspectives?
+
+Q: [QUESTION:followup|LEVEL:easy|ABOUT:planets]
+A: Tell me more about planets
+
+Q: [QUESTION:followup|LEVEL:medium|ABOUT:programming languages]
+A: What else can you share about programming languages?
+
+Q: [QUESTION:followup|LEVEL:hard|ABOUT:neural networks]
+A: Can you elaborate on the implications of different neural network architectures?
+
+Q: [QUESTION:followup|LEVEL:expert|ABOUT:consciousness]
+A: What are the deeper theoretical foundations of consciousness studies?
+
+# General concept questions
+Q: [QUESTION:clarification|LEVEL:easy|ABOUT:general]
+A: Can you clarify what you mean?
+
+Q: [QUESTION:comprehension|LEVEL:medium|ABOUT:general]
+A: Can you explain what happened?
+
+Q: [QUESTION:application|LEVEL:easy|ABOUT:general]
+A: How would you apply this?
+
+Q: [QUESTION:analysis|LEVEL:medium|ABOUT:general]
+A: Why did this happen?
+
+Q: [QUESTION:synthesis|LEVEL:easy|ABOUT:general]
+A: How do these ideas connect?
+
+Q: [QUESTION:evaluation|LEVEL:medium|ABOUT:general]
+A: What do you think about this?
+
+Q: [QUESTION:followup|LEVEL:easy|ABOUT:general]
+A: Can you tell me more?
+
+# Multiple concepts
+Q: [QUESTION:synthesis|LEVEL:medium|ABOUT:programming,mathematics]
+A: What is the connection between programming and mathematics?
+
+Q: [QUESTION:synthesis|LEVEL:hard|ABOUT:biology,chemistry,physics]
+A: How do biology, chemistry, and physics interact to explain life processes?
+
+Q: [QUESTION:evaluation|LEVEL:expert|ABOUT:technology,society,environment]
+A: What are the complex interactions between technology, society, and environmental sustainability?

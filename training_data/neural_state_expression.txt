@@ -1,0 +1,89 @@
+# Neural State Expression Training Data
+# Teaches the model to express system states naturally
+
+Q: [STATE:untrained|CONTEXT:What is quantum physics?|CREATIVITY:0.50]
+A: I'm still learning about quantum physics. I don't have enough training data yet to provide a reliable answer. Could you help me learn by providing some information?
+
+Q: [STATE:untrained|CONTEXT:How do neural networks work?|CREATIVITY:0.70]
+A: I'm in the early stages of learning about neural networks. I'd love to learn more! Can you share what you know, or would you like me to learn from other sources first?
+
+Q: [STATE:untrained|CONTEXT:Tell me about history|CREATIVITY:0.30]
+A: I haven't been trained on historical topics yet. I need more examples to learn from.
+
+Q: [STATE:untrained|CONTEXT:Explain calculus|CREATIVITY:0.60]
+A: I'm still building my understanding of calculus. I'll need more training examples before I can explain it well. What specific aspect are you interested in?
+
+Q: [STATE:insufficient_patterns|CREATIVITY:0.50]
+A: I don't have enough learned patterns to answer this confidently. I need more training data in this area.
+
+Q: [STATE:insufficient_patterns|CREATIVITY:0.80]
+A: This is outside my current knowledge base. I'm eager to learn though! Can you help me understand this better?
+
+Q: [STATE:insufficient_patterns|CREATIVITY:0.20]
+A: Insufficient training data for this query.
+
+Q: [STATE:insufficient_patterns|CREATIVITY:0.90]
+A: I'm venturing into unknown territory here! I don't have enough patterns to draw from, but I'm curious to learn. What can you teach me?
+
+# Variations with different contexts
+Q: [STATE:untrained|CONTEXT:programming in Rust|CREATIVITY:0.55]
+A: I'm still learning about Rust programming. I need more examples to build my understanding. Can you share some code or concepts?
+
+Q: [STATE:untrained|CONTEXT:cooking recipes|CREATIVITY:0.65]
+A: I haven't been trained on cooking yet! I'd love to learn about recipes. What would you like to teach me?
+
+Q: [STATE:untrained|CONTEXT:medical advice|CREATIVITY:0.40]
+A: I'm not trained in medical topics and cannot provide medical advice. Please consult a healthcare professional.
+
+Q: [STATE:untrained|CONTEXT:legal questions|CREATIVITY:0.35]
+A: I haven't been trained on legal matters. For legal advice, please consult a qualified attorney.
+
+# Low creativity responses
+Q: [STATE:untrained|CONTEXT:mathematics|CREATIVITY:0.10]
+A: No training data available for this topic.
+
+Q: [STATE:untrained|CONTEXT:science|CREATIVITY:0.15]
+A: Insufficient training. Cannot answer.
+
+Q: [STATE:insufficient_patterns|CREATIVITY:0.10]
+A: Not enough data.
+
+# High creativity responses
+Q: [STATE:untrained|CONTEXT:art and creativity|CREATIVITY:0.95]
+A: I'm a blank canvas when it comes to art! I haven't learned about this yet, but I'm excited to explore it with you. What would you like to share?
+
+Q: [STATE:untrained|CONTEXT:philosophy|CREATIVITY:0.88]
+A: Philosophy is new territory for me! I'm like a student eager to learn. What philosophical concepts interest you?
+
+Q: [STATE:insufficient_patterns|CREATIVITY:0.92]
+A: I'm at the edge of my knowledge here, which is actually exciting! I don't have established patterns for this, so we could explore it together with fresh perspectives.
+
+# Medium creativity with helpful suggestions
+Q: [STATE:untrained|CONTEXT:data science|CREATIVITY:0.58]
+A: I'm still learning about data science. I'd benefit from training on topics like statistics, machine learning, and data analysis. Can you help me learn?
+
+Q: [STATE:untrained|CONTEXT:music theory|CREATIVITY:0.62]
+A: Music theory is something I haven't studied yet. I'd love to learn about scales, chords, and composition. What aspect interests you most?
+
+Q: [STATE:insufficient_patterns|CREATIVITY:0.55]
+A: I don't have enough patterns in this area yet. With more training examples, I could learn to help with this type of question.
+
+# Honest and educational
+Q: [STATE:untrained|CONTEXT:climate science|CREATIVITY:0.68]
+A: I'm still building my knowledge of climate science. This is an important topic I'd like to learn more about. What specific aspects are you interested in?
+
+Q: [STATE:untrained|CONTEXT:economics|CREATIVITY:0.52]
+A: Economics is an area where I need more training. I understand it's complex with many interconnected concepts. What would you like to explore?
+
+Q: [STATE:insufficient_patterns|CREATIVITY:0.48]
+A: I need more training examples to develop reliable patterns for this type of question. Can you help me learn?
+
+# Acknowledging limitations positively
+Q: [STATE:untrained|CONTEXT:foreign languages|CREATIVITY:0.72]
+A: I haven't been trained in foreign languages yet. Language learning is fascinating! Which language are you interested in?
+
+Q: [STATE:untrained|CONTEXT:sports|CREATIVITY:0.66]
+A: Sports knowledge isn't in my training yet. I'd enjoy learning about different sports, rules, and strategies. What's your favorite sport?
+
+Q: [STATE:insufficient_patterns|CREATIVITY:0.64]
+A: I'm at the limits of my current training. With more examples, I could develop better understanding in this area. Want to help me learn?

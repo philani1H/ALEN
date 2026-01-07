@@ -1,0 +1,174 @@
+# Self-Questioning and Help Request Training Data
+# Teaches the model to ask for help and generate its own questions
+
+# Asking for clarification
+Q: I need help understanding this
+A: I'd be happy to help! What specifically would you like to understand better? Can you tell me what part is confusing?
+
+Q: Can you help me?
+A: Of course! What do you need help with? The more details you provide, the better I can assist you.
+
+Q: I'm stuck
+A: I understand. Let's work through this together. What are you trying to do, and where exactly are you getting stuck?
+
+Q: This doesn't make sense
+A: Let me help clarify. Which part doesn't make sense? Is it a specific concept, step, or the overall idea?
+
+Q: I don't understand
+A: That's okay! Learning takes time. What specifically are you trying to understand? Let's break it down together.
+
+# Self-generated questions for learning
+Q: What should I ask about machine learning?
+A: Great questions to ask about machine learning include: What is machine learning? How does it differ from traditional programming? What are supervised vs unsupervised learning? What are common algorithms? How do I get started?
+
+Q: What questions help me learn programming?
+A: Helpful programming questions: What language should I start with? What is a variable? How do functions work? What are data structures? How do I debug code? What are best practices?
+
+Q: How do I ask better questions?
+A: To ask better questions: Be specific about what you want to know, provide context, explain what you've already tried, state what you expect vs what's happening, and ask one thing at a time.
+
+Q: What should I ask to understand a topic deeply?
+A: Deep understanding questions: What is it? Why does it matter? How does it work? What are the key principles? How does it relate to other concepts? What are common misconceptions? Can you give examples?
+
+# Requesting examples
+Q: Can you give me an example?
+A: Absolutely! Examples help clarify concepts. What specific topic or concept would you like an example of?
+
+Q: Show me how this works
+A: I'd be glad to demonstrate! What would you like me to show you? A step-by-step process, a code example, or a practical application?
+
+Q: I learn better with examples
+A: That's a great learning style! What concept would you like me to illustrate with examples?
+
+# Asking for different explanations
+Q: Can you explain that differently?
+A: Of course! Let me try another approach. Would you prefer a simpler explanation, a more technical one, or perhaps an analogy?
+
+Q: I still don't get it
+A: No problem, let's try again. What part is still unclear? Sometimes a different perspective helps.
+
+Q: Can you simplify that?
+A: Sure! Let me break it down into simpler terms. Which part should I focus on simplifying?
+
+Q: Can you be more specific?
+A: Absolutely. What aspect would you like me to elaborate on? I can provide more details on any part.
+
+# Requesting step-by-step guidance
+Q: Can you walk me through this?
+A: Yes! I'll guide you step by step. What process or problem would you like me to walk you through?
+
+Q: What are the steps?
+A: I can outline the steps for you. What task or process are you trying to complete?
+
+Q: How do I start?
+A: Great question! The first step is important. What are you trying to accomplish? I'll help you get started.
+
+# Asking about resources
+Q: Where can I learn more?
+A: I can suggest learning resources! What topic are you interested in learning more about?
+
+Q: What should I read?
+A: I can recommend reading materials. What subject or skill are you looking to develop?
+
+Q: Are there tutorials?
+A: Yes, there are many tutorials available! What specific topic or skill are you looking for tutorials on?
+
+# Self-reflection questions
+Q: Am I understanding this correctly?
+A: Let's check your understanding. Can you explain back to me what you think it means? That will help me confirm or clarify.
+
+Q: Is this the right approach?
+A: That's a good question to ask! Tell me what approach you're considering, and I'll help you evaluate if it's suitable for your goal.
+
+Q: What am I missing?
+A: Good self-awareness! To help identify what you might be missing, can you tell me what you currently understand and what you're trying to achieve?
+
+# Asking for feedback
+Q: Is this correct?
+A: I'd be happy to check! Can you show me what you have so I can provide feedback?
+
+Q: Am I doing this right?
+A: Let me help you verify. What are you working on? Share your approach and I'll give you feedback.
+
+Q: Can you review this?
+A: Sure! I can review it for you. What would you like me to look at?
+
+# Requesting comparisons
+Q: What's the difference between X and Y?
+A: Great question! Comparing concepts helps understanding. What two things would you like me to compare?
+
+Q: How is this similar to that?
+A: Good thinking! Finding similarities helps learning. What concepts are you comparing?
+
+Q: Which is better?
+A: That depends on context. What are you comparing, and what's your use case? I can help you evaluate the options.
+
+# Asking about applications
+Q: When would I use this?
+A: Excellent practical question! What concept or tool are you asking about? I'll explain when and why you'd use it.
+
+Q: What's this used for?
+A: Good question! Understanding applications is important. What are you curious about?
+
+Q: Can you give a real-world example?
+A: Absolutely! Real-world examples make concepts concrete. What topic would you like a practical example of?
+
+# Asking about prerequisites
+Q: What do I need to know first?
+A: Smart question! Prerequisites matter. What topic are you trying to learn? I'll tell you what foundation you need.
+
+Q: Is there something I should learn before this?
+A: Good thinking! Some topics build on others. What are you trying to learn? I'll identify any prerequisites.
+
+Q: What's the foundation for this?
+A: Excellent question! Understanding foundations is key. What topic are you exploring?
+
+# Asking for practice
+Q: How can I practice this?
+A: Practice is essential! What skill or concept do you want to practice? I can suggest exercises or activities.
+
+Q: Can you give me a problem to solve?
+A: Great way to learn! What type of problem would you like? I can create practice problems for you.
+
+Q: What exercises should I do?
+A: Practice exercises help solidify learning. What skill are you developing? I'll suggest appropriate exercises.
+
+# Meta-questions about learning
+Q: How long will this take to learn?
+A: Learning time varies by person and topic. What are you trying to learn? I can give you a realistic estimate and learning path.
+
+Q: What's the best way to learn this?
+A: Different approaches work for different people. What's your learning style? Do you prefer hands-on practice, reading, videos, or a combination?
+
+Q: How do I know if I've learned it?
+A: Good question! You can test understanding by: explaining it to someone else, applying it to new problems, teaching it, or completing practice exercises. What topic are you learning?
+
+# Asking for motivation
+Q: Why should I learn this?
+A: Understanding motivation helps! What topic are you considering? I'll explain its value and applications.
+
+Q: What's the point of this?
+A: Fair question! Knowing the purpose helps motivation. What are you questioning? I'll explain its relevance.
+
+Q: How will this help me?
+A: Practical benefits matter! What skill or knowledge are you asking about? I'll explain how it can help you.
+
+# Collaborative learning questions
+Q: Can we figure this out together?
+A: Absolutely! Collaborative problem-solving is great. What challenge are you facing? Let's work through it together.
+
+Q: Let's think through this
+A: I like that approach! What problem or concept shall we think through together?
+
+Q: What do you think?
+A: I appreciate you asking! What topic or problem are we discussing? I'll share my analysis.
+
+# Questions about mistakes
+Q: What did I do wrong?
+A: Let's identify the issue together. Can you show me what you tried? I'll help you find and fix the problem.
+
+Q: Why isn't this working?
+A: Good debugging question! What are you trying to do, and what's happening instead? Let's troubleshoot together.
+
+Q: Where's my error?
+A: Let's find it! Can you share what you're working on? I'll help you locate and understand the error.

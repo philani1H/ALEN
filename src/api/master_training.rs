@@ -23,6 +23,10 @@ use once_cell::sync::Lazy;
 static MASTER_SYSTEM: Lazy<Arc<Mutex<Option<MasterNeuralSystem>>>> =
     Lazy::new(|| Arc::new(Mutex::new(None)));
 
+/// Global storage for uploaded training examples
+static UPLOADED_EXAMPLES: Lazy<Arc<Mutex<Vec<TrainingExample>>>> =
+    Lazy::new(|| Arc::new(Mutex::new(Vec::new())));
+
 #[derive(Debug, Serialize, Deserialize)]
 pub struct DocumentUploadResponse {
     pub success: bool,
@@ -158,12 +162,20 @@ pub async fn upload_document(
         }
     }
 
+    // Store uploaded examples for training
+    if !examples.is_empty() {
+        let mut uploaded = UPLOADED_EXAMPLES.lock().await;
+        uploaded.clear(); // Clear previous uploads
+        uploaded.extend(examples.clone());
+        eprintln!("📁 Stored {} examples from upload", examples.len());
+    }
+
     Json(DocumentUploadResponse {
         success: !examples.is_empty(),
         message: if examples.is_empty() {
             "No training examples found in file".to_string()
         } else {
-            format!("Successfully parsed {} examples", examples.len())
+            format!("Successfully parsed and stored {} examples", examples.len())
         },
         examples_parsed: examples.len(),
         file_name,
@@ -180,11 +192,33 @@ pub async fn train_master(
     let mut system_lock = MASTER_SYSTEM.lock().await;
 
     if let Some(ref mut system) = system_lock.as_mut() {
+        // Use uploaded examples if request is empty
+        let examples = if req.examples.is_empty() {
+            let uploaded = UPLOADED_EXAMPLES.lock().await;
+            uploaded.clone()
+        } else {
+            req.examples.clone()
+        };
+
+        if examples.is_empty() {
+            return Json(TrainMasterResponse {
+                success: false,
+                message: "No training examples provided. Please upload a document first.".to_string(),
+                examples_trained: 0,
+                average_loss: 0.0,
+                average_confidence: 0.0,
+                total_training_steps: 0,
+                controller_updates: 0,
+                core_model_updates: 0,
+                memories_in_db: 0,
+            });
+        }
+
         let mut total_loss = 0.0;
         let mut total_confidence = 0.0;
-        let examples_count = req.examples.len();
+        let examples_count = examples.len();
 
-        for example in &req.examples {
+        for example in &examples {
             let metrics = system.train_step(&example.input, &example.target);
             total_loss += metrics.total_loss;
             total_confidence += metrics.confidence;

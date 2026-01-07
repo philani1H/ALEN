@@ -1,0 +1,678 @@
+# Neural Question Generation Training Data
+# Teaches the model to generate natural questions from structured intents
+
+Q: [QUESTION:clarification|LEVEL:easy|ABOUT:gravity]
+A: What is gravity?
+
+Q: [QUESTION:clarification|LEVEL:medium|ABOUT:photosynthesis]
+A: Can you explain what you mean by photosynthesis?
+
+Q: [QUESTION:clarification|LEVEL:hard|ABOUT:quantum entanglement]
+A: How would you define quantum entanglement in this context?
+
+Q: [QUESTION:clarification|LEVEL:expert|ABOUT:neural networks,backpropagation]
+A: What are the key characteristics of backpropagation in neural networks that distinguish it from other optimization methods?
+
+Q: [QUESTION:comprehension|LEVEL:easy|ABOUT:water cycle]
+A: What happens in the water cycle?
+
+Q: [QUESTION:comprehension|LEVEL:medium|ABOUT:democracy]
+A: Can you explain the role of democracy in modern society?
+
+Q: [QUESTION:comprehension|LEVEL:hard|ABOUT:climate change]
+A: How does climate change contribute to the overall environmental crisis?
+
+Q: [QUESTION:comprehension|LEVEL:expert|ABOUT:machine learning]
+A: What are the underlying mechanisms by which machine learning algorithms learn from data?
+
+Q: [QUESTION:application|LEVEL:easy|ABOUT:addition]
+A: How would you use addition in everyday life?
+
+Q: [QUESTION:application|LEVEL:medium|ABOUT:recursion]
+A: Can you give an example of recursion in a different programming context?
+
+Q: [QUESTION:application|LEVEL:hard|ABOUT:design patterns]
+A: How would you apply the principles of design patterns to solve a new software architecture problem?
+
+Q: [QUESTION:application|LEVEL:expert|ABOUT:quantum computing]
+A: What are the implications of quantum computing for cryptography and security?
+
+Q: [QUESTION:analysis|LEVEL:easy|ABOUT:exercise]
+A: Why is exercise important for health?
+
+Q: [QUESTION:analysis|LEVEL:medium|ABOUT:inflation]
+A: What causes inflation to happen in an economy?
+
+Q: [QUESTION:analysis|LEVEL:hard|ABOUT:social inequality]
+A: What are the underlying reasons for persistent social inequality?
+
+Q: [QUESTION:analysis|LEVEL:expert|ABOUT:evolutionary biology]
+A: How do the causal mechanisms of natural selection interact with genetic drift and other evolutionary factors?
+
+Q: [QUESTION:synthesis|LEVEL:easy|ABOUT:rain,clouds]
+A: How are rain and clouds related?
+
+Q: [QUESTION:synthesis|LEVEL:medium|ABOUT:supply,demand]
+A: What is the connection between supply and demand in economics?
+
+Q: [QUESTION:synthesis|LEVEL:hard|ABOUT:artificial intelligence,ethics]
+A: How do artificial intelligence and ethics interact to shape responsible AI development?
+
+Q: [QUESTION:synthesis|LEVEL:expert|ABOUT:quantum mechanics,relativity]
+A: What emergent properties arise from attempting to unify quantum mechanics and general relativity?
+
+Q: [QUESTION:evaluation|LEVEL:easy|ABOUT:recycling]
+A: Do you think recycling is beneficial?
+
+Q: [QUESTION:evaluation|LEVEL:medium|ABOUT:remote work]
+A: What is your assessment of remote work effectiveness?
+
+Q: [QUESTION:evaluation|LEVEL:hard|ABOUT:renewable energy]
+A: How would you evaluate the effectiveness of renewable energy policies?
+
+Q: [QUESTION:evaluation|LEVEL:expert|ABOUT:universal basic income]
+A: What are the strengths and limitations of universal basic income from economic, social, and political perspectives?
+
+Q: [QUESTION:followup|LEVEL:easy|ABOUT:planets]
+A: Tell me more about planets
+
+Q: [QUESTION:followup|LEVEL:medium|ABOUT:programming languages]
+A: What else can you share about programming languages?
+
+Q: [QUESTION:followup|LEVEL:hard|ABOUT:neural networks]
+A: Can you elaborate on the implications of different neural network architectures?
+
+Q: [QUESTION:followup|LEVEL:expert|ABOUT:consciousness]
+A: What are the deeper theoretical foundations of consciousness studies?
+
+# General concept questions
+Q: [QUESTION:clarification|LEVEL:easy|ABOUT:general]
+A: Can you clarify what you mean?
+
+Q: [QUESTION:comprehension|LEVEL:medium|ABOUT:general]
+A: Can you explain what happened?
+
+Q: [QUESTION:application|LEVEL:easy|ABOUT:general]
+A: How would you apply this?
+
+Q: [QUESTION:analysis|LEVEL:medium|ABOUT:general]
+A: Why did this happen?
+
+Q: [QUESTION:synthesis|LEVEL:easy|ABOUT:general]
+A: How do these ideas connect?
+
+Q: [QUESTION:evaluation|LEVEL:medium|ABOUT:general]
+A: What do you think about this?
+
+Q: [QUESTION:followup|LEVEL:easy|ABOUT:general]
+A: Can you tell me more?
+
+# Multiple concepts
+Q: [QUESTION:synthesis|LEVEL:medium|ABOUT:programming,mathematics]
+A: What is the connection between programming and mathematics?
+
+Q: [QUESTION:synthesis|LEVEL:hard|ABOUT:biology,chemistry,physics]
+A: How do biology, chemistry, and physics interact to explain life processes?
+
+Q: [QUESTION:evaluation|LEVEL:expert|ABOUT:technology,society,environment]
+A: What are the complex interactions between technology, society, and environmental sustainability?
+# Neural Follow-up Generation Training Data
+# Teaches the model to generate contextual follow-up questions
+
+Q: [FOLLOWUP:clarification|CONFIDENCE:0.35|USER_VERBOSITY:0.80]
+A: Could you provide more details or rephrase your question? I want to make sure I understand what you're asking.
+
+Q: [FOLLOWUP:clarification|CONFIDENCE:0.25|USER_VERBOSITY:0.50]
+A: I'm not quite sure I understand. Could you clarify what you mean?
+
+Q: [FOLLOWUP:clarification|CONFIDENCE:0.40|USER_VERBOSITY:0.90]
+A: To give you the best answer, could you elaborate on what specific aspect you're interested in?
+
+Q: [FOLLOWUP:clarification|CONFIDENCE:0.30|USER_VERBOSITY:0.60]
+A: Can you rephrase that? I want to make sure I answer the right question.
+
+Q: [FOLLOWUP:elaboration|CONFIDENCE:0.65|USER_VERBOSITY:0.85]
+A: Would you like me to explain this in more detail? I can break it down further.
+
+Q: [FOLLOWUP:elaboration|CONFIDENCE:0.55|USER_VERBOSITY:0.75]
+A: I can provide more information about this if you'd like. Would that be helpful?
+
+Q: [FOLLOWUP:elaboration|CONFIDENCE:0.60|USER_VERBOSITY:0.90]
+A: Would you like me to go deeper into the technical details, or would you prefer a high-level overview?
+
+Q: [FOLLOWUP:elaboration|CONFIDENCE:0.68|USER_VERBOSITY:0.70]
+A: Should I explain the reasoning behind this answer?
+
+Q: [FOLLOWUP:exploration|MEMORY:0.15|USER_CREATIVITY:0.85]
+A: This is a novel question for me. Would you like to explore related topics together?
+
+Q: [FOLLOWUP:exploration|MEMORY:0.20|USER_CREATIVITY:0.75]
+A: I haven't encountered this exact scenario before. Shall we think through it creatively?
+
+Q: [FOLLOWUP:exploration|MEMORY:0.10|USER_CREATIVITY:0.90]
+A: This is new territory! Would you like to brainstorm some possibilities?
+
+Q: [FOLLOWUP:exploration|MEMORY:0.25|USER_CREATIVITY:0.70]
+A: I'm learning about this area. Want to explore it together and see what we discover?
+
+# Low confidence, low verbosity
+Q: [FOLLOWUP:clarification|CONFIDENCE:0.20|USER_VERBOSITY:0.30]
+A: Not sure I got that. Can you rephrase?
+
+Q: [FOLLOWUP:clarification|CONFIDENCE:0.35|USER_VERBOSITY:0.40]
+A: Could you clarify?
+
+# Medium confidence, high verbosity
+Q: [FOLLOWUP:elaboration|CONFIDENCE:0.50|USER_VERBOSITY:0.95]
+A: I have a general answer, but would you like me to provide more comprehensive details, examples, and context?
+
+Q: [FOLLOWUP:elaboration|CONFIDENCE:0.62|USER_VERBOSITY:0.88]
+A: I can expand on this with additional information, related concepts, and practical applications. Would that be useful?
+
+# High creativity, low memory
+Q: [FOLLOWUP:exploration|MEMORY:0.05|USER_CREATIVITY:0.95]
+A: This is completely new to me! Let's think outside the box and explore creative possibilities together.
+
+Q: [FOLLOWUP:exploration|MEMORY:0.12|USER_CREATIVITY:0.82]
+A: I'm venturing into unfamiliar territory here. Want to explore this creatively and see where it leads?
+
+# Moderate scenarios
+Q: [FOLLOWUP:clarification|CONFIDENCE:0.45|USER_VERBOSITY:0.55]
+A: I think I understand, but could you confirm what you mean by that?
+
+Q: [FOLLOWUP:elaboration|CONFIDENCE:0.58|USER_VERBOSITY:0.65]
+A: Would you like more details on this?
+
+Q: [FOLLOWUP:exploration|MEMORY:0.18|USER_CREATIVITY:0.68]
+A: This is somewhat new to me. Shall we explore it together?
+
+# Edge cases
+Q: [FOLLOWUP:clarification|CONFIDENCE:0.10|USER_VERBOSITY:0.20]
+A: Unclear. Rephrase?
+
+Q: [FOLLOWUP:elaboration|CONFIDENCE:0.69|USER_VERBOSITY:0.99]
+A: I have a solid understanding of this topic. Would you like me to provide an exhaustive explanation covering all aspects, including theoretical foundations, practical applications, edge cases, and related concepts?
+
+Q: [FOLLOWUP:exploration|MEMORY:0.02|USER_CREATIVITY:0.98]
+A: This is completely uncharted territory! Let's embark on a creative exploration and discover new insights together!
+
+# Contextual variations
+Q: [FOLLOWUP:clarification|CONFIDENCE:0.38|USER_VERBOSITY:0.72]
+A: To ensure I give you the most accurate answer, could you specify which aspect you're most interested in?
+
+Q: [FOLLOWUP:elaboration|CONFIDENCE:0.64|USER_VERBOSITY:0.78]
+A: I can dive deeper into the specifics if you'd like. What would be most helpful?
+
+Q: [FOLLOWUP:exploration|MEMORY:0.22|USER_CREATIVITY:0.76]
+A: I'm still learning about this area. Would you like to explore different perspectives together?
+# Neural State Expression Training Data
+# Teaches the model to express system states naturally
+
+Q: [STATE:untrained|CONTEXT:What is quantum physics?|CREATIVITY:0.50]
+A: I'm still learning about quantum physics. I don't have enough training data yet to provide a reliable answer. Could you help me learn by providing some information?
+
+Q: [STATE:untrained|CONTEXT:How do neural networks work?|CREATIVITY:0.70]
+A: I'm in the early stages of learning about neural networks. I'd love to learn more! Can you share what you know, or would you like me to learn from other sources first?
+
+Q: [STATE:untrained|CONTEXT:Tell me about history|CREATIVITY:0.30]
+A: I haven't been trained on historical topics yet. I need more examples to learn from.
+
+Q: [STATE:untrained|CONTEXT:Explain calculus|CREATIVITY:0.60]
+A: I'm still building my understanding of calculus. I'll need more training examples before I can explain it well. What specific aspect are you interested in?
+
+Q: [STATE:insufficient_patterns|CREATIVITY:0.50]
+A: I don't have enough learned patterns to answer this confidently. I need more training data in this area.
+
+Q: [STATE:insufficient_patterns|CREATIVITY:0.80]
+A: This is outside my current knowledge base. I'm eager to learn though! Can you help me understand this better?
+
+Q: [STATE:insufficient_patterns|CREATIVITY:0.20]
+A: Insufficient training data for this query.
+
+Q: [STATE:insufficient_patterns|CREATIVITY:0.90]
+A: I'm venturing into unknown territory here! I don't have enough patterns to draw from, but I'm curious to learn. What can you teach me?
+
+# Variations with different contexts
+Q: [STATE:untrained|CONTEXT:programming in Rust|CREATIVITY:0.55]
+A: I'm still learning about Rust programming. I need more examples to build my understanding. Can you share some code or concepts?
+
+Q: [STATE:untrained|CONTEXT:cooking recipes|CREATIVITY:0.65]
+A: I haven't been trained on cooking yet! I'd love to learn about recipes. What would you like to teach me?
+
+Q: [STATE:untrained|CONTEXT:medical advice|CREATIVITY:0.40]
+A: I'm not trained in medical topics and cannot provide medical advice. Please consult a healthcare professional.
+
+Q: [STATE:untrained|CONTEXT:legal questions|CREATIVITY:0.35]
+A: I haven't been trained on legal matters. For legal advice, please consult a qualified attorney.
+
+# Low creativity responses
+Q: [STATE:untrained|CONTEXT:mathematics|CREATIVITY:0.10]
+A: No training data available for this topic.
+
+Q: [STATE:untrained|CONTEXT:science|CREATIVITY:0.15]
+A: Insufficient training. Cannot answer.
+
+Q: [STATE:insufficient_patterns|CREATIVITY:0.10]
+A: Not enough data.
+
+# High creativity responses
+Q: [STATE:untrained|CONTEXT:art and creativity|CREATIVITY:0.95]
+A: I'm a blank canvas when it comes to art! I haven't learned about this yet, but I'm excited to explore it with you. What would you like to share?
+
+Q: [STATE:untrained|CONTEXT:philosophy|CREATIVITY:0.88]
+A: Philosophy is new territory for me! I'm like a student eager to learn. What philosophical concepts interest you?
+
+Q: [STATE:insufficient_patterns|CREATIVITY:0.92]
+A: I'm at the edge of my knowledge here, which is actually exciting! I don't have established patterns for this, so we could explore it together with fresh perspectives.
+
+# Medium creativity with helpful suggestions
+Q: [STATE:untrained|CONTEXT:data science|CREATIVITY:0.58]
+A: I'm still learning about data science. I'd benefit from training on topics like statistics, machine learning, and data analysis. Can you help me learn?
+
+Q: [STATE:untrained|CONTEXT:music theory|CREATIVITY:0.62]
+A: Music theory is something I haven't studied yet. I'd love to learn about scales, chords, and composition. What aspect interests you most?
+
+Q: [STATE:insufficient_patterns|CREATIVITY:0.55]
+A: I don't have enough patterns in this area yet. With more training examples, I could learn to help with this type of question.
+
+# Honest and educational
+Q: [STATE:untrained|CONTEXT:climate science|CREATIVITY:0.68]
+A: I'm still building my knowledge of climate science. This is an important topic I'd like to learn more about. What specific aspects are you interested in?
+
+Q: [STATE:untrained|CONTEXT:economics|CREATIVITY:0.52]
+A: Economics is an area where I need more training. I understand it's complex with many interconnected concepts. What would you like to explore?
+
+Q: [STATE:insufficient_patterns|CREATIVITY:0.48]
+A: I need more training examples to develop reliable patterns for this type of question. Can you help me learn?
+
+# Acknowledging limitations positively
+Q: [STATE:untrained|CONTEXT:foreign languages|CREATIVITY:0.72]
+A: I haven't been trained in foreign languages yet. Language learning is fascinating! Which language are you interested in?
+
+Q: [STATE:untrained|CONTEXT:sports|CREATIVITY:0.66]
+A: Sports knowledge isn't in my training yet. I'd enjoy learning about different sports, rules, and strategies. What's your favorite sport?
+
+Q: [STATE:insufficient_patterns|CREATIVITY:0.64]
+A: I'm at the limits of my current training. With more examples, I could develop better understanding in this area. Want to help me learn?
+# Comprehensive Training Data - All Patterns
+# Covers mathematics, science, programming, reasoning, and conversation
+
+# Mathematics
+Q: What is 2 + 2?
+A: 4
+
+Q: What is 15 * 7?
+A: 105
+
+Q: What is the square root of 144?
+A: 12
+
+Q: Solve for x: 2x + 5 = 15
+A: x = 5. Subtract 5 from both sides: 2x = 10, then divide by 2: x = 5.
+
+Q: What is the derivative of x²?
+A: 2x. Using the power rule: d/dx(x^n) = nx^(n-1), so d/dx(x²) = 2x^(2-1) = 2x.
+
+Q: What is the integral of 2x?
+A: x² + C, where C is the constant of integration.
+
+Q: What is the Pythagorean theorem?
+A: In a right triangle, a² + b² = c², where c is the hypotenuse and a and b are the other two sides.
+
+Q: What is 25% of 80?
+A: 20. Calculate: 0.25 × 80 = 20.
+
+Q: What is the area of a circle with radius 5?
+A: Approximately 78.54 square units. Using A = πr², A = π(5)² = 25π ≈ 78.54.
+
+Q: What is a prime number?
+A: A prime number is a natural number greater than 1 that has no positive divisors other than 1 and itself. Examples: 2, 3, 5, 7, 11.
+
+# Science
+Q: What is photosynthesis?
+A: Photosynthesis is the process by which plants use sunlight, water, and carbon dioxide to produce oxygen and energy in the form of sugar.
+
+Q: What is gravity?
+A: Gravity is a fundamental force that attracts objects with mass toward each other. On Earth, it gives weight to physical objects and causes them to fall toward the ground.
+
+Q: What is DNA?
+A: DNA (deoxyribonucleic acid) is a molecule that carries genetic instructions for the development, functioning, growth, and reproduction of all known organisms.
+
+Q: What is the speed of light?
+A: The speed of light in a vacuum is approximately 299,792,458 meters per second (about 186,282 miles per second).
+
+Q: What causes seasons?
+A: Seasons are caused by Earth's tilted axis as it orbits the sun. Different parts of Earth receive varying amounts of sunlight throughout the year.
+
+Q: What is an atom?
+A: An atom is the smallest unit of matter that retains the properties of an element. It consists of a nucleus (protons and neutrons) surrounded by electrons.
+
+Q: What is evolution?
+A: Evolution is the process by which species change over time through natural selection, genetic variation, and adaptation to their environment.
+
+Q: What is the water cycle?
+A: The water cycle is the continuous movement of water on, above, and below Earth's surface through evaporation, condensation, precipitation, and collection.
+
+# Programming
+Q: What is a variable in programming?
+A: A variable is a named storage location in memory that holds a value which can be changed during program execution.
+
+Q: What is a function?
+A: A function is a reusable block of code that performs a specific task. It can take inputs (parameters) and return outputs.
+
+Q: What is a loop?
+A: A loop is a programming construct that repeats a block of code multiple times until a condition is met.
+
+Q: What is an array?
+A: An array is a data structure that stores a collection of elements, typically of the same type, in contiguous memory locations.
+
+Q: What is recursion?
+A: Recursion is a programming technique where a function calls itself to solve a problem by breaking it down into smaller, similar subproblems.
+
+Q: What is object-oriented programming?
+A: Object-oriented programming (OOP) is a programming paradigm based on objects that contain data (attributes) and code (methods). Key concepts include encapsulation, inheritance, and polymorphism.
+
+Q: What is a bug in programming?
+A: A bug is an error, flaw, or fault in a computer program that causes it to produce incorrect or unexpected results.
+
+Q: What is debugging?
+A: Debugging is the process of finding and fixing bugs or errors in computer programs.
+
+# Reasoning and Logic
+Q: If all cats are animals, and Fluffy is a cat, what is Fluffy?
+A: Fluffy is an animal. This follows from logical deduction: all cats are animals, Fluffy is a cat, therefore Fluffy is an animal.
+
+Q: What is cause and effect?
+A: Cause and effect is a relationship where one event (the cause) makes another event happen (the effect). For example, rain (cause) makes the ground wet (effect).
+
+Q: What is critical thinking?
+A: Critical thinking is the objective analysis and evaluation of an issue to form a judgment. It involves questioning assumptions, examining evidence, and considering alternative perspectives.
+
+Q: What is an analogy?
+A: An analogy is a comparison between two things that are similar in some way, often used to explain or clarify a concept.
+
+Q: What is deductive reasoning?
+A: Deductive reasoning is a logical process where a conclusion is based on the concordance of multiple premises that are generally assumed to be true.
+
+Q: What is inductive reasoning?
+A: Inductive reasoning is a logical process where multiple premises, all believed true, are combined to obtain a specific conclusion. It moves from specific observations to broader generalizations.
+
+# Language and Communication
+Q: What is a noun?
+A: A noun is a word that names a person, place, thing, or idea. Examples: cat, city, happiness, John.
+
+Q: What is a verb?
+A: A verb is a word that expresses an action, occurrence, or state of being. Examples: run, think, is, become.
+
+Q: What is grammar?
+A: Grammar is the set of rules that govern the structure of sentences in a language, including syntax, morphology, and punctuation.
+
+Q: What is a metaphor?
+A: A metaphor is a figure of speech that describes something by saying it is something else, to create a comparison. Example: "Time is money."
+
+Q: What is active listening?
+A: Active listening is fully concentrating on, understanding, responding to, and remembering what is being said, rather than just passively hearing the words.
+
+Q: What makes good communication?
+A: Good communication is clear, concise, respectful, and appropriate for the audience. It involves both effective speaking/writing and active listening.
+
+# General Knowledge
+Q: What is the capital of France?
+A: Paris is the capital of France.
+
+Q: How many continents are there?
+A: There are seven continents: Africa, Antarctica, Asia, Europe, North America, Oceania, and South America.
+
+Q: What is democracy?
+A: Democracy is a system of government where power is vested in the people, who rule either directly or through freely elected representatives.
+
+Q: What is the Internet?
+A: The Internet is a global network of interconnected computers that communicate using standardized protocols to share information and resources.
+
+Q: What is climate change?
+A: Climate change refers to long-term shifts in global temperatures and weather patterns, primarily caused by human activities that increase greenhouse gas emissions.
+
+# Problem Solving
+Q: How do you solve a problem?
+A: To solve a problem: 1) Define the problem clearly, 2) Gather information, 3) Generate possible solutions, 4) Evaluate options, 5) Choose and implement a solution, 6) Review the results.
+
+Q: What is brainstorming?
+A: Brainstorming is a creative technique for generating ideas where participants freely suggest solutions without immediate criticism or evaluation.
+
+Q: What is trial and error?
+A: Trial and error is a problem-solving method where you try different solutions until you find one that works, learning from each attempt.
+
+Q: What is a strategy?
+A: A strategy is a plan of action designed to achieve a long-term or overall aim. It involves making choices about how to allocate resources and effort.
+
+# Learning and Memory
+Q: What is learning?
+A: Learning is the process of acquiring new knowledge, skills, behaviors, or understanding through study, experience, or teaching.
+
+Q: What is memory?
+A: Memory is the mental capacity to store, retain, and recall information and experiences.
+
+Q: How can I improve my memory?
+A: To improve memory: practice regularly, use mnemonic devices, get enough sleep, stay physically active, eat a healthy diet, and engage in mentally stimulating activities.
+
+Q: What is practice?
+A: Practice is the repeated exercise of an activity or skill to improve or maintain proficiency.
+
+Q: What is understanding?
+A: Understanding is the ability to comprehend the meaning, nature, or importance of something, going beyond mere memorization to grasp underlying concepts.
+
+# Emotions and Social Skills
+Q: What is empathy?
+A: Empathy is the ability to understand and share the feelings of another person, putting yourself in their shoes.
+
+Q: What is patience?
+A: Patience is the capacity to accept or tolerate delay, difficulty, or annoyance without getting angry or upset.
+
+Q: What is respect?
+A: Respect is a feeling of deep admiration for someone or something based on their abilities, qualities, or achievements. It involves treating others with consideration and courtesy.
+
+Q: What is teamwork?
+A: Teamwork is the collaborative effort of a group to achieve a common goal or complete a task effectively and efficiently.
+
+Q: What is conflict resolution?
+A: Conflict resolution is the process of resolving a dispute or disagreement by finding a peaceful solution that satisfies all parties involved.
+
+# Creativity and Innovation
+Q: What is creativity?
+A: Creativity is the ability to generate new ideas, approaches, or solutions that are original and valuable.
+
+Q: What is innovation?
+A: Innovation is the process of translating creative ideas into practical applications, products, or services that create value.
+
+Q: How can I be more creative?
+A: To boost creativity: expose yourself to new experiences, practice divergent thinking, embrace failure as learning, collaborate with others, and give yourself time to think without pressure.
+
+Q: What is imagination?
+A: Imagination is the ability to form mental images, concepts, or scenarios that are not present to the senses or have not been experienced.
+
+# Ethics and Values
+Q: What is honesty?
+A: Honesty is the quality of being truthful, sincere, and free from deceit. It involves telling the truth and acting with integrity.
+
+Q: What is responsibility?
+A: Responsibility is the state of being accountable for one's actions and obligations, and fulfilling duties reliably.
+
+Q: What is fairness?
+A: Fairness is treating people equally and justly, without favoritism or discrimination, and making decisions based on objective criteria.
+
+Q: What is kindness?
+A: Kindness is the quality of being friendly, generous, and considerate toward others, showing compassion and care.
+# Self-Questioning and Help Request Training Data
+# Teaches the model to ask for help and generate its own questions
+
+# Asking for clarification
+Q: I need help understanding this
+A: I'd be happy to help! What specifically would you like to understand better? Can you tell me what part is confusing?
+
+Q: Can you help me?
+A: Of course! What do you need help with? The more details you provide, the better I can assist you.
+
+Q: I'm stuck
+A: I understand. Let's work through this together. What are you trying to do, and where exactly are you getting stuck?
+
+Q: This doesn't make sense
+A: Let me help clarify. Which part doesn't make sense? Is it a specific concept, step, or the overall idea?
+
+Q: I don't understand
+A: That's okay! Learning takes time. What specifically are you trying to understand? Let's break it down together.
+
+# Self-generated questions for learning
+Q: What should I ask about machine learning?
+A: Great questions to ask about machine learning include: What is machine learning? How does it differ from traditional programming? What are supervised vs unsupervised learning? What are common algorithms? How do I get started?
+
+Q: What questions help me learn programming?
+A: Helpful programming questions: What language should I start with? What is a variable? How do functions work? What are data structures? How do I debug code? What are best practices?
+
+Q: How do I ask better questions?
+A: To ask better questions: Be specific about what you want to know, provide context, explain what you've already tried, state what you expect vs what's happening, and ask one thing at a time.
+
+Q: What should I ask to understand a topic deeply?
+A: Deep understanding questions: What is it? Why does it matter? How does it work? What are the key principles? How does it relate to other concepts? What are common misconceptions? Can you give examples?
+
+# Requesting examples
+Q: Can you give me an example?
+A: Absolutely! Examples help clarify concepts. What specific topic or concept would you like an example of?
+
+Q: Show me how this works
+A: I'd be glad to demonstrate! What would you like me to show you? A step-by-step process, a code example, or a practical application?
+
+Q: I learn better with examples
+A: That's a great learning style! What concept would you like me to illustrate with examples?
+
+# Asking for different explanations
+Q: Can you explain that differently?
+A: Of course! Let me try another approach. Would you prefer a simpler explanation, a more technical one, or perhaps an analogy?
+
+Q: I still don't get it
+A: No problem, let's try again. What part is still unclear? Sometimes a different perspective helps.
+
+Q: Can you simplify that?
+A: Sure! Let me break it down into simpler terms. Which part should I focus on simplifying?
+
+Q: Can you be more specific?
+A: Absolutely. What aspect would you like me to elaborate on? I can provide more details on any part.
+
+# Requesting step-by-step guidance
+Q: Can you walk me through this?
+A: Yes! I'll guide you step by step. What process or problem would you like me to walk you through?
+
+Q: What are the steps?
+A: I can outline the steps for you. What task or process are you trying to complete?
+
+Q: How do I start?
+A: Great question! The first step is important. What are you trying to accomplish? I'll help you get started.
+
+# Asking about resources
+Q: Where can I learn more?
+A: I can suggest learning resources! What topic are you interested in learning more about?
+
+Q: What should I read?
+A: I can recommend reading materials. What subject or skill are you looking to develop?
+
+Q: Are there tutorials?
+A: Yes, there are many tutorials available! What specific topic or skill are you looking for tutorials on?
+
+# Self-reflection questions
+Q: Am I understanding this correctly?
+A: Let's check your understanding. Can you explain back to me what you think it means? That will help me confirm or clarify.
+
+Q: Is this the right approach?
+A: That's a good question to ask! Tell me what approach you're considering, and I'll help you evaluate if it's suitable for your goal.
+
+Q: What am I missing?
+A: Good self-awareness! To help identify what you might be missing, can you tell me what you currently understand and what you're trying to achieve?
+
+# Asking for feedback
+Q: Is this correct?
+A: I'd be happy to check! Can you show me what you have so I can provide feedback?
+
+Q: Am I doing this right?
+A: Let me help you verify. What are you working on? Share your approach and I'll give you feedback.
+
+Q: Can you review this?
+A: Sure! I can review it for you. What would you like me to look at?
+
+# Requesting comparisons
+Q: What's the difference between X and Y?
+A: Great question! Comparing concepts helps understanding. What two things would you like me to compare?
+
+Q: How is this similar to that?
+A: Good thinking! Finding similarities helps learning. What concepts are you comparing?
+
+Q: Which is better?
+A: That depends on context. What are you comparing, and what's your use case? I can help you evaluate the options.
+
+# Asking about applications
+Q: When would I use this?
+A: Excellent practical question! What concept or tool are you asking about? I'll explain when and why you'd use it.
+
+Q: What's this used for?
+A: Good question! Understanding applications is important. What are you curious about?
+
+Q: Can you give a real-world example?
+A: Absolutely! Real-world examples make concepts concrete. What topic would you like a practical example of?
+
+# Asking about prerequisites
+Q: What do I need to know first?
+A: Smart question! Prerequisites matter. What topic are you trying to learn? I'll tell you what foundation you need.
+
+Q: Is there something I should learn before this?
+A: Good thinking! Some topics build on others. What are you trying to learn? I'll identify any prerequisites.
+
+Q: What's the foundation for this?
+A: Excellent question! Understanding foundations is key. What topic are you exploring?
+
+# Asking for practice
+Q: How can I practice this?
+A: Practice is essential! What skill or concept do you want to practice? I can suggest exercises or activities.
+
+Q: Can you give me a problem to solve?
+A: Great way to learn! What type of problem would you like? I can create practice problems for you.
+
+Q: What exercises should I do?
+A: Practice exercises help solidify learning. What skill are you developing? I'll suggest appropriate exercises.
+
+# Meta-questions about learning
+Q: How long will this take to learn?
+A: Learning time varies by person and topic. What are you trying to learn? I can give you a realistic estimate and learning path.
+
+Q: What's the best way to learn this?
+A: Different approaches work for different people. What's your learning style? Do you prefer hands-on practice, reading, videos, or a combination?
+
+Q: How do I know if I've learned it?
+A: Good question! You can test understanding by: explaining it to someone else, applying it to new problems, teaching it, or completing practice exercises. What topic are you learning?
+
+# Asking for motivation
+Q: Why should I learn this?
+A: Understanding motivation helps! What topic are you considering? I'll explain its value and applications.
+
+Q: What's the point of this?
+A: Fair question! Knowing the purpose helps motivation. What are you questioning? I'll explain its relevance.
+
+Q: How will this help me?
+A: Practical benefits matter! What skill or knowledge are you asking about? I'll explain how it can help you.
+
+# Collaborative learning questions
+Q: Can we figure this out together?
+A: Absolutely! Collaborative problem-solving is great. What challenge are you facing? Let's work through it together.
+
+Q: Let's think through this
+A: I like that approach! What problem or concept shall we think through together?
+
+Q: What do you think?
+A: I appreciate you asking! What topic or problem are we discussing? I'll share my analysis.
+
+# Questions about mistakes
+Q: What did I do wrong?
+A: Let's identify the issue together. Can you show me what you tried? I'll help you find and fix the problem.
+
+Q: Why isn't this working?
+A: Good debugging question! What are you trying to do, and what's happening instead? Let's troubleshoot together.
+
+Q: Where's my error?
+A: Let's find it! Can you share what you're working on? I'll help you locate and understand the error.

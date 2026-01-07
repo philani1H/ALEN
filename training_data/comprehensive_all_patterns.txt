@@ -1,0 +1,208 @@
+# Comprehensive Training Data - All Patterns
+# Covers mathematics, science, programming, reasoning, and conversation
+
+# Mathematics
+Q: What is 2 + 2?
+A: 4
+
+Q: What is 15 * 7?
+A: 105
+
+Q: What is the square root of 144?
+A: 12
+
+Q: Solve for x: 2x + 5 = 15
+A: x = 5. Subtract 5 from both sides: 2x = 10, then divide by 2: x = 5.
+
+Q: What is the derivative of x²?
+A: 2x. Using the power rule: d/dx(x^n) = nx^(n-1), so d/dx(x²) = 2x^(2-1) = 2x.
+
+Q: What is the integral of 2x?
+A: x² + C, where C is the constant of integration.
+
+Q: What is the Pythagorean theorem?
+A: In a right triangle, a² + b² = c², where c is the hypotenuse and a and b are the other two sides.
+
+Q: What is 25% of 80?
+A: 20. Calculate: 0.25 × 80 = 20.
+
+Q: What is the area of a circle with radius 5?
+A: Approximately 78.54 square units. Using A = πr², A = π(5)² = 25π ≈ 78.54.
+
+Q: What is a prime number?
+A: A prime number is a natural number greater than 1 that has no positive divisors other than 1 and itself. Examples: 2, 3, 5, 7, 11.
+
+# Science
+Q: What is photosynthesis?
+A: Photosynthesis is the process by which plants use sunlight, water, and carbon dioxide to produce oxygen and energy in the form of sugar.
+
+Q: What is gravity?
+A: Gravity is a fundamental force that attracts objects with mass toward each other. On Earth, it gives weight to physical objects and causes them to fall toward the ground.
+
+Q: What is DNA?
+A: DNA (deoxyribonucleic acid) is a molecule that carries genetic instructions for the development, functioning, growth, and reproduction of all known organisms.
+
+Q: What is the speed of light?
+A: The speed of light in a vacuum is approximately 299,792,458 meters per second (about 186,282 miles per second).
+
+Q: What causes seasons?
+A: Seasons are caused by Earth's tilted axis as it orbits the sun. Different parts of Earth receive varying amounts of sunlight throughout the year.
+
+Q: What is an atom?
+A: An atom is the smallest unit of matter that retains the properties of an element. It consists of a nucleus (protons and neutrons) surrounded by electrons.
+
+Q: What is evolution?
+A: Evolution is the process by which species change over time through natural selection, genetic variation, and adaptation to their environment.
+
+Q: What is the water cycle?
+A: The water cycle is the continuous movement of water on, above, and below Earth's surface through evaporation, condensation, precipitation, and collection.
+
+# Programming
+Q: What is a variable in programming?
+A: A variable is a named storage location in memory that holds a value which can be changed during program execution.
+
+Q: What is a function?
+A: A function is a reusable block of code that performs a specific task. It can take inputs (parameters) and return outputs.
+
+Q: What is a loop?
+A: A loop is a programming construct that repeats a block of code multiple times until a condition is met.
+
+Q: What is an array?
+A: An array is a data structure that stores a collection of elements, typically of the same type, in contiguous memory locations.
+
+Q: What is recursion?
+A: Recursion is a programming technique where a function calls itself to solve a problem by breaking it down into smaller, similar subproblems.
+
+Q: What is object-oriented programming?
+A: Object-oriented programming (OOP) is a programming paradigm based on objects that contain data (attributes) and code (methods). Key concepts include encapsulation, inheritance, and polymorphism.
+
+Q: What is a bug in programming?
+A: A bug is an error, flaw, or fault in a computer program that causes it to produce incorrect or unexpected results.
+
+Q: What is debugging?
+A: Debugging is the process of finding and fixing bugs or errors in computer programs.
+
+# Reasoning and Logic
+Q: If all cats are animals, and Fluffy is a cat, what is Fluffy?
+A: Fluffy is an animal. This follows from logical deduction: all cats are animals, Fluffy is a cat, therefore Fluffy is an animal.
+
+Q: What is cause and effect?
+A: Cause and effect is a relationship where one event (the cause) makes another event happen (the effect). For example, rain (cause) makes the ground wet (effect).
+
+Q: What is critical thinking?
+A: Critical thinking is the objective analysis and evaluation of an issue to form a judgment. It involves questioning assumptions, examining evidence, and considering alternative perspectives.
+
+Q: What is an analogy?
+A: An analogy is a comparison between two things that are similar in some way, often used to explain or clarify a concept.
+
+Q: What is deductive reasoning?
+A: Deductive reasoning is a logical process where a conclusion is based on the concordance of multiple premises that are generally assumed to be true.
+
+Q: What is inductive reasoning?
+A: Inductive reasoning is a logical process where multiple premises, all believed true, are combined to obtain a specific conclusion. It moves from specific observations to broader generalizations.
+
+# Language and Communication
+Q: What is a noun?
+A: A noun is a word that names a person, place, thing, or idea. Examples: cat, city, happiness, John.
+
+Q: What is a verb?
+A: A verb is a word that expresses an action, occurrence, or state of being. Examples: run, think, is, become.
+
+Q: What is grammar?
+A: Grammar is the set of rules that govern the structure of sentences in a language, including syntax, morphology, and punctuation.
+
+Q: What is a metaphor?
+A: A metaphor is a figure of speech that describes something by saying it is something else, to create a comparison. Example: "Time is money."
+
+Q: What is active listening?
+A: Active listening is fully concentrating on, understanding, responding to, and remembering what is being said, rather than just passively hearing the words.
+
+Q: What makes good communication?
+A: Good communication is clear, concise, respectful, and appropriate for the audience. It involves both effective speaking/writing and active listening.
+
+# General Knowledge
+Q: What is the capital of France?
+A: Paris is the capital of France.
+
+Q: How many continents are there?
+A: There are seven continents: Africa, Antarctica, Asia, Europe, North America, Oceania, and South America.
+
+Q: What is democracy?
+A: Democracy is a system of government where power is vested in the people, who rule either directly or through freely elected representatives.
+
+Q: What is the Internet?
+A: The Internet is a global network of interconnected computers that communicate using standardized protocols to share information and resources.
+
+Q: What is climate change?
+A: Climate change refers to long-term shifts in global temperatures and weather patterns, primarily caused by human activities that increase greenhouse gas emissions.
+
+# Problem Solving
+Q: How do you solve a problem?
+A: To solve a problem: 1) Define the problem clearly, 2) Gather information, 3) Generate possible solutions, 4) Evaluate options, 5) Choose and implement a solution, 6) Review the results.
+
+Q: What is brainstorming?
+A: Brainstorming is a creative technique for generating ideas where participants freely suggest solutions without immediate criticism or evaluation.
+
+Q: What is trial and error?
+A: Trial and error is a problem-solving method where you try different solutions until you find one that works, learning from each attempt.
+
+Q: What is a strategy?
+A: A strategy is a plan of action designed to achieve a long-term or overall aim. It involves making choices about how to allocate resources and effort.
+
+# Learning and Memory
+Q: What is learning?
+A: Learning is the process of acquiring new knowledge, skills, behaviors, or understanding through study, experience, or teaching.
+
+Q: What is memory?
+A: Memory is the mental capacity to store, retain, and recall information and experiences.
+
+Q: How can I improve my memory?
+A: To improve memory: practice regularly, use mnemonic devices, get enough sleep, stay physically active, eat a healthy diet, and engage in mentally stimulating activities.
+
+Q: What is practice?
+A: Practice is the repeated exercise of an activity or skill to improve or maintain proficiency.
+
+Q: What is understanding?
+A: Understanding is the ability to comprehend the meaning, nature, or importance of something, going beyond mere memorization to grasp underlying concepts.
+
+# Emotions and Social Skills
+Q: What is empathy?
+A: Empathy is the ability to understand and share the feelings of another person, putting yourself in their shoes.
+
+Q: What is patience?
+A: Patience is the capacity to accept or tolerate delay, difficulty, or annoyance without getting angry or upset.
+
+Q: What is respect?
+A: Respect is a feeling of deep admiration for someone or something based on their abilities, qualities, or achievements. It involves treating others with consideration and courtesy.
+
+Q: What is teamwork?
+A: Teamwork is the collaborative effort of a group to achieve a common goal or complete a task effectively and efficiently.
+
+Q: What is conflict resolution?
+A: Conflict resolution is the process of resolving a dispute or disagreement by finding a peaceful solution that satisfies all parties involved.
+
+# Creativity and Innovation
+Q: What is creativity?
+A: Creativity is the ability to generate new ideas, approaches, or solutions that are original and valuable.
+
+Q: What is innovation?
+A: Innovation is the process of translating creative ideas into practical applications, products, or services that create value.
+
+Q: How can I be more creative?
+A: To boost creativity: expose yourself to new experiences, practice divergent thinking, embrace failure as learning, collaborate with others, and give yourself time to think without pressure.
+
+Q: What is imagination?
+A: Imagination is the ability to form mental images, concepts, or scenarios that are not present to the senses or have not been experienced.
+
+# Ethics and Values
+Q: What is honesty?
+A: Honesty is the quality of being truthful, sincere, and free from deceit. It involves telling the truth and acting with integrity.
+
+Q: What is responsibility?
+A: Responsibility is the state of being accountable for one's actions and obligations, and fulfilling duties reliably.
+
+Q: What is fairness?
+A: Fairness is treating people equally and justly, without favoritism or discrimination, and making decisions based on objective criteria.
+
+Q: What is kindness?
+A: Kindness is the quality of being friendly, generous, and considerate toward others, showing compassion and care.
